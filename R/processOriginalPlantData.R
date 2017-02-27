@@ -13,8 +13,6 @@
 #'  \item format numeric columns
 #'  \item check for observations of 0 pads, 0 height, or 0 width; if there are observations, stop
 #' 	}
-
-#' 	}
 #'
 #' @export
 

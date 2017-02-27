@@ -20,7 +20,7 @@ processPlantInfo <- function(Plant_Info, Plot_Info) {
 	}
 	# are any plant IDs in Plant Info not in the surveys?
 	dups <- Plant_Info %>%
-		filter(!(PlantID %in% Plant_Surveys$PlantID)) %>% 
+		filter(!(PlantID %in% Plant_Surveys$PlotPlantID)) %>% 
 		.[,2:5]
 	if (dim(dups)[1] > 0) {
 		warning(paste(
