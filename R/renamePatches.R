@@ -5,6 +5,7 @@
 #' @export
 
 renamePatches <- function(Data) {
+	Data$Island %<>% as.factor
 	Data$IslandFullNames <- Data$Island
 	levels(Data$IslandFullNames) <- c(
 		 "Island 1",
