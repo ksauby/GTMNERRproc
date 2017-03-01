@@ -39,8 +39,5 @@ createPlantSurveysbyYear <- function(Plant_Surveys_by_Plant) {
 	Plant_Surveys_by_Year$Year <- year(Plant_Surveys_by_Year$Date)
 	Plant_Surveys_by_Year$PrevYear <- year(Plant_Surveys_by_Year$Date) - 1
 	Plant_Surveys_by_Year %<>% createInsectPresDuringStudy
-
-		
-}
-		
+	return(Plant_Surveys_by_Year)
 }

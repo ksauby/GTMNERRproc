@@ -67,4 +67,4 @@ createPlantInfobyPlant <- function(Plant_Info) {
 	Plant_Info_Analysis %<>% 
 		merge(First_Size, by=c("First.Survey.Date", "PlantID"))
 	return(Plant_Info_Analysis)
-}createPlantInfobyPlant
+}
