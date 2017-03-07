@@ -5,7 +5,16 @@
 #'  \item fix Cluster variable name
 #'  \item include "In Demography Study" information
 #'  \item add vegetation information
+#' \itemize{
+	#'  \item VegDensity
+	#'  \item Canopy
+	#'  \item Detritus
+#' }
 #'  \item add elevation, distance to water information
+#' \itemize{
+	#'  \item elevation
+	#'  \item dist_to_water
+#'  }
 #'  \item limit to only plots still in study
 #'  \item make coordinates numeric
 #' 	}

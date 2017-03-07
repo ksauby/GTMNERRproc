@@ -8,13 +8,17 @@ processOccupancyPlotSurveys(Plot_Surveys)
 }
 \description{
 Steps:
+\enumerate{
+ \item Warnings and Errors:
 \itemize{
+ \item Duplicate plot surveys for plot(s)
+}	
  \item limit to only plots still in study
  \item format date
  \item Change Yes/No to 1/0
  \item make variables numeric
- \item If pusilla is not present, change all pusilla-dependent data to NA
- \item If stricta is not present, change all stricta-dependent data to NA
-	}
+ \item If \emph{O. pusilla} is not present, change all \emph{O. pusilla}-dependent data to NA
+ \item If O. stricta is not present, change all O. stricta-dependent data to NA
+}
 }
 
