@@ -31,7 +31,7 @@ createPlantSurveysbyYear <- function(Plant_Surveys_by_Plant) {
 			Old_Moth_Evidence_t = max(Old_Moth_Evidence_t, na.rm=T),
 			Moth_Evidence_t = max(Moth_Evidence_t, na.rm=T),
 			Insect_Evidence_t = max(Insect_Evidence_t, na.rm=T),
-			Dead = max(Dead, na.rm=T),
+			DeadbyEndofYear = max(Dead, na.rm=T),
 			Missing = max(Missing, na.rm=T)
 		) %>% 
 		mutate(PrevSamplingYear = SamplingYear - 1)

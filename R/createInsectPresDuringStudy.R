@@ -16,6 +16,7 @@ createInsectPresDuringStudy <- function(Plant_Surveys_by_Year) {
 			MothNetworkPres_t = max(Moth_Evidence_t, na.rm=T)
 		) %>%
 		calculateLagGroupedDF(
+			.,
 			vars=c(
 				"OldMothNetworkPres_t", 
 				"MENetworkPres_t", 
@@ -23,7 +24,7 @@ createInsectPresDuringStudy <- function(Plant_Surveys_by_Year) {
 				"MothNetworkPres_t"
 			), 
 			arrange.variable="Year", 
-			grouping.variable=c("Network")
+			grouping.variable="Network"
 		)
 	network_summary <- Plant_Surveys_by_Year %>%
 		group_by(Network) %>%

@@ -10,7 +10,7 @@ classifybyStage <- function(Data) {
 	Data$Stage <- Data$RecruitmentMode
 	Data[which(Data$Stage!="Seedling"), ]$Stage <- "Adult"
 	Data[which(is.na(Data$Stage)), ]$Stage <- "Adult"
-	Data[which(Data$Dead==1), ]$Stage <- "Dead"
+	Data[which(Data$DeadbyEndofYear==1), ]$Stage <- "Dead"
 	Data[which(Data$Missing==1), ]$Stage <- "Dead"
 	# fix Seedling category
 	stages <- Data$Stage
@@ -34,7 +34,11 @@ classifybyStage <- function(Data) {
 			)
 		) %>%
 		group_by(PlantID) %>%
-		mutate(FirstAdult = min(Date[which(Size_t > 1)])) %>%
+		mutate(FirstAdult = ifelse(
+			max(Size_t) > 1,
+			min(Date[which(Size_t > 1)]),
+			NA
+		)) %>%
 		# once plants reach "Adult", they remain "Adult", even if they retrogress to one segment
 		mutate(
 			Stage = replace(
@@ -45,5 +49,6 @@ classifybyStage <- function(Data) {
 		) %>%
 		dplyr::select(-c(FirstObs, FirstAdult)) %>%
 		as.data.frame
+		temp$Seedling$FirstAdult %<>% as.Date
 	Data <- do.call(rbind.fill, temp)
 }
