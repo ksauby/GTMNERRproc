@@ -9,6 +9,7 @@
 #' @export
 
 processPlantInfo <- function(Plant_Info, Plot_Info) {
+	Plant_Info %<>% filter(InBigPlantStudy=="")
 	# ----------------------------------------------------------- ERROR MESSAGES
 	# Plants listed as species Not Recorded
 	dups <- Plant_Info[which(Plant_Info$HostSpecies=="Not Recorded"), ]
@@ -19,7 +20,7 @@ processPlantInfo <- function(Plant_Info, Plot_Info) {
 		))
 	}
 	# are any plant IDs in Plant Info not in the surveys?
-	dups <- Plant_Info %>%
+	dups <- Plant_Info[which(Plant_Info$OutsideOfCluster!="Yes"),] %>%
 		filter(!(PlantID %in% Plant_Surveys$PlotPlantID)) %>% 
 		.[,2:5]
 	if (dim(dups)[1] > 0) {
