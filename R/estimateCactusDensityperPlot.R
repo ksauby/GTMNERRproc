@@ -21,7 +21,7 @@ estimateCactusDensityperPlot <- function(Plant_Surveys_by_Year, Plot_Info) {
 		summarise(n_plots = length(Tag_Number))
 	# count plants per demographic plot per demographic survey
 	temp_A <- Plant_Surveys_by_Year %>%
-		filter(Dead==0 & Missing==0) %>%
+		filter(DeadbyEndofYear==0 & MissingbyEndofYear==0) %>%
 		group_by(SamplingYear, Network, Species) %>%
 		summarise(
 			#N_plants = length(unique(PlantID)),

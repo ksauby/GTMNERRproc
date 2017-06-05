@@ -11,7 +11,7 @@ classifybyStage <- function(Data) {
 	Data[which(Data$Stage!="Seedling"), ]$Stage <- "Adult"
 	Data[which(is.na(Data$Stage)), ]$Stage <- "Adult"
 	Data[which(Data$DeadbyEndofYear==1), ]$Stage <- "Dead"
-	Data[which(Data$Missing==1), ]$Stage <- "Dead"
+	Data[which(Data$MissingbyEndofYear==1), ]$Stage <- "Dead"
 	# fix Seedling category
 	stages <- Data$Stage
 	temp <- split(Data, stages)

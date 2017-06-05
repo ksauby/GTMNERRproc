@@ -92,21 +92,9 @@ calculateClonalReproduction <- function(
 	   	dplyr::select(Parent, SamplingYear, PlantID, Offspring.Size_t) %>%
 		merge(parent_size, by=c("Parent", "SamplingYear"))
 
-	SizeClass <- c(0:5,10,140)
-	Parent_Size_Class <- cut(D$Parent_Size_t, SizeClass, include.lowest=T, labels=FALSE)
-	E <- cbind(D, Parent_Size_Class)
-	Offspring_Size_Class <- cut(E$Offspring.Size_t, SizeClass, include.lowest=T, labels=FALSE)
-	clone_production <- cbind(E, Offspring_Size_Class)
-
-
-	# figure out percentage of segments PER STAGE that became clones
-	# so number of clones doesn't matter?
-
-	table(clone_production$Offspring_Size_Class, clone_production$Parent_Size_Class)
 
 	# need to know number of segments produced per size class
-
-	loss_to_clones <- clone_production %>% 
+	loss_to_clones <- D %>% 
 		group_by(Parent, SamplingYear) %>%
 		summarise(
 			Clones_t = length(unique(PlantID)),
@@ -123,6 +111,7 @@ calculateClonalReproduction <- function(
 		) %>% 
 		as.data.frame
 	Plant_Surveys_by_Yearw_clones %<>%
+		rowwise %>%
 		mutate(
 			Clones_t = replace(
 				Clones_t,
