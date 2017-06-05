@@ -217,7 +217,7 @@ processPlantSurveys <- function(Plant_Surveys, Plant_Info) {
 		"Num_Fruit",
 		"Dead",
 		"Missing")] %<>% 
-		apply(2, as.numeric
+		apply(2, destring
 	)
 	# ------------------------------------------------- ADD TOTAL SEGMENT COLUMN
 	# do this so that plants that have no segments recorded (all NAs) have a total segment count = NA

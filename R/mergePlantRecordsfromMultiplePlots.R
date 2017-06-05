@@ -71,13 +71,16 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys) {
 				Z[[i]][j, "Unknown_Moth_t"] 		<- mysum1(M$Unknown_Moth_t)
 				Z[[i]][j, "Gerstaeckeria_t"] 		<- mysum1(M$Gerstaeckeria_t)
 				Z[[i]][j, "Old_Moth_Evidence_t"]<- mysum1(M$Old_Moth_Evidence_t)
-				# Dead or missing - cannot be dead; can be alive if at least one observation of alive
-				# (1) if the sum of Dead = # of PlotPlantIDs, the plant is dead in all plots
-				if (sum(M$Dead, na.rm=T) <= (dim(N)[1]-1)) 
+				# Dead or missing - alive if at least one observation of alive
+				# 	if the sum of Dead/Missing == # of PlotPlantIDs, the plant is dead in all plots
+				if (sum(M$Dead, M$Missing, na.rm=T) < dim(N)[1])
 					{Z[[i]][j, "Dead"] <- 0} 
 					else {Z[[i]][j, "Dead"] <- NA}
 				# Missing
-				Z[[i]][j, "Missing"] <- NA
+				# 	if the sum of Missing == # of PlotPlantIDs, the plant is missing in all plots
+				if (sum(M$Missing, na.rm=T) < dim(N)[1])
+					{Z[[i]][j, "Missing"] <- 0} 
+					else {Z[[i]][j, "Missing"] <- NA}
 				# all surveyed = FALSE
 				Z[[i]][j, "AllSurveyed"] 			<- "FALSE"
 			}
@@ -168,4 +171,28 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys) {
 	Plant_Surveys <- rbind.fill(temp_B, temp_C)
 	Plant_Surveys %<>% arrange(PlantID, Date)
 	return(Plant_Surveys)
+	
+	# ----------------------------------------------------------- ERROR MESSAGES
+	temp <- Plant_Surveys %>% 
+		filter(PlantID=="7101", Date=="2015-05-23")
+	if (temp$Dead != 0 | temp$Missing != 0) {
+		warning(paste(
+			"Death of part of plant (but not whole plant) not recorded 
+				correctly for plant 7101."
+		))
+	}
+	temp <- Plant_Surveys %>% 
+		filter(PlantID=="7185", Date=="2015-05-24")
+	if (temp$Dead != 0 | temp$Missing != 0) {
+		warning(paste(
+			"Dead/Alive/Missing status not recorded correctly for plant 7185."
+		))
+	}
+	temp <- Plant_Surveys %>% 
+		filter(PlantID=="7185", Date=="2015-05-26")
+	if (temp$Dead != 1) {
+		warning(paste(
+			"Dead/Alive/Missing status not recorded correctly for plant 7185."
+		))
+	}
 }

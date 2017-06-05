@@ -23,7 +23,6 @@
 
 processPlantSurveysafterMergewPlantInfo <- function(Plant_Surveys) {
 	Plant_Surveys %>%
-		filter(InBigPlantStudy!="yes" & InBigPlantStudy!="Yes") %>%
 		addSamplingPeriods %>%
 		addSamplingYear %>%
 		as.data.frame

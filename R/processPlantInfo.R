@@ -9,6 +9,7 @@
 #' @export
 
 processPlantInfo <- function(Plant_Info, Plot_Info) {
+	# --------------------------------------------------- remove InBigPlantStudy
 	Plant_Info %<>% filter(InBigPlantStudy=="")
 	# ----------------------------------------------------------- ERROR MESSAGES
 	# Plants listed as species Not Recorded
@@ -225,11 +226,6 @@ processPlantInfo <- function(Plant_Info, Plot_Info) {
 		merge(Plot_Info, by="Tag_Number") %>%
 		select(ClusterID, Tag_Number)
 	Plant_Info %<>% merge(Plot_Info_Cluster, by="Tag_Number", all.x=T)
-	# --------------------------------------------------- remove InBigPlantStudy
-	Plant_Info[which(is.na(Plant_Info$InBigPlantStudy)), ]$InBigPlantStudy <- "No"
-	Plant_Info[which(Plant_Info$InBigPlantStudy=="yes"), ]$InBigPlantStudy <- "Yes"
-	Plant_Info[which(Plant_Info$InBigPlantStudy==""), ]$InBigPlantStudy <- "No"
-	Plant_Info %<>% filter(InBigPlantStudy=="No")
 	# ------------------------------------------------------------------------ #
 	return(Plant_Info)
 }
