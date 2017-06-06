@@ -251,6 +251,25 @@ processPlantSurveys <- function(Plant_Surveys, Plant_Info) {
 	# ----------------------------------------------------------- ERROR MESSAGES
 	dups <- Plant_Surveys %>% filter(Size_t==0)
 		if (dim(dups)[1] > 0) {stop("Size values = 0.")}
+	# throw a warning if a plant has a recorded size but is also marked either dead or missing
+	temp <- Plant_Surveys %>%
+		filter(!(is.na(Size_t)) & Dead == 1)
+	if (dim(temp)[1] > 0) {
+		warning(paste(
+			"PlantMeasureID Records ",
+			paste(temp$PlantMeasureID, collapse=", "),
+			"have size measurements but are also marked dead"
+		))
+	}
+	temp <- Plant_Surveys %>%
+		filter(!(is.na(Size_t)) & Missing == 1)
+	if (dim(temp)[1] > 0) {
+		warning(paste(
+			"PlantMeasureID Records ",
+			paste(temp$PlantMeasureID, collapse=", "),
+			"have size measurements but are also marked missing"
+		))
+	}
 	# ------------------------------------------------------------------------ #
 	return(Plant_Surveys)
 }
