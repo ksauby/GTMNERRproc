@@ -54,7 +54,7 @@ createPlotSurveysfromPlantSurveys <- function(Plant_Surveys, Plot_Surveys, D_Plo
 				Plant_Info, 
 				Tag_Number==L$Tag_Number[1], 
 				# only include plants that are listed as having been added to Plant.Info on or after Date
-				First.Survey.Date <= unique(L$Date)[j],
+				First.Survey.Date.Alive <= unique(L$Date)[j],
 				# exclude dead plants (including date plant was first recorded as dead)
 				FirstDeadMissingObservation > unique(L$Date)[j] | 
 					is.na(FirstDeadMissingObservation)==T
