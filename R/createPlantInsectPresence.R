@@ -6,7 +6,9 @@
 #' @export
 
 createPlantInsectPresence <- function(Plant_Surveys_by_Plant) {
-	Plant_Surveys_by_Plant %<>% mutate(
+	Plant_Surveys_by_Plant %<>% 
+	rowwise %>%
+	mutate(
 		Moth_Evidence_t = max(
 			CA_t,
 			ME_t,
@@ -24,6 +26,7 @@ createPlantInsectPresence <- function(Plant_Surveys_by_Plant) {
 			DA_t,
 			na.rm=T
 		)
-	)
+	) %>%
+	ungroup()
 	return(Plant_Surveys_by_Plant)
 }
