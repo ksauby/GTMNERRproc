@@ -6,18 +6,29 @@
 #' @export
 
 createPlantInfobyPlant <- function(Plant_Info) {
+	
+	# STANDARDIZE PARENT, REPRODUCTIVEMODE for PLANTIDs
+	
+	
+	
 	# one record per plant
 	Plant_Info_Analysis <- Plant_Info %>%
 		group_by(PlantID) %>%
 		summarise(
-			Island = Island[1],
-			Network = Network[1],
-			Species = Species[1],
-			RecruitmentMode = RecruitmentMode[1],
-			Parent = Parent[1],
-			DaysAlive = DaysAlive[1],
-			Dead = min(ConfirmedDeadMissing),
-			First.Survey.Date = min(First.Survey.Date)
+			Island 				= Island[1],
+			Network 			= Network[1],
+			# make sure they are all the same species
+			Species 			= Species[1],
+			# fix/verify
+			RecruitmentMode 	= RecruitmentMode[1],
+			Parent 				= Parent[1],
+			# should figure out the longest span of time a plotplantid was alive
+			DaysAlive 			= max(DaysAlive, na.rm=T),
+			# plant may have died in one plot but is alive in another
+			DeadMissing 		= min(ConfirmedDeadMissing),
+			Dead 				= min(ConfirmedDead),
+			Missing 			= min(ConfirmedMissing),
+			First.Survey.Date 	= min(First.Survey.Date)
 		) %>%
 		filter(!is.na(Network))
 	Plant_Info_Analysis$DaysAlive %<>% as.numeric
