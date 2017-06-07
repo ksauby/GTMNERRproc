@@ -73,41 +73,69 @@ processPlantInfo <- function(Plant_Info, Plot_Info) {
 		group_by(PlotPlantID) %>%
 		summarise(
 			First.Survey.Date = min(Date),
+			# should be max date the plant was alive
 			Last.Survey.Date = max(Date)
 		) %>%
 		merge(Plant_Info, ., by="PlotPlantID", all.y=TRUE)
 	# ----------------------------------------------------------- PLANT SURVIVAL
-	# indicate whether plant was previously listed as dead or missing
-	# group based on plant ID number
-	Plant_Info <- Plant_Surveys %>% group_by(PlotPlantID) %>%
-		summarise( 
-		# a plant has been obvserved to be dead/missing if at least 1 observation (> 0)
-		DeadObservation 		= Dead_Missing_Function(Dead),
-		MissingObservation 		= Dead_Missing_Function(Missing),
-		# a plant is confirmed dead/missing if at least 2 observations (> 1)
-		ConfirmedDead 			= Confirmed_Dead_Missing_Function(Dead),
-		ConfirmedMissing 		= Confirmed_Dead_Missing_Function(Missing),
-		ConfirmedDeadMissing = Confirmed_Dead_Missing_Function(c(Dead,Missing))	
-	) %>%
-	merge(Plant_Info, ., by="PlotPlantID")
-	# for those first marked dead/missing during the last survey, assume they are confirmed dead/missing
-	Plant_Info %<>% 
+	# indicate whether plant was listed as dead or missing
+	A <- Plant_Surveys %>%
+		rowwise() %>%
+		mutate(DeadMissing = sum(Dead,Missing,na.rm=T)) %>%
+		arrange(Date) %>%
 		group_by(PlotPlantID) %>%
-		mutate(
-			ConfirmedDeadMissing = replace(
-				ConfirmedDeadMissing,
-				which(Last.Survey.Date >= "2015-05-01"),
-				max(
-					DeadObservation,
-					MissingObservation,
-					ConfirmedDead,
-					ConfirmedMissing,
-					ConfirmedDeadMissing,
-					na.rm=T
-				)
+		summarise(
+			sequenceDeadobs 		= paste(Dead, collapse=""),
+			sequenceMissingobs 		= paste(Missing, collapse=""),
+			sequenceDeadMissingobs 	= paste(DeadMissing, collapse=""),
+			confirmedDead 			= ifelse(
+				grepl("11", sequenceDeadobs) == TRUE,
+				1,
+				0
+			),
+			confirmedMissing 		= ifelse(
+				grepl("11", sequenceDeadobs) == TRUE,
+				1,
+				0
+			),
+			confirmedDeadMissing 	= ifelse(
+				grepl("11", sequenceDeadMissingobs) == TRUE,
+				1,
+				0
+			),
+			inconsistentDeadMissing = ifelse(
+				grepl("10", sequenceDeadMissingobs) == TRUE,
+				1,
+				0
 			)
 		)
-		# FIX LAST SURVEY DATE FOR THOSE THAT AREN'T DEAD
+	# ERROR MESSAGES
+	Z <- A %>% filter(inconsistentDeadMissing==1)
+	if (dim(Z)[1] > 0) {
+		write.csv(Z, "inconsistentDeadMissing.csv")
+		warning(paste(
+			"Plants with inconsistent records of dead/missing/alive present in dataset. These plants have been saved to a csv."
+		))
+	}
+	# info for plants NOT observed in summer 2015
+	B <- A %>% filter(!(PlotPlantID %in% B$PlotPlantID))
+	# info for plants observed in summer 2015 - these do not need 2 consecutive obs. of dead/missing to be confirmed dead/missing
+	C <- Plant_Surveys %>% 
+		filter(Date >= "2015-05-01") %>%
+		rowwise() %>%
+		mutate(DeadMissing = sum(Dead,Missing,na.rm=T)) %>%
+		arrange(Date) %>%
+		group_by(PlotPlantID) %>%
+		summarise(
+			confirmedDead 			= Dead_Missing_Function(Dead),
+			confirmedMissing 		= Dead_Missing_Function(Missing),
+			confirmedDeadMissing 	= Dead_Missing_Function(c(Dead,Missing))
+		)
+	# paste together
+	#		info for plants NOT observed in summer 2015 &
+	#		info for plants observed in summer 2015
+	Plant_Info <- rbind.fill(B, C) %>%
+		merge(Plant_Info, ., by="PlotPlantID")
 	#---------------- ADD FIRST DATE PlotPlantID WAS RECORDED AS DEAD OR MISSING
 	# oldest date PlotPlantID was recorded as dead
 	temp_dead_obs <- filter(Plant_Surveys, Dead=="1") %>%
@@ -142,10 +170,16 @@ processPlantInfo <- function(Plant_Info, Plot_Info) {
 			PlantID.Last.Alive = replace(
 				Last.Survey.Date,
 				which(ConfirmedDeadMissing==1),
+				# but this is not the last day alive
 				FirstDeadMissingObservation
 			)
 		)
 		# then find latest date at which a plant was surveyed (regardless of whether it had died or not)
+		
+		
+		
+		# is this really the last date alive or last date surveyed?
+		
 		Plant_Info %<>% group_by(PlantID) %>%
 		mutate(
 			PlantID.Last.Alive = max(Last.Survey.Date, na.rm=T)
