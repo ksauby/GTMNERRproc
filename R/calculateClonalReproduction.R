@@ -59,12 +59,12 @@ calculateClonalReproduction <- function(
 		filter(!is.na(Offspring.Size_t)) %>%
 		filter(!is.na(Parent.Obs.Date)) %>%
 		# remove Parent survey dates that are after offspring was observed
-		filter(Parent.Obs.Date <= First.Survey.Date) %>%
+		filter(Parent.Obs.Date <= First.Survey.Date.Alive) %>%
 		# find Parent observation date (WITH a size obs) closest to (or equal to) date that the offspring was observed
 		filter(Parent.Obs.Date==max(Parent.Obs.Date)) %>%
 		# find Offspring observation date (WITH a size obs) closest to (or equal to) date it was first observed
 		filter(Offspring.Obs.Date==min(Offspring.Obs.Date)) %>%
-		setnames("First.Survey.Date", "Date")	
+		setnames("First.Survey.Date.Alive", "Date")	
 	
 	D %<>% addSamplingYear
 	
