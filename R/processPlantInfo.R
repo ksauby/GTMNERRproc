@@ -175,8 +175,7 @@ processPlantInfo <- function(Plant_Info, Plot_Info) {
 			)
 		)
 		# then find latest date at which a plant was surveyed (regardless of whether it had died or not)
-		
-		
+			
 		
 		# is this really the last date alive or last date surveyed?
 		
