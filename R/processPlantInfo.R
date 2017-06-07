@@ -133,9 +133,9 @@ processPlantInfo <- function(Plant_Info, Plot_Info) {
 		arrange(Date) %>%
 		group_by(PlotPlantID) %>%
 		summarise(
-			confirmedDead 			= Dead_Missing_Function(Dead),
-			confirmedMissing 		= Dead_Missing_Function(Missing),
-			confirmedDeadMissing 	= Dead_Missing_Function(c(Dead,Missing))
+			ConfirmedDead 			= Dead_Missing_Function(Dead),
+			ConfirmedMissing 		= Dead_Missing_Function(Missing),
+			ConfirmedDeadMissing 	= Dead_Missing_Function(c(Dead,Missing))
 		)
 	# paste together
 	#		info for plants NOT observed in summer 2015 &

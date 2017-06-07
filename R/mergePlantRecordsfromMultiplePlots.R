@@ -37,7 +37,7 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys) {
 				Plant_Info, 
 				PlantID==L$PlantID[1], 
 				# only include plants that are listed as having been added to Plant_Info on or after Date
-				First.Survey.Date <= unique(L$Date)[j],
+				First.Survey.Date.Alive <= unique(L$Date)[j],
 				# exclude dead plants (including date plant was first recorded as dead)
 				FirstDeadMissingObservation >= unique(L$Date)[j] | 
 					is.na(FirstDeadMissingObservation)==T
