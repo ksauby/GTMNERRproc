@@ -219,6 +219,8 @@ processPlantSurveys <- function(Plant_Surveys, Plant_Info) {
 		"Missing")] %<>% 
 		apply(2, destring
 	)
+	# ---------------------------------------------- Change Missing = NA to zero
+	Plant_Surveys$Missing %<>% NA_is_Zero_Function
 	# ------------------------------------------------- ADD TOTAL SEGMENT COLUMN
 	# do this so that plants that have no segments recorded (all NAs) have a total segment count = NA
 	# for those plants that have fewer than four NAs (at least one segment column has a number), sum the segments
