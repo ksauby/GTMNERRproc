@@ -4,11 +4,14 @@
 #' @param Plant_Surveys_by_Plant Plant Survey Dataset
 #'
 #' @export
+#' @importFrom dataproc Unique
 
 createPlantInfobyPlant <- function(Plant_Info) {
 	
 	# STANDARDIZE PARENT, REPRODUCTIVEMODE for PLANTIDs
 	
+	
+	# 8683 - clonal and unknown
 	
 	
 	# one record per plant
@@ -20,7 +23,7 @@ createPlantInfobyPlant <- function(Plant_Info) {
 			# make sure they are all the same species
 			Species 			= Species[1],
 			# fix/verify
-			RecruitmentMode 	= RecruitmentMode[1],
+			RecruitmentMode 	= paste(Unique(RecruitmentMode), collapse=","),
 			Parent 				= Parent[1],
 			# should figure out the longest span of time a plotplantid was alive
 			DaysAlive 			= max(DaysAlive, na.rm=T),
@@ -28,7 +31,7 @@ createPlantInfobyPlant <- function(Plant_Info) {
 			DeadMissing 		= min(ConfirmedDeadMissing),
 			Dead 				= min(ConfirmedDead),
 			Missing 			= min(ConfirmedMissing),
-			First.Survey.Date 	= min(First.Survey.Date)
+			First.Survey.Date.Alive 	= min(First.Survey.Date.Alive)
 		) %>%
 		filter(!is.na(Network))
 	Plant_Info_Analysis$DaysAlive %<>% as.numeric
@@ -70,12 +73,21 @@ createPlantInfobyPlant <- function(Plant_Info) {
 	First_Size <- Plant_Surveys_by_Year %>%
 		group_by(PlantID) %>%
 		summarise(
-			First.Survey.Date = min(Date),
-			First_Size = Size_t[which(Date==First.Survey.Date)],
+			First.Survey.Date.Alive = min(Date),
+			First_Size = Size_t[which(Date==First.Survey.Date.Alive)],
 			min.Size = min(Size_t, na.rm=T),
 			max.Size = max(Size_t, na.rm=T)
 		)
 	Plant_Info_Analysis %<>% 
-		merge(First_Size, by=c("First.Survey.Date", "PlantID"))
+		merge(First_Size, by=c("First.Survey.Date.Alive", "PlantID"))
+	# WARNINGS	
+	temp <- Plant_Surveys %>% 
+		filter(grepl(",", RecruitmentMode)==TRUE)
+	if (dim(temp)[1] > 0) {
+		write.csv(temp, "InconsistentRecruitmentModePlantInfo.csv")
+		warning(paste(
+			"Inconsistent recruitment mode recorded for at least one plant spanning multiple plots. These plant info records have been written to csv."
+		))
+	}	
 	return(Plant_Info_Analysis)
 }
