@@ -8,13 +8,6 @@
 #' @export
 
 estimateCactusDensityperPlot <- function(Plant_Surveys_by_Year, Plot_Info) {
-	# Warnings
-	temp <- Plant_Surveys_by_Year %>% 
-		filter(is.na(Size_t))
-	if (dim(temp)[1] > 0) {
-		warning("Some plant sizes = NA. Data written to csv file.")
-		temp %>% write.csv("plants_w_no_size.csv")
-	}
 	# need to control for # of plots in network
 	temp <- Plot_Info %>%
 		group_by(Network) %>%
