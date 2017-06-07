@@ -123,10 +123,11 @@ processPlantInfo <- function(Plant_Info, Plot_Info) {
 		))
 	}
 	# info for plants NOT observed in summer 2015
-	B <- A %>% filter(!(PlotPlantID %in% B$PlotPlantID))
+	B <- Plant_Surveys %>% 
+		filter(Date >= "2015-05-01")
+	C <- A %>% filter(!(PlotPlantID %in% B$PlotPlantID))
 	# info for plants observed in summer 2015 - these do not need 2 consecutive obs. of dead/missing to be confirmed dead/missing
-	C <- Plant_Surveys %>% 
-		filter(Date >= "2015-05-01") %>%
+	 B %<>%
 		rowwise() %>%
 		mutate(DeadMissing = sum(Dead,Missing,na.rm=T)) %>%
 		arrange(Date) %>%
@@ -169,7 +170,7 @@ processPlantInfo <- function(Plant_Info, Plot_Info) {
 	# calculate first/last day alive for PlantID (not individual Plot Plant IDs)
 	Plant_Info %<>% group_by(PlantID) %>%
 	mutate(
-		PlantID.First.Alive = min(First.Survey.Date.Alive, na.rm=T)
+		PlantID.First.Alive = min(First.Survey.Date.Alive, na.rm=T),
 		PlantID.Last.Alive = max(Last.Survey.Date.Alive, na.rm=T)
 	)
 	# ---------------------- CALCULATE HOW MANY DAYS PLANT WAS KNOWN TO BE ALIVE
@@ -202,15 +203,12 @@ processPlantInfo <- function(Plant_Info, Plot_Info) {
 		RecruitmentMode = replace(
 			RecruitmentMode,
 			which(RecruitmentMode=="WoodyTrunk"),
-			"Unknown"
+			NA
 		),
-		
-		# DO I REALLY WANT TO DO THIS
-		
 		RecruitmentMode = replace(
 			RecruitmentMode,
 			which(is.na(RecruitmentMode)),
-			"Unknown"
+			NA
 		)
 	)
 	# ------------------------------------------------- ADD InDemomographicStudy
