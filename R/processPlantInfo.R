@@ -70,11 +70,16 @@ processPlantInfo <- function(Plant_Info, Plot_Info) {
 	# particularly relevant for plants that grew into plots over the course of the study (and thus the number of PlotPlantIDs for a given PlantID changed over time)
 	# also helps calculate the number of days a plant was known to have survived
 	Plant_Info <- Plant_Surveys %>%
+		filter(
+			Dead != 1,
+			Missing != 1
+		) %>%
 		group_by(PlotPlantID) %>%
 		summarise(
-			First.Survey.Date = min(Date),
+			# simply the first survey date
+			First.Survey.Date.Alive = min(Date),
 			# should be max date the plant was alive
-			Last.Survey.Date = max(Date)
+			Last.Survey.Date.Alive = max(Date)
 		) %>%
 		merge(Plant_Info, ., by="PlotPlantID", all.y=TRUE)
 	# ----------------------------------------------------------- PLANT SURVIVAL
@@ -137,24 +142,23 @@ processPlantInfo <- function(Plant_Info, Plot_Info) {
 	Plant_Info <- rbind.fill(B, C) %>%
 		merge(Plant_Info, ., by="PlotPlantID")
 	#---------------- ADD FIRST DATE PlotPlantID WAS RECORDED AS DEAD OR MISSING
-	# oldest date PlotPlantID was recorded as dead
+	# earliest date PlotPlantID was recorded as dead
 	temp_dead_obs <- filter(Plant_Surveys, Dead=="1") %>%
 		group_by(PlotPlantID) %>%
 		summarise(FirstDeadObservation = min(Date))
-	# oldest date PlotPlantID was recorded as missing
+	# earliest date PlotPlantID was recorded as missing
 	temp_missing_obs <- filter(Plant_Surveys, Missing=="1") %>%
 		group_by(PlotPlantID) %>%
 		summarise(FirstMissingObservation = min(Date))
-	# oldest date PlotPlantID was recorded as missing or dead
+	# earliest date PlotPlantID was recorded as missing or dead
 	temp_dead_missing <- merge(
 		temp_dead_obs, 
 		temp_missing_obs, 
 		by="PlotPlantID", 
 		all=T
 	) 
-	temp_dead_missing$FirstDeadMissingObservation = 
+	temp_dead_missing$FirstDeadMissingObservation = temp_dead_missing %>%
 		select(
-			temp_dead_missing, 
 			FirstDeadObservation,
 			FirstMissingObservation
 		) %>% 
@@ -162,33 +166,12 @@ processPlantInfo <- function(Plant_Info, Plot_Info) {
 		as.Date
 	# merge with Plant_Info
 	Plant_Info <- merge(Plant_Info, temp_dead_missing, by="PlotPlantID", all=T)
-	# fix last survey date
-	#	for each PlotPlantID, keep FirstDeadMissingObservation
-	Plant_Info %<>% 
-		group_by(PlotPlantID) %>%
-		mutate(
-			PlantID.Last.Alive = replace(
-				Last.Survey.Date,
-				which(ConfirmedDeadMissing==1),
-				# but this is not the last day alive
-				FirstDeadMissingObservation
-			)
-		)
-		# then find latest date at which a plant was surveyed (regardless of whether it had died or not)
-			
-		# is this really the last date alive or last date surveyed?
-		
-		Plant_Info %<>% group_by(PlantID) %>%
-		mutate(
-			PlantID.Last.Alive = max(Last.Survey.Date, na.rm=T)
-		)
-		# find the earliest date that the plant was surveyed
-		Plant_Info %<>% group_by(PlantID) %>%
-		mutate(
-			PlantID.First.Alive = min(First.Survey.Date, na.rm=T)
-		)
-		# STANDARDIZE PARENT, REPRODUCTIVEMODE for PLANTIDs
-
+	# calculate first/last day alive for PlantID (not individual Plot Plant IDs)
+	Plant_Info %<>% group_by(PlantID) %>%
+	mutate(
+		PlantID.First.Alive = min(First.Survey.Date.Alive, na.rm=T)
+		PlantID.Last.Alive = max(Last.Survey.Date.Alive, na.rm=T)
+	)
 	# ---------------------- CALCULATE HOW MANY DAYS PLANT WAS KNOWN TO BE ALIVE
 	Plant_Info %<>% 
 		group_by(PlantID) %>%
@@ -221,6 +204,9 @@ processPlantInfo <- function(Plant_Info, Plot_Info) {
 			which(RecruitmentMode=="WoodyTrunk"),
 			"Unknown"
 		),
+		
+		# DO I REALLY WANT TO DO THIS
+		
 		RecruitmentMode = replace(
 			RecruitmentMode,
 			which(is.na(RecruitmentMode)),
