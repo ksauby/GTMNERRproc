@@ -28,12 +28,12 @@ createPlantInsectPresence <- function(Plant_Surveys_by_Plant) {
 		),
 		Moth_Evidence_t = replace(
 			Moth_Evidence_t,
-			Moth_Evidence_t==-Inf,
+			Moth_Evidence_t == -Inf,
 			NA
 		),
 		Insect_Evidence_t = replace(
 			Insect_Evidence_t,
-			Insect_Evidence_t==-Inf,
+			Insect_Evidence_t == -Inf,
 			NA
 		)
 	) %>%
