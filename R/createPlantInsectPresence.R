@@ -25,6 +25,16 @@ createPlantInsectPresence <- function(Plant_Surveys_by_Plant) {
 			CH_t,
 			DA_t,
 			na.rm=T
+		),
+		Moth_Evidence_t = replace(
+			Moth_Evidence_t,
+			Moth_Evidence_t==-Inf,
+			NA
+		),
+		Insect_Evidence_t = replace(
+			Insect_Evidence_t,
+			Insect_Evidence_t==-Inf,
+			NA
 		)
 	) %>%
 	ungroup()
