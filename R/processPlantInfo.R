@@ -81,7 +81,7 @@ processPlantInfo <- function(Plant_Info, Plot_Info) {
 			# should be max date the plant was alive
 			Last.Survey.Date.Alive = max(Date)
 		) %>%
-		merge(Plant_Info, ., by="PlotPlantID", all.y=TRUE)
+		merge(Plant_Info, by="PlotPlantID")
 	# ----------------------------------------------------------- PLANT SURVIVAL
 	# indicate whether plant was listed as dead or missing
 	A <- Plant_Surveys %>%
@@ -217,8 +217,7 @@ processPlantInfo <- function(Plant_Info, Plot_Info) {
 	Plant_Info %<>% merge(
 		., 
 		ClustersInDemographicStudy, 
-		by = "Cluster",
-		all=TRUE
+		by = "Cluster"
 	) 
 	# ------------------------------------------------------------ ADD ClusterID
 	#	do this because some clusters share plots
