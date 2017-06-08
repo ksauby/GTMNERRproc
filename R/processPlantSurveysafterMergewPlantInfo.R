@@ -22,9 +22,40 @@
 #' @export
 
 processPlantSurveysafterMergewPlantInfo <- function(Plant_Surveys) {
-	Plant_Surveys %>%
+	Plant_Surveys %<>%
 		addSamplingPeriods %>%
 		addSamplingYear %>%
 		as.data.frame
+	# ----------------------------------------------------------- ERROR MESSAGES
+	# throw a warning if pusilla has flowers before summer 2015
+	temp <- Plant_Surveys %>%
+		filter(
+			Species=="pusilla",
+			SamplingYear!=2015,
+			Fruit_Flowers_t > 0,
+			!(month(Date) %in% c(5,6,7,8))
+		)
+	if (dim(temp)[1] > 0) {
+		warning(paste(
+			"O. pusilla plants ",
+			paste(temp$PlotPlantID, collapse=", "),
+			"are recorded as having fruit/flowers in a year other than 2015."
+		))
+	}
+	# how many plants with less than 10 segments had fruit/flowers?
+	# throw a warning if pusilla has flowers before summer 2015
+	temp <- Plant_Surveys %>%
+		filter(
+			Size_t < 5,
+			Fruit_Flowers_t > 0
+		)
+	if (dim(temp)[1] > 0) {
+		write.csv(temp, "SmallPlantswFruitFlowers.csv")
+		warning(paste(
+			"Plants less than 5 segments in size observed with fruit/flowers. Records written to csv file."
+		))
+	}
+	# --------------------------------------------------------------------------
+	return(Plant_Surveys)	
 }
 	
