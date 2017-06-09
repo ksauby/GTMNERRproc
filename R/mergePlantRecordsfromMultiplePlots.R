@@ -247,6 +247,32 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys) {
 			"Marked missing but has size/fruit measurements. Information written to csv file."
 		))
 	}
+	# throw a warning if pusilla has flowers before summer 2015
+	temp <- Plant_Surveys %>%
+		filter(
+			Size_t < 5,
+			Fruit_Flowers_t > 0
+		) %>%
+		filter(
+			!(
+				# these records in database were verified with original datasheets
+				PlantID == 9329	& Date == "2013-02-25" |
+				PlantID == 9972	& Date == "2013-04-01" |
+				PlantID == 9893	& Date == "2013-04-13" |
+				PlantID == 9893	& Date == "2013-05-16" |
+				PlantID == 8159	& Date == "2013-05-23" |
+				PlantID == 8780	& Date == "2014-05-26" |
+				PlantID == 7569	& Date == "2014-09-21" |
+				PlantID == 7813	& Date == "2015-01-20" |
+				PlantID == 7814	& Date == "2015-01-20"
+				)
+			)
+	if (dim(temp)[1] > 0) {
+		write.csv(temp, "SmallPlantswFruitFlowers.csv")
+		warning(paste(
+			"Plants less than 5 segments in size observed with fruit/flowers. Records written to csv file."
+		))
+	}
 	# ------------------------- CHANGE SURVEY INFO TO NA FOR DEAD/MISSING PLANTS
 	Plant_Surveys %<>%
 		rowwise() %>%
@@ -351,7 +377,8 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys) {
 				which(Dead == 1 | Missing == 1),
 				NA
 			)
-		)
+		) %>%
+		ungroup()
 	# --------------------------------------------------------------------------
 	return(Plant_Surveys)
 }
