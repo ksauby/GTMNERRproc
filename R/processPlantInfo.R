@@ -115,7 +115,46 @@ processPlantInfo <- function(Plant_Info, Plot_Info) {
 			)
 		)
 	# ERROR MESSAGES
-	Z <- A %>% filter(inconsistentDeadMissing==1)
+	Z <- A %>% 
+		filter(inconsistentDeadMissing==1) %>%
+		filter(!(
+			PlotPlantID == 8202 |
+			PlotPlantID == 7130 |
+			PlotPlantID == 7152 |
+			PlotPlantID == 7165 |
+			PlotPlantID == 7168 |
+			PlotPlantID == 7174 |
+			PlotPlantID == 7192 |
+			PlotPlantID == 7333 |
+			PlotPlantID == 8013 |
+			PlotPlantID == 8068 |
+			PlotPlantID == 8077 |
+			PlotPlantID == 8088 |
+			PlotPlantID == 8126 |
+			PlotPlantID == 8148 |
+			PlotPlantID == 8168 |
+			PlotPlantID == 8265 |
+			PlotPlantID == 8270 |
+			PlotPlantID == 8374 |
+			PlotPlantID == 8403 |
+			PlotPlantID == 8458 |
+			PlotPlantID == 8487 |
+			PlotPlantID == 8508 |
+			PlotPlantID == 8555 |
+			PlotPlantID == 8584 |
+			PlotPlantID == 8652 |
+			PlotPlantID == 8658 |
+			PlotPlantID == 8673 |
+			PlotPlantID == 8680 |
+			PlotPlantID == 8735 |
+			PlotPlantID == 8781 |
+			PlotPlantID == 8826 |
+			PlotPlantID == 8861 |
+			PlotPlantID == 8911 |
+			PlotPlantID == 8927 |
+			PlotPlantID == 8951 |
+			PlotPlantID == 8980
+		))
 	if (dim(Z)[1] > 0) {
 		write.csv(Z, "inconsistentDeadMissing.csv")
 		warning(paste(
