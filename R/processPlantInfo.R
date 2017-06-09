@@ -118,42 +118,8 @@ processPlantInfo <- function(Plant_Info, Plot_Info) {
 	Z <- A %>% 
 		filter(inconsistentDeadMissing==1) %>%
 		filter(!(
-			PlotPlantID == 8202 |
-			PlotPlantID == 7130 |
-			PlotPlantID == 7152 |
-			PlotPlantID == 7165 |
-			PlotPlantID == 7168 |
-			PlotPlantID == 7174 |
-			PlotPlantID == 7192 |
-			PlotPlantID == 7333 |
-			PlotPlantID == 8013 |
-			PlotPlantID == 8068 |
-			PlotPlantID == 8077 |
-			PlotPlantID == 8088 |
-			PlotPlantID == 8126 |
-			PlotPlantID == 8148 |
-			PlotPlantID == 8168 |
-			PlotPlantID == 8265 |
-			PlotPlantID == 8270 |
-			PlotPlantID == 8374 |
-			PlotPlantID == 8403 |
-			PlotPlantID == 8458 |
-			PlotPlantID == 8487 |
-			PlotPlantID == 8508 |
-			PlotPlantID == 8555 |
-			PlotPlantID == 8584 |
-			PlotPlantID == 8652 |
-			PlotPlantID == 8658 |
-			PlotPlantID == 8673 |
-			PlotPlantID == 8680 |
-			PlotPlantID == 8735 |
-			PlotPlantID == 8781 |
-			PlotPlantID == 8826 |
-			PlotPlantID == 8861 |
-			PlotPlantID == 8911 |
-			PlotPlantID == 8927 |
-			PlotPlantID == 8951 |
-			PlotPlantID == 8980
+			PlotPlantID %in% c(8202, 7130, 7152, 7165, 7168, 7174, 7192, 7333, 8013, 8068, 8077, 8088, 8126, 8148, 8168, 8265, 8270, 8374, 8403, 8458, 8487, 8508, 8555, 8584, 8652, 8658, 8673, 8680, 8735, 8781, 8826, 8861, 8911, 8927, 8951, 8980, 9069, 9082, 9220, 9255, 9338, 9341, 9350, 9354, 9394, 9399, 9401, 9430, 9437, 9540, 9583, 9642, 9682, 9739, 9747, 9807, 9818, 9834, 9871, 9917, 8087, 8311) |
+			PlotPlantID == "8999b"
 		))
 	if (dim(Z)[1] > 0) {
 		write.csv(Z, "inconsistentDeadMissing.csv")
