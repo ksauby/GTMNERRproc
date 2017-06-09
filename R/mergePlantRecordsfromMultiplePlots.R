@@ -170,8 +170,6 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys) {
 	# merge plants in multiple plots and plants in one plot
 	Plant_Surveys <- rbind.fill(temp_B, temp_C)
 	Plant_Surveys %<>% arrange(PlantID, Date)
-	return(Plant_Surveys)
-	
 	# ----------------------------------------------------------- ERROR MESSAGES
 	temp <- Plant_Surveys %>% 
 		filter(PlantID=="7101", Date=="2015-05-23")
@@ -195,4 +193,165 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys) {
 			"Dead/Alive/Missing status not recorded correctly for plant 7185."
 		))
 	}
+	temp <- Plant_Surveys %>%
+		filter(
+			Dead == 1,
+			!(
+				is.na(Size_t) |
+				is.na(Plant_Segments_w_leaves) |
+				is.na(Plant_Segments_wo_leaves) |
+				is.na(Plant_Segments_woody) |
+				is.na(Height_t) |
+				is.na(Width_t) |
+				is.na(Perpen_Width)
+			) |
+			Num_FlowerBuds > 0 |
+			Num_Fruit_red > 0 |
+			Num_Fruit_green > 0 |
+			Num_Flowers > 0 |
+			Fruit_t > 0 |
+			Fruit_Flowers_t
+		)
+	if (dim(temp)[1] > 0) {
+		write.csv(temp,"Deadplantswsizemeasurements.csv")
+		warning(paste(
+			"Plant ",
+			paste(temp$PlantID, collapse=","),
+			"Marked dead but has size/fruit measurements. Information written to csv file."
+		))
+	}
+	temp <- Plant_Surveys %>%
+		filter(
+			Missing == 1,
+			!(
+				is.na(Size_t) |
+				is.na(Plant_Segments_w_leaves) |
+				is.na(Plant_Segments_wo_leaves) |
+				is.na(Plant_Segments_woody) |
+				is.na(Height_t) |
+				is.na(Width_t) |
+				is.na(Perpen_Width)
+			) |
+			Num_FlowerBuds > 0 |
+			Num_Fruit_red > 0 |
+			Num_Fruit_green > 0 |
+			Num_Flowers > 0 |
+			Fruit_t > 0 |
+			Fruit_Flowers_t
+		)
+	if (dim(temp)[1] > 0) {
+		write.csv(temp,"Missingplantswsizemeasurements.csv")
+		warning(paste(
+			"Plant ",
+			paste(temp$PlantID, collapse=","),
+			"Marked missing but has size/fruit measurements. Information written to csv file."
+		))
+	}
+	# ------------------------- CHANGE SURVEY INFO TO NA FOR DEAD/MISSING PLANTS
+	Plant_Surveys %<>%
+		rowwise() %>%
+		mutate(
+			CA_t = replace(
+				CA_t,
+				which(Dead == 1 | Missing == 1),
+				NA
+			),
+			ME_t = replace(
+				ME_t,
+				which(Dead == 1 | Missing == 1),
+				NA
+			),
+			CH_t = replace(
+				CH_t,
+				which(Dead == 1 | Missing == 1),
+				NA
+			),
+			DA_t = replace(
+				DA_t,
+				which(Dead == 1 | Missing == 1),
+				NA
+			),
+			Unknown_Moth_t = replace(
+				Unknown_Moth_t,
+				which(Dead == 1 | Missing == 1),
+				NA
+			),
+			Gerstaeckeria_t = replace(
+				Gerstaeckeria_t,
+				which(Dead == 1 | Missing == 1),
+				NA
+			),
+			Old_Moth_Evidence_t = replace(
+				Old_Moth_Evidence_t,
+				which(Dead == 1 | Missing == 1),
+				NA
+			),
+			Size_t = replace(
+				Size_t,
+				which(Dead == 1 | Missing == 1),
+				NA
+			),
+			Plant_Segments_w_leaves = replace(
+				Plant_Segments_w_leaves,
+				which(Dead == 1 | Missing == 1),
+				NA
+			),
+			Plant_Segments_wo_leaves = replace(
+				Plant_Segments_wo_leaves,
+				which(Dead == 1 | Missing == 1),
+				NA
+			),
+			Plant_Segments_woody = replace(
+				Plant_Segments_woody,
+				which(Dead == 1 | Missing == 1),
+				NA
+			),
+			Height_t = replace(
+				Height_t,
+				which(Dead == 1 | Missing == 1),
+				NA
+			),
+			Width_t = replace(
+				Width_t,
+				which(Dead == 1 | Missing == 1),
+				NA
+			),
+			Perpen_Width = replace(
+				Perpen_Width,
+				which(Dead == 1 | Missing == 1),
+				NA
+			),
+			Num_FlowerBuds = replace(
+				Num_FlowerBuds,
+				which(Dead == 1 | Missing == 1),
+				NA
+			),
+			Num_Fruit_red = replace(
+				Num_Fruit_red,
+				which(Dead == 1 | Missing == 1),
+				NA
+			),
+			Num_Fruit_green = replace(
+				Num_Fruit_green,
+				which(Dead == 1 | Missing == 1),
+				NA
+			),
+			Num_Flowers = replace(
+				Num_Flowers,
+				which(Dead == 1 | Missing == 1),
+				NA
+			),
+			Fruit_t = replace(
+				Fruit_t,
+				which(Dead == 1 | Missing == 1),
+				NA
+			),
+			Fruit_Flowers_t = replace(
+				Fruit_Flowers_t,
+				which(Dead == 1 | Missing == 1),
+				NA
+			)
+		)
+	# --------------------------------------------------------------------------
+	return(Plant_Surveys)
 }
