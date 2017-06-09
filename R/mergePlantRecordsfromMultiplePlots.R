@@ -247,6 +247,7 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys) {
 			"Marked missing but has size/fruit measurements. Information written to csv file."
 		))
 	}
+	# how many plants with less than 10 segments had fruit/flowers?
 	# throw a warning if pusilla has flowers before summer 2015
 	temp <- Plant_Surveys %>%
 		filter(
