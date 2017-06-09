@@ -241,6 +241,16 @@ processPlantInfo <- function(Plant_Info, Plot_Info) {
 		merge(Plot_Info, by="Tag_Number") %>%
 		select(ClusterID, Tag_Number)
 	Plant_Info %<>% merge(Plot_Info_Cluster, by="Tag_Number", all.x=T)
+	# ----------------------------------------------------------- ERROR MESSAGES
+	temp <- Plant_Info %>% 
+		filter(RecruitmentMode=="Seedling") %>% 
+		filter(Species=="pusilla")
+	if (dim(temp)[1] > 0) {
+		write.csv(temp,"Pusillaseedlings.csv")
+		warning(
+			"O. pusilla plants marked as seedlings. Information written to csv file."
+		)
+	}
 	# ------------------------------------------------------------------------ #
 	return(Plant_Info)
 }
