@@ -205,13 +205,13 @@ fixInconsistentDeadMissingRecords <- function(Plant_Surveys) {
 			which(PlotPlantID=="9923" & Date=="2013-12-18"),
 			0
 		),
-		Dead = replace(
-			Dead,
+		Missing = replace(
+			Missing,
 			which(PlotPlantID=="9923" & Date=="2014-06-26"),
 			0
 		),
-		Dead = replace(
-			Dead,
+		Missing = replace(
+			Missing,
 			which(PlotPlantID=="9923" & Date=="2015-01-20"),
 			0
 		),
@@ -577,8 +577,8 @@ fixInconsistentDeadMissingRecords <- function(Plant_Surveys) {
 		# 8087: 
 		# 8311: 
 		# 8202: replace dead with 0 on 2015-01-16
-		Dead = replace(
-			Dead,
+		Missing = replace(
+			Missing,
 			which(PlotPlantID=="8202" & Date=="2015-01-16"),
 			0
 		),
@@ -604,6 +604,47 @@ fixInconsistentDeadMissingRecords <- function(Plant_Surveys) {
 			Dead,
 			which(PlotPlantID=="8514" & Date=="2014-06-04"),
 			1
-		)
+		),
+		# 9106
+		Dead = replace(
+			Dead,
+			which(PlotPlantID=="9106" & Date=="2014-06-02"),
+			1
+		),
+		# 8374
+		Missing = replace(
+			Missing,
+			which(PlotPlantID=="8374" & Date=="2015-01-16"),
+			0
+		),
+		# 8311
+		Dead = replace(
+			Dead,
+			which(PlotPlantID=="8311" & Date=="2013-12-21"),
+			0
+		),
+		# 8311
+		Dead = replace(
+			Dead,
+			which(PlotPlantID=="8311" & Date=="2013-12-21"),
+			0
+		),
+		# 8087
+		Dead = replace(
+			Dead,
+			which(PlotPlantID=="8087" & Date=="2013-12-20"),
+			0
+		),
+		# 8081
+		Dead = replace(
+			Dead,
+			which(PlotPlantID=="8081" & Date=="2013-12-20"),
+			0
+		),
+		Dead = replace(
+			Dead,
+			which(PlotPlantID=="8081" & Date=="2014-06-04"),
+			0
+		)			
 	)
 }
