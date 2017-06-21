@@ -19,6 +19,8 @@ fixInconsistentDeadMissingRecords <- function(Plant_Surveys) {
 			which(PlotPlantID=="7226" & Date=="2015-01-28"),
 			0
 		),
+		# 7331	photos look the same so I think dead/missing recordings are erroneous
+		
 		# 7351: photos look the same so I think dead/missing recordings are erroneous; should be alive on 2014-09-08 and 2015-01-16
 		Dead = replace(
 			Dead,
@@ -60,13 +62,13 @@ fixInconsistentDeadMissingRecords <- function(Plant_Surveys) {
 			1
 		),
 		# 8493: I guess it was buried on 2014-06-27 and 2015-01-21 (should be alive)
-		Dead = replace(
-			Dead,
+		Missing = replace(
+			Missing,
 			which(PlotPlantID=="8493" & Date=="2014-06-27"),
 			0
 		),
-		Dead = replace(
-			Dead,
+		Missing = replace(
+			Missing,
 			which(PlotPlantID=="8493" & Date=="2015-01-21"),
 			0
 		),
@@ -164,8 +166,8 @@ fixInconsistentDeadMissingRecords <- function(Plant_Surveys) {
 			1
 		),
 		# 9732: assume was alive on 2013-07-23 and 2013-12-17
-		Dead = replace(
-			Dead,
+		Missing = replace(
+			Missing,
 			which(PlotPlantID=="9732" & Date=="2013-07-23"),
 			0
 		),
@@ -310,9 +312,9 @@ fixInconsistentDeadMissingRecords <- function(Plant_Surveys) {
 			which(PlotPlantID=="8168" & Date=="2013-12-21"),
 			0
 		),
-		# 8265: replace dead on 2015-01-16 with 0
-		Dead = replace(
-			Dead,
+		# 8265: replace Missing on 2015-01-16 with 0
+		Missing = replace(
+			Missing,
 			which(PlotPlantID=="8265" & Date=="2015-01-16"),
 			0
 		),
@@ -322,9 +324,9 @@ fixInconsistentDeadMissingRecords <- function(Plant_Surveys) {
 			which(PlotPlantID=="8270" & Date=="2014-09-08"),
 			0
 		),
-		# 8374: replace dead on 2015-01-20 with 0
-		Dead = replace(
-			Dead,
+		# 8374: replace Missing on 2015-01-20 with 0
+		Missing = replace(
+			Missing,
 			which(PlotPlantID=="8374" & Date=="2015-01-20"),
 			0
 		),
@@ -364,9 +366,9 @@ fixInconsistentDeadMissingRecords <- function(Plant_Surveys) {
 			which(PlotPlantID=="8584" & Date=="2015-01-28"),
 			0
 		),
-		# 8652: replace dead on 2015-01-28 with 0
-		Dead = replace(
-			Dead,
+		# 8652: replace Missing on 2015-01-28 with 0
+		Missing = replace(
+			Missing,
 			which(PlotPlantID=="8652" & Date=="2015-01-28"),
 			0
 		),
@@ -409,7 +411,7 @@ fixInconsistentDeadMissingRecords <- function(Plant_Surveys) {
 		# 8861: replace missing on 2015-01-20 with 0
 		Missing = replace(
 			Missing,
-			which(PlotPlantID=="8861" & Date=="2015-01-20"),
+			which(PlotPlantID=="8861" & Date=="2015-01-22"),
 			0
 		),
 		# 8911: replace dead on 2015-01-15 with 0
@@ -430,9 +432,9 @@ fixInconsistentDeadMissingRecords <- function(Plant_Surveys) {
 			which(PlotPlantID=="8951" & Date=="2015-01-16"),
 			0
 		),
-		# 8980: replace dead on 2015-01-16 with 0
-		Dead = replace(
-			Dead,
+		# 8980: replace Missing on 2015-01-16 with 0
+		Missing = replace(
+			Missing,
 			which(PlotPlantID=="8980" & Date=="2015-01-16"),
 			0
 		),
@@ -460,30 +462,148 @@ fixInconsistentDeadMissingRecords <- function(Plant_Surveys) {
 			which(PlotPlantID=="9255" & Date=="2015-02-03"),
 			0
 		),
+		# 9338: replace missing on 2015-02-02 with 0
+		Missing = replace(
+			Missing,
+			which(PlotPlantID=="9338" & Date=="2015-02-02"),
+			0
+		),		
 		
+		# 9341: replace ? - where are the records?
 		
-		# 9338: replace dead on 2015-01-20 with 0
-		# 9341: replace dead on 2015-01-20 with 0
-		# 9350: replace dead on 2015-01-20 with 0
-		# 9354: replace dead on 2015-01-20 with 0
-		# 9394: replace dead on 2015-01-20 with 0
-		# 9399: replace dead on 2015-01-20 with 0
-		# 9401: replace dead on 2015-01-20 with 0
-		# 9430: replace dead on 2015-01-20 with 0
-		# 9437: replace dead on 2015-01-20 with 0
-		# 9540: replace dead on 2015-01-20 with 0
-		# 9583: replace dead on 2015-01-20 with 0
-		# 9642: replace dead on 2015-01-20 with 0
-		# 9682: replace dead on 2015-01-20 with 0
-		# 9739: replace dead on 2015-01-20 with 0
-		# 9747: replace dead on 2015-01-20 with 0
-		# 9807: replace dead on 2015-01-20 with 0
-		# 9818: replace dead on 2015-01-20 with 0
-		# 9834: replace dead on 2015-01-20 with 0
+		# 9350: replace dead on 2015-01-08 with 0
+		Dead = replace(
+			Dead,
+			which(PlotPlantID=="9350" & Date=="2015-01-08"),
+			0
+		),
+		# 9354: replace dead on 2015-05-25 with 0
+		Dead = replace(
+			Dead,
+			which(PlotPlantID=="9354" & Date=="2015-05-25"),
+			0
+		),
+		# 9394: replace dead on 2015-01-09 with 0
+		Dead = replace(
+			Dead,
+			which(PlotPlantID=="9394" & Date=="2015-01-09"),
+			0
+		),
+		# 9399: replace dead on 2015-01-09 with 0
+		Dead = replace(
+			Dead,
+			which(PlotPlantID=="9399" & Date=="2015-01-09"),
+			0
+		),
+		# 9401: replace dead on 2015-01-09 with 0
+		Dead = replace(
+			Dead,
+			which(PlotPlantID=="9401" & Date=="2015-01-09"),
+			0
+		),
+		# 9430: replace missing on 2015-02-02 with 0
+		Missing = replace(
+			Missing,
+			which(PlotPlantID=="9430" & Date=="2015-02-02"),
+			0
+		),
+		# 9437: replace dead on 2014-05-11 with 0
+		Dead = replace(
+			Dead,
+			which(PlotPlantID=="9437" & Date=="2014-05-11"),
+			0
+		),
+		# 9540: replace dead on 2015-01-09 with 0
+		Dead = replace(
+			Dead,
+			which(PlotPlantID=="9540" & Date=="2015-01-09"),
+			0
+		),
+		# 9583: replace dead on 2014-06-25 with 0
+		Dead = replace(
+			Dead,
+			which(PlotPlantID=="9583" & Date=="2014-06-25"),
+			0
+		),
+		# 9642: replace dead on 2015-01-17 with 0
+		Dead = replace(
+			Dead,
+			which(PlotPlantID=="9642" & Date=="2015-01-17"),
+			0
+		),
+		# 9682: replace dead on 2014-06-02 with 0
+		Dead = replace(
+			Dead,
+			which(PlotPlantID=="9682" & Date=="2014-06-02"),
+			0
+		),
+		# 9739: replace dead on 2015-01-28 with 0
+		Dead = replace(
+			Dead,
+			which(PlotPlantID=="9739" & Date=="2015-01-28"),
+			0
+		),
+		# 9747: replace dead on 2015-01-28 with 0
+		Dead = replace(
+			Dead,
+			which(PlotPlantID=="9747" & Date=="2015-01-28"),
+			0
+		),
+		# 9807: replace dead on 2014-09-05 with 0
+		Dead = replace(
+			Dead,
+			which(PlotPlantID=="9807" & Date=="2014-09-05"),
+			0
+		),
+		# 9818: replace dead on 2014-01-26 with 0
+		Dead = replace(
+			Dead,
+			which(PlotPlantID=="9818" & Date=="2014-01-26"),
+			0
+		),
+		# 9834: replace missing on 2014-06-10 with 0
+		Missing = replace(
+			Missing,
+			which(PlotPlantID=="9834" & Date=="2014-06-10"),
+			0
+		),
 		# 9871: replace dead on 2015-01-20 with 0
-		# 9917: replace dead on 2015-01-20 with 0
-		# 8087: replace dead on 2015-01-20 with 0
-		# 8311: replace dead on 2015-01-20 with 0
-		
+		Dead = replace(
+			Dead,
+			which(PlotPlantID=="9871" & Date=="2015-01-20"),
+			0
+		),
+		# 9917: where are records
+		# 8087: 
+		# 8311: 
+		# 8202: replace dead with 0 on 2015-01-16
+		Dead = replace(
+			Dead,
+			which(PlotPlantID=="8202" & Date=="2015-01-16"),
+			0
+		),
+		# 8374: replace dead with 0 on 2015-01-16
+		Dead = replace(
+			Dead,
+			which(PlotPlantID=="8374" & Date=="2015-01-16"),
+			0
+		),
+		# 8374
+		Missing = replace(
+			Missing,
+			which(PlotPlantID=="7331" & Date=="2015-01-15"),
+			0
+		),
+		Dead = replace(
+			Dead,
+			which(PlotPlantID=="7331" & Date=="2014-09-08"),
+			0
+		),
+		# 8514
+		Dead = replace(
+			Dead,
+			which(PlotPlantID=="8514" & Date=="2014-06-04"),
+			1
+		)
 	)
 }

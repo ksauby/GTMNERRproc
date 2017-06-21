@@ -118,7 +118,8 @@ processPlantInfo <- function(Plant_Info, Plot_Info) {
 	Z <- A %>% 
 		filter(inconsistentDeadMissing==1) %>%
 		filter(!(
-			PlotPlantID %in% c("8999b", "9113b", "9164a", "9341a", "9917a")
+			PlotPlantID %in% c("8999b", "9113b", "9164a", "9341a", "9917a", 
+			"8873b", "9892b")
 		)) 
 	if (dim(Z)[1] > 0) {
 		write.csv(Z, "inconsistentDeadMissing.csv")
