@@ -12,8 +12,40 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys) {
 	for (i in 1:length(unique(temp_A$PlantID))) {
 		# pull all records for this PlantID from the plant surveys
 		L = filter(temp_A, PlantID==unique(temp_A$PlantID)[i])
-		# Use the last date the plant was surveyed during each Demographic Survey
-		Dates <- L %>% group_by(DemographicSurvey) %>% summarise(Date=max(Date))
+		# For each Demographic Survey and two week window, use the last date the plant was surveyed
+		# then save range of dates that the plant was surveyed 
+		
+		
+		
+		# for 9361, want to group surveys on "2014-05-10" "2014-05-10" "2014-05-11" "2014-05-11"
+		
+		L.list <- split(
+			L,
+			cut(
+				L$Date,
+				seq(min(L$Date), max(L$Date), by=14)
+			)
+		)
+		
+		
+		L.list %<>% .[sapply(., function(x) dim(x)[1]) > 0]
+		
+		
+		Dates <- L %>% 
+			group_by(DemographicSurvey) %>% 
+			summarise(
+				maxDate=max(Date),
+				minDate=min(Date),
+				diffDate = maxDate - minDate
+			)
+			one.per.Demog.Survey <- Dates %>% filter(diffDate <= 14)
+			mult.per.Demog.Survey <- Dates %>% filter(diffDate > 14)
+			
+			for (i in 1:length(DemographicSurvey)) {
+				Dates %>% mutate(maxDate - minDate
+			}
+			# if more than two weeks between max and min Date, group into more than one survey
+		
 		Z[[i]] 	<- data.frame(Dates)
 		Z[[i]][, "PlantID"] 			<- L$PlantID[1]
 		Z[[i]][, "ClusterID"] 			<- L$ClusterID[1]
@@ -28,9 +60,9 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys) {
 												unique(.) %>%
 												paste(collapse="")
 												
-		# for each date - how do I do it for a set of dates
-		# do first date with window
-		# then do for other dates as long as they do not fall within window of previous dates
+		# first group by dates
+		
+		# then figure out which have incomplete surveys and group within two week window
 		
 		# can group by DemographicSurvey if no duplicate surveys present
 		uniqSurveys <- unique(Z[[i]]$DemographicSurvey)
@@ -44,6 +76,9 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys) {
 					Dead != 1,
 					Missing != 1
 				)
+			
+				# what if a plotplantID is surveyed multiple times within this window? don't want to add it together
+			
 			# get list of PlotPlantIDs alive at this time
 			# plant would be dead if no PlantID records showed up in N
 			N = Plant_Info %>%
