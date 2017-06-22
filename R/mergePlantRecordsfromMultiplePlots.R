@@ -17,13 +17,11 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys) {
 		
 		
 		
-		# for 9361, want to group surveys on "2014-05-10" "2014-05-10" "2014-05-11" "2014-05-11"
-		
 		L.list <- split(
 			L,
 			cut(
 				L$Date,
-				seq(min(L$Date), max(L$Date), by=14)
+				seq(min(L$Date), max(L$Date), by=28)
 			)
 		)
 		
@@ -31,22 +29,9 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys) {
 		L.list %<>% .[sapply(., function(x) dim(x)[1]) > 0]
 		
 		
-		Dates <- L %>% 
-			group_by(DemographicSurvey) %>% 
-			summarise(
-				maxDate=max(Date),
-				minDate=min(Date),
-				diffDate = maxDate - minDate
-			)
-			one.per.Demog.Survey <- Dates %>% filter(diffDate <= 14)
-			mult.per.Demog.Survey <- Dates %>% filter(diffDate > 14)
-			
-			for (i in 1:length(DemographicSurvey)) {
-				Dates %>% mutate(maxDate - minDate
-			}
-			# if more than two weeks between max and min Date, group into more than one survey
 		
-		Z[[i]] 	<- data.frame(Dates)
+		
+		Z[[i]] 	<- data.frame(Date = names(L.list))
 		Z[[i]][, "PlantID"] 			<- L$PlantID[1]
 		Z[[i]][, "ClusterID"] 			<- L$ClusterID[1]
 		Z[[i]][, "Network"] 			<- L$Network[1]
@@ -62,22 +47,19 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys) {
 												
 		# first group by dates
 		
-		# then figure out which have incomplete surveys and group within two week window
-		
-		# can group by DemographicSurvey if no duplicate surveys present
-		uniqSurveys <- unique(Z[[i]]$DemographicSurvey)
-		for (j in 1:length(uniqSurveys)) {
-		
+		for (j in 1:length(L$Date)) {
 			# pull all plant survey records for this date from plant surveys
 			# allow surveys to occur within a two week window around this date
-			M = L %>% 
-				filter(
-					DemographicSurvey == uniqSurveys[j],
-					Dead != 1,
-					Missing != 1
-				)
+			M <- eval(parse(text=paste(
+					"L.list$", 
+					'"', 
+					Z[[i]]$Date[j], 
+					'"', 
+					sep=""
+				))) %>%
+				filter(Dead != 1, Missing != 1)
 			
-				# what if a plotplantID is surveyed multiple times within this window? don't want to add it together
+			
 			
 			# get list of PlotPlantIDs alive at this time
 			# plant would be dead if no PlantID records showed up in N
@@ -111,6 +93,32 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys) {
 				Z[[i]][j, "AllSurveyed"] 			<- "TRUE"
 			}
 			else {
+				# throw error if a plotplantID is surveyed multiple times within this window and both records have size measurements
+			temp <- M %>% filter(
+					Plant_Segments_w_leaves > 0 |
+					Plant_Segments_wo_leaves > 0 |
+					Plant_Segments_woody > 0 | 
+					Height_t > 0 | 
+					Width_t > 0 | 
+					Perpen_Width > 0 | 
+					Num_FlowerBuds > 0 | 
+					Num_Fruit_red > 0 | 
+					Num_Fruit_green > 0 | 
+					Num_Flowers > 0 | 
+					Num_Fruit > 0
+			) %>%
+				group_by(PlotPlantID) %>%
+				mutate(n.records = n()) %>%
+				ungroup() %>%
+				filter(n.records > 1)
+			if (dim(temp)[1] > 0) {
+				warning(paste(
+					"Multiple size records for PlotPlantID", 
+					M$PlotPlantID[1], 
+					"around date", 
+					paste(M$Date, collapse=",")
+				))
+			}
 				# if all PlotPlantIDs were NOT surveyed on this date consider the insect to be detected if the sum is greater than zero
 				Z[[i]][j, "CA_t"] 					<- mysum1(M$CA_t)
 				Z[[i]][j, "ME_t"] 					<- mysum1(M$ME_t)
@@ -223,23 +231,6 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys) {
 	temp_D <- rbind.fill(temp_B, temp_C)
 	temp_D %<>% arrange(PlantID, Date)
 	# ----------------------------------------------------------- ERROR MESSAGES
-	temp <- temp_D %>% 
-		filter(PlantID=="7101", Date=="2015-05-23")
-	if (temp$Dead != 0 | temp$Missing != 0) {
-		warning(paste(
-			"Death of part of plant (but not whole plant) not recorded 
-				correctly for plant 7101."
-		))
-	}
-	
-	# why dead=NA for DemographicSurvey=5 when both were recorded dead?
-	temp <- temp_D %>% 
-		filter(PlantID=="7185", Date=="2015-05-26")
-	if (temp$Dead != 1) {
-		warning(paste(
-			"Dead/Alive/Missing status not recorded correctly for plant 7185."
-		))
-	}
 	temp <- temp_D %>%
 		filter(
 			Dead == 1,
