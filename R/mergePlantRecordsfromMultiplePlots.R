@@ -6,6 +6,11 @@
 #' @export
 
 mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys) {
+	
+	
+	h <- function(w) if( any( grepl( "no non-missing arguments to max", w) ) ) invokeRestart( "muffleWarning" )
+	
+	
 	# restrict to plants that span multiple plots
 	temp_A <- filter(Plant_Surveys, N.PlotPlantIDs > 1)
 	Z = list()
@@ -16,22 +21,24 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys) {
 		# then save range of dates that the plant was surveyed 
 		
 		
-		
-		L.list <- split(
-			L,
-			cut(
-				L$Date,
-				seq(min(L$Date), max(L$Date), by=28)
+		if (max(L$Date) - min(L$Date) > 28) {
+			L.list <- split(
+				L,
+				cut(
+					L$Date,
+					seq(min(L$Date), max(L$Date), by=28)
+				)
 			)
-		)
+			L.list %<>% .[sapply(., function(x) dim(x)[1]) > 0]
+			Z[[i]] 	<- data.frame(Date = names(L.list))
+		} else {
+			L.list <- list(L)
+			names(L.list) <- max(L.list[[1]]$Date)
+			Z[[i]] <- data.frame(Date = max(L.list[[1]]$Date))
+		}
 		
 		
-		L.list %<>% .[sapply(., function(x) dim(x)[1]) > 0]
 		
-		
-		
-		
-		Z[[i]] 	<- data.frame(Date = names(L.list))
 		Z[[i]][, "PlantID"] 			<- L$PlantID[1]
 		Z[[i]][, "ClusterID"] 			<- L$ClusterID[1]
 		Z[[i]][, "Network"] 			<- L$Network[1]
@@ -47,7 +54,7 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys) {
 												
 		# first group by dates
 		
-		for (j in 1:length(L$Date)) {
+		for (j in 1:length(names(L.list))) {
 			# pull all plant survey records for this date from plant surveys
 			# allow surveys to occur within a two week window around this date
 			M <- eval(parse(text=paste(
@@ -58,7 +65,20 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys) {
 					sep=""
 				))) %>%
 				filter(Dead != 1, Missing != 1)
+			# pull all surveys where plant was marked dead
+			O <- eval(parse(text=paste(
+					"L.list$", 
+					'"', 
+					Z[[i]]$Date[j], 
+					'"', 
+					sep=""
+				))) %>%
+				filter(Dead == 1 | Missing == 1)
 			
+			# the plant may be dead 
+			if (dim(M)[1] == 0 & dim(O)[1] > 0) {
+				# if dead date from plant info falls within the survey period, say its dead this survey
+				# the max of the FirstDeadObservation from PlantInfo
 			
 			
 			# get list of PlotPlantIDs alive at this time
@@ -72,6 +92,9 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys) {
 					FirstDeadMissingObservation > max(M$Date) | 
 						is.na(FirstDeadMissingObservation)==T
 				)
+			
+			}
+			
 			# if all PlotPlantIDs were surveyed for a given date:
 			if (identical(M$PlotPlantID[order(M$PlotPlantID)], 
 				N$PlotPlantID[order(N$PlotPlantID)])==T) {
@@ -91,8 +114,7 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys) {
 					{Z[[i]][j, "Missing"] <- 1} else {Z[[i]][j, "Missing"] <- 0}
 				# all surveyed = TRUE
 				Z[[i]][j, "AllSurveyed"] 			<- "TRUE"
-			}
-			else {
+			} else {
 				# throw error if a plotplantID is surveyed multiple times within this window and both records have size measurements
 			temp <- M %>% filter(
 					Plant_Segments_w_leaves > 0 |
@@ -111,14 +133,14 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys) {
 				mutate(n.records = n()) %>%
 				ungroup() %>%
 				filter(n.records > 1)
-			if (dim(temp)[1] > 0) {
-				warning(paste(
-					"Multiple size records for PlotPlantID", 
-					M$PlotPlantID[1], 
-					"around date", 
-					paste(M$Date, collapse=",")
-				))
-			}
+			#if (dim(temp)[1] > 0) {
+			#	warning(paste(
+			#		"Multiple size records for PlotPlantID", 
+			#		M$PlotPlantID[1], 
+			#		"around date", 
+			#		paste(M$Date, collapse=",")
+			#	))
+			#}
 				# if all PlotPlantIDs were NOT surveyed on this date consider the insect to be detected if the sum is greater than zero
 				Z[[i]][j, "CA_t"] 					<- mysum1(M$CA_t)
 				Z[[i]][j, "ME_t"] 					<- mysum1(M$ME_t)
@@ -153,9 +175,18 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys) {
 			 	mysum(M$Plant_Segments_wo_leaves)
 			Z[[i]][j, "Plant_Segments_woody"] <- mysum(M$Plant_Segments_woody)
 			# Size
-			Z[[i]][j, "Height_t"] 				<- max(M$Height_t, na.rm=T)
-			Z[[i]][j, "Width_t"] 				<- max(M$Width_t, na.rm=T)
-			Z[[i]][j, "Perpen_Width"] 			<- max(M$Perpen_Width, na.rm=T)
+			Z[[i]][j, "Height_t"] 				<- withCallingHandlers(
+				max(M$Height_t, na.rm=T),
+				warning = h
+			)
+			Z[[i]][j, "Width_t"] 				<- withCallingHandlers(
+				max(M$Width_t, na.rm=T),
+				warning = h
+			)
+			Z[[i]][j, "Perpen_Width"] 			<- withCallingHandlers(
+				max(M$Perpen_Width, na.rm=T),
+				warning = h
+			)
 			# Fruit	and Flowers
 			Z[[i]][j, "Num_FlowerBuds"] 			<- mysum(M$Num_FlowerBuds)
 			Z[[i]][j, "Num_Fruit_red"] 				<- mysum(M$Num_Fruit_red)
@@ -230,6 +261,8 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys) {
 	# merge plants in multiple plots and plants in one plot
 	temp_D <- rbind.fill(temp_B, temp_C)
 	temp_D %<>% arrange(PlantID, Date)
+	
+	temp_D %>% write.csv("temp.csv")
 	# ----------------------------------------------------------- ERROR MESSAGES
 	temp <- temp_D %>%
 		filter(
