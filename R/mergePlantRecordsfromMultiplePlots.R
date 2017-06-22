@@ -6,21 +6,16 @@
 #' @export
 
 mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys) {
-	# restrict to plants that are in more than one plot
+	# restrict to plants that span multiple plots
 	temp_A <- filter(Plant_Surveys, N.PlotPlantIDs > 1)
 	Z = list()
-	# for each PlantID in the plant surveys data
 	for (i in 1:length(unique(temp_A$PlantID))) {
 		# pull all records for this PlantID from the plant surveys
 		L = filter(temp_A, PlantID==unique(temp_A$PlantID)[i])
-		# Date the plant was finished being survey, by Demographic Survey
+		# Use the last date the plant was surveyed during each Demographic Survey
 		Dates <- L %>% group_by(DemographicSurvey) %>% summarise(Date=max(Date))
-		
-		
-		Z[[i]] 	<- as.data.frame(matrix(NA,length(Dates$Date),1))	
-		Z[[i]][, 1] 					<- L$PlantID[1]
-		
-		# can't include unique Tag_Number because some plants are in more than one plot
+		Z[[i]] 	<- data.frame(Dates)
+		Z[[i]][, "PlantID"] 			<- L$PlantID[1]
 		Z[[i]][, "ClusterID"] 			<- L$ClusterID[1]
 		Z[[i]][, "Network"] 			<- L$Network[1]
 		Z[[i]][, "Island"] 				<- L$Island[1]
@@ -32,27 +27,34 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys) {
 												.[which(!is.na(.))] %>%
 												unique(.) %>%
 												paste(collapse="")
+												
 		# for each date - how do I do it for a set of dates
 		# do first date with window
 		# then do for other dates as long as they do not fall within window of previous dates
 		
 		# can group by DemographicSurvey if no duplicate surveys present
-		for (j in 1:length(unique(L$DemographicSurvey))) {
+		uniqSurveys <- unique(Z[[i]]$DemographicSurvey)
+		for (j in 1:length(uniqSurveys)) {
 		
 			# pull all plant survey records for this date from plant surveys
 			# allow surveys to occur within a two week window around this date
 			M = L %>% 
-				filter(L$DemographicSurvey == unique(L$DemographicSurvey)[j])
-			# get list of PlotPlantIDs
-			N = filter(
-				Plant_Info, 
-				PlantID==L$PlantID[1], 
-				# only include plants that are listed as having been added to Plant_Info on or after Date
-				First.Survey.Date.Alive <= max(L$Date),
-				# exclude dead plants (including date plant was first recorded as dead)
-				FirstDeadMissingObservation >= max(L$Date) | 
-					is.na(FirstDeadMissingObservation)==T
-			)
+				filter(
+					DemographicSurvey == uniqSurveys[j],
+					Dead != 1,
+					Missing != 1
+				)
+			# get list of PlotPlantIDs alive at this time
+			# plant would be dead if no PlantID records showed up in N
+			N = Plant_Info %>%
+				filter( 
+					PlantID==L$PlantID[1], 
+					# only include plants that are listed as having been added to Plant_Info on or after Date
+					First.Survey.Date.Alive <= max(M$Date),
+					# exclude dead plants (including date plant was first recorded as dead)
+					FirstDeadMissingObservation > max(M$Date) | 
+						is.na(FirstDeadMissingObservation)==T
+				)
 			# if all PlotPlantIDs were surveyed for a given date:
 			if (identical(M$PlotPlantID[order(M$PlotPlantID)], 
 				N$PlotPlantID[order(N$PlotPlantID)])==T) {
@@ -85,13 +87,18 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys) {
 				# Dead or missing - alive if at least one observation of alive
 				# 	if the sum of Dead/Missing == # of PlotPlantIDs, the plant is dead in all plots
 				if (sum(M$Dead, M$Missing, na.rm=T) < dim(N)[1])
-					{Z[[i]][j, "Dead"] <- 0} 
-					else {Z[[i]][j, "Dead"] <- NA}
+					{Z[[i]][j, "Dead"] <- 0} else
+						if (dim(N)[1] == 0)
+							{Z[[i]][j, "Dead"] <- 1} else
+								{Z[[i]][j, "Dead"] <- NA}
 				# Missing
 				# 	if the sum of Missing == # of PlotPlantIDs, the plant is missing in all plots
+				O = Plant_Info %>% filter(PlantID==L$PlantID[1])
 				if (sum(M$Missing, na.rm=T) < dim(N)[1])
-					{Z[[i]][j, "Missing"] <- 0} 
-					else {Z[[i]][j, "Missing"] <- NA}
+					{Z[[i]][j, "Missing"] <- 0}  else
+						if (dim(N)[1] == 0 & sum(M$Missing, na.rm=T)==dim(O)[1])
+							{Z[[i]][j, "Missing"] <- 1} else
+								{Z[[i]][j, "Missing"] <- NA}
 				# all surveyed = FALSE
 				Z[[i]][j, "AllSurveyed"] 			<- "FALSE"
 			}
@@ -127,7 +134,6 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys) {
 	# fraction of time that the insect was found
 	# field indicating when plant was measured
 	temp_B <- do.call(rbind.data.frame, Z)
-	names(temp_B)[1] <- "PlantID"
 	# max(NA, NA, na.rm=T) returns "-Inf"
 	temp_B[,c(
 		"Perpen_Width",
@@ -179,10 +185,10 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys) {
 	temp_C$AllSurveyed <- "TRUE"
 	temp_C$PlantsSurveyed <- "NA"
 	# merge plants in multiple plots and plants in one plot
-	Plant_Surveys <- rbind.fill(temp_B, temp_C)
-	Plant_Surveys %<>% arrange(PlantID, Date)
+	temp_D <- rbind.fill(temp_B, temp_C)
+	temp_D %<>% arrange(PlantID, Date)
 	# ----------------------------------------------------------- ERROR MESSAGES
-	temp <- Plant_Surveys %>% 
+	temp <- temp_D %>% 
 		filter(PlantID=="7101", Date=="2015-05-23")
 	if (temp$Dead != 0 | temp$Missing != 0) {
 		warning(paste(
@@ -190,21 +196,16 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys) {
 				correctly for plant 7101."
 		))
 	}
-	temp <- Plant_Surveys %>% 
-		filter(PlantID=="7185", Date=="2015-05-24")
-	if (temp$Dead != 0 | temp$Missing != 0) {
-		warning(paste(
-			"Dead/Alive/Missing status not recorded correctly for plant 7185."
-		))
-	}
-	temp <- Plant_Surveys %>% 
+	
+	# why dead=NA for DemographicSurvey=5 when both were recorded dead?
+	temp <- temp_D %>% 
 		filter(PlantID=="7185", Date=="2015-05-26")
 	if (temp$Dead != 1) {
 		warning(paste(
 			"Dead/Alive/Missing status not recorded correctly for plant 7185."
 		))
 	}
-	temp <- Plant_Surveys %>%
+	temp <- temp_D %>%
 		filter(
 			Dead == 1,
 			!(
@@ -231,7 +232,7 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys) {
 			"Marked dead but has size/fruit measurements. Information written to csv file."
 		))
 	}
-	temp <- Plant_Surveys %>%
+	temp <- temp_D %>%
 		filter(
 			Missing == 1,
 			!(
@@ -260,7 +261,7 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys) {
 	}
 	# how many plants with less than 10 segments had fruit/flowers?
 	# throw a warning if pusilla has flowers before summer 2015
-	temp <- Plant_Surveys %>%
+	temp <- temp_D %>%
 		filter(
 			Size_t < 5,
 			Fruit_Flowers_t > 0
@@ -286,7 +287,7 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys) {
 		))
 	}
 	# ------------------------- CHANGE SURVEY INFO TO NA FOR DEAD/MISSING PLANTS
-	Plant_Surveys %<>%
+	temp_D %<>%
 		rowwise() %>%
 		mutate(
 			CA_t = replace(
@@ -392,5 +393,5 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys) {
 		) %>%
 		ungroup()
 	# --------------------------------------------------------------------------
-	return(Plant_Surveys)
+	return(temp_D)
 }
