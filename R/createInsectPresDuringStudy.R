@@ -7,7 +7,7 @@
 
 createInsectPresDuringStudy <- function(Plant_Surveys_by_Year) {
 	network_summary_time_t <- Plant_Surveys_by_Year %>%
-		group_by(Network, Year) %>%
+		group_by(Network, SamplingYear) %>%
 		summarise(
 			OldMothNetworkPres_t = max(Old_Moth_Evidence_t, na.rm=T),
 			#InsectNetworkPres = max(Insect_t, na.rm=T),
@@ -23,7 +23,7 @@ createInsectPresDuringStudy <- function(Plant_Surveys_by_Year) {
 				"CANetworkPres_t", 
 				"MothNetworkPres_t"
 			), 
-			arrange.variable="Year", 
+			arrange.variable="SamplingYear", 
 			grouping.variable="Network"
 		)
 	network_summary <- Plant_Surveys_by_Year %>%
@@ -47,5 +47,5 @@ createInsectPresDuringStudy <- function(Plant_Surveys_by_Year) {
 	Plant_Surveys_by_Year %>% 
 		merge(network_summary, by="Network") %>% 
 		merge(Plant_summary, by="PlantID") %>%
-		merge(network_summary_time_t, by=c("Year", "Network"))
+		merge(network_summary_time_t, by=c("SamplingYear", "Network"))
 }

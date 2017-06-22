@@ -9,13 +9,17 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys) {
 	# restrict to plants that are in more than one plot
 	temp_A <- filter(Plant_Surveys, N.PlotPlantIDs > 1)
 	Z = list()
-	# for each tag number in the plot surveys data
+	# for each PlantID in the plant surveys data
 	for (i in 1:length(unique(temp_A$PlantID))) {
-		# pull all records for this Tag Number from plot surveys
+		# pull all records for this PlantID from the plant surveys
 		L = filter(temp_A, PlantID==unique(temp_A$PlantID)[i])
-		Z[[i]] 	<- as.data.frame(matrix(NA,length(unique(L$Date)),1))	
+		# Date the plant was finished being survey, by Demographic Survey
+		Dates <- L %>% group_by(DemographicSurvey) %>% summarise(Date=max(Date))
+		
+		
+		Z[[i]] 	<- as.data.frame(matrix(NA,length(Dates$Date),1))	
 		Z[[i]][, 1] 					<- L$PlantID[1]
-		Z[[i]][, "Date"] 				<- unique(L$Date)
+		
 		# can't include unique Tag_Number because some plants are in more than one plot
 		Z[[i]][, "ClusterID"] 			<- L$ClusterID[1]
 		Z[[i]][, "Network"] 			<- L$Network[1]
@@ -28,18 +32,25 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys) {
 												.[which(!is.na(.))] %>%
 												unique(.) %>%
 												paste(collapse="")
-		# for each date
-		for (j in 1:length(unique(L$Date))) {
+		# for each date - how do I do it for a set of dates
+		# do first date with window
+		# then do for other dates as long as they do not fall within window of previous dates
+		
+		# can group by DemographicSurvey if no duplicate surveys present
+		for (j in 1:length(unique(L$DemographicSurvey))) {
+		
 			# pull all plant survey records for this date from plant surveys
-			M = filter(L, Date==unique(L$Date)[j])
+			# allow surveys to occur within a two week window around this date
+			M = L %>% 
+				filter(L$DemographicSurvey == unique(L$DemographicSurvey)[j])
 			# get list of PlotPlantIDs
 			N = filter(
 				Plant_Info, 
 				PlantID==L$PlantID[1], 
 				# only include plants that are listed as having been added to Plant_Info on or after Date
-				First.Survey.Date.Alive <= unique(L$Date)[j],
+				First.Survey.Date.Alive <= max(L$Date),
 				# exclude dead plants (including date plant was first recorded as dead)
-				FirstDeadMissingObservation >= unique(L$Date)[j] | 
+				FirstDeadMissingObservation >= max(L$Date) | 
 					is.na(FirstDeadMissingObservation)==T
 			)
 			# if all PlotPlantIDs were surveyed for a given date:
@@ -92,9 +103,9 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys) {
 			 	mysum(M$Plant_Segments_wo_leaves)
 			Z[[i]][j, "Plant_Segments_woody"] <- mysum(M$Plant_Segments_woody)
 			# Size
-			Z[[i]][j, "Height_t"] 					<- max(M$Height_t)
-			Z[[i]][j, "Width_t"] 					<- max(M$Width_t)
-			Z[[i]][j, "Perpen_Width"] 				<- max(M$Perpen_Width)
+			Z[[i]][j, "Height_t"] 				<- max(M$Height_t, na.rm=T)
+			Z[[i]][j, "Width_t"] 				<- max(M$Width_t, na.rm=T)
+			Z[[i]][j, "Perpen_Width"] 			<- max(M$Perpen_Width, na.rm=T)
 			# Fruit	and Flowers
 			Z[[i]][j, "Num_FlowerBuds"] 			<- mysum(M$Num_FlowerBuds)
 			Z[[i]][j, "Num_Fruit_red"] 				<- mysum(M$Num_Fruit_red)

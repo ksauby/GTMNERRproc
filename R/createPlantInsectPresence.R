@@ -37,6 +37,7 @@ createPlantInsectPresence <- function(Plant_Surveys_by_Plant) {
 			NA
 		)
 	) %>%
-	ungroup()
+	ungroup() %>%
+	as.data.frame
 	return(Plant_Surveys_by_Plant)
 }

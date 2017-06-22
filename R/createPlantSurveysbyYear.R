@@ -14,7 +14,7 @@ createPlantSurveysbyYear <- function(Plant_Surveys_by_Plant) {
 			Network = Network[1],
 			Island = Island[1],
 			RecruitmentMode = RecruitmentMode[1],
-			Date = min(Date),
+			#Date = min(Date),
 			FruitPres_t = max(FruitPres_t, na.rm=T),
 			Fruit_Flowers_t = max(Fruit_Flowers_t, na.rm=T),
 			FruitFlowerPres_t = max(FruitFlowerPres_t, na.rm=T),
@@ -34,15 +34,16 @@ createPlantSurveysbyYear <- function(Plant_Surveys_by_Plant) {
 			DeadbyEndofYear = max(Dead, na.rm=T),
 			MissingbyEndofYear = max(Missing, na.rm=T),
 			DeadMissingbyEndofYear = sum(
-				c(
-					DeadbyEndofYear, 
-					MissingbyEndofYear
-				), na.rm=T)			
+				c(DeadbyEndofYear, MissingbyEndofYear),
+				na.rm=T
+			)			
 		) %>% 
-		mutate(PrevSamplingYear = SamplingYear - 1)
+		rowwise() %>%
+		mutate(
+			PrevSamplingYear = SamplingYear - 1,
+			Alive = abs(DeadMissingbyEndofYear - 1)
+		)
 	# create PrevYear
-	Plant_Surveys_by_Year$Year <- year(Plant_Surveys_by_Year$Date)
-	Plant_Surveys_by_Year$PrevYear <- year(Plant_Surveys_by_Year$Date) - 1
 	Plant_Surveys_by_Year %<>% createInsectPresDuringStudy
 	return(Plant_Surveys_by_Year)
 }
