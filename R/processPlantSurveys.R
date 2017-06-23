@@ -82,7 +82,7 @@
 #' @export
 
 processPlantSurveys <- function(Plant_Surveys, Plant_Info) {
-	# ----------------------------------------------------------- ERROR MESSAGES
+	# ----------------------------------------------------------------- WARNINGS
 	# check first duplicate data entries
 	dups <- Plant_Surveys %>% 
 		group_by(PlantID, DateSurveyed) %>%
@@ -219,6 +219,9 @@ processPlantSurveys <- function(Plant_Surveys, Plant_Info) {
 		"Missing")] %<>% 
 		apply(2, destring
 	)
+	# ------------------------------------------------------------ GERSTAECKERIA
+	# Gerstaeckeria was not reliably surveyed so can only take values of NA or 1
+	Plant_Surveys$Gerstaeckeria_t %<>% Zero_is_NA_Function
 	# ---------------------------------------------- Change Missing = NA to zero
 	Plant_Surveys$Missing %<>% NA_is_Zero_Function
 	# ------------------------------------------------- ADD TOTAL SEGMENT COLUMN
@@ -250,7 +253,7 @@ processPlantSurveys <- function(Plant_Surveys, Plant_Info) {
 			Num_Fruit
 		) %>%
 		apply(1, mysum)
-	# ----------------------------------------------------------- ERROR MESSAGES
+	# ----------------------------------------------------------------- WARNINGS
 	dups <- Plant_Surveys %>% filter(Size_t==0)
 		if (dim(dups)[1] > 0) {stop("Size values = 0.")}
 	# throw a warning if a plant has a recorded size but is also marked either dead or missing

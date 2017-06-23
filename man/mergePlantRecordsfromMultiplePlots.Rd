@@ -4,7 +4,7 @@
 \alias{mergePlantRecordsfromMultiplePlots}
 \title{Merge Plants from Multiple Plots}
 \usage{
-mergePlantRecordsfromMultiplePlots(Plant_Surveys)
+mergePlantRecordsfromMultiplePlots(Plant_Surveys, date_window = 48)
 }
 \arguments{
 \item{Plant_Surveys}{Plant survey dataset}

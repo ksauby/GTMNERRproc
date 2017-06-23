@@ -6,11 +6,7 @@
 #' @export
 
 mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys, date_window=48) {
-	
-	
 	h <- function(w) if( any( grepl( "no non-missing arguments to max", w) ) ) invokeRestart( "muffleWarning" )
-	
-	
 	# restrict to plants that span multiple plots
 	temp_A <- filter(Plant_Surveys, N.PlotPlantIDs > 1)
 	Z = list()
@@ -82,6 +78,7 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys, date_window=48) {
 			}
 			# pull all plant survey records for this date from plant surveys within the window of dates, excluding dead/missing
 			M <- K %>% filter(Dead != 1, Missing != 1)
+			# --------------------------------------------------------- WARNINGS
 			# throw error if a plotplantID is surveyed multiple times within this window and multiple records have size measurements
 			temp <- M %>% filter(
 					Plant_Segments_w_leaves > 0 |
@@ -108,28 +105,23 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys, date_window=48) {
 					paste(M$Date, collapse=",")
 				))
 			}
+			# ---------------------------------------------------------------- #
 			# get list of PlotPlantIDs alive at this time
 			# plant would be dead if no PlantID records showed up in N
 			N = Plant_Info %>%
 				filter( 
 					PlantID==L$PlantID[1], 
 					# only include plants that are listed as having been added to Plant_Info on or after Date
-					First.Survey.Date.Alive <= as.Date(Z[[i]]$Date[j]) + date_window,
+					First.Survey.Date.Alive <= 
+						as.Date(Z[[i]]$Date[j]) + date_window,
 					# exclude dead plants (including date plant was first recorded as dead)
-					FirstDeadMissingObservation > as.Date(Z[[i]]$Date[j]) + date_window| 
+					FirstDeadMissingObservation > 
+						as.Date(Z[[i]]$Date[j]) + date_window | 
 						is.na(FirstDeadMissingObservation)==T
 				)	
-				
-				# need to ignore some of 8873, 9113b, 
-				
-				
-				
 			# pull all surveys where plant was marked dead
 			O <- K %>% filter(Dead == 1 | Missing == 1)
-			
-			# the plant may be dead 
-			# if dead date from plant info falls within the survey period, say its dead this survey
-			# the max of the FirstDeadObservation from PlantInfo
+			# the plant can only be marked dead if no live part was surveyed and no parts remained unsurveyed
 			if (dim(M)[1] == 0 & dim(N)[1] == 0 & dim(O)[1] > 0) {
 				Z[[i]][j, "Dead"] <- withCallingHandlers(
 					max(O$Dead, na.rm=T),
@@ -198,15 +190,7 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys, date_window=48) {
 			Z[[i]][j, "PlantsSurveyed"] <- paste(M$PlotPlantID, collapse=",")
 		}
 	}
-	# Field indicating all plants that were merged
-	# Field indicating the fraction of all plants surveying during this time period
-	# Field indicating the dates used for the merge
-	# n times surveyed
-	# n times insect was found
-	# fraction of time that the insect was found
-	# field indicating when plant was measured
 	temp_B <- do.call(rbind.data.frame, Z)
-	# max(NA, NA, na.rm=T) returns "-Inf"
 	temp_B[,c(
 		"Perpen_Width",
 		"Width_t",
@@ -259,10 +243,8 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys, date_window=48) {
 	# merge plants in multiple plots and plants in one plot
 	temp_D <- rbind.fill(temp_B, temp_C)
 	temp_D %<>% arrange(PlantID, Date)
-	
-	temp_D %>% write.csv("temp.csv")
-	# ----------------------------------------------------------- ERROR MESSAGES
-	# which plants completely died but do not have a survey indicating so in the merged surveys?
+	# ----------------------------------------------------------------- WARNINGS
+	# WHICH PLANTS COMPLETELY DIED BUT DO NOT HAVE A SURVEY INDICATING SO IN THE MERGED SURVEYS?
 	# Dead/missing observations from plant surveys before merge
 	temp1 <- temp_A %>% filter(Dead == 1 | Missing == 1)
 	# Dead/missing observations from plant surveys after merge
@@ -283,9 +265,7 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys, date_window=48) {
 			"Plant that is missing/dead is not indicated as such in merged surveys. Date written to csv file."
 		))
 	}
-
-	
-	
+	# WARNING IF PLANTS MARKED DEAD HAVE NON-ZERO SIZE/FRUIT COUNT MEASUREMENTS
 	temp <- temp_D %>%
 		filter(
 			Dead == 1,
@@ -313,6 +293,7 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys, date_window=48) {
 			"Marked dead but has size/fruit measurements. Information written to csv file."
 		))
 	}
+	# WARNING IF PLANTS MARKED DEAD HAVE NON-ZERO SIZE/FRUIT COUNT MEASUREMENTS
 	temp <- temp_D %>%
 		filter(
 			Missing == 1,
@@ -340,8 +321,7 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys, date_window=48) {
 			"Marked missing but has size/fruit measurements. Information written to csv file."
 		))
 	}
-	# how many plants with less than 10 segments had fruit/flowers?
-	# throw a warning if pusilla has flowers before summer 2015
+	# HOW MANY PLANTS WITH LESS THAN 5 SEGMENTS HAD FRUIT/FLOWERS?
 	temp <- temp_D %>%
 		filter(
 			Size_t < 5,
@@ -359,12 +339,30 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys, date_window=48) {
 				PlantID == 7569	& Date == "2014-09-21" |
 				PlantID == 7813	& Date == "2015-01-20" |
 				PlantID == 7814	& Date == "2015-01-20"
-				)
 			)
+		)
 	if (dim(temp)[1] > 0) {
 		write.csv(temp, "SmallPlantswFruitFlowers.csv")
 		warning(paste(
 			"Plants less than 5 segments in size observed with fruit/flowers. Records written to csv file."
+		))
+	}
+	# THROW A WARNING IF PUSILLA HAS FLOWERS BEFORE SUMMER 2015 (THEY WERE ONLY OBSERVED SPRING/SUMMER 2015)
+	temp <- temp_D %>%
+		filter(
+			Species == "pusilla",
+			year(Date) < 2015,
+			Num_FlowerBuds > 0 |
+			Num_Fruit_red > 0 |
+			Num_Fruit_green > 0 |
+			Num_Flowers > 0 |
+			Fruit_t > 0 |
+			Fruit_Flowers_t
+		)
+	if (dim(temp)[1] > 0) {
+		write.csv(temp, "OpusillaPlantsWithFruitPriorTo2015.csv")
+		warning(paste(
+			"O. pusilla plants recorded with fruit/flowers prior to 2015."
 		))
 	}
 	# ------------------------- CHANGE SURVEY INFO TO NA FOR DEAD/MISSING PLANTS
