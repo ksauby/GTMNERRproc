@@ -25,14 +25,14 @@ calculateClonalReproduction <- function(
 	# use this dataset to use parent size that is consistent for all offpsring
 	A <- Plant_Surveys_by_Year %>% 
 		#filter(Species=="Opuntia stricta") %>%
-		dplyr::select(PlantID, Date, Size_t) %>% 
-		setnames("Date", "Parent.Obs.Date") %>%
+		select(PlantID, SurveyDate_SpringSummer, Size_t) %>% 
+		setnames("SurveyDate_SpringSummer", "Parent.Obs.Date") %>%
 		setnames("Size_t", "Parent.Size_t")
 	# prep offspring survey data
 	# use this dataset to figure out first size of offspring
 	B <- Plant_Surveys_by_Plant %>% 
 		#filter(Species=="Opuntia stricta") %>%
-		dplyr::select(PlantID, Date, Size_t) %>% 
+		select(PlantID, Date, Size_t) %>% 
 		setnames("Date", "Offspring.Obs.Date") %>%
 		setnames("Size_t", "Offspring.Size_t")
 	# merge parent data with offspring info
@@ -59,7 +59,9 @@ calculateClonalReproduction <- function(
 		filter(!is.na(Offspring.Size_t)) %>%
 		filter(!is.na(Parent.Obs.Date)) %>%
 		# remove Parent survey dates that are after offspring was observed
-		filter(Parent.Obs.Date <= First.Survey.Date.Alive) %>%
+		filter(
+			Parent.Obs.Date <= First.Survey.Date.Alive
+		) %>%
 		# find Parent observation date (WITH a size obs) closest to (or equal to) date that the offspring was observed
 		filter(Parent.Obs.Date==max(Parent.Obs.Date)) %>%
 		# find Offspring observation date (WITH a size obs) closest to (or equal to) date it was first observed
@@ -83,13 +85,13 @@ calculateClonalReproduction <- function(
 		# calculate Parent size as observed parent size plus all offspring; this ensures that a parent cannot have size equal to or less than offspring
 		mutate(Parent_Size_t = Parent.Size_t[1] + sum(n.offspring.segments)) %>%
 		ungroup %>%
-		dplyr::select(Parent, SamplingYear, Parent_Size_t) %>%
+		select(Parent, SamplingYear, Parent_Size_t) %>%
 		unique
 	
 	# merge offspring info with parent size info
 	D %<>% 
 		as.data.frame %>%
-	   	dplyr::select(Parent, SamplingYear, PlantID, Offspring.Size_t) %>%
+	   	select(Parent, SamplingYear, PlantID, Offspring.Size_t) %>%
 		merge(parent_size, by=c("Parent", "SamplingYear"))
 
 

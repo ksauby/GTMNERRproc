@@ -36,7 +36,7 @@ createPlantSurveysbyYear <- function(Plant_Surveys_by_Plant) {
 			DeadMissingbyEndofYear = sum(
 				c(DeadbyEndofYear, MissingbyEndofYear),
 				na.rm=T
-			)			
+			)
 		) %>% 
 		rowwise() %>%
 		mutate(
@@ -45,5 +45,29 @@ createPlantSurveysbyYear <- function(Plant_Surveys_by_Plant) {
 		)
 	# create PrevYear
 	Plant_Surveys_by_Year %<>% createInsectPresDuringStudy
+	# figure out spring/summer survey dates	
+	temp <- Plant_Surveys_by_Plant %>%
+		filter(
+			month(Date) == 5 |
+			month(Date) == 6 |
+			month(Date) == 7 |
+			month(Date) == 8 |
+			month(Date) == 9,
+		    !(
+				is.na(Fruit_Flowers_t) |
+				is.na(Size_t)
+			)
+		) %>%
+		select(
+			Date,
+			PlantID,
+			SamplingYear
+		) %>%
+		setnames("Date", "SurveyDate_SpringSummer")
+	# merge
+	########################
+	# DO I LOSE PLANTS HERE?
+	########################	
+	Plant_Surveys_by_Year %<>% merge(temp, by=c("PlantID", "SamplingYear"))
 	return(Plant_Surveys_by_Year)
 }

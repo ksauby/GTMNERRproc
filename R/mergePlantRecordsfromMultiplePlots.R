@@ -72,9 +72,12 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys, date_window=48) {
 					sep=""
 				)
 				Z[[i]][j, "SizeofDateRange"] <- max(K$Date) - min(K$Date)
+				Z[[i]][j, "maxDate"] <- as.character(max(K$Date))
+				
 			} else {
 				Z[[i]][j, "RangeofDates"] <- unique(K$Date)
 				Z[[i]][j, "SizeofDateRange"] <- 0
+				Z[[i]][j, "maxDate"] <- as.character(max(K$Date))
 			}
 			# pull all plant survey records for this date from plant surveys within the window of dates, excluding dead/missing
 			M <- K %>% filter(Dead != 1, Missing != 1)
@@ -189,6 +192,9 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys, date_window=48) {
 			# Paste PlotPlantIDs together to know which plants were surveyed on this date
 			Z[[i]][j, "PlantsSurveyed"] <- paste(M$PlotPlantID, collapse=",")
 		}
+		Z[[i]] %<>%
+			select(-(Date)) %>%
+			setnames("maxDate", "Date")
 	}
 	temp_B <- do.call(rbind.data.frame, Z)
 	temp_B[,c(
@@ -385,13 +391,13 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys, date_window=48) {
 	temp <- temp_D %>%
 		filter(
 			Species == "pusilla",
-			year(Date) < 2015,
+			SamplingYear < "2015",
 			Num_FlowerBuds > 0 |
 			Num_Fruit_red > 0 |
 			Num_Fruit_green > 0 |
 			Num_Flowers > 0 |
 			Fruit_t > 0 |
-			Fruit_Flowers_t
+			Fruit_Flowers_t > 0
 		)
 	if (dim(temp)[1] > 0) {
 		write.csv(temp, "OpusillaPlantsWithFruitPriorTo2015.csv")
@@ -506,5 +512,6 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys, date_window=48) {
 		) %>%
 		ungroup()
 	# --------------------------------------------------------------------------
+	temp_D$Date %<>% as.Date
 	return(temp_D)
 }

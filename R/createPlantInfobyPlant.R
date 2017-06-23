@@ -69,8 +69,9 @@ createPlantInfobyPlant <- function(Plant_Info, Plant_Surveys_by_Year) {
 	First_Size <- Plant_Surveys_by_Year %>%
 		group_by(PlantID) %>%
 		summarise(
+			minSamplingYear = min(SamplingYear, na.rm=T),
 			First_Size = 
-				Size_t[which(SamplingYear==min(SamplingYear, na.rm=T))],
+				Size_t[SamplingYear==minSamplingYear],
 			min.Size = min(Size_t, na.rm=T),
 			max.Size = max(Size_t, na.rm=T)
 		)
