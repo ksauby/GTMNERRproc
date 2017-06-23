@@ -6,14 +6,7 @@
 #' @export
 #' @importFrom dataproc Unique
 
-createPlantInfobyPlant <- function(Plant_Info) {
-	
-	# STANDARDIZE PARENT, REPRODUCTIVEMODE for PLANTIDs
-	
-	
-	# 8683 - clonal and unknown
-	
-	
+createPlantInfobyPlant <- function(Plant_Info, Plant_Surveys_by_Year) {
 	# one record per plant
 	Plant_Info_Analysis <- Plant_Info %>%
 		group_by(PlantID) %>%
@@ -34,6 +27,8 @@ createPlantInfobyPlant <- function(Plant_Info) {
 			First.Survey.Date.Alive 	= min(First.Survey.Date.Alive)
 		) %>%
 		filter(!is.na(Network))
+	# save to figure out if some plants were lost during processing
+	temp1 <- Plant_Info_Analysis$PlantID
 	Plant_Info_Analysis$DaysAlive %<>% as.numeric
 	# Parent
 	Plant_Info_Analysis %<>% mutate(
@@ -66,6 +61,7 @@ createPlantInfobyPlant <- function(Plant_Info) {
 			CAPlantPres = max(CA_t, na.rm=T),
 			MothPlantPres = max(Moth_Evidence_t, na.rm=T)
 		)
+	# I lose 38 plant IDs at this step
 	Plant_Info_Analysis %<>% 
 		merge(network_summary, by="Network") %>%
 		merge(Plant_summary, by="PlantID")
@@ -73,13 +69,13 @@ createPlantInfobyPlant <- function(Plant_Info) {
 	First_Size <- Plant_Surveys_by_Year %>%
 		group_by(PlantID) %>%
 		summarise(
-			First.Survey.Date.Alive = min(Date),
-			First_Size = Size_t[which(Date==First.Survey.Date.Alive)],
+			First_Size = 
+				Size_t[which(SamplingYear==min(SamplingYear, na.rm=T))],
 			min.Size = min(Size_t, na.rm=T),
 			max.Size = max(Size_t, na.rm=T)
 		)
 	Plant_Info_Analysis %<>% 
-		merge(First_Size, by=c("First.Survey.Date.Alive", "PlantID"))
+		merge(First_Size, by=c("PlantID"))
 	# WARNINGS	
 	temp <- Plant_Surveys %>% 
 		filter(grepl(",", RecruitmentMode)==TRUE)
