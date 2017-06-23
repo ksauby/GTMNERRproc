@@ -61,7 +61,15 @@ createPlantInfobyPlant <- function(Plant_Info, Plant_Surveys_by_Year) {
 			CAPlantPres = max(CA_t, na.rm=T),
 			MothPlantPres = max(Moth_Evidence_t, na.rm=T)
 		)
+		
+		
+	################################
 	# I lose 38 plant IDs at this step
+	################################
+	
+	
+	
+	
 	Plant_Info_Analysis %<>% 
 		merge(network_summary, by="Network") %>%
 		merge(Plant_summary, by="PlantID")
