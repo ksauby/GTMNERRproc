@@ -244,6 +244,40 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys, date_window=48) {
 	temp_D <- rbind.fill(temp_B, temp_C)
 	temp_D %<>% arrange(PlantID, Date)
 	# ----------------------------------------------------------------- WARNINGS
+	# WHICH PLANTS WERE RECORDED AS ALIVE IN THE SPRING/SUMMER BUT HAD NO SIZE RECORDS?
+	temp <- temp_D %>%
+		filter(
+			Dead != 1 & Missing != 1,
+			DemographicSurvey == 1 |
+			DemographicSurvey == 3 |
+			DemographicSurvey == 5
+		) %>%
+		group_by(DemographicSurvey) %>%
+		summarise(
+			maxSize 		= max(Size_t, na.rm=T),
+			maxFruit 		= max(Fruit_Flowers_t, na.rm=T),
+			maxHeight_t 	= max(Height_t, na.rm=T),
+			maxWidth_t 		= max(Width_t, na.rm=T),
+			maxPerpen_Width = max(Perpen_Width, na.rm=T)
+		) %>%
+		filter(
+			is.na(maxSize) |
+			maxSize < 0 |
+			is.na(maxFruit) |
+			maxFruit < 0 |
+			is.na(maxHeight_t) |
+			maxHeight_t < 0 |
+			is.na(maxWidth_t) |
+			maxWidth_t < 0 |
+			is.na(maxPerpen_Width) |
+			maxPerpen_Width < 0 
+		)	
+	if (dim(temp)[1] > 0) {
+		write.csv(temp3,"PlantsNotMeasuredinSpringSummer.csv")
+		warning(paste(
+			"Plants marked as alive but no size records during the spring/summer."
+		))
+	}
 	# WHICH PLANTS COMPLETELY DIED BUT DO NOT HAVE A SURVEY INDICATING SO IN THE MERGED SURVEYS?
 	# Dead/missing observations from plant surveys before merge
 	temp1 <- temp_A %>% filter(Dead == 1 | Missing == 1)
