@@ -5,7 +5,7 @@
 #' 
 #' @export
 
-mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys) {
+mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys, date_window=48) {
 	
 	
 	h <- function(w) if( any( grepl( "no non-missing arguments to max", w) ) ) invokeRestart( "muffleWarning" )
@@ -17,28 +17,35 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys) {
 	for (i in 1:length(unique(temp_A$PlantID))) {
 		# pull all records for this PlantID from the plant surveys
 		L = filter(temp_A, PlantID==unique(temp_A$PlantID)[i])
-		# For each Demographic Survey and two week window, use the last date the plant was surveyed
-		# then save range of dates that the plant was surveyed 
-		
-		
-		if (max(L$Date) - min(L$Date) > 36) {
-			L.list <- split(
-				L,
+		# group by window of dates
+		if (max(L$Date) - min(L$Date) > date_window) {
+			L.list <- L %>%
+				split(
+				.,
 				cut(
 					L$Date,
-					seq(min(L$Date), max(L$Date), by=36)
+					seq(
+						min(L$Date), 
+						max(L$Date) + date_window, 
+						by = date_window
+					)
 				)
 			)
 			L.list %<>% .[sapply(., function(x) dim(x)[1]) > 0]
-			Z[[i]] 	<- data.frame(Date = names(L.list))
+			L.list %<>% lapply(., function(x) split(x, x$DemographicSurvey))
+			L.list %<>% unlist(recursive=F)
+			list.names <- gsub("\\..*","", names(L.list))
+			demography.surveys <- gsub("^.*\\.","", names(L.list))
+			
+			Z[[i]] 	<- data.frame(
+				Date = list.names,
+				DemographicSurvey = demography.surveys
+			)
 		} else {
 			L.list <- list(L)
 			names(L.list) <- max(L.list[[1]]$Date)
 			Z[[i]] <- data.frame(Date = max(L.list[[1]]$Date))
 		}
-		
-		
-		
 		Z[[i]][, "PlantID"] 			<- L$PlantID[1]
 		Z[[i]][, "ClusterID"] 			<- L$ClusterID[1]
 		Z[[i]][, "Network"] 			<- L$Network[1]
@@ -46,26 +53,36 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys) {
 		Z[[i]][, "Species"] 			<- L$Species[1]
 		Z[[i]][, "Easting"] 			<- L$Easting[1]
 		Z[[i]][, "Northing"] 			<- L$Northing[1]
-		Z[[i]][, "RecruitmentMode"]	<- L$RecruitmentMode %>%
-												.[which(. != "NA")] %>%
-												.[which(!is.na(.))] %>%
-												unique(.) %>%
-												paste(collapse="")
-												
-		# first group by dates
-		
+		Z[[i]][, "RecruitmentMode"]		<- L$RecruitmentMode %>%
+			.[which(. != "NA")] %>%
+			.[which(!is.na(.))] %>%
+			unique(.) %>%
+			paste(collapse="")
+		# for each window of dates
 		for (j in 1:length(names(L.list))) {
-			# pull all plant survey records for this date from plant surveys
-			# allow surveys to occur within a two week window around this date
-			M <- eval(parse(text=paste(
-					"L.list$", 
-					'"', 
-					Z[[i]]$Date[j], 
-					'"', 
+			K <- eval(parse(text=paste(
+				"L.list$", 
+				'"', 
+				names(L.list)[j], 
+				'"', 
+				sep=""
+			)))
+			# save range of dates used to create whole plant survey
+			if (dim(K)[1] > 1) {
+				Z[[i]][j, "RangeofDates"] <- paste(
+					min(K$Date), 
+					" - ", 
+					max(K$Date),
 					sep=""
-				))) %>%
-				filter(Dead != 1, Missing != 1)
-			# throw error if a plotplantID is surveyed multiple times within this window and both records have size measurements
+				)
+				Z[[i]][j, "SizeofDateRange"] <- max(K$Date) - min(K$Date)
+			} else {
+				Z[[i]][j, "RangeofDates"] <- K$Date
+				Z[[i]][j, "SizeofDateRange"] <- 0
+			}
+			# pull all plant survey records for this date from plant surveys within the window of dates, excluding dead/missing
+			M <- K %>% filter(Dead != 1, Missing != 1)
+			# throw error if a plotplantID is surveyed multiple times within this window and multiple records have size measurements
 			temp <- M %>% filter(
 					Plant_Segments_w_leaves > 0 |
 					Plant_Segments_wo_leaves > 0 |
@@ -97,9 +114,9 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys) {
 				filter( 
 					PlantID==L$PlantID[1], 
 					# only include plants that are listed as having been added to Plant_Info on or after Date
-					First.Survey.Date.Alive <= as.Date(Z[[i]]$Date[j]) + 36,
+					First.Survey.Date.Alive <= as.Date(Z[[i]]$Date[j]) + date_window,
 					# exclude dead plants (including date plant was first recorded as dead)
-					FirstDeadMissingObservation > as.Date(Z[[i]]$Date[j]) + 36| 
+					FirstDeadMissingObservation > as.Date(Z[[i]]$Date[j]) + date_window| 
 						is.na(FirstDeadMissingObservation)==T
 				)	
 				
@@ -108,21 +125,20 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys) {
 				
 				
 			# pull all surveys where plant was marked dead
-			O <- eval(parse(text=paste(
-					"L.list$", 
-					'"', 
-					Z[[i]]$Date[j], 
-					'"', 
-					sep=""
-				))) %>%
-				filter(Dead == 1 | Missing == 1)
+			O <- K %>% filter(Dead == 1 | Missing == 1)
 			
 			# the plant may be dead 
 			# if dead date from plant info falls within the survey period, say its dead this survey
 			# the max of the FirstDeadObservation from PlantInfo
-			if (dim(M)[1] == 0 & dim(O)[1] > 0) {
-				Z[[i]][j, "Dead"] <- 1
-				Z[[i]][j, "Missing"] <- 1
+			if (dim(M)[1] == 0 & dim(N)[1] == 0 & dim(O)[1] > 0) {
+				Z[[i]][j, "Dead"] <- withCallingHandlers(
+					max(O$Dead, na.rm=T),
+					warning = h
+				)
+				Z[[i]][j, "Missing"] <- withCallingHandlers(
+					max(O$Missing, na.rm=T),
+					warning = h
+				)
 			} else
 			# if all PlotPlantIDs were surveyed for a given date:
 			if (dim(M)[1] > 0 & all(M$PlotPlantID %in% N$PlotPlantID)) {
@@ -133,15 +149,9 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys) {
 				Z[[i]][j, "Unknown_Moth_t"] 		<- mysum2(M$Unknown_Moth_t)
 				Z[[i]][j, "Gerstaeckeria_t"] 		<- mysum2(M$Gerstaeckeria_t)
 				Z[[i]][j, "Old_Moth_Evidence_t"]<- mysum2(M$Old_Moth_Evidence_t)
-				# Dead or missing - has to be dead or missing in all plots
-				# (1) if the sum of Dead = # of PlotPlantIDs, the plant is dead in all plots
-				if (sum(M$Dead, na.rm=T)==dim(N)[1]) 
-					{Z[[i]][j, "Dead"] <- 1} else {Z[[i]][j, "Dead"] <- 0}
-				# Missing
-				if (sum(M$Missing, na.rm=T)==dim(N)[1]) 
-					{Z[[i]][j, "Missing"] <- 1} else {Z[[i]][j, "Missing"] <- 0}
-				# all surveyed = TRUE
 				Z[[i]][j, "AllSurveyed"] 			<- "TRUE"
+				Z[[i]][j, "Dead"] <- 0
+				Z[[i]][j, "Missing"] <- 0
 			} else {
 				# if all PlotPlantIDs were NOT surveyed on this date consider the insect to be detected if the sum is greater than zero
 				Z[[i]][j, "CA_t"] 					<- mysum1(M$CA_t)
@@ -151,23 +161,9 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys) {
 				Z[[i]][j, "Unknown_Moth_t"] 		<- mysum1(M$Unknown_Moth_t)
 				Z[[i]][j, "Gerstaeckeria_t"] 		<- mysum1(M$Gerstaeckeria_t)
 				Z[[i]][j, "Old_Moth_Evidence_t"]<- mysum1(M$Old_Moth_Evidence_t)
-				# Dead or missing - alive if at least one observation of alive
-				# 	if the sum of Dead/Missing == # of PlotPlantIDs, the plant is dead in all plots
-				if (sum(M$Dead, M$Missing, na.rm=T) < dim(N)[1])
-					{Z[[i]][j, "Dead"] <- 0} else
-						if (dim(N)[1] == 0)
-							{Z[[i]][j, "Dead"] <- 1} else
-								{Z[[i]][j, "Dead"] <- NA}
-				# Missing
-				# 	if the sum of Missing == # of PlotPlantIDs, the plant is missing in all plots
-				O = Plant_Info %>% filter(PlantID==L$PlantID[1])
-				if (sum(M$Missing, na.rm=T) < dim(N)[1])
-					{Z[[i]][j, "Missing"] <- 0}  else
-						if (dim(N)[1] == 0 & sum(M$Missing, na.rm=T)==dim(O)[1])
-							{Z[[i]][j, "Missing"] <- 1} else
-								{Z[[i]][j, "Missing"] <- NA}
-				# all surveyed = FALSE
 				Z[[i]][j, "AllSurveyed"] 			<- "FALSE"
+				Z[[i]][j, "Dead"] <- 0
+				Z[[i]][j, "Missing"] <- 0
 			}
 			# Number of segments
 			Z[[i]][j, "Size_t"] 					<- mysum(M$Size_t)
@@ -266,6 +262,30 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys) {
 	
 	temp_D %>% write.csv("temp.csv")
 	# ----------------------------------------------------------- ERROR MESSAGES
+	# which plants completely died but do not have a survey indicating so in the merged surveys?
+	# Dead/missing observations from plant surveys before merge
+	temp1 <- temp_A %>% filter(Dead == 1 | Missing == 1)
+	# Dead/missing observations from plant surveys after merge
+	temp2 <- temp_D %>% filter(Dead == 1 | Missing == 1)
+	temp <- temp1 %>% filter(!(PlantID %in% temp2$PlantID))
+	# which of these plants completely died?
+	temp3 <- Plant_Info %>%
+		filter(PlantID %in% temp$PlantID) %>%
+		group_by(PlantID) %>%
+		summarise(
+			Dead = sum(ConfirmedDeadMissing, na.rm=T)/
+				length(ConfirmedDeadMissing)
+		) %>%
+		filter(Dead >= 1)
+	if (dim(temp3)[1] > 0) {
+		write.csv(temp3,"PlantsNotSurveyedasDead.csv")
+		warning(paste(
+			"Plant that is missing/dead is not indicated as such in merged surveys. Date written to csv file."
+		))
+	}
+
+	
+	
 	temp <- temp_D %>%
 		filter(
 			Dead == 1,
