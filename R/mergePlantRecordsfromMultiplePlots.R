@@ -68,7 +68,7 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys, date_window=48) {
 				sep=""
 			)))
 			# save range of dates used to create whole plant survey
-			if (dim(K)[1] > 1) {
+			if (length(unique(K$Date)) > 1) {
 				Z[[i]][j, "RangeofDates"] <- paste(
 					min(K$Date), 
 					" - ", 
@@ -77,7 +77,7 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys, date_window=48) {
 				)
 				Z[[i]][j, "SizeofDateRange"] <- max(K$Date) - min(K$Date)
 			} else {
-				Z[[i]][j, "RangeofDates"] <- K$Date
+				Z[[i]][j, "RangeofDates"] <- unique(K$Date)
 				Z[[i]][j, "SizeofDateRange"] <- 0
 			}
 			# pull all plant survey records for this date from plant surveys within the window of dates, excluding dead/missing
