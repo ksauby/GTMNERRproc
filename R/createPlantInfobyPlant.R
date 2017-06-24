@@ -8,6 +8,7 @@
 
 createPlantInfobyPlant <- function(Plant_Info, Plant_Surveys_by_Year) {
 	# one record per plant
+	# 2887 records
 	Plant_Info_Analysis <- Plant_Info %>%
 		group_by(PlantID) %>%
 		summarise(
@@ -64,12 +65,12 @@ createPlantInfobyPlant <- function(Plant_Info, Plant_Surveys_by_Year) {
 		
 		
 	################################
-	# I lose 38 plant IDs at this step
+	# I lose 100 plant IDs at this step
 	################################
 	
 	
 	
-	
+	# 2693 plants 
 	Plant_Info_Analysis %<>% 
 		merge(network_summary, by="Network") %>%
 		merge(Plant_summary, by="PlantID")
@@ -79,7 +80,7 @@ createPlantInfobyPlant <- function(Plant_Info, Plant_Surveys_by_Year) {
 		summarise(
 			minSamplingYear = min(SamplingYear, na.rm=T),
 			First_Size = 
-				Size_t[SamplingYear==minSamplingYear],
+				min(Size_t[SamplingYear == min(SamplingYear)]),
 			min.Size = min(Size_t, na.rm=T),
 			max.Size = max(Size_t, na.rm=T)
 		)
