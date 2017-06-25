@@ -10,7 +10,7 @@
 #'		\item survey 4 - winter 2015
 #'		\item survey 5 - spring/summer 2015
 #'	}
-#'  \item addSamplingYear
+#'  \item addFecundityYear
 #'	\itemize{
 #'		\item 2012 - Date >= "2012-12-02" & Date < "2013-05-01"
 #'		\item 2013 - Date >= "2013-05-01" & Date < "2014-05-01"
@@ -24,14 +24,14 @@
 processPlantSurveysafterMergewPlantInfo <- function(Plant_Surveys) {
 	Plant_Surveys %<>%
 		addSamplingPeriods %>%
-		addSamplingYear %>%
+		addFecundityYear %>%
 		as.data.frame
 	# ----------------------------------------------------------- ERROR MESSAGES
 	# throw a warning if pusilla has flowers before summer 2015
 	temp <- Plant_Surveys %>%
 		filter(
 			Species=="pusilla",
-			SamplingYear!=2015,
+			FecundityYear!=2015,
 			Fruit_Flowers_t > 0,
 			!(month(Date) %in% c(5,6,7,8))
 		)

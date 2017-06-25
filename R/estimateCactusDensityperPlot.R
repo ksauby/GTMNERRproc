@@ -15,17 +15,17 @@ estimateCactusDensityperPlot <- function(Plant_Surveys_by_Year, Plot_Info) {
 	# count plants per demographic plot per demographic survey
 	temp_A <- Plant_Surveys_by_Year %>%
 		filter(DeadbyEndofYear==0 & MissingbyEndofYear==0) %>%
-		group_by(SamplingYear, Network, Species) %>%
+		group_by(FecundityYear, Network, Species) %>%
 		summarise(
 			#N_plants = length(unique(PlantID)),
 			N_segments = sum(Size_t, na.rm=T),
 			Island = Island[1]
 		) %>%
 		as.data.frame %>%
-		arrange(Network, SamplingYear) %>%
+		arrange(Network, FecundityYear) %>%
 		dcast(
 			., 
-			SamplingYear + Network + Island ~ Species, 
+			FecundityYear + Network + Island ~ Species, 
 			value.var="N_segments"
 		) %>%
 		setnames("Opuntia pusilla", "pusilla_density") %>%
@@ -42,6 +42,6 @@ estimateCactusDensityperPlot <- function(Plant_Surveys_by_Year, Plot_Info) {
 			cactus_density_per_plot = cactus_density/n_plots
 		)
 	Plant_Surveys_by_Year %<>% 
-		merge(temp_A, by=c("SamplingYear", "Network", "Island"))
+		merge(temp_A, by=c("FecundityYear", "Network", "Island"))
 	return(Plant_Surveys_by_Year)
 }

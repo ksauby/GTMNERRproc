@@ -8,7 +8,7 @@
 
 createPlantSurveysbyYear <- function(Plant_Surveys_by_Plant) {
 	Plant_Surveys_by_Year <- Plant_Surveys_by_Plant %>% 
-		group_by(SamplingYear, PlantID) %>%
+		group_by(FecundityYear, PlantID) %>%
 		summarise(
 			Species = Species[1],
 			Network = Network[1],
@@ -40,7 +40,7 @@ createPlantSurveysbyYear <- function(Plant_Surveys_by_Plant) {
 		) %>% 
 		rowwise() %>%
 		mutate(
-			PrevSamplingYear = SamplingYear - 1,
+			PrevFecundityYear = FecundityYear - 1,
 			Alive = abs(DeadMissingbyEndofYear - 1)
 		)
 	# create PrevYear
@@ -61,13 +61,13 @@ createPlantSurveysbyYear <- function(Plant_Surveys_by_Plant) {
 		select(
 			Date,
 			PlantID,
-			SamplingYear
+			FecundityYear
 		) %>%
 		setnames("Date", "SurveyDate_SpringSummer")
 	# merge
 	########################
 	# DO I LOSE PLANTS HERE?
 	########################	
-	Plant_Surveys_by_Year %<>% merge(temp, by=c("PlantID", "SamplingYear"))
+	Plant_Surveys_by_Year %<>% merge(temp, by=c("PlantID", "FecundityYear"))
 	return(Plant_Surveys_by_Year)
 }

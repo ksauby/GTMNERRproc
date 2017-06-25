@@ -68,36 +68,36 @@ calculateClonalReproduction <- function(
 		filter(Offspring.Obs.Date==min(Offspring.Obs.Date)) %>%
 		setnames("First.Survey.Date.Alive", "Date")	
 	
-	D %<>% addSamplingYear
+	D %<>% addFecundityYear
 	
 	# figure out parent size
 	parent_size <- D %>% 
-		group_by(Parent, SamplingYear, Parent.Size_t, Offspring.Size_t) %>%
+		group_by(Parent, FecundityYear, Parent.Size_t, Offspring.Size_t) %>%
 		# still need to count number of clones per size class
 		summarise(n.clones=length(unique(PlantID))) %>%
-		group_by(Parent, SamplingYear, Parent.Size_t, Offspring.Size_t) %>%
+		group_by(Parent, FecundityYear, Parent.Size_t, Offspring.Size_t) %>%
 		summarise(
 			n.clones = n.clones[1],
 			n.offspring.segments = Offspring.Size_t * n.clones
 			) %>%
 		as.data.frame %>% 
-		group_by(Parent, SamplingYear) %>%
+		group_by(Parent, FecundityYear) %>%
 		# calculate Parent size as observed parent size plus all offspring; this ensures that a parent cannot have size equal to or less than offspring
 		mutate(Parent_Size_t = Parent.Size_t[1] + sum(n.offspring.segments)) %>%
 		ungroup %>%
-		select(Parent, SamplingYear, Parent_Size_t) %>%
+		select(Parent, FecundityYear, Parent_Size_t) %>%
 		unique
 	
 	# merge offspring info with parent size info
 	D %<>% 
 		as.data.frame %>%
-	   	select(Parent, SamplingYear, PlantID, Offspring.Size_t) %>%
-		merge(parent_size, by=c("Parent", "SamplingYear"))
+	   	select(Parent, FecundityYear, PlantID, Offspring.Size_t) %>%
+		merge(parent_size, by=c("Parent", "FecundityYear"))
 
 
 	# need to know number of segments produced per size class
 	loss_to_clones <- D %>% 
-		group_by(Parent, SamplingYear) %>%
+		group_by(Parent, FecundityYear) %>%
 		summarise(
 			Clones_t = length(unique(PlantID)),
 			Size_t_w_clone = paste(unique(Parent_Size_t), collapse=","),
@@ -107,8 +107,8 @@ calculateClonalReproduction <- function(
 	Plant_Surveys_by_Yearw_clones <- merge(
 			Plant_Surveys_by_Year, 
 			loss_to_clones, 
-			by.x=c("PlantID", "SamplingYear"), 
-			by.y=c("Parent", "SamplingYear"),
+			by.x=c("PlantID", "FecundityYear"), 
+			by.y=c("Parent", "FecundityYear"),
 			all=T
 		) %>% 
 		as.data.frame

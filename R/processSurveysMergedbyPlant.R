@@ -8,7 +8,7 @@
 #'  	\item Determine if an insect species was ever detected during the study period
 #'  	\item Rename species levels ("Opuntia stricta" instead of "stricta" and "Opuntia pusilla" instead of "pusilla")
 #' 	 	\item Make new insect variables with "yes"/"no" values instead of 0/1, named "C_cactorum" and "M_prodenialis"
-#'  	\item format the variables "ClusterID", "Network", "Island", "Species", "DemographicSurvey", "SamplingYear", "Year", "Season", "C_cactorum", "M_prodenialis" as factors
+#'  	\item format the variables "ClusterID", "Network", "Island", "Species", "DemographicSurvey", "FecundityYear", "Year", "Season", "C_cactorum", "M_prodenialis" as factors
 #' 	}
 #'
 #' @export
