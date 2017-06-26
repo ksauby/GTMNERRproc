@@ -97,7 +97,7 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys, date_window=48) {
 					Num_Fruit > 0
 			) %>%
 				group_by(PlotPlantID) %>%
-				mutate(n.records = n()) %>%
+				mutate(n.records = length(Fruit_t)) %>%
 				ungroup() %>%
 				filter(n.records > 1)
 			if (dim(temp)[1] > 0) {

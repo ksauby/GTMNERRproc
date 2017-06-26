@@ -3,7 +3,6 @@
 export(Format_PlantIDs_Function)
 export(WoodyTrunk_Function)
 export(addSamplingPeriods)
-export(addSamplingYear)
 export(calculateClonalReproduction)
 export(calculateFruitPresence)
 export(calculatePlantVolume)

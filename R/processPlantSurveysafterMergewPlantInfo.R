@@ -22,9 +22,13 @@
 #' @export
 
 processPlantSurveysafterMergewPlantInfo <- function(Plant_Surveys) {
+	Plant_Surveys$Date %<>%
+		strptime("%Y-%m-%d") %>%
+		as.POSIXct(format="%Y-%m-%d")
 	Plant_Surveys %<>%
 		addSamplingPeriods %>%
-		addFecundityYear %>%
+		assignSeason %>%
+		createFecundityYear %>%
 		as.data.frame
 	# ----------------------------------------------------------- ERROR MESSAGES
 	# throw a warning if pusilla has flowers before summer 2015
