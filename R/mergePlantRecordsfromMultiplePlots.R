@@ -18,8 +18,10 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys, date_window=48) {
 			L.list <- L %>%
 				split(
 				.,
+				# this is really slow for i=2
 				cut(
 					L$Date,
+					# it's doing sequence of seconds
 					seq(
 						min(L$Date), 
 						max(L$Date) + date_window, 
@@ -83,23 +85,9 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys, date_window=48) {
 			M <- K %>% filter(Dead != 1, Missing != 1)
 			# --------------------------------------------------------- WARNINGS
 			# throw error if a plotplantID is surveyed multiple times within this window and multiple records have size measurements
-			temp <- M %>% filter(
-					Plant_Segments_w_leaves > 0 |
-					Plant_Segments_wo_leaves > 0 |
-					Plant_Segments_woody > 0 | 
-					Height_t > 0 | 
-					Width_t > 0 | 
-					Perpen_Width > 0 | 
-					Num_FlowerBuds > 0 | 
-					Num_Fruit_red > 0 | 
-					Num_Fruit_green > 0 | 
-					Num_Flowers > 0 | 
-					Num_Fruit > 0
-			) %>%
-				group_by(PlotPlantID) %>%
-				mutate(n.records = length(Fruit_t)) %>%
-				ungroup() %>%
-				filter(n.records > 1)
+			temp <- M %>% filter(SizeFruitMeasured > 0) %>%
+				dplyr::add_count(PlotPlantID) %>%				
+				filter(n > 1)
 			if (dim(temp)[1] > 0) {
 				warning(paste(
 					"Multiple size records for PlotPlantID", 
@@ -195,6 +183,7 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys, date_window=48) {
 		Z[[i]] %<>%
 			select(-(Date)) %>%
 			setnames("maxDate", "Date")
+		cat(i)
 	}
 	temp_B <- do.call(rbind.data.frame, Z)
 	temp_B[,c(
@@ -250,40 +239,6 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys, date_window=48) {
 	temp_D <- rbind.fill(temp_B, temp_C)
 	temp_D %<>% arrange(PlantID, Date)
 	# ----------------------------------------------------------------- WARNINGS
-	# WHICH PLANTS WERE RECORDED AS ALIVE IN THE SPRING/SUMMER BUT HAD NO SIZE RECORDS?
-	temp <- temp_D %>%
-		filter(
-			Dead != 1 & Missing != 1,
-			DemographicSurvey == 1 |
-			DemographicSurvey == 3 |
-			DemographicSurvey == 5
-		) %>%
-		group_by(DemographicSurvey) %>%
-		summarise(
-			maxSize 		= max(Size_t, na.rm=T),
-			maxFruit 		= max(Fruit_Flowers_t, na.rm=T),
-			maxHeight_t 	= max(Height_t, na.rm=T),
-			maxWidth_t 		= max(Width_t, na.rm=T),
-			maxPerpen_Width = max(Perpen_Width, na.rm=T)
-		) %>%
-		filter(
-			is.na(maxSize) |
-			maxSize < 0 |
-			is.na(maxFruit) |
-			maxFruit < 0 |
-			is.na(maxHeight_t) |
-			maxHeight_t < 0 |
-			is.na(maxWidth_t) |
-			maxWidth_t < 0 |
-			is.na(maxPerpen_Width) |
-			maxPerpen_Width < 0 
-		)	
-	if (dim(temp)[1] > 0) {
-		write.csv(temp3,"PlantsNotMeasuredinSpringSummer.csv")
-		warning(paste(
-			"Plants marked as alive but no size records during the spring/summer."
-		))
-	}
 	# WHICH PLANTS COMPLETELY DIED BUT DO NOT HAVE A SURVEY INDICATING SO IN THE MERGED SURVEYS?
 	# Dead/missing observations from plant surveys before merge
 	temp1 <- temp_A %>% filter(Dead == 1 | Missing == 1)
@@ -359,50 +314,6 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys, date_window=48) {
 			"Plant ",
 			paste(temp$PlantID, collapse=","),
 			"Marked missing but has size/fruit measurements. Information written to csv file."
-		))
-	}
-	# HOW MANY PLANTS WITH LESS THAN 5 SEGMENTS HAD FRUIT/FLOWERS?
-	temp <- temp_D %>%
-		filter(
-			Size_t < 5,
-			Fruit_Flowers_t > 0
-		) %>%
-		filter(
-			!(
-				# these records in database were verified with original datasheets
-				PlantID == 9329	& Date == "2013-02-25" |
-				PlantID == 9972	& Date == "2013-04-01" |
-				PlantID == 9893	& Date == "2013-04-13" |
-				PlantID == 9893	& Date == "2013-05-16" |
-				PlantID == 8159	& Date == "2013-05-23" |
-				PlantID == 8780	& Date == "2014-05-26" |
-				PlantID == 7569	& Date == "2014-09-21" |
-				PlantID == 7813	& Date == "2015-01-20" |
-				PlantID == 7814	& Date == "2015-01-20"
-			)
-		)
-	if (dim(temp)[1] > 0) {
-		write.csv(temp, "SmallPlantswFruitFlowers.csv")
-		warning(paste(
-			"Plants less than 5 segments in size observed with fruit/flowers. Records written to csv file."
-		))
-	}
-	# THROW A WARNING IF PUSILLA HAS FLOWERS BEFORE SUMMER 2015 (THEY WERE ONLY OBSERVED SPRING/SUMMER 2015)
-	temp <- temp_D %>%
-		filter(
-			Species == "pusilla",
-			FecundityYear < "2015",
-			Num_FlowerBuds > 0 |
-			Num_Fruit_red > 0 |
-			Num_Fruit_green > 0 |
-			Num_Flowers > 0 |
-			Fruit_t > 0 |
-			Fruit_Flowers_t > 0
-		)
-	if (dim(temp)[1] > 0) {
-		write.csv(temp, "OpusillaPlantsWithFruitPriorTo2015.csv")
-		warning(paste(
-			"O. pusilla plants recorded with fruit/flowers prior to 2015."
 		))
 	}
 	# ------------------------- CHANGE SURVEY INFO TO NA FOR DEAD/MISSING PLANTS

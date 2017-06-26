@@ -253,6 +253,22 @@ processPlantSurveys <- function(Plant_Surveys, Plant_Info) {
 			Num_Fruit
 		) %>%
 		apply(1, mysum)
+	# -------- variable indicating whether size/fruit measured during the survey
+	Plant_Surveys$SizeFruitMeasured <- Plant_Surveys %>%
+		dplyr::select(
+			Num_FlowerBuds,
+			Num_Flowers,
+			Num_Fruit_red,
+			Num_Fruit_green,
+			Num_Fruit,
+			Plant_Segments_w_leaves,
+			Plant_Segments_wo_leaves,
+			Plant_Segments_woody, 
+			Height_t, 
+			Width_t, 
+			Perpen_Width
+		) %>%
+		apply(1, mysum3)
 	# ----------------------------------------------------------------- WARNINGS
 	dups <- Plant_Surveys %>% filter(Size_t==0)
 		if (dim(dups)[1] > 0) {stop("Size values = 0.")}

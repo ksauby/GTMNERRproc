@@ -22,14 +22,16 @@
 #' @export
 
 processPlantSurveysafterMergewPlantInfo <- function(Plant_Surveys) {
+	# can I get the following code to work without the strptime, etc.?
 	Plant_Surveys$Date %<>%
 		strptime("%Y-%m-%d") %>%
-		as.POSIXct(format="%Y-%m-%d")
+		as.POSIXct(format="%Y-%m-%d", tz="")
 	Plant_Surveys %<>%
 		addSamplingPeriods %>%
 		assignSeason %>%
 		createFecundityYear %>%
 		as.data.frame
+	Plant_Surveys$Date %<>% as.Date
 	# ----------------------------------------------------------- ERROR MESSAGES
 	# throw a warning if pusilla has flowers before summer 2015
 	temp <- Plant_Surveys %>%
