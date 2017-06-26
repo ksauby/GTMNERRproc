@@ -26,6 +26,8 @@ addSamplingPeriods <- function(Plant_Surveys) {
 				which(Date >= "2015-01-08" & Date <= "2015-02-21"), "4"),
 			# SURVEY 5 - SPRING/SUMMER 2015
 			DemographicSurvey = replace(DemographicSurvey, 
-				which(Date >= "2015-05-01"), "5"))
+				which(Date >= "2015-05-01"), "5")
+		) %>%
+		ungroup()
 	return(Plant_Surveys)
 }
