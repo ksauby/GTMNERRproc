@@ -11,7 +11,7 @@ createPlantInfobyPlant <- function(Plant_Info, Plant_Surveys_by_Year) {
 	# 2887 records
 	Plant_Info_Analysis <- Plant_Info %>%
 		group_by(PlantID) %>%
-		summarise(
+		dplyr::summarise(
 			Island 				= Island[1],
 			Network 			= Network[1],
 			# make sure they are all the same species
@@ -46,7 +46,7 @@ createPlantInfobyPlant <- function(Plant_Info, Plant_Surveys_by_Year) {
 	# summarise insect presence on plants and in networks
 	network_summary <- Plant_Surveys_by_Year %>%
 		group_by(Network) %>%
-		summarise(
+		dplyr::summarise(
 			OldMothNetworkPres = max(Old_Moth_Evidence_t, na.rm=T),
 			#InsectNetworkPres = max(Insect_t, na.rm=T),
 			MENetworkPres = max(ME_t, na.rm=T),
@@ -55,7 +55,7 @@ createPlantInfobyPlant <- function(Plant_Info, Plant_Surveys_by_Year) {
 		)
 	Plant_summary <- Plant_Surveys_by_Year %>%
 		group_by(PlantID) %>%
-		summarise(
+		dplyr::summarise(
 			OldMothPlantPres = max(Old_Moth_Evidence_t, na.rm=T),
 			#InsectPlantPres = max(Insect_t, na.rm=T),
 			MEPlantPres = max(ME_t, na.rm=T),

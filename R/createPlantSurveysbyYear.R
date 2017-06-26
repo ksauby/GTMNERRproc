@@ -9,7 +9,7 @@
 createPlantSurveysbyYear <- function(Plant_Surveys_by_Plant) {
 	Plant_Surveys_by_Year <- Plant_Surveys_by_Plant %>% 
 		group_by(FecundityYear, PlantID) %>%
-		summarise(
+		dplyr::summarise(
 			Species = Species[1],
 			Network = Network[1],
 			Island = Island[1],
@@ -68,6 +68,6 @@ createPlantSurveysbyYear <- function(Plant_Surveys_by_Plant) {
 	########################
 	# DO I LOSE PLANTS HERE?
 	########################	
-	Plant_Surveys_by_Year %<>% merge(temp, by=c("PlantID", "FecundityYear"))
+	Plant_Surveys_by_Year %<>% merge(temp, by=c("PlantID", "FecundityYear"), all.x=T)
 	return(Plant_Surveys_by_Year)
 }

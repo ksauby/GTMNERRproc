@@ -8,27 +8,26 @@
 createInsectPresDuringStudy <- function(Plant_Surveys_by_Year) {
 	network_summary_time_t <- Plant_Surveys_by_Year %>%
 		group_by(Network, FecundityYear) %>%
-		summarise(
+		dplyr::summarise(
 			OldMothNetworkPres_t = max(Old_Moth_Evidence_t, na.rm=T),
 			#InsectNetworkPres = max(Insect_t, na.rm=T),
 			MENetworkPres_t = max(ME_t, na.rm=T),
 			CANetworkPres_t = max(CA_t, na.rm=T),
 			MothNetworkPres_t = max(Moth_Evidence_t, na.rm=T)
 		) %>%
-		calculateLagGroupedDF(
-			.,
-			vars=c(
-				"OldMothNetworkPres_t", 
+		arrange(FecundityYear) %>%
+		group_by(Network) %>%
+		mutate_at(
+			.funs=funs("1" = "lag"),
+			.vars=c("OldMothNetworkPres_t", 
 				"MENetworkPres_t", 
 				"CANetworkPres_t", 
 				"MothNetworkPres_t"
-			), 
-			arrange.variable="FecundityYear", 
-			grouping.variable="Network"
-		)
+			)
+		) 
 	network_summary <- Plant_Surveys_by_Year %>%
 		group_by(Network) %>%
-		summarise(
+		dplyr::summarise(
 			OldMothNetworkPres = max(Old_Moth_Evidence_t, na.rm=T),
 			#InsectNetworkPres = max(Insect_t, na.rm=T),
 			MENetworkPres = max(ME_t, na.rm=T),
@@ -37,7 +36,7 @@ createInsectPresDuringStudy <- function(Plant_Surveys_by_Year) {
 		)
 	Plant_summary <- Plant_Surveys_by_Year %>%
 		group_by(PlantID) %>%
-		summarise(
+		dplyr::summarise(
 			OldMothPlantPres = max(Old_Moth_Evidence_t, na.rm=T),
 			#InsectPlantPres = max(Insect_t, na.rm=T),
 			MEPlantPres = max(ME_t, na.rm=T),
