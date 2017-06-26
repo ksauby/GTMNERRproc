@@ -44,7 +44,7 @@ processPlantInfo <- function(Plant_Info, Plot_Info) {
 	}
 	# ----------------- ADD INFO FROM Plot_Info (Cluster, Network, Island, etc.)
 	Plant_Info <- Plot_Info %>%
-		select(
+		dplyr::select(
 			Island, 
 			Tag_Number, 
 			Cluster, 
@@ -62,7 +62,7 @@ processPlantInfo <- function(Plant_Info, Plot_Info) {
 	#---------------------- CALCULATE AND ADD NUMBER OF PlotPlantIDs PER PlantID
 	Plant_Info <- Plant_Info %>%
 		group_by(PlantID) %>%
-		summarise(
+		dplyr::summarise(
 			N.PlotPlantIDs = length(unique(PlotPlantID))
 		) %>%
 		merge(Plant_Info, by="PlantID")
@@ -75,7 +75,7 @@ processPlantInfo <- function(Plant_Info, Plot_Info) {
 			Missing != 1
 		) %>%
 		group_by(PlotPlantID) %>%
-		summarise(
+		dplyr::summarise(
 			# simply the first survey date
 			First.Survey.Date.Alive = min(Date),
 			# should be max date the plant was alive
@@ -89,7 +89,7 @@ processPlantInfo <- function(Plant_Info, Plot_Info) {
 		mutate(DeadMissing = sum(Dead,Missing,na.rm=T)) %>%
 		arrange(Date) %>%
 		group_by(PlotPlantID) %>%
-		summarise(
+		dplyr::summarise(
 			sequenceDeadobs 		= paste(Dead, collapse=""),
 			sequenceMissingobs 		= paste(Missing, collapse=""),
 			sequenceDeadMissingobs 	= paste(DeadMissing, collapse=""),
@@ -137,7 +137,7 @@ processPlantInfo <- function(Plant_Info, Plot_Info) {
 		mutate(DeadMissing = sum(Dead,Missing,na.rm=T)) %>%
 		arrange(Date) %>%
 		group_by(PlotPlantID) %>%
-		summarise(
+		dplyr::summarise(
 			ConfirmedDead 			= Dead_Missing_Function(Dead),
 			ConfirmedMissing 		= Dead_Missing_Function(Missing),
 			ConfirmedDeadMissing 	= Dead_Missing_Function(c(Dead,Missing))
@@ -151,11 +151,11 @@ processPlantInfo <- function(Plant_Info, Plot_Info) {
 	# earliest date PlotPlantID was recorded as dead
 	temp_dead_obs <- filter(Plant_Surveys, Dead=="1") %>%
 		group_by(PlotPlantID) %>%
-		summarise(FirstDeadObservation = min(Date))
+		dplyr::summarise(FirstDeadObservation = min(Date))
 	# earliest date PlotPlantID was recorded as missing
 	temp_missing_obs <- filter(Plant_Surveys, Missing=="1") %>%
 		group_by(PlotPlantID) %>%
-		summarise(FirstMissingObservation = min(Date))
+		dplyr::summarise(FirstMissingObservation = min(Date))
 	# earliest date PlotPlantID was recorded as missing or dead
 	temp_dead_missing <- merge(
 		temp_dead_obs, 
@@ -164,7 +164,7 @@ processPlantInfo <- function(Plant_Info, Plot_Info) {
 		all=T
 	) 
 	temp_dead_missing$FirstDeadMissingObservation = temp_dead_missing %>%
-		select(
+		dplyr::select(
 			FirstDeadObservation,
 			FirstMissingObservation
 		) %>% 
@@ -223,11 +223,12 @@ processPlantInfo <- function(Plant_Info, Plot_Info) {
 		., 
 		ClustersInDemographicStudy, 
 		by = "Cluster"
-	) 
+	) %>%
+	filter(InDemographicStudy == "yes")
 	# ------------------------------------------------------------ ADD ClusterID
 	#	do this because some clusters share plots
 	Plot_Info_Cluster <- Plot_Info %>%
-		select(Tag_Number, Cluster, Cluster2) %>%
+		dplyr::select(Tag_Number, Cluster, Cluster2) %>%
 		reshape2:::melt.data.frame(., id.vars=c("Tag_Number"), 
 			value.name="ClusterID") %>%
 		filter(ClusterID!=0) %>%
@@ -235,16 +236,16 @@ processPlantInfo <- function(Plant_Info, Plot_Info) {
 		arrange(Tag_Number)
 	Plot_Info_Cluster %<>%
 		group_by(Tag_Number) %>%
-		summarise(ClusterID = paste(ClusterID, collapse=", "))
+		dplyr::summarise(ClusterID = paste(ClusterID, collapse=", "))
 	# CLUSTER ID FOR PLOTS *NOT* IN CLUSTERS
 	temp_A = Plot_Info %>%
-		select(Tag_Number, Cluster) %>%
+		dplyr::select(Tag_Number, Cluster) %>%
 		filter(Cluster==0)
 	temp_A$ClusterID <- temp_A$Tag_Number
 	temp_A %<>% .[, -2]
 	Plot_Info_Cluster %<>% rbind.fill(temp_A) %>% 
 		merge(Plot_Info, by="Tag_Number") %>%
-		select(ClusterID, Tag_Number)
+		dplyr::select(ClusterID, Tag_Number)
 	Plant_Info %<>% merge(Plot_Info_Cluster, by="Tag_Number", all.x=T)
 	# ----------------------------------------------------------- ERROR MESSAGES
 	temp <- Plant_Info %>% 
