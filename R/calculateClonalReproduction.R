@@ -42,29 +42,57 @@ calculateClonalReproduction <- function(
 		setnames("Size_t", "Offspring.Size_t") %>%
 		setnames("PlantID", "Offspring.ID")
 	# merge parent data (from A) with offspring info (from Plant_Info_Analysis)
-	C <- Plant_Info_Analysis %>%
+	C <- Plant_Info_Analysis 
+	C %<>%
+		mutate(Parent = substr(x=Parent,start=1,stop=4)) %>%
 		setnames("PlantID", "Offspring.ID") %>%
 		setnames("Parent", "Parent.ID") %>%
+		setnames("First_Size", "Offspring.First_Size") %>%
+		setnames(
+			"First.Survey.Date.Alive", 
+			"Offspring.First.Survey.Date.Alive"
+		) %>%
 		dplyr::select(
 			Parent.ID, 
 			Offspring.ID, 
-			First_Size,
-			First.Survey.Date.Alive
+			Offspring.First_Size,
+			Offspring.First.Survey.Date.Alive,
+			minFecundityYear
 		) %>%
 		merge(
 			A, 
-			by = "Parent.ID", 
+			by.x = c("Parent.ID", "minFecundityYear"),
+			by.y  = c("Parent.ID", "Parent.FecundityYear"),
 			all=T
 		) %>%
-		# merge first offspring size
+		# remove plants that had no offspring
 		filter(!is.na(Offspring.ID)) %>%
-		merge(
-			B,
-			by="Offspring.ID", 
-			all.x=T
-			) %>%
-			filter(!is.na(Parent.ID))
-	
+		# remove plants without identified parents
+		filter(!is.na(Parent.ID))
+		
+		
+		
+		
+		# calculateClonalReproduction - why do some parents have no obs.date & size?
+		C %>% filter(is.na(Parent.Size_t))
+		
+		
+		# were any sizes recorded at all? yes, at least for some
+		PlantIDwoSize <- C %>% 
+			filter(is.na(Offspring.First_Size)) %$% 
+			unique(Offspring.ID)
+		Plant_Surveys_by_Plant %>%
+		filter(
+			PlantID %in% PlantIDwoSize,
+			!(is.na(Size_t))
+		)
+		
+		
+		
+		
+		
+		
+		
 	D <- C %>%
 		group_by(Parent.ID) %>%
 		# remove NAs

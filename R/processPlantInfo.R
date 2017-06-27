@@ -59,6 +59,7 @@ processPlantInfo <- function(Plant_Info, Plot_Info) {
 		as.data.frame
 	#---------------------------------------------------------- FORMAT PLANT IDs
 	Plant_Info %<>% Format_PlantIDs_Function
+	Plant_Info$Parent %<>% str_replace_all(fixed(" "), "")
 	#---------------------- CALCULATE AND ADD NUMBER OF PlotPlantIDs PER PlantID
 	Plant_Info <- Plant_Info %>%
 		group_by(PlantID) %>%
