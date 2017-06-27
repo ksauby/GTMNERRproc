@@ -10,7 +10,7 @@ createPlantInfobyPlant <- function(Plant_Info, Plant_Surveys_by_Year) {
 	# one record per plant
 	# 2849 records
 	Plant_Info_Analysis <- Plant_Info %>%
-		arrange(Date) %>%
+		arrange(First.Survey.Date.Alive) %>%
 		group_by(PlantID) %>%
 		dplyr::summarise(
 			Island 				= Island[1],
@@ -69,12 +69,12 @@ createPlantInfobyPlant <- function(Plant_Info, Plant_Surveys_by_Year) {
 		arrange(Date) %>%
 		group_by(PlantID) %>%
 		dplyr::summarise(
-			First.Survey.Date 			= Date[1],
-			minFecundityYear 			= Minimum(FecundityYear),
-			First_Size 					= Size_t[!(is.na(Size_t))][1],
-			First.Measurement.Date 		= Date[!(is.na(Size_t))][1],
-			min.Size 					= Minimum(Size_t),
-			max.Size 					= Maximum(Size_t)
+			First.Survey.Date 		= Date[1],
+			minFecundityYear 		= Minimum(FecundityYear),
+			First_Size 				= Size_t[!(is.na(Size_t))][1],
+			First.Measurement.Date 	= Date[!(is.na(Size_t))][1],
+			min.Size 				= Minimum(Size_t),
+			max.Size 				= Maximum(Size_t)
 		)
 	Plant_Info_Analysis %<>% 
 		merge(First_Size, by=c("PlantID"))
