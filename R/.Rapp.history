@@ -1,293 +1,33 @@
-1353-501
-852/71
-7956-7878
-8176-8029
-8176-8092
-250*.75
-250*.25
-42*2 + 17*2
-118/19
-21/6.2
-59.5*.75
-59.5*.5 + 59.5
-71/12
-597/80
-597/8
-432/8
-15*8 + 9*3
-?seq_len
-7.25/3
-7.25/4
-for(i in 0:9){x=cos(2*pi/10*i);y=x+1;z=(y-2)*22;pie(c(y,8-y),col=c(0,7),init.angl=135-z,bo=F,la=NA)}
-install.packages("ProjectTemplate")
-install.packages("dplyr")
-install.packages("ggplot2")
-install.packages("data.table")
-install.packages("corrgram")
-install.packages("survival")
-install.packages("shapefiles")
-install.packages("rgdal")
-install.packages("PBSmapping")
-install.packages("sp")
-install.packages("gdistance")
-install.packages("chron")
-install.packages("unmarked")
-install.packages("lme4")
-install.packages("rgeos", repos="http://R-Forge.R-project.org", type="source")#
-require(rgeos)
-install.packages('rgdal',repos="http://www.stats.ox.ac.uk/pub/RWin")
-library(rgdal)
-install.packages("http://cran.r-project.org/src/contrib/rgdal_0.9-1.tar.gz", repos = NULL, type="source", configure.args = "--with-gdal-config=/Library/Frameworks/GDAL.framework/Versions/1.10/unix/bin/gdal-config --with-proj-include=/Library/Frameworks/PROJ.framework/unix/include --with-proj-lib=/Library/Frameworks/PROJ.framework/unix/lib")
-18/1.618
-189+114
-library(lubridate)
-library(magrittr)
-seasons <- data.frame(#
-	   SE = as.POSIXct(c("2009-3-20", "2010-3-20", "2011-3-20", "2012-3-20", #
-            "2013-3-20", "2014-3-20"), format="%Y-%m-%d"),#
-	   SS = as.POSIXct(c("2009-6-21", "2010-6-21", "2011-6-21", "2012-6-20",#
-            "2013-6-20", "2014-6-20"), format="%Y-%m-%d"),#
-	   FE = as.POSIXct(c("2009-9-22", "2010-9-23", "2011-9-23", "2012-9-22",#
-            "2013-9-22", "2014-9-22"), format="%Y-%m-%d"),#
-	   WS = as.POSIXct(c("2009-12-21", "2010-12-21", "2011-12-22", "2012-12-21", #
-            "2013-12-21", "2014-12-21"), format="%Y-%m-%d")#
-    )#
-#
-    assignSeason <- function(dat, SeasonStarts=seasons) {#
-	    dat %<>% mutate(#
-		    Season = lapply(Date,#
-				function(x) {#
-					findInterval(#
-						x, #
-						SeasonStarts[which(year(x)==year(SeasonStarts$WS)), ]#
-					)#
-				}#
-			) %>% unlist	#
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+Plot_Info_Cluster %<>% rbind.fill(temp_A) %>% #
+		merge(Plot_Info, by="Tag_Number") %>%#
+		dplyr::select(ClusterID, Tag_Number)#
+	Plant_Info %<>% merge(Plot_Info_Cluster, by="Tag_Number", all.x=T)#
+	# ----------------------------------------------------------- ERROR MESSAGES#
+	temp <- Plant_Info %>% #
+		filter(RecruitmentMode=="Seedling") %>% #
+		filter(Species=="pusilla")#
+	if (dim(temp)[1] > 0) {#
+		write.csv(temp,"Pusillaseedlings.csv")#
+		warning(#
+			"O. pusilla plants marked as seedlings. Information written to csv file."#
 		)#
-	    dat[which(dat$Season==0 | dat$Season==4), ]$Season 	<- "Winter"#
-	    dat[which(dat$Season==1), ]$Season 					<- "Spring"#
-	    dat[which(dat$Season==2), ]$Season 					<- "Summer"#
-	    dat[which(dat$Season==3), ]$Season 					<- "Fall"#
-	    return(dat)#
-    }
-dat = data.frame(#
-	    Date = as.POSIXct(strptime(as.Date("2011-12-01", format = "%Y-%m-%d") + #
-            (0:10)*30, format="%Y-%m-%d" ))#
-    )#
-    dat %>% assignSeason
-library(dplyr)
-dat = data.frame(#
-	    Date = as.POSIXct(strptime(as.Date("2011-12-01", format = "%Y-%m-%d") + #
-            (0:10)*30, format="%Y-%m-%d" ))#
-    )#
-    dat %>% assignSeason
-library(devtoolks)
-library(devtools)
-?install_github
-devtools::install_github("ksauby/ACSampling", auth_token="2ab30a602e52fae481f4249cc25e892c0a9ccfc7", subdir="/code/Restricted_ACS_Simulations/ACSampling", repos=NULL)
-devtools::install_github("ksauby/ACSampling", auth_token="2794c3f10db92f525181a0b1f6c19064fe3a2ef3", subdir="/code/Restricted_ACS_Simulations/ACSampling", repos=NULL)
-devtools::install("~/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
-devtools::install(pkg="~/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
-devtools::install(pkg="Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
-devtools::install(pkg="~/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
-devtools::install(pkg="/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
-devtools::install_local(path="/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
-library(devtools)
-devtools::install_local(path="/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
-devtools::install(pkg="/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
-install.packages("~/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
-??limit
-37-13
-24/37
-37-13
-26/37
-25/37
-23/37
-29/37
-30/37
-22/37
-30/37
-29/37
-28/37
-27/37
-35/37
-30/37
-29/37
-26/37
-26/37 - .6757
-28/37
-30/37
-29/37
-37-12
-25/37
-219*.8
-219*.8 - 17
-26/3
-17/900
-42/900
-49/900
-29/40
-1/25
-8/25
-10/25
-(7.5 + 3.75)/15
-12*0.75
-11 * 0.75
-11/15
-11*0.25
-11/15 * 6
-32/41 +0.03.5
-32/41 + 0.035
-(32/41 + 0.035)*100
-100/41
-23/40 * 100
-(23/40 * 100)+5
-(164 + 13.5 + 6)
-(164 + 13.5 + 6)/365
-(164 + 13.5 + 6 + (50))/365
-(164 + 13.5 + 6 + (60))/365
-(164 + 13.5 + 6 + (70))/365
-(164 + 13.5 + 6 + (75))/365
-102/40
-102/41
-?table
-9.49/2
-12.75+8.25
-(10.5 + 6.5)/(12.75+8.25)
-.25^2 * 2
-(.25^2 * 2)^0.5
-(.25^2 * 2)^0.5 * 2
-3/8
-5/8
-6/8
-30*1.5
-40*15
-40*1.5
-13.25 - 4.5
-(276.29+8.75)/365
-16*3
-16*4
-84/12
-9/12
-9/12*14
-22+60+78+80+88+98
-22+38+18+2+8+10
-239/785
-(239+53)/785
-.492+.139
-.412+.166+.002
-.412/.58
-.166/.58
-.412*.58
-.71*.58
-98-54
-22+49+43+33+36+44
-60-11
-78-26
-80-35
-88-47
-98-52
-22+49+52+45+41+46
-library(RMark)
-?test_ddl
-data(dipper)    dipper.processed=process.data(dipper,groups=("sex"))    release.gof(dipper.processed)
-4+19+7+12
-4+17.83+7+12
-40.83/42
-40.83/42*14
-14
-(11.25+5)/(25.5 + 10.25 - 14)
-365*0.6666
-365*0.6666 - 75.89
-5/6 * 2
-5/6 * 2 + 75.89
-365*0.6666 -77.55667
-365*0.6666 -77.55667 - 6 - 13 - 1
-145.7523/2
-15*3
-11*5
-8/12*14
-4+15.33+5.5+12
-(4+15.33+5.5+12)
-(4+15.33+5.5+12)/(4+19+7+12)
-(4+19+7+12)
-(4+15.33+5.5+12)/(4+19+7+12)*14
-2.5+17.5+12
-32/42
-32/42 * 14
-4+12+6.5+12
-(4+12+6.5+12)/42 * 14
-5/6*2
-5/6*2 + 0.25
-5/6*2 + 0.5
-2577.77/12
-15/20
-15/20*6
-300 - 4*50
-300 - 4*40
-4.5/12*14
-9+9+7+9
-33.5/34 * 14
-32/34 * 14
-32/34*14
-7+8.5+7+7
-(7+8.5+7+7)/34 * 14
-(7+5.5+5.5+8.5)/34 * 14
-(7+5.5+5.5+8.5)/(9+7+9+9) * 14
-9+7+9+9
-(14.25+7.25)/(24.75+10.25-9)
-(16.5+7.75)/(24.75+10.25)
-(16.5+7.75)/(24.75+10.25)*6
-(5.25+5.5)/(22.5+10.5)
-(5.25+5.5)/(22.5+10.5)*6
-(9.75+5.5)/(24.7+10.25-5)*6
-(9.75+5.5)/(24.7+10.25-5)
-3.98/6
-(9.75+5.5)/(24.7+10.25-10)
-(9.75+5.5)/(24.7+10.25-10)*6
-5/6*2
-1.83-5/6*2
-1.83-4/6*2
-5/6*2 + 0.5
-4/6*2 + 0.5
-4/6*2
-4/6 + 0.5
-4/6*2 + 0.5
-33/34 * 14
-17.5*4
-24*4 + 1.75*4
-library(dplyr)
-library(plyr)
-600*.22
-library(dplyr)
-library(dplyr)
+	}
+dim(Plant_Info)
+str(Plant_Info)
+unique(Plant_Info$InDemographicStudy)
+InDemographicStudy %>% filter(InDemographicStudy=="no") %>% dim
+InDemographicStudy %>% filter(InDemographicStudy=="no") %>% dimPlant_Info
+Plant_Info %>% filter(InDemographicStudy=="no") %>% dimPlant_Info
+Plant_Info %>% filter(InDemographicStudy=="no") %>% dim
 setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
 # ---------------------------------------------------------- Shorten names#
 Plot_Info <- OccupancySRSWOR.Plot.Surveys.Info#
 Plot_Surveys <- OccupancySRSWOR.Plot.Surveys#
 Plant_Surveys <- Demographic.Plant.Surveys#
+# Plant_Surveys <- Plant.Surveys.processed.26jun17#
 Plant_Info <- Demographic.Plant.Info#
-Plant_Surveys_All <- Demographic.Plant.Surveys#
-Plant_Info_All <- Demographic.Plant.Info#
-D_Plot_Surveys <- Demographic.Plot.Surveys#
-Original_Plant_Data <- Original.Demographic.Plant.Data#
-Seed_Abundance <- Seed.Abundance#
-Seed_Abundance_Surveys <- Seed.Abundance.Surveys#
-GIS_data_updated <- GIS.data.updated
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis')
-library(ProjectTemplate)#
-#
-# when working on a Windows computer#
-# setwd("C:/Users/KSauby/Dropbox/gradschool/Research/Projects/sampling")#
-#
-# load project#
-load.project()
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
-# ---------------------------------------------------------- Shorten names#
-Plot_Info <- OccupancySRSWOR.Plot.Surveys.Info#
-Plot_Surveys <- OccupancySRSWOR.Plot.Surveys#
-Plant_Surveys <- Demographic.Plant.Surveys#
-Plant_Info <- Demographic.Plant.Info#
+# Plant_Info <- Plant.Info.processed.26jun17#
 Plant_Surveys_All <- Demographic.Plant.Surveys#
 Plant_Info_All <- Demographic.Plant.Info#
 D_Plot_Surveys <- Demographic.Plot.Surveys#
@@ -299,91 +39,1969 @@ setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
 D_Plot_Surveys$Date %<>% as.Date("%m/%d/%Y") # Demographic Plot Surveys#
 Plant_Surveys %<>% processPlantSurveys(Plant_Info) # Plant Surveys#
 Plant_Surveys %<>% fixInconsistentDeadMissingRecords#
+#
+placeholder <- Plant_Info
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+Plant_Info %<>% filter(InBigPlantStudy=="")#
+	# ----------------------------------------------------------- ERROR MESSAGES#
+	# Plants listed as species Not Recorded#
+	dups <- Plant_Info[which(Plant_Info$HostSpecies=="Not Recorded"), ]#
+	if (dim(dups)[1] > 0) {#
+		warning(paste(#
+			"Species identity not recorded for plantID: ",#
+			paste(dups$PlantID, collapse=", ")#
+		))#
+	}#
+	# are any plant IDs in Plant Info not in the surveys?#
+	dups <- Plant_Info[which(Plant_Info$OutsideOfCluster!="Yes"),] %>%#
+		filter(!(PlantID %in% Plant_Surveys$PlotPlantID)) %>% #
+		.[,2:5]#
+	if (dim(dups)[1] > 0) {#
+		warning(paste(#
+			"Some plant IDs are not in Plant Surveys data: ",#
+			paste(dups$PlantID, collapse=", ")#
+		))#
+	}
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+# make sure that there is plot info for each tag number in plant info#
+	dups <- Plant_Info %>%#
+		filter(!(Tag_Number %in% Plot_Info$Tag_Number))#
+	if (dim(dups)[1] > 0) {#
+		warning(paste(#
+			"Plants (",#
+			paste(unique(dups$PlantID), collapse=", "),#
+			") are listed as being in plots not in Plot Info data (",#
+			paste(unique(dups$Tag_Number), collapse=", "),#
+			")"#
+		))#
+	}#
+	# ----------------- ADD INFO FROM Plot_Info (Cluster, Network, Island, etc.)#
+	Plant_Info <- Plot_Info %>%#
+		dplyr::select(#
+			Island, #
+			Tag_Number, #
+			Cluster, #
+			Cluster2, #
+			Network, #
+			Sampling, #
+			SurveyOrder#
+		) %>%#
+		merge(Plant_Info, by = "Tag_Number", all.y=TRUE) %>%#
+		as.data.table %>%#
+		setnames("HostSpecies", "Species") %>%#
+		as.data.frame#
+	#---------------------------------------------------------- FORMAT PLANT IDs#
+	Plant_Info %<>% Format_PlantIDs_Function
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+#---------------------- CALCULATE AND ADD NUMBER OF PlotPlantIDs PER PlantID#
+	Plant_Info <- Plant_Info %>%#
+		group_by(PlantID) %>%#
+		dplyr::summarise(#
+			N.PlotPlantIDs = length(unique(PlotPlantID))#
+		) %>%#
+		merge(Plant_Info, by="PlantID")#
+	#-------------------------- ADD FIRST and LAST DATE PlotPlantID WAS SURVEYED#
+	# particularly relevant for plants that grew into plots over the course of the study (and thus the number of PlotPlantIDs for a given PlantID changed over time)#
+	# also helps calculate the number of days a plant was known to have survived#
+	Plant_Info <- Plant_Surveys %>%#
+		filter(#
+			Dead != 1,#
+			Missing != 1#
+		) %>%#
+		group_by(PlotPlantID) %>%#
+		dplyr::summarise(#
+			# simply the first survey date#
+			First.Survey.Date.Alive = min(Date),#
+			# should be max date the plant was alive#
+			Last.Survey.Date.Alive = max(Date)#
+		) %>%#
+		merge(Plant_Info, by="PlotPlantID")#
+	# ----------------------------------------------------------- PLANT SURVIVAL#
+	# indicate whether plant was listed as dead or missing#
+	A <- Plant_Surveys %>%#
+		rowwise() %>%#
+		mutate(DeadMissing = sum(Dead,Missing,na.rm=T)) %>%#
+		arrange(Date) %>%#
+		group_by(PlotPlantID) %>%#
+		dplyr::summarise(#
+			sequenceDeadobs 		= paste(Dead, collapse=""),#
+			sequenceMissingobs 		= paste(Missing, collapse=""),#
+			sequenceDeadMissingobs 	= paste(DeadMissing, collapse=""),#
+			confirmedDead 			= ifelse(#
+				grepl("11", sequenceDeadobs) == TRUE,#
+				1,#
+				0#
+			),#
+			confirmedMissing 		= ifelse(#
+				grepl("11", sequenceDeadobs) == TRUE,#
+				1,#
+				0#
+			),#
+			confirmedDeadMissing 	= ifelse(#
+				grepl("11", sequenceDeadMissingobs) == TRUE,#
+				1,#
+				0#
+			),#
+			inconsistentDeadMissing = ifelse(#
+				grepl("10", sequenceDeadMissingobs) == TRUE,#
+				1,#
+				0#
+			)#
+		)#
+	# ERROR MESSAGES#
+	Z <- A %>% #
+		filter(inconsistentDeadMissing==1) %>%#
+		filter(!(#
+			PlotPlantID %in% c("8999b", "9113b", "9164a", "9341a", "9917a", #
+			"8873b", "9892b", "9573b")#
+		)) #
+	if (dim(Z)[1] > 0) {#
+		write.csv(Z, "inconsistentDeadMissing.csv")#
+		warning(paste(#
+			"Plants with inconsistent records of dead/missing/alive present in dataset. These plants have been saved to a csv."#
+		))#
+	}#
+	# info for plants NOT observed in summer 2015#
+	B <- Plant_Surveys %>% #
+		filter(Date >= "2015-05-01")#
+	C <- A %>% filter(!(PlotPlantID %in% B$PlotPlantID))#
+	# info for plants observed in summer 2015 - these do not need 2 consecutive obs. of dead/missing to be confirmed dead/missing#
+	 B %<>%#
+		rowwise() %>%#
+		mutate(DeadMissing = sum(Dead,Missing,na.rm=T)) %>%#
+		arrange(Date) %>%#
+		group_by(PlotPlantID) %>%#
+		dplyr::summarise(#
+			ConfirmedDead 			= Dead_Missing_Function(Dead),#
+			ConfirmedMissing 		= Dead_Missing_Function(Missing),#
+			ConfirmedDeadMissing 	= Dead_Missing_Function(c(Dead,Missing))#
+		)#
+	# paste together#
+	#		info for plants NOT observed in summer 2015 &#
+	#		info for plants observed in summer 2015#
+	Plant_Info <- rbind.fill(B, C) %>%#
+		merge(Plant_Info, ., by="PlotPlantID")#
+	#---------------- ADD FIRST DATE PlotPlantID WAS RECORDED AS DEAD OR MISSING#
+	# earliest date PlotPlantID was recorded as dead#
+	temp_dead_obs <- filter(Plant_Surveys, Dead=="1") %>%#
+		group_by(PlotPlantID) %>%#
+		dplyr::summarise(FirstDeadObservation = min(Date))#
+	# earliest date PlotPlantID was recorded as missing#
+	temp_missing_obs <- filter(Plant_Surveys, Missing=="1") %>%#
+		group_by(PlotPlantID) %>%#
+		dplyr::summarise(FirstMissingObservation = min(Date))#
+	# earliest date PlotPlantID was recorded as missing or dead#
+	temp_dead_missing <- merge(#
+		temp_dead_obs, #
+		temp_missing_obs, #
+		by="PlotPlantID", #
+		all=T#
+	) #
+	temp_dead_missing$FirstDeadMissingObservation = temp_dead_missing %>%#
+		dplyr::select(#
+			FirstDeadObservation,#
+			FirstMissingObservation#
+		) %>% #
+		apply(., 1, min, na.rm=T) %>%#
+		as.Date#
+	# merge with Plant_Info#
+	Plant_Info <- merge(Plant_Info, temp_dead_missing, by="PlotPlantID", all=T)#
+	# calculate first/last day alive for PlantID (not individual Plot Plant IDs)#
+	Plant_Info %<>% group_by(PlantID) %>%#
+	mutate(#
+		PlantID.First.Alive = min(First.Survey.Date.Alive, na.rm=T),#
+		PlantID.Last.Alive = max(Last.Survey.Date.Alive, na.rm=T)#
+	)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+Plant_Info %<>% #
+		group_by(PlantID) %>%#
+		mutate(DaysAlive = PlantID.Last.Alive - PlantID.First.Alive)#
+	# -------------------------------------------------- CLEANUP FOR CONSISTENCY#
+	Plant_Info[,c(#
+		"Quadrant",#
+		"ReproductiveMode",#
+		"Parent")] %<>%#
+		apply(., 2, as.character#
+	)#
+	Plant_Info[,c(#
+		"Quadrant",#
+		"ReproductiveMode",#
+		"Parent")] %<>%#
+		apply(., 2, NA_Function#
+	)#
+	Plant_Info[,c(#
+		"Quadrant",#
+		"ReproductiveMode",#
+		"Parent")] %<>%#
+		apply(., 2, as.factor#
+	)#
+	# ------------------------------------------------- modify Reproductive Mode#
+	Plant_Info$ReproductiveMode %<>% WoodyTrunk_Function()#
+	Plant_Info %<>% setnames("ReproductiveMode", "RecruitmentMode")#
+	Plant_Info %<>% mutate(#
+		RecruitmentMode = replace(#
+			RecruitmentMode,#
+			which(RecruitmentMode=="WoodyTrunk"),#
+			NA#
+		),#
+		RecruitmentMode = replace(#
+			RecruitmentMode,#
+			which(is.na(RecruitmentMode)),#
+			NA#
+		)#
+	)#
+	# ------------------------------------------------- ADD InDemomographicStudy#
+	# save all Plant_Info#
+	Plant_Info_All <- Plant_Info#
+	Plant_Info %<>% merge(#
+		., #
+		ClustersInDemographicStudy, #
+		by = "Cluster"#
+	) %>%#
+	filter(InDemographicStudy == "yes")
+dim(Plant_Info)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+Plot_Info_Cluster <- Plot_Info %>%#
+		dplyr::select(Tag_Number, Cluster, Cluster2) %>%#
+		reshape2:::melt.data.frame(., id.vars=c("Tag_Number"), #
+			value.name="ClusterID") %>%#
+		filter(ClusterID!=0) %>%#
+		.[, -2] %>%#
+		arrange(Tag_Number)#
+	Plot_Info_Cluster %<>%#
+		group_by(Tag_Number) %>%#
+		dplyr::summarise(ClusterID = paste(ClusterID, collapse=", "))#
+	# CLUSTER ID FOR PLOTS *NOT* IN CLUSTERS#
+	temp_A = Plot_Info %>%#
+		dplyr::select(Tag_Number, Cluster) %>%#
+		filter(Cluster==0)#
+	temp_A$ClusterID <- temp_A$Tag_Number#
+	temp_A %<>% .[, -2]#
+	Plot_Info_Cluster %<>% rbind.fill(temp_A) %>% #
+		merge(Plot_Info, by="Tag_Number") %>%#
+		dplyr::select(ClusterID, Tag_Number)#
+	Plant_Info %<>% merge(Plot_Info_Cluster, by="Tag_Number", all.x=T)#
+	# ----------------------------------------------------------- ERROR MESSAGES#
+	temp <- Plant_Info %>% #
+		filter(RecruitmentMode=="Seedling") %>% #
+		filter(Species=="pusilla")#
+	if (dim(temp)[1] > 0) {#
+		write.csv(temp,"Pusillaseedlings.csv")#
+		warning(#
+			"O. pusilla plants marked as seedlings. Information written to csv file."#
+		)#
+	}
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+Plant_Surveys <- Plant_Info %>%#
+		dplyr::select(#
+			ClusterID, #
+			InDemographicStudy, #
+			PlotPlantID, #
+			Tag_Number, #
+			Island, #
+			Cluster2, #
+			Network, #
+			Species, #
+			InBigPlantStudy, #
+			N.PlotPlantIDs, #
+			Easting, #
+			Northing,#
+			RecruitmentMode#
+		) %>%#
+		merge(Plant_Surveys, by = "PlotPlantID")
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+Plant_Surveys$Date %<>%#
+		strptime("%Y-%m-%d") %>%#
+		as.POSIXct(format="%Y-%m-%d", tz="")#
+	Plant_Surveys %<>%#
+		addSamplingPeriods %>%#
+		assignSeason %>%#
+		createFecundityYear %>%#
+		as.data.frame#
+	Plant_Surveys$Date %<>% as.Date
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+# throw a warning if pusilla has flowers before summer 2015#
+	temp <- Plant_Surveys %>%#
+		filter(#
+			Species=="pusilla",#
+			FecundityYear!=2015,#
+			Fruit_Flowers_t > 0,#
+			!(month(Date) %in% c(5,6,7,8))#
+		)#
+	if (dim(temp)[1] > 0) {#
+		warning(paste(#
+			"O. pusilla plants ",#
+			paste(temp$PlotPlantID, collapse=", "),#
+			"are recorded as having fruit/flowers in a year other than 2015."#
+		))#
+	}#
+	# ------------------------------
+unique(Plant_Surveys$InDemographicStudy)
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
+Plant_Surveys_by_Plant <- Plant_Surveys %>% #
+	processSurveysMergedbyPlant
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
+Plant_Surveys_by_Plant %>% filter(AllSurveyed==F) %>% write.csv("incompletesurveys.csv")#
+#
+Plant_Surveys %>% filter(N.PlotPlantIDs > 1) %>% filter(Dead==1 | Missing == 1) %>% write.csv("deadmissing.csv")
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
+h <- function(w) if( any( grepl( "no non-missing arguments to max", w) ) ) invokeRestart( "muffleWarning" )#
+Plant_Surveys_by_Plant <- withCallingHandlers(#
+	createPlantInsectPresence(Plant_Surveys_by_Plant),#
+	warning = h#
+)#
+# create Fecundity and RGR dataset#
+Plant_Surveys_by_Year <- createPlantSurveysbyYear(Plant_Surveys_by_Plant) %>%#
+	renamePatches #%>%
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
+Plant_Surveys_by_Year %<>% mutate(#
+	PlantIDb = paste(#
+		Island,#
+		PlantID,#
+		sep=", "#
+	),#
+	PlantIDc = paste(#
+		Island,#
+		PlantID,#
+		sep="\n"#
+	)#
+)
+Plant_Info_Analysis$PlantID[!(unique(Plant_Info_Analysis$PlantID) %in% unique(Plant_Surveys_by_Year$PlantID))]
+Plant_Info_Analysis$PlantID[!(unique(Plant_Surveys_by_Year$PlantID) %in% unique(Plant_Info_Analysis$PlantID))]
+Plant_Surveys_by_Year %>% filter(PlantID=="8714")
+Plant_Surveys %>% filter(PlantID=="8714")
+Plant_Surveys_by_Plant %>% filter(PlantID=="8714")
+Plant_Surveys_by_Year %>% filter(PlantID=="8714")
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+Plant_Surveys_by_Year <- Plant_Surveys_by_Plant %>% #
+		group_by(FecundityYear, PlantID) %>%#
+		dplyr::summarise(#
+			Species = Species[1],#
+			Network = Network[1],#
+			Island = Island[1],#
+			RecruitmentMode = RecruitmentMode[1],#
+			#Date = min(Date),#
+			FruitPres_t = max(FruitPres_t, na.rm=T),#
+			Fruit_Flowers_t = max(Fruit_Flowers_t, na.rm=T),#
+			FruitFlowerPres_t = max(FruitFlowerPres_t, na.rm=T),#
+			Size_t = max(Size_t, na.rm=T),#
+			Height_t = max(Height_t, na.rm=T),#
+			Fruit_t = max(Fruit_t, na.rm=T),#
+			FruitPres_t = max(FruitPres_t, na.rm=T),#
+			CA_t = max(CA_t, na.rm=T),#
+			ME_t = max(ME_t, na.rm=T),#
+			DA_t = max(DA_t, na.rm=T),#
+			CH_t = max(CH_t, na.rm=T),#
+			Gerstaeckeria_t = max(Gerstaeckeria_t, na.rm=T),#
+			Unknown_Moth_t = max(Unknown_Moth_t, na.rm=T),#
+			Old_Moth_Evidence_t = max(Old_Moth_Evidence_t, na.rm=T),#
+			Moth_Evidence_t = max(Moth_Evidence_t, na.rm=T),#
+			Insect_Evidence_t = max(Insect_Evidence_t, na.rm=T),#
+			DeadbyEndofYear = max(Dead, na.rm=T),#
+			MissingbyEndofYear = max(Missing, na.rm=T),#
+			DeadMissingbyEndofYear = sum(#
+				c(DeadbyEndofYear, MissingbyEndofYear),#
+				na.rm=T#
+			)#
+		)
+Plant_Surveys_by_Year %>% filter(PlantID=="8714")
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+Plant_Surveys_by_Year <- Plant_Surveys_by_Plant %>% #
+		group_by(FecundityYear, PlantID) %>%#
+		dplyr::summarise(#
+			Species = Species[1],#
+			Network = Network[1],#
+			Island = Island[1],#
+			RecruitmentMode = RecruitmentMode[1],#
+			#Date = min(Date),#
+			FruitPres_t = max(FruitPres_t, na.rm=T),#
+			Fruit_Flowers_t = max(Fruit_Flowers_t, na.rm=T),#
+			FruitFlowerPres_t = max(FruitFlowerPres_t, na.rm=T),#
+			Size_t = max(Size_t, na.rm=T),#
+			Height_t = max(Height_t, na.rm=T),#
+			Fruit_t = max(Fruit_t, na.rm=T),#
+			FruitPres_t = max(FruitPres_t, na.rm=T),#
+			CA_t = max(CA_t, na.rm=T),#
+			ME_t = max(ME_t, na.rm=T),#
+			DA_t = max(DA_t, na.rm=T),#
+			CH_t = max(CH_t, na.rm=T),#
+			Gerstaeckeria_t = max(Gerstaeckeria_t, na.rm=T),#
+			Unknown_Moth_t = max(Unknown_Moth_t, na.rm=T),#
+			Old_Moth_Evidence_t = max(Old_Moth_Evidence_t, na.rm=T),#
+			Moth_Evidence_t = max(Moth_Evidence_t, na.rm=T),#
+			Insect_Evidence_t = max(Insect_Evidence_t, na.rm=T),#
+			DeadbyEndofYear = max(Dead, na.rm=T),#
+			MissingbyEndofYear = max(Missing, na.rm=T),#
+			DeadMissingbyEndofYear = sum(#
+				c(DeadbyEndofYear, MissingbyEndofYear),#
+				na.rm=T#
+			)#
+		) %>% #
+		rowwise() %>%#
+		mutate(#
+			PrevFecundityYear = FecundityYear - 1,#
+			Alive = abs(DeadMissingbyEndofYear - 1)#
+		)#
+	# create PrevYear#
+	Plant_Surveys_by_Year %<>% createInsectPresDuringStudy#
+	# figure out spring/summer survey dates	#
+	temp <- Plant_Surveys_by_Plant %>%#
+		filter(#
+			month(Date) == 5 |#
+			month(Date) == 6 |#
+			month(Date) == 7 |#
+			month(Date) == 8 |#
+			month(Date) == 9,#
+		    !(#
+				is.na(Fruit_Flowers_t) |#
+				is.na(Size_t)#
+			)#
+		) %>%#
+		select(#
+			Date,#
+			PlantID,#
+			FecundityYear#
+		) %>%#
+		setnames("Date", "SurveyDate_SpringSummer")
+Plant_Surveys_by_Year <- Plant_Surveys_by_Plant %>% #
+		group_by(FecundityYear, PlantID) %>%#
+		dplyr::summarise(#
+			Species = Species[1],#
+			Network = Network[1],#
+			Island = Island[1],#
+			RecruitmentMode = RecruitmentMode[1],#
+			#Date = min(Date),#
+			FruitPres_t = max(FruitPres_t, na.rm=T),#
+			Fruit_Flowers_t = max(Fruit_Flowers_t, na.rm=T),#
+			FruitFlowerPres_t = max(FruitFlowerPres_t, na.rm=T),#
+			Size_t = max(Size_t, na.rm=T),#
+			Height_t = max(Height_t, na.rm=T),#
+			Fruit_t = max(Fruit_t, na.rm=T),#
+			FruitPres_t = max(FruitPres_t, na.rm=T),#
+			CA_t = max(CA_t, na.rm=T),#
+			ME_t = max(ME_t, na.rm=T),#
+			DA_t = max(DA_t, na.rm=T),#
+			CH_t = max(CH_t, na.rm=T),#
+			Gerstaeckeria_t = max(Gerstaeckeria_t, na.rm=T),#
+			Unknown_Moth_t = max(Unknown_Moth_t, na.rm=T),#
+			Old_Moth_Evidence_t = max(Old_Moth_Evidence_t, na.rm=T),#
+			Moth_Evidence_t = max(Moth_Evidence_t, na.rm=T),#
+			Insect_Evidence_t = max(Insect_Evidence_t, na.rm=T),#
+			DeadbyEndofYear = max(Dead, na.rm=T),#
+			MissingbyEndofYear = max(Missing, na.rm=T),#
+			DeadMissingbyEndofYear = sum(#
+				c(DeadbyEndofYear, MissingbyEndofYear),#
+				na.rm=T#
+			)#
+		) %>% #
+		rowwise() %>%#
+		mutate(#
+			PrevFecundityYear = FecundityYear - 1,#
+			Alive = abs(DeadMissingbyEndofYear - 1)#
+		)#
+	# create PrevYear#
+	Plant_Surveys_by_Year %<>% createInsectPresDuringStudy#
+	# figure out spring/summer survey dates	#
+	temp <- Plant_Surveys_by_Plant %>%#
+		filter(#
+			month(Date) == 5 |#
+			month(Date) == 6 |#
+			month(Date) == 7 |#
+			month(Date) == 8 |#
+			month(Date) == 9,#
+		    !(#
+				is.na(Fruit_Flowers_t) |#
+				is.na(Size_t)#
+			)#
+		) %>%#
+		dplyr::select(#
+			Date,#
+			PlantID,#
+			FecundityYear#
+		) %>%#
+		setnames("Date", "SurveyDate_SpringSummer")
+Plant_Surveys_by_Year %>% filter(PlantID=="8714")
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+Plant_Surveys_by_Year %<>% merge(temp, by=c("PlantID", "FecundityYear"), all.x=T)
+Plant_Surveys_by_Year %>% filter(PlantID=="8714")
+Plant_Surveys_by_Year %<>%#
+	renamePatches #%>%#
+	#createMothOccupancytVariable %>%#
+	#createMothOccupancyVariable %>%#
+	#createDeadFactorVariable#
+# Second Plant ID#
+Plant_Surveys_by_Year %<>% mutate(#
+	PlantIDb = paste(#
+		Island,#
+		PlantID,#
+		sep=", "#
+	),#
+	PlantIDc = paste(#
+		Island,#
+		PlantID,#
+		sep="\n"#
+	)#
+)
+Plant_Surveys_by_Year %<>% merge(temp, by=c("PlantID", "FecundityYear"), all.x=T)
+Plant_Surveys_by_Year %>% filter(PlantID=="8714")
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+Plant_Surveys_by_Year <- Plant_Surveys_by_Plant %>% #
+		group_by(FecundityYear, PlantID) %>%#
+		dplyr::summarise(#
+			Species = Species[1],#
+			Network = Network[1],#
+			Island = Island[1],#
+			RecruitmentMode = RecruitmentMode[1],#
+			#Date = min(Date),#
+			FruitPres_t = max(FruitPres_t, na.rm=T),#
+			Fruit_Flowers_t = max(Fruit_Flowers_t, na.rm=T),#
+			FruitFlowerPres_t = max(FruitFlowerPres_t, na.rm=T),#
+			Size_t = max(Size_t, na.rm=T),#
+			Height_t = max(Height_t, na.rm=T),#
+			Fruit_t = max(Fruit_t, na.rm=T),#
+			FruitPres_t = max(FruitPres_t, na.rm=T),#
+			CA_t = max(CA_t, na.rm=T),#
+			ME_t = max(ME_t, na.rm=T),#
+			DA_t = max(DA_t, na.rm=T),#
+			CH_t = max(CH_t, na.rm=T),#
+			Gerstaeckeria_t = max(Gerstaeckeria_t, na.rm=T),#
+			Unknown_Moth_t = max(Unknown_Moth_t, na.rm=T),#
+			Old_Moth_Evidence_t = max(Old_Moth_Evidence_t, na.rm=T),#
+			Moth_Evidence_t = max(Moth_Evidence_t, na.rm=T),#
+			Insect_Evidence_t = max(Insect_Evidence_t, na.rm=T),#
+			DeadbyEndofYear = max(Dead, na.rm=T),#
+			MissingbyEndofYear = max(Missing, na.rm=T),#
+			DeadMissingbyEndofYear = sum(#
+				c(DeadbyEndofYear, MissingbyEndofYear),#
+				na.rm=T#
+			)#
+		) %>% #
+		rowwise() %>%#
+		mutate(#
+			PrevFecundityYear = FecundityYear - 1,#
+			Alive = abs(DeadMissingbyEndofYear - 1)#
+		)#
+	# create PrevYear#
+	Plant_Surveys_by_Year %<>% createInsectPresDuringStudy#
+	# figure out spring/summer survey dates	#
+	temp <- Plant_Surveys_by_Plant %>%#
+		filter(#
+			month(Date) == 5 |#
+			month(Date) == 6 |#
+			month(Date) == 7 |#
+			month(Date) == 8 |#
+			month(Date) == 9,#
+		    !(#
+				is.na(Fruit_Flowers_t) |#
+				is.na(Size_t)#
+			)#
+		) %>%#
+		select(#
+			Date,#
+			PlantID,#
+			FecundityYear#
+		) %>%#
+		setnames("Date", "SurveyDate_SpringSummer")#
+	# merge#
+	#########################
+	# DO I LOSE PLANTS HERE?#
+	########################	#
+	Plant_Surveys_by_Year %<>% merge(temp, by=c("PlantID", "FecundityYear"), all.x=T)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+temp <- Plant_Surveys_by_Plant %>%#
+		filter(#
+			month(Date) == 5 |#
+			month(Date) == 6 |#
+			month(Date) == 7 |#
+			month(Date) == 8 |#
+			month(Date) == 9,#
+		    !(#
+				is.na(Fruit_Flowers_t) |#
+				is.na(Size_t)#
+			)#
+		) %>%#
+		dplyr::select(#
+			Date,#
+			PlantID,#
+			FecundityYear#
+		) %>%#
+		setnames("Date", "SurveyDate_SpringSummer")#
+	# merge#
+	#########################
+	# DO I LOSE PLANTS HERE?#
+	########################	#
+	Plant_Surveys_by_Year %<>% merge(temp, by=c("PlantID", "FecundityYear"), all.x=T)
+Plant_Surveys_by_Year %>% filter(PlantID=="8714")
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+Plant_Surveys_by_Year <- Plant_Surveys_by_Plant %>% #
+		group_by(FecundityYear, PlantID) %>%#
+		dplyr::summarise(#
+			Species = Species[1],#
+			Network = Network[1],#
+			Island = Island[1],#
+			RecruitmentMode = RecruitmentMode[1],#
+			#Date = min(Date),#
+			FruitPres_t = max(FruitPres_t, na.rm=T),#
+			Fruit_Flowers_t = max(Fruit_Flowers_t, na.rm=T),#
+			FruitFlowerPres_t = max(FruitFlowerPres_t, na.rm=T),#
+			Size_t = max(Size_t, na.rm=T),#
+			Height_t = max(Height_t, na.rm=T),#
+			Fruit_t = max(Fruit_t, na.rm=T),#
+			FruitPres_t = max(FruitPres_t, na.rm=T),#
+			CA_t = max(CA_t, na.rm=T),#
+			ME_t = max(ME_t, na.rm=T),#
+			DA_t = max(DA_t, na.rm=T),#
+			CH_t = max(CH_t, na.rm=T),#
+			Gerstaeckeria_t = max(Gerstaeckeria_t, na.rm=T),#
+			Unknown_Moth_t = max(Unknown_Moth_t, na.rm=T),#
+			Old_Moth_Evidence_t = max(Old_Moth_Evidence_t, na.rm=T),#
+			Moth_Evidence_t = max(Moth_Evidence_t, na.rm=T),#
+			Insect_Evidence_t = max(Insect_Evidence_t, na.rm=T),#
+			DeadbyEndofYear = max(Dead, na.rm=T),#
+			MissingbyEndofYear = max(Missing, na.rm=T),#
+			DeadMissingbyEndofYear = sum(#
+				c(DeadbyEndofYear, MissingbyEndofYear),#
+				na.rm=T#
+			)#
+		) %>% #
+		rowwise() %>%#
+		mutate(#
+			PrevFecundityYear = FecundityYear - 1,#
+			Alive = abs(DeadMissingbyEndofYear - 1)#
+		)#
+	# create PrevYear#
+	Plant_Surveys_by_Year %<>% createInsectPresDuringStudy#
+	# figure out spring/summer survey dates	#
+	temp <- Plant_Surveys_by_Plant %>%#
+		filter(#
+			month(Date) == 5 |#
+			month(Date) == 6 |#
+			month(Date) == 7 |#
+			month(Date) == 8 |#
+			month(Date) == 9,#
+		    !(#
+				is.na(Fruit_Flowers_t) |#
+				is.na(Size_t)#
+			)#
+		) %>%#
+		dplyr::select(#
+			Date,#
+			PlantID,#
+			FecundityYear#
+		) %>%#
+		setnames("Date", "SurveyDate_SpringSummer")#
+	# merge#
+	#########################
+	# DO I LOSE PLANTS HERE?#
+	########################	#
+	Plant_Surveys_by_Year %<>% merge(temp, by=c("PlantID", "FecundityYear"), all.x=T)
+Plant_Surveys_by_Year %>% filter(PlantID=="8714")
+Plant_Surveys_by_Year %<>%#
+	renamePatches #%>%#
+	#createMothOccupancytVariable %>%#
+	#createMothOccupancyVariable %>%#
+	#createDeadFactorVariable#
+# Second Plant ID#
+Plant_Surveys_by_Year %<>% mutate(#
+	PlantIDb = paste(#
+		Island,#
+		PlantID,#
+		sep=", "#
+	),#
+	PlantIDc = paste(#
+		Island,#
+		PlantID,#
+		sep="\n"#
+	)#
+)
+Plant_Surveys_by_Year %>% filter(PlantID=="8714")
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+Plant_Info_Analysis <- Plant_Info %>%#
+		group_by(PlantID) %>%#
+		dplyr::summarise(#
+			Island 				= Island[1],#
+			Network 			= Network[1],#
+			# make sure they are all the same species#
+			Species 			= Species[1],#
+			# fix/verify#
+			RecruitmentMode 	= paste(Unique(RecruitmentMode), collapse=","),#
+			Parent 				= Parent[1],#
+			# should figure out the longest span of time a plotplantid was alive#
+			DaysAlive 			= max(DaysAlive, na.rm=T),#
+			# plant may have died in one plot but is alive in another#
+			DeadMissing 		= min(ConfirmedDeadMissing),#
+			Dead 				= min(ConfirmedDead),#
+			Missing 			= min(ConfirmedMissing),#
+			First.Survey.Date.Alive 	= min(First.Survey.Date.Alive)#
+		) %>%#
+		filter(!is.na(Network))
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+temp1 <- Plant_Info_Analysis$PlantID#
+	Plant_Info_Analysis$DaysAlive %<>% as.numeric#
+	# Parent#
+	Plant_Info_Analysis %<>% mutate(#
+		Parent = replace(#
+			Parent,#
+			which(is.na(Parent)),#
+			"Unknown"#
+		)#
+	)	#
+	Plant_Info_Analysis$Parent %<>% NA_Function#
+	Plant_Info_Analysis$Parent[which(Plant_Info_Analysis$Parent=="")] <- NA#
+	# order#
+	Plant_Info_Analysis %<>% arrange(desc(Island), desc(Parent))
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+# summarise insect presence on plants and in networks#
+	network_summary <- Plant_Surveys_by_Year %>%#
+		group_by(Network) %>%#
+		dplyr::summarise(#
+			OldMothNetworkPres = max(Old_Moth_Evidence_t, na.rm=T),#
+			#InsectNetworkPres = max(Insect_t, na.rm=T),#
+			MENetworkPres = max(ME_t, na.rm=T),#
+			CANetworkPres = max(CA_t, na.rm=T),#
+			MothNetworkPres = max(Moth_Evidence_t, na.rm=T)#
+		)#
+	Plant_summary <- Plant_Surveys_by_Year %>%#
+		group_by(PlantID) %>%#
+		dplyr::summarise(#
+			OldMothPlantPres = max(Old_Moth_Evidence_t, na.rm=T),#
+			#InsectPlantPres = max(Insect_t, na.rm=T),#
+			MEPlantPres = max(ME_t, na.rm=T),#
+			CAPlantPres = max(CA_t, na.rm=T),#
+			MothPlantPres = max(Moth_Evidence_t, na.rm=T)#
+		)
+Plant_Surveys_by_Year %>% filter(PlantID=="8714")
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+# 2693 plants #
+	Plant_Info_Analysis %<>% #
+		merge(network_summary, by="Network") %>%#
+		merge(Plant_summary, by="PlantID")
+Plant_Info_Analysis %>% filter(PlantID=="8714")
+Plant_Surveys %>% filter(PlantID=="8714")
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+First_Size <- Plant_Surveys_by_Year %>%#
+		group_by(PlantID) %>%#
+		summarise(#
+			minFecundityYear = min(FecundityYear, na.rm=T),#
+			First_Size = #
+				min(Size_t[FecundityYear == min(FecundityYear)]),#
+			min.Size = min(Size_t, na.rm=T),#
+			max.Size = max(Size_t, na.rm=T)#
+		)#
+	Plant_Info_Analysis %<>% #
+		merge(First_Size, by=c("PlantID"))
+Plant_Info_Analysis %>% filter(PlantID=="8714")
+setwd('/Users/KSauby/Documents/Projects')
+setwd("./GTMNERRproc")#
+#setwd("./dataproc")#
+#setwd("./modresproc")#
+#setwd("./unmarked")#
+#setwd("./RPresence")#
+#devtools::test()#
+devtools::document()#
+devtools::install()
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
+# ---------------------------------------------------------- Shorten names#
+Plot_Info <- OccupancySRSWOR.Plot.Surveys.Info#
+Plot_Surveys <- OccupancySRSWOR.Plot.Surveys#
+Plant_Surveys <- Demographic.Plant.Surveys#
+# Plant_Surveys <- Plant.Surveys.processed.26jun17#
+Plant_Info <- Demographic.Plant.Info#
+# Plant_Info <- Plant.Info.processed.26jun17#
+Plant_Surveys_All <- Demographic.Plant.Surveys#
+Plant_Info_All <- Demographic.Plant.Info#
+D_Plot_Surveys <- Demographic.Plot.Surveys#
+Original_Plant_Data <- Original.Demographic.Plant.Data#
+Seed_Abundance <- Seed.Abundance#
+Seed_Abundance_Surveys <- Seed.Abundance.Surveys#
+GIS_data_updated <- GIS.data.updated
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
+D_Plot_Surveys$Date %<>% as.Date("%m/%d/%Y") # Demographic Plot Surveys#
+Plant_Surveys %<>% processPlantSurveys(Plant_Info) # Plant Surveys#
+Plant_Surveys %<>% fixInconsistentDeadMissingRecords#
+#
+placeholder <- Plant_Info#
+#
 Plant_Info %<>% processPlantInfo(Plot_Info) # Plant Info#
 Plant_Surveys %<>% mergePlantSurveysPlantInfo(Plant_Info) # Plant Surveys#
-Plant_Surveys %<>% processPlantSurveysafterMergewPlantInfo %>%#
-	filter(InDemographicStudy=="yes")
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+Plant_Surveys %<>% processPlantSurveysafterMergewPlantInfo#
+#
+# saved here#
+# write.csv(Plant_Surveys, "../data/Plant_Surveys_processed_26jun17.csv")#
+# write.csv(Plant_Info, "../data/Plant_Info_processed_26jun17.csv")#
+Plant_Surveys$Date %<>% as.Date#
+Plant_Surveys_by_Plant <- Plant_Surveys %>% #
+	processSurveysMergedbyPlant#
+Plant_Surveys_by_Plant %>% filter(AllSurveyed==F) %>% write.csv("incompletesurveys.csv")#
+#
+Plant_Surveys %>% filter(N.PlotPlantIDs > 1) %>% filter(Dead==1 | Missing == 1) %>% write.csv("deadmissing.csv")#
+#
 h <- function(w) if( any( grepl( "no non-missing arguments to max", w) ) ) invokeRestart( "muffleWarning" )#
-	# restrict to plants that span multiple plots#
-	temp_A <- filter(Plant_Surveys, N.PlotPlantIDs > 1)#
-	Z = list()
-i=1
-j=1
+Plant_Surveys_by_Plant <- withCallingHandlers(#
+	createPlantInsectPresence(Plant_Surveys_by_Plant),#
+	warning = h#
+)#
+# create Fecundity and RGR dataset#
+Plant_Surveys_by_Year <- createPlantSurveysbyYear(Plant_Surveys_by_Plant) %>%#
+	renamePatches #%>%#
+	#createMothOccupancytVariable %>%#
+	#createMothOccupancyVariable %>%#
+	#createDeadFactorVariable#
+# Second Plant ID#
+Plant_Surveys_by_Year %<>% mutate(#
+	PlantIDb = paste(#
+		Island,#
+		PlantID,#
+		sep=", "#
+	),#
+	PlantIDc = paste(#
+		Island,#
+		PlantID,#
+		sep="\n"#
+	)#
+)
+Plant_Surveys_by_Year %>% filter(PlantID=="8714")
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
+Plant_Info_Analysis <- createPlantInfobyPlant(Plant_Info, Plant_Surveys_by_Year)# %>%#
+	# createMothOccupancyVariable#
+Plant_Info_stricta <- Plant_Info_Analysis %>% filter(Species=="stricta")#
+Plant_Info_pusilla <- Plant_Info_Analysis %>% filter(Species=="pusilla")#
+write.csv(Plant_Info_Analysis, "../data/Plant_Info_Analysis.csv")#
+write.csv(Plant_Info_stricta, "../data/Plant_Info_Analysis_stricta.csv")#
+write.csv(Plant_Info_pusilla, "../data/Plant_Info_Analysis_pusilla.csv")#
+# --------------------------------------------------------------------------- ##
+# Survival#
+# --------------------------------------------------------------------------- ##
+#
+# WHY ARE PLANTS RECORDED AS 0 DAYS ALIVE DURING SURVEYS OTHER THAN THE LAST SURVEY?#
+temp <- Plant_Info_Analysis %>% #
+	filter(#
+		DaysAlive==0,#
+		!(#
+			month(First.Survey.Date.Alive) == 5 |#
+			month(First.Survey.Date.Alive) == 6 |#
+			month(First.Survey.Date.Alive) == 7 |#
+			month(First.Survey.Date.Alive) == 8 & #
+			year(First.Survey.Date.Alive) == 2015#
+		)#
+	)#
+if (dim(temp)[1] > 0) {#
+	write.csv(temp,"PlantsAlive0Days.csv")#
+	warning(paste(#
+		"Plants that first recruited before the last survey are marked as alive 0 days. Records written to csv."#
+	))#
+}	#
+#
+Plant_Info_Survival <- Plant_Info_Analysis %>% #
+	filter(DaysAlive!=0) %>%#
+	dplyr::select(-c(First_Size, Parent)) %>% #
+	.[complete.cases(.),] %>%#
+	renameSpecies#
+Plant_Info_Survival %<>%#
+	mutate(#
+		HabitatType = NA,#
+		HabitatType = replace(#
+			HabitatType,#
+			which(#
+				Island=="Roadway1" |#
+				Island=="Roadway2"#
+			),#
+			"Barrier Island Habitat"#
+		),#
+		HabitatType = replace(#
+			HabitatType,#
+			which(#
+				Island!="Roadway1" &#
+				Island!="Roadway2"#
+			),#
+			"Intracoastal Waterway Island"#
+		)#
+	)#
+# Plant_Info_Survival %<>% #
+	#renamePatches %>%#
+	#createDeadFactorVariable#
+Plant_Info_Survival_stricta <- Plant_Info_Survival %>% #
+	filter(Species=="Opuntia stricta") # %>% 	dplyr::select(-c(MothOccupancy, IslandFullNames, DeadFactor))#
+Plant_Info_Survival_pusilla <- Plant_Info_Survival %>% #
+	filter(Species=="Opuntia pusilla") # %>% 	dplyr::select(-c(MothOccupancy, IslandFullNames, DeadFactor))#
+write.csv(Plant_Info_Survival_stricta, "../data/Plant_Info_Survival_stricta.csv")#
+write.csv(Plant_Info_Survival_pusilla, "../data/Plant_Info_Survival_pusilla.csv")
+Plant_Surveys_by_Year %>% filter(PlantID=="8714")
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
+Plant_Surveys_by_Year %<>% calculateClonalReproduction(Plant_Surveys_by_Plant, #
+	Plant_Info_Analysis)
+setwd('/Users/KSauby/Documents/Projects')
+setwd("./GTMNERRproc")#
+#setwd("./dataproc")#
+#setwd("./modresproc")#
+#setwd("./unmarked")#
+#setwd("./RPresence")#
+#devtools::test()#
+devtools::document()#
+devtools::install()
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
+Plant_Surveys_by_Year %<>% calculateClonalReproduction(Plant_Surveys_by_Plant, #
+	Plant_Info_Analysis)
+str(Plant_Surveys_by_Year)
 setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-date_window=48
+A <- Plant_Surveys_by_Year %>% #
+		#filter(Species=="Opuntia stricta") %>%#
+		select(PlantID, SurveyDate_SpringSummer, Size_t) %>% #
+		setnames("SurveyDate_SpringSummer", "Parent.Obs.Date") %>%#
+		setnames("Size_t", "Parent.Size_t")
 setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-# pull all records for this PlantID from the plant surveys#
-		L = filter(temp_A, PlantID==unique(temp_A$PlantID)[i])#
-		# group by window of dates#
-		if (max(L$Date) - min(L$Date) > date_window) {#
-			L.list <- L %>%#
-				split(#
-				.,#
-				cut(#
-					L$Date,#
-					seq(#
-						min(L$Date), #
-						max(L$Date) + date_window, #
-						by = date_window#
-					)#
-				)#
-			)#
-			L.list %<>% .[sapply(., function(x) dim(x)[1]) > 0]#
-			L.list %<>% lapply(., function(x) split(x, x$DemographicSurvey))#
-			L.list %<>% unlist(recursive=F)#
-			list.names <- gsub("\\..*","", names(L.list))#
-			demography.surveys <- gsub("^.*\\.","", names(L.list))#
-			Z[[i]] 	<- data.frame(#
-				Date = list.names,#
-				DemographicSurvey = demography.surveys#
-			)#
-		} else {#
-			L.list <- list(L)#
-			names(L.list) <- max(L.list[[1]]$Date)#
-			Z[[i]] <- data.frame(Date = max(L.list[[1]]$Date))#
-		}#
-		Z[[i]][, "PlantID"] 			<- L$PlantID[1]#
-		Z[[i]][, "ClusterID"] 			<- L$ClusterID[1]#
-		Z[[i]][, "Network"] 			<- L$Network[1]#
-		Z[[i]][, "Island"] 				<- L$Island[1]#
-		Z[[i]][, "Species"] 			<- L$Species[1]#
-		Z[[i]][, "Easting"] 			<- L$Easting[1]#
-		Z[[i]][, "Northing"] 			<- L$Northing[1]#
-		Z[[i]][, "RecruitmentMode"]		<- L$RecruitmentMode %>%#
-			.[which(. != "NA")] %>%#
-			.[which(!is.na(.))] %>%#
-			unique(.) %>%#
-			paste(collapse="")
+A <- Plant_Surveys_by_Year %>% #
+		#filter(Species=="Opuntia stricta") %>%#
+		dplyr::select(PlantID, SurveyDate_SpringSummer, Size_t) %>% #
+		setnames("SurveyDate_SpringSummer", "Parent.Obs.Date") %>%#
+		setnames("Size_t", "Parent.Size_t")#
+	# prep offspring survey data#
+	# use this dataset to figure out first size of offspring#
+	B <- Plant_Surveys_by_Plant %>% #
+		#filter(Species=="Opuntia stricta") %>%#
+		dplyr::select(PlantID, Date, Size_t) %>% #
+		setnames("Date", "Offspring.Obs.Date") %>%#
+		setnames("Size_t", "Offspring.Size_t")
 setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-K <- eval(parse(text=paste(#
-				"L.list$", #
-				'"', #
-				names(L.list)[j], #
-				'"', #
-				sep=""#
-			)))#
-			# save range of dates used to create whole plant survey#
-			if (length(unique(K$Date)) > 1) {#
-				Z[[i]][j, "RangeofDates"] <- paste(#
-					min(K$Date), #
-					" - ", #
-					max(K$Date),#
-					sep=""#
-				)#
-				Z[[i]][j, "SizeofDateRange"] <- max(K$Date) - min(K$Date)#
-				Z[[i]][j, "maxDate"] <- as.character(max(K$Date))#
-			} else {#
-				Z[[i]][j, "RangeofDates"] <- unique(K$Date)#
-				Z[[i]][j, "SizeofDateRange"] <- 0#
-				Z[[i]][j, "maxDate"] <- as.character(max(K$Date))#
-			}#
-			# pull all plant survey records for this date from plant surveys within the window of dates, excluding dead/missing#
-			M <- K %>% filter(Dead != 1, Missing != 1)
-?add_count
+C <- Plant_Info_Analysis %>%#
+		merge(#
+			A, #
+			by.x="Parent", #
+			by.y="PlantID", #
+			all=T#
+		) %>%#
+		# merge first offspring size#
+		filter(!is.na(PlantID)) %>%#
+		merge(#
+			B,#
+			by="PlantID", #
+			all.x=T#
+			) %>%#
+			filter(!is.na(Parent))
 setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-temp <- M %>% filter(SizeFruitMeasured > 1) %>%#
-				add_count(PlotPlantID)
+D <- C %>%#
+		group_by(PlantID) %>%#
+		# remove NAs#
+		filter(!is.na(Parent.Size_t)) %>%#
+		filter(!is.na(Offspring.Size_t)) %>%#
+		filter(!is.na(Parent.Obs.Date)) %>%#
+		# remove Parent survey dates that are after offspring was observed#
+		filter(#
+			Parent.Obs.Date <= First.Survey.Date.Alive#
+		) %>%#
+		# find Parent observation date (WITH a size obs) closest to (or equal to) date that the offspring was observed#
+		filter(Parent.Obs.Date==max(Parent.Obs.Date)) %>%#
+		# find Offspring observation date (WITH a size obs) closest to (or equal to) date it was first observed#
+		filter(Offspring.Obs.Date==min(Offspring.Obs.Date)) %>%#
+		setnames("First.Survey.Date.Alive", "Date")
 setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-temp <- M %>% filter(SizeFruitMeasured > 1) %>%#
-				dplyr::add_count(PlotPlantID)
+# figure out parent size#
+	parent_size <- D %>% #
+		group_by(Parent, FecundityYear, Parent.Size_t, Offspring.Size_t) %>%#
+		# still need to count number of clones per size class#
+		dplyr::summarise(n.clones=length(unique(PlantID))) %>%#
+		group_by(Parent, FecundityYear, Parent.Size_t, Offspring.Size_t) %>%#
+		dplyr::summarise(#
+			n.clones = n.clones[1],#
+			n.offspring.segments = Offspring.Size_t * n.clones#
+			) %>%#
+		as.data.frame %>% #
+		group_by(Parent, FecundityYear) %>%#
+		# calculate Parent size as observed parent size plus all offspring; this ensures that a parent cannot have size equal to or less than offspring#
+		mutate(Parent_Size_t = Parent.Size_t[1] + sum(n.offspring.segments)) %>%#
+		ungroup %>%#
+		dplyr::select(Parent, FecundityYear, Parent_Size_t) %>%#
+		unique
+str(D)
+str(as.data.frame(D))
+str(Plant_Surveys_by_Year)
+?group_by
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+parent_size <- D %>% #
+		group_by(Parent, FecundityYear, Parent.Size_t, Offspring.Size_t) %>%#
+		# still need to count number of clones per size class#
+		dplyr::summarise(n.clones=length(unique(PlantID)))
+str(D)
+str(Plant_Info_Analysis)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+A <- Plant_Surveys_by_Year %>% #
+		#filter(Species=="Opuntia stricta") %>%#
+		dplyr::select(#
+			PlantID, #
+			FecundityYear, #
+			SurveyDate_SpringSummer, #
+			Size_t#
+		) %>% #
+		setnames("SurveyDate_SpringSummer", "Parent.Obs.Date") %>%#
+		setnames("Size_t", "Parent.Size_t") %>%#
+		setnames("FecundityYear", "Parent.FecundityYear")
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+B <- Plant_Surveys_by_Plant %>% #
+		#filter(Species=="Opuntia stricta") %>%#
+		dplyr::select(PlantID, Date, Size_t) %>% #
+		setnames("Date", "Offspring.Obs.Date") %>%#
+		setnames("Size_t", "Offspring.Size_t")
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+C <- Plant_Info_Analysis %>%#
+		merge(#
+			A, #
+			by.x="Parent", #
+			by.y="PlantID", #
+			all=T#
+		) %>%#
+		# merge first offspring size#
+		filter(!is.na(PlantID)) %>%#
+		merge(#
+			B,#
+			by="PlantID", #
+			all.x=T#
+			) %>%#
+			filter(!is.na(Parent))
+head(C)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+A <- Plant_Surveys_by_Year %>% #
+		#filter(Species=="Opuntia stricta") %>%#
+		dplyr::select(#
+			PlantID, #
+			FecundityYear, #
+			SurveyDate_SpringSummer, #
+			Size_t#
+		) %>% #
+		setnames("SurveyDate_SpringSummer", "Parent.Obs.Date") %>%#
+		setnames("Size_t", "Parent.Size_t") %>%#
+		setnames("FecundityYear", "Parent.FecundityYear")
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+A <- Plant_Surveys_by_Year %>% #
+		#filter(Species=="Opuntia stricta") %>%#
+		dplyr::select(#
+			PlantID, #
+			FecundityYear, #
+			SurveyDate_SpringSummer, #
+			Size_t#
+		) %>% #
+		setnames("SurveyDate_SpringSummer", "Parent.Obs.Date") %>%#
+		setnames("Size_t", "Parent.Size_t") %>%#
+		setnames("FecundityYear", "Parent.FecundityYear") %>%#
+		setnames("PlantID", "Parent.ID")
+head(A)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+B <- Plant_Surveys_by_Plant %>% #
+		#filter(Species=="Opuntia stricta") %>%#
+		dplyr::select(PlantID, Date, Size_t) %>% #
+		setnames("Date", "Offspring.Obs.Date") %>%#
+		setnames("Size_t", "Offspring.Size_t") %>%#
+		setnames("PlantID", "Offspring.ID")
+head(B)
+str(Plant_Info_Analysis)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+A <- Plant_Surveys_by_Year %>% #
+		#filter(Species=="Opuntia stricta") %>%#
+		dplyr::select(#
+			PlantID, #
+			FecundityYear, #
+			SurveyDate_SpringSummer, #
+			Size_t#
+		) %>% #
+		setnames("SurveyDate_SpringSummer", "Parent.Obs.Date") %>%#
+		setnames("Size_t", "Parent.Size_t") %>%#
+		setnames("FecundityYear", "Parent.FecundityYear") %>%#
+		setnames("PlantID", "Parent.ID")#
+	# prep offspring survey data#
+	# use this dataset to figure out first size of offspring#
+	B <- Plant_Surveys_by_Plant %>% #
+		#filter(Species=="Opuntia stricta") %>%#
+		dplyr::select(PlantID, Date, Size_t) %>% #
+		setnames("Date", "Offspring.Obs.Date") %>%#
+		setnames("Size_t", "Offspring.Size_t") %>%#
+		setnames("PlantID", "Offspring.ID")#
+	# merge parent data (from A) with offspring info (from Plant_Info_Analysis)#
+	C <- Plant_Info_Analysis %>%#
+		setnames("PlantID", "Offspring.ID") %>%#
+		setnames("Parent", "Parent.ID") %>%#
+		dplyr::select(Parent.ID, Offspring.ID, First_Size) %>%#
+		merge(#
+			A, #
+			by = "Parent.ID", #
+			all=T#
+		)
+head(C)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+C <- Plant_Info_Analysis %>%#
+		setnames("PlantID", "Offspring.ID") %>%#
+		setnames("Parent", "Parent.ID") %>%#
+		dplyr::select(Parent.ID, Offspring.ID, First_Size) %>%#
+		merge(#
+			A, #
+			by = "Parent.ID", #
+			all=T#
+		) %>%#
+		# merge first offspring size#
+		filter(!is.na(PlantID)) %>%#
+		merge(#
+			B,#
+			by="Offspring.ID", #
+			all.x=T#
+			) %>%#
+			filter(!is.na(Parent))
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+A <- Plant_Surveys_by_Year %>% #
+		#filter(Species=="Opuntia stricta") %>%#
+		dplyr::select(#
+			PlantID, #
+			FecundityYear, #
+			SurveyDate_SpringSummer, #
+			Size_t#
+		) %>% #
+		setnames("SurveyDate_SpringSummer", "Parent.Obs.Date") %>%#
+		setnames("Size_t", "Parent.Size_t") %>%#
+		setnames("FecundityYear", "Parent.FecundityYear") %>%#
+		setnames("PlantID", "Parent.ID")#
+	# prep offspring survey data#
+	# use this dataset to figure out first size of offspring#
+	B <- Plant_Surveys_by_Plant %>% #
+		#filter(Species=="Opuntia stricta") %>%#
+		dplyr::select(PlantID, Date, Size_t) %>% #
+		setnames("Date", "Offspring.Obs.Date") %>%#
+		setnames("Size_t", "Offspring.Size_t") %>%#
+		setnames("PlantID", "Offspring.ID")#
+	# merge parent data (from A) with offspring info (from Plant_Info_Analysis)#
+	C <- Plant_Info_Analysis %>%#
+		setnames("PlantID", "Offspring.ID") %>%#
+		setnames("Parent", "Parent.ID") %>%#
+		dplyr::select(Parent.ID, Offspring.ID, First_Size) %>%#
+		merge(#
+			A, #
+			by = "Parent.ID", #
+			all=T#
+		) %>%#
+		# merge first offspring size#
+		filter(!is.na(PlantID)) %>%#
+		merge(#
+			B,#
+			by="Offspring.ID", #
+			all.x=T#
+			) %>%#
+			filter(!is.na(Parent))
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+A <- Plant_Surveys_by_Year %>% #
+		#filter(Species=="Opuntia stricta") %>%#
+		dplyr::select(#
+			PlantID, #
+			FecundityYear, #
+			SurveyDate_SpringSummer, #
+			Size_t#
+		) %>% #
+		setnames("SurveyDate_SpringSummer", "Parent.Obs.Date") %>%#
+		setnames("Size_t", "Parent.Size_t") %>%#
+		setnames("FecundityYear", "Parent.FecundityYear") %>%#
+		setnames("PlantID", "Parent.ID")#
+	# prep offspring survey data#
+	# use this dataset to figure out first size of offspring#
+	B <- Plant_Surveys_by_Plant %>% #
+		#filter(Species=="Opuntia stricta") %>%#
+		dplyr::select(PlantID, Date, Size_t) %>% #
+		setnames("Date", "Offspring.Obs.Date") %>%#
+		setnames("Size_t", "Offspring.Size_t") %>%#
+		setnames("PlantID", "Offspring.ID")#
+	# merge parent data (from A) with offspring info (from Plant_Info_Analysis)#
+	C <- Plant_Info_Analysis %>%#
+		setnames("PlantID", "Offspring.ID") %>%#
+		setnames("Parent", "Parent.ID") %>%#
+		dplyr::select(Parent.ID, Offspring.ID, First_Size) %>%#
+		merge(#
+			A, #
+			by = "Parent.ID", #
+			all=T#
+		) %>%#
+		# merge first offspring size#
+		filter(!is.na(Offspring.ID)) %>%#
+		merge(#
+			B,#
+			by="Offspring.ID", #
+			all.x=T#
+			)
+head(Plant_Surveys_by_Plant)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+A <- Plant_Surveys_by_Year %>% #
+		#filter(Species=="Opuntia stricta") %>%#
+		dplyr::select(#
+			PlantID, #
+			FecundityYear, #
+			SurveyDate_SpringSummer, #
+			Size_t#
+		) %>% #
+		setnames("SurveyDate_SpringSummer", "Parent.Obs.Date") %>%#
+		setnames("Size_t", "Parent.Size_t") %>%#
+		setnames("FecundityYear", "Parent.FecundityYear") %>%#
+		setnames("PlantID", "Parent.ID")#
+	# prep offspring survey data#
+	# use this dataset to figure out first size of offspring#
+	B <- Plant_Surveys_by_Plant %>% #
+		#filter(Species=="Opuntia stricta") %>%#
+		dplyr::select(PlantID, Date, Size_t) %>% #
+		setnames("Date", "Offspring.Obs.Date") %>%#
+		setnames("Size_t", "Offspring.Size_t") %>%#
+		setnames("PlantID", "Offspring.ID")
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+C <- Plant_Info_Analysis %>%#
+		setnames("PlantID", "Offspring.ID") %>%#
+		setnames("Parent", "Parent.ID") %>%#
+		dplyr::select(Parent.ID, Offspring.ID, First_Size) %>%#
+		merge(#
+			A, #
+			by = "Parent.ID", #
+			all=T#
+		)
+str(Plant_Info_Analysis)
+C <- Plant_Info_Analysis %>%#
+		#setnames("PlantID", "Offspring.ID") %>%#
+		#setnames("Parent", "Parent.ID") %>%#
+		dplyr::select(Parent.ID, Offspring.ID, First_Size) %>%#
+		merge(#
+			A, #
+			by = "Parent.ID", #
+			all=T#
+		) %>%#
+		# merge first offspring size#
+		filter(!is.na(Offspring.ID)) %>%#
+		merge(#
+			B,#
+			by="Offspring.ID", #
+			all.x=T#
+			) %>%#
+			filter(!is.na(Parent))
+C <- Plant_Info_Analysis %>%#
+		#setnames("PlantID", "Offspring.ID") %>%#
+		#setnames("Parent", "Parent.ID") %>%#
+		dplyr::select(Parent.ID, Offspring.ID, First_Size) %>%#
+		merge(#
+			A, #
+			by = "Parent.ID", #
+			all=T#
+		) %>%#
+		# merge first offspring size#
+		filter(!is.na(Offspring.ID)) %>%#
+		merge(#
+			B,#
+			by="Offspring.ID", #
+			all.x=T#
+			) %>%#
+			filter(!is.na(Parent.ID))
+head(C)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+D <- C %>%#
+		group_by(PlantID) %>%#
+		# remove NAs#
+		filter(!is.na(Parent.Size_t)) %>%#
+		filter(!is.na(Offspring.Size_t)) %>%#
+		filter(!is.na(Parent.Obs.Date)) %>%#
+		# remove Parent survey dates that are after offspring was observed#
+		filter(#
+			Parent.Obs.Date <= First.Survey.Date.Alive#
+		) %>%#
+		# find Parent observation date (WITH a size obs) closest to (or equal to) date that the offspring was observed#
+		filter(Parent.Obs.Date==max(Parent.Obs.Date)) %>%#
+		# find Offspring observation date (WITH a size obs) closest to (or equal to) date it was first observed#
+		filter(Offspring.Obs.Date==min(Offspring.Obs.Date)) %>%#
+		setnames("First.Survey.Date.Alive", "Date")
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+D <- C %>%#
+		group_by(Parent.ID) %>%#
+		# remove NAs#
+		filter(!is.na(Parent.Size_t)) %>%#
+		filter(!is.na(Offspring.Size_t)) %>%#
+		filter(!is.na(Parent.Obs.Date)) %>%#
+		# remove Parent survey dates that are after offspring was observed#
+		filter(#
+			Parent.Obs.Date <= First.Survey.Date.Alive#
+		) %>%#
+		# find Parent observation date (WITH a size obs) closest to (or equal to) date that the offspring was observed#
+		filter(Parent.Obs.Date==max(Parent.Obs.Date)) %>%#
+		# find Offspring observation date (WITH a size obs) closest to (or equal to) date it was first observed#
+		filter(Offspring.Obs.Date==min(Offspring.Obs.Date)) %>%#
+		setnames("First.Survey.Date.Alive", "Date")
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+A <- Plant_Surveys_by_Year %>% #
+		#filter(Species=="Opuntia stricta") %>%#
+		dplyr::select(#
+			PlantID, #
+			FecundityYear, #
+			SurveyDate_SpringSummer, #
+			Size_t#
+		) %>% #
+		setnames("SurveyDate_SpringSummer", "Parent.Obs.Date") %>%#
+		setnames("Size_t", "Parent.Size_t") %>%#
+		setnames("FecundityYear", "Parent.FecundityYear") %>%#
+		setnames("PlantID", "Parent.ID")
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+B <- Plant_Surveys_by_Plant %>% #
+		#filter(Species=="Opuntia stricta") %>%#
+		dplyr::select(PlantID, Date, Size_t) %>% #
+		setnames("Date", "Offspring.Obs.Date") %>%#
+		setnames("Size_t", "Offspring.Size_t") %>%#
+		setnames("PlantID", "Offspring.ID")
+C <- Plant_Info_Analysis %>%#
+	#	setnames("PlantID", "Offspring.ID") %>%#
+	#	setnames("Parent", "Parent.ID") %>%#
+		dplyr::select(#
+			Parent.ID, #
+			Offspring.ID, #
+			First_Size,#
+			First.Survey.Date.Alive#
+		) %>%#
+		merge(#
+			A, #
+			by = "Parent.ID", #
+			all=T#
+		) %>%#
+		# merge first offspring size#
+		filter(!is.na(Offspring.ID)) %>%#
+		merge(#
+			B,#
+			by="Offspring.ID", #
+			all.x=T#
+			) %>%#
+			filter(!is.na(Parent))
+C <- Plant_Info_Analysis %>%#
+	#	setnames("PlantID", "Offspring.ID") %>%#
+	#	setnames("Parent", "Parent.ID") %>%#
+		dplyr::select(#
+			Parent.ID, #
+			Offspring.ID, #
+			First_Size,#
+			First.Survey.Date.Alive#
+		) %>%#
+		merge(#
+			A, #
+			by = "Parent.ID", #
+			all=T#
+		) %>%#
+		# merge first offspring size#
+		filter(!is.na(Offspring.ID)) %>%#
+		merge(#
+			B,#
+			by="Offspring.ID", #
+			all.x=T#
+			) %>%#
+			filter(!is.na(Parent.ID))
+str(C)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+D <- C %>%#
+		group_by(Parent.ID) %>%#
+		# remove NAs#
+		filter(!is.na(Parent.Size_t)) %>%#
+		filter(!is.na(Offspring.Size_t)) %>%#
+		filter(!is.na(Parent.Obs.Date)) %>%#
+		# remove Parent survey dates that are after offspring was observed#
+		filter(#
+			Parent.Obs.Date <= First.Survey.Date.Alive#
+		) %>%#
+		# find Parent observation date (WITH a size obs) closest to (or equal to) date that the offspring was observed#
+		filter(Parent.Obs.Date==max(Parent.Obs.Date)) %>%#
+		# find Offspring observation date (WITH a size obs) closest to (or equal to) date it was first observed#
+		filter(Offspring.Obs.Date==min(Offspring.Obs.Date)) %>%#
+		setnames("First.Survey.Date.Alive", "Date")
+head(D)
+head(D) %>% as.data.frame
+?tally
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+parent_size <- D %>% #
+		# still need to count number of clones per size class#
+		dplyr::add_count(#
+			Parent, #
+			Parent.FecundityYear, #
+			Parent.Size_t, #
+			Offspring.Size_t#
+		)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+parent_size <- D %>% #
+		# still need to count number of clones per size class#
+		dplyr::add_count(#
+			Parent.ID, #
+			Parent.FecundityYear, #
+			Parent.Size_t, #
+			Offspring.Size_t#
+		)
+head(parent_size)
+head(parent_size) %>% as.data.frame
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+parent_size <- D %>% #
+		# still need to count number of clones per size class#
+		dplyr::add_count(#
+			Parent.ID, #
+			Parent.FecundityYear, #
+			Parent.Size_t, # why am I grouping by this?#
+			Offspring.Size_t#
+		) %>%#
+		group_by(#
+			Parent.ID, #
+			Parent.FecundityYear, #
+			Parent.Size_t, #
+			Offspring.Size_t#
+		) %>%#
+		dplyr::summarise(#
+			n.clones = n[1],#
+			n.offspring.segments = Offspring.Size_t * n.clones#
+			) %>%#
+		as.data.frame %>% #
+		group_by(Parent, FecundityYear) %>%#
+		# calculate Parent size as observed parent size plus all offspring; this ensures that a parent cannot have size equal to or less than offspring#
+		mutate(Parent_Size_t = Parent.Size_t[1] + sum(n.offspring.segments)) %>%#
+		ungroup %>%#
+		dplyr::select(Parent.ID, Parent.FecundityYear, Parent_Size_t) %>%#
+		unique
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+parent_size <- D %>% #
+		# still need to count number of clones per size class#
+		dplyr::add_count(#
+			Parent.ID, #
+			Parent.FecundityYear, #
+			Parent.Size_t, # why am I grouping by this?#
+			Offspring.Size_t#
+		) %>%#
+		group_by(#
+			Parent.ID, #
+			Parent.FecundityYear, #
+			Parent.Size_t, #
+			Offspring.Size_t#
+		) %>%#
+		dplyr::summarise(#
+			n.clones = n[1],#
+			n.offspring.segments = Offspring.Size_t * n.clones#
+			)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+parent_size <- D %>% #
+		# still need to count number of clones per size class#
+		dplyr::add_count(#
+			Parent.ID, #
+			Parent.FecundityYear, #
+			Parent.Size_t, # why am I grouping by this?#
+			Offspring.Size_t#
+		) %>%#
+		group_by(#
+			Parent.ID, #
+			Parent.FecundityYear, #
+			Parent.Size_t, #
+			Offspring.Size_t#
+		) %>%#
+		dplyr::summarise(#
+			n.clones = n[1],#
+			n.offspring.segments = Offspring.Size_t * n#
+		)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+parent_size <- D %>% #
+		# still need to count number of clones per size class#
+		dplyr::add_count(#
+			Parent.ID, #
+			Parent.FecundityYear, #
+			Parent.Size_t, # why am I grouping by this?#
+			Offspring.Size_t#
+		)
+head(parent_size)
+parent_size %>% arrange(Parent.ID) %>% tail
+parent_size %>% arrange(Parent.ID) %>% head
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+parent_size <- D %>% #
+		# still need to count number of clones per size class#
+		dplyr::add_count(#
+			Parent.ID, #
+			Parent.FecundityYear, #
+			# Parent.Size_t, # why am I grouping by this?#
+			Offspring.Size_t#
+		) %>%#
+		group_by(#
+			Parent.ID, #
+			Parent.FecundityYear, #
+			# Parent.Size_t, #
+			Offspring.Size_t#
+		) %>%#
+		dplyr::summarise(#
+			n.clones = n[1],#
+			n.offspring.segments = Offspring.Size_t * n#
+		)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+parent_size <- D %>% #
+		# still need to count number of clones per size class#
+		dplyr::add_count(#
+			Parent.ID, #
+			Parent.FecundityYear, #
+			# Parent.Size_t, # why am I grouping by this?#
+			Offspring.Size_t#
+		) %>%#
+		group_by(#
+			Parent.ID, #
+			Parent.FecundityYear, #
+			# Parent.Size_t, #
+			Offspring.Size_t#
+		) %>%#
+		dplyr::summarise(#
+			n.clones = n[1],#
+			n.offspring.segments = sum(Offspring.Size_t * n)#
+		)
+head(parent_size)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+parent_size <- D %>% #
+		# still need to count number of clones per size class#
+		dplyr::add_count(#
+			Parent.ID, #
+			Parent.FecundityYear, #
+			# Parent.Size_t, # why am I grouping by this?#
+			Offspring.Size_t#
+		) %>%#
+		group_by(#
+			Parent.ID, #
+			Parent.FecundityYear, #
+			# Parent.Size_t, #
+			Offspring.Size_t#
+		) %>%#
+		dplyr::summarise(#
+			n.clones = n[1],#
+			n.offspring.segments = sum(Offspring.Size_t * n)#
+		) %>%#
+		as.data.frame %>% #
+		group_by(Parent, FecundityYear) %>%#
+		# calculate Parent size as observed parent size plus all offspring; this ensures that a parent cannot have size equal to or less than offspring#
+		mutate(Parent_Size_t = Parent.Size_t[1] + sum(n.offspring.segments))
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+parent_size <- D %>% #
+		# still need to count number of clones per size class#
+		dplyr::add_count(#
+			Parent.ID, #
+			Parent.FecundityYear, #
+			# Parent.Size_t, # why am I grouping by this?#
+			Offspring.Size_t#
+		) %>%#
+		group_by(#
+			Parent.ID, #
+			Parent.FecundityYear, #
+			# Parent.Size_t, #
+			Offspring.Size_t#
+		) %>%#
+		dplyr::summarise(#
+			n.clones = n[1],#
+			n.offspring.segments = sum(Offspring.Size_t * n)#
+		) %>%#
+		as.data.frame %>% #
+		group_by(Parent.ID, Parent.FecundityYear) %>%#
+		# calculate Parent size as observed parent size plus all offspring; this ensures that a parent cannot have size equal to or less than offspring#
+		mutate(Parent_Size_t = Parent.Size_t[1] + sum(n.offspring.segments))
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+parent_size <- D %>% #
+		# still need to count number of clones per size class#
+		dplyr::add_count(#
+			Parent.ID, #
+			Parent.FecundityYear, #
+			Parent.Size_t, # why am I grouping by this?#
+			Offspring.Size_t#
+		) %>%#
+		group_by(#
+			Parent.ID, #
+			Parent.FecundityYear, #
+			Parent.Size_t, #
+			Offspring.Size_t#
+		) %>%#
+		dplyr::summarise(#
+			n.clones = n[1],#
+			n.offspring.segments = sum(Offspring.Size_t * n)#
+		) %>%#
+		as.data.frame %>% #
+		group_by(Parent.ID, Parent.FecundityYear) %>%#
+		# calculate Parent size as observed parent size plus all offspring; this ensures that a parent cannot have size equal to or less than offspring#
+		mutate(Parent_Size_t = Parent.Size_t[1] + sum(n.offspring.segments)) %>%#
+		ungroup
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+parent_size <- D %>% #
+		group_by(Parent.ID, Parent.FecundityYear) %>%#
+		# calculate Parent size as observed parent size plus all offspring; this ensures that a parent cannot have size equal to or less than offspring#
+		mutate(#
+			Parent_Size_t = Parent.Size_t[1] + sum(Offspring.Size_t)#
+		) %>%#
+		ungroup
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+parent_size <- D %>% #
+		group_by(Parent.ID, Parent.FecundityYear) %>%#
+		# calculate Parent size as observed parent size plus all offspring; this ensures that a parent cannot have size equal to or less than offspring#
+		mutate(#
+			Parent_Size_t = Parent.Size_t[1] + sum(Offspring.Size_t)#
+		) %>%#
+		ungroup %>%#
+		dplyr::add_count(Parent.ID, Parent.FecundityYear) %>%#
+		filter(n > 1)
+dim(parent_size)
+parent_size <- D %>% #
+		group_by(Parent.ID, Parent.FecundityYear) %>%#
+		# calculate Parent size as observed parent size plus all offspring; this ensures that a parent cannot have size equal to or less than offspring#
+		mutate(#
+			Parent_Size_t = Parent.Size_t[1] + sum(Offspring.Size_t)#
+		) %>%#
+		ungroup %>%#
+		dplyr::add_count(Parent.ID, Parent.FecundityYear) %>%#
+		filter(n > 1) %>% head
+parent_size
+parent_size <- D %>% #
+		group_by(Parent.ID, Parent.FecundityYear) %>%#
+		# calculate Parent size as observed parent size plus all offspring; this ensures that a parent cannot have size equal to or less than offspring#
+		mutate(#
+			Parent_Size_t = Parent.Size_t[1] + sum(Offspring.Size_t)#
+		) %>%#
+		ungroup %>%#
+		dplyr::add_count(Parent.ID, Parent.FecundityYear) %>%#
+		filter(n > 1) %>% arrange(Parent.ID, Parent.FecundityYear ) %>% head
+parent_size
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+parent_size <- D %>% #
+		group_by(Parent.ID, Parent.FecundityYear) %>%#
+		# calculate Parent size as observed parent size plus all offspring; this ensures that a parent cannot have size equal to or less than offspring#
+		mutate(#
+			Parent_Size_t = Parent.Size_t[1] + sum(Offspring.Size_t)#
+		) %>%#
+		ungroup
+parent_size %>% arrange(Parent.ID, Parent.FecundityYear) D %>% #
+		group_by(Parent.ID, Parent.FecundityYear) %>%#
+		# calculate Parent size as observed parent size plus all offspring; this ensures that a parent cannot have size equal to or less than offspring#
+		mutate(#
+			Parent_Size_t = Parent.Size_t[1] + sum(Offspring.Size_t)#
+		) %>%#
+		ungroup %>%#
+		dplyr::add_count(Parent.ID, Parent.FecundityYear) %>%#
+		filter(n > 1) %>% head
+D %>% #
+		group_by(Parent.ID, Parent.FecundityYear) %>%#
+		# calculate Parent size as observed parent size plus all offspring; this ensures that a parent cannot have size equal to or less than offspring#
+		mutate(#
+			Parent_Size_t = Parent.Size_t[1] + sum(Offspring.Size_t)#
+		) %>%#
+		ungroup %>%#
+		dplyr::add_count(Parent.ID, Parent.FecundityYear) %>%#
+		filter(n > 1) %>% head
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+D <- C %>%#
+		group_by(Parent.ID) %>%#
+		# remove NAs#
+		filter(!is.na(Parent.Size_t)) %>%#
+		filter(!is.na(Offspring.Size_t)) %>%#
+		filter(!is.na(Parent.Obs.Date)) %>%#
+		# keep only parent surveys that are before or on the same date as the first offspring obs. date#
+		filter(#
+			Parent.Obs.Date <= First.Survey.Date.Alive#
+		) %>%#
+		# find Parent observation date (WITH a size obs) closest to (or equal to) date that the offspring was observed#
+		filter(Parent.Obs.Date==max(Parent.Obs.Date)) %>%#
+		# find Offspring observation date (WITH a size obs) closest to (or equal to) date it was first observed#
+		filter(Offspring.Obs.Date==min(Offspring.Obs.Date)) %>%#
+		setnames("First.Survey.Date.Alive", "Date")
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+A <- Plant_Surveys_by_Year %>% #
+		dplyr::select(#
+			PlantID, #
+			FecundityYear, #
+			SurveyDate_SpringSummer, #
+			Size_t#
+		) %>% #
+		setnames("SurveyDate_SpringSummer", "Parent.Obs.Date") %>%#
+		setnames("Size_t", "Parent.Size_t") %>%#
+		setnames("FecundityYear", "Parent.FecundityYear") %>%#
+		setnames("PlantID", "Parent.ID")#
+	# OFFSPRING SURVEY DATA#
+	# use this dataset to figure out first size of offspring#
+	B <- Plant_Surveys_by_Plant %>% #
+		dplyr::select(PlantID, Date, Size_t) %>% #
+		setnames("Date", "Offspring.Obs.Date") %>%#
+		setnames("Size_t", "Offspring.Size_t") %>%#
+		setnames("PlantID", "Offspring.ID")
+C <- Plant_Info_Analysis %>%#
+		#setnames("PlantID", "Offspring.ID") %>%#
+		#setnames("Parent", "Parent.ID") %>%#
+		dplyr::select(#
+			Parent.ID, #
+			Offspring.ID, #
+			First_Size,#
+			First.Survey.Date.Alive#
+		) %>%#
+		merge(#
+			A, #
+			by = "Parent.ID", #
+			all=T#
+		) %>%#
+		# merge first offspring size#
+		filter(!is.na(Offspring.ID)) %>%#
+		merge(#
+			B,#
+			by="Offspring.ID", #
+			all.x=T#
+			) %>%#
+			filter(!is.na(Parent.ID))
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+D <- C %>%#
+		group_by(Parent.ID) %>%#
+		# remove NAs#
+		filter(!is.na(Parent.Size_t)) %>%#
+		filter(!is.na(Offspring.Size_t)) %>%#
+		filter(!is.na(Parent.Obs.Date)) %>%#
+		# keep only parent surveys that are before or on the same date as the first offspring obs. date#
+		filter(#
+			Parent.Obs.Date <= First.Survey.Date.Alive#
+		) %>%#
+		# find Parent observation date (WITH a size obs) closest to (or equal to) date that the offspring was observed#
+		filter(Parent.Obs.Date==max(Parent.Obs.Date)) %>%#
+		# find Offspring observation date (WITH a size obs) closest to (or equal to) date it was first observed#
+		filter(Offspring.Obs.Date==min(Offspring.Obs.Date)) %>%#
+		setnames("First.Survey.Date.Alive", "Date")
+parent_size <- D %>% #
+		group_by(Parent.ID, Parent.FecundityYear) %>%#
+		# calculate Parent size as observed parent size plus all offspring; this ensures that a parent cannot have size equal to or less than offspring#
+		mutate(#
+			Parent_Size_t = Parent.Size_t[1] + sum(Offspring.Size_t)#
+		) %>%#
+		ungroup %>%#
+		dplyr::add_count(Parent.ID, Parent.FecundityYear) %>%#
+		filter(n > 1) %>% head
+parent_size
+str(D)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+D <- C %>%#
+		group_by(Parent.ID) %>%#
+		# remove NAs#
+		filter(!is.na(Parent.Size_t)) %>%#
+		filter(!is.na(Offspring.Size_t)) %>%#
+		filter(!is.na(Parent.Obs.Date)) %>%#
+		# keep only parent surveys that are before or on the same date as the first offspring obs. date#
+		filter(#
+			Parent.Obs.Date <= First.Survey.Date.Alive#
+		) %>%#
+		# find Parent observation date (WITH a size obs) closest to (or equal to) date that the offspring was observed#
+		filter(Parent.Obs.Date==max(Parent.Obs.Date)) %>%#
+		# find Offspring observation date (WITH a size obs) closest to (or equal to) date it was first observed#
+		filter(Offspring.Obs.Date==min(Offspring.Obs.Date)) %>%#
+		setnames("First.Survey.Date.Alive", "Date")	%>%#
+		ungroup
+C <- Plant_Info_Analysis %>%#
+	#	setnames("PlantID", "Offspring.ID") %>%#
+	#	setnames("Parent", "Parent.ID") %>%#
+		dplyr::select(#
+			Parent.ID, #
+			Offspring.ID, #
+			First_Size,#
+			First.Survey.Date.Alive#
+		) %>%#
+		merge(#
+			A, #
+			by = "Parent.ID", #
+			all=T#
+		) %>%#
+		# merge first offspring size#
+		filter(!is.na(Offspring.ID)) %>%#
+		merge(#
+			B,#
+			by="Offspring.ID", #
+			all.x=T#
+			) %>%#
+			filter(!is.na(Parent.ID))
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+D <- C %>%#
+		group_by(Parent.ID) %>%#
+		# remove NAs#
+		filter(!is.na(Parent.Size_t)) %>%#
+		filter(!is.na(Offspring.Size_t)) %>%#
+		filter(!is.na(Parent.Obs.Date)) %>%#
+		# keep only parent surveys that are before or on the same date as the first offspring obs. date#
+		filter(#
+			Parent.Obs.Date <= First.Survey.Date.Alive#
+		) %>%#
+		# find Parent observation date (WITH a size obs) closest to (or equal to) date that the offspring was observed#
+		filter(Parent.Obs.Date==max(Parent.Obs.Date)) %>%#
+		# find Offspring observation date (WITH a size obs) closest to (or equal to) date it was first observed#
+		filter(Offspring.Obs.Date==min(Offspring.Obs.Date)) %>%#
+		setnames("First.Survey.Date.Alive", "Date")	%>%#
+		ungroup
+str(D)
+D %>% #
+		group_by(Parent.ID, Parent.FecundityYear) %>%#
+		# calculate Parent size as observed parent size plus all offspring; this ensures that a parent cannot have size equal to or less than offspring#
+		mutate(#
+			Parent_Size_t = Parent.Size_t[1] + sum(Offspring.Size_t)#
+		) %>%#
+		ungroup %>%#
+		dplyr::add_count(Parent.ID, Parent.FecundityYear) %>%#
+		filter(n > 1) %>% head
+D %>% #
+		as.data.frame %>%#
+		group_by(Parent.ID, Parent.FecundityYear) %>%#
+		# calculate Parent size as observed parent size plus all offspring; this ensures that a parent cannot have size equal to or less than offspring#
+		mutate(#
+			Parent_Size_t = Parent.Size_t[1] + sum(Offspring.Size_t)#
+		) %>%#
+		ungroup %>%#
+		dplyr::add_count(Parent.ID, Parent.FecundityYear) %>%#
+		filter(n > 1) %>% head
+C <- Plant_Info_Analysis %>%#
+		#setnames("PlantID", "Offspring.ID") %>%#
+		setnames("Parent", "Parent.ID") %>%#
+		dplyr::select(#
+			Parent.ID, #
+			Offspring.ID, #
+			First_Size,#
+			First.Survey.Date.Alive#
+		) %>%#
+		merge(#
+			A, #
+			by = "Parent.ID", #
+			all=T#
+		) %>%#
+		# merge first offspring size#
+		filter(!is.na(Offspring.ID)) %>%#
+		merge(#
+			B,#
+			by="Offspring.ID", #
+			all.x=T#
+			) %>%#
+			filter(!is.na(Parent.ID))
+C <- Plant_Info_Analysis %>%#
+		#setnames("PlantID", "Offspring.ID") %>%#
+		#setnames("Parent", "Parent.ID") %>%#
+		dplyr::select(#
+			Parent.ID, #
+			Offspring.ID, #
+			First_Size,#
+			First.Survey.Date.Alive#
+		) %>%#
+		merge(#
+			A, #
+			by = "Parent.ID", #
+			all=T#
+		) %>%#
+		# merge first offspring size#
+		filter(!is.na(Offspring.ID)) %>%#
+		merge(#
+			B,#
+			by="Offspring.ID", #
+			all.x=T#
+			) %>%#
+			filter(!is.na(Parent.ID))
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+D <- C %>%#
+		group_by(Parent.ID) %>%#
+		# remove NAs#
+		filter(!is.na(Parent.Size_t)) %>%#
+		filter(!is.na(Offspring.Size_t)) %>%#
+		filter(!is.na(Parent.Obs.Date)) %>%#
+		# keep only parent surveys that are before or on the same date as the first offspring obs. date#
+		filter(#
+			Parent.Obs.Date <= First.Survey.Date.Alive#
+		) %>%#
+		# find Parent observation date (WITH a size obs) closest to (or equal to) date that the offspring was observed#
+		filter(Parent.Obs.Date==max(Parent.Obs.Date)) %>%#
+		# find Offspring observation date (WITH a size obs) closest to (or equal to) date it was first observed#
+		filter(Offspring.Obs.Date==min(Offspring.Obs.Date)) %>%#
+		setnames("First.Survey.Date.Alive", "Date")	%>%#
+		ungroup
+D %>% #
+		as.data.frame %>%#
+		group_by(Parent.ID, Parent.FecundityYear) %>%#
+		# calculate Parent size as observed parent size plus all offspring; this ensures that a parent cannot have size equal to or less than offspring#
+		mutate(#
+			Parent_Size_t = Parent.Size_t[1] + sum(Offspring.Size_t)#
+		) %>%#
+		ungroup %>%#
+		dplyr::add_count(Parent.ID, Parent.FecundityYear) %>%#
+		filter(n > 1) %>% head
+C <- Plant_Info_Analysis %>%#
+		#setnames("PlantID", "Offspring.ID") %>%#
+		#\setnames("Parent", "Parent.ID") %>%#
+		dplyr::select(#
+			Parent.ID, #
+			Offspring.ID, #
+			First_Size,#
+			First.Survey.Date.Alive#
+		) %>%#
+		merge(#
+			A, #
+			by = "Parent.ID", #
+			all=T#
+		) %>%#
+		# merge first offspring size#
+		filter(!is.na(Offspring.ID)) %>%#
+		merge(#
+			B,#
+			by="Offspring.ID", #
+			all.x=T#
+			) %>%#
+			filter(!is.na(Parent.ID))
+str(C)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+D <- C %>%#
+		group_by(Parent.ID) %>%#
+		# remove NAs#
+		filter(!is.na(Parent.Size_t)) %>%#
+		filter(!is.na(Offspring.Size_t)) %>%#
+		filter(!is.na(Parent.Obs.Date)) %>%#
+		# keep only parent surveys that are before or on the same date as the first offspring obs. date#
+		filter(#
+			Parent.Obs.Date <= First.Survey.Date.Alive#
+		) %>%#
+		# find Parent observation date (WITH a size obs) closest to (or equal to) date that the offspring was observed#
+		filter(Parent.Obs.Date==max(Parent.Obs.Date)) %>%#
+		# find Offspring observation date (WITH a size obs) closest to (or equal to) date it was first observed#
+		filter(Offspring.Obs.Date==min(Offspring.Obs.Date)) %>%#
+		setnames("First.Survey.Date.Alive", "Date")	%>%#
+		as.data.frame
+str(D)
+D %>% #
+		as.data.frame %>%#
+		group_by(Parent.ID, Parent.FecundityYear) %>%#
+		# calculate Parent size as observed parent size plus all offspring; this ensures that a parent cannot have size equal to or less than offspring#
+		mutate(#
+			Parent_Size_t = Parent.Size_t[1] + sum(Offspring.Size_t)#
+		) %>%#
+		ungroup %>%#
+		dplyr::add_count(Parent.ID, Parent.FecundityYear) %>%#
+		filter(n > 1) %>% head
+D %>% #
+		as.data.frame %>%#
+		group_by(Parent.ID, Parent.FecundityYear) %>%#
+		# calculate Parent size as observed parent size plus all offspring; this ensures that a parent cannot have size equal to or less than offspring#
+		mutate(#
+			Parent_Size_t = Parent.Size_t[1] + sum(Offspring.Size_t)#
+		) %>%#
+		ungroup %>%#
+		dplyr::add_count(Parent.ID, Parent.FecundityYear) %>%#
+		filter(n > 1) %>% head %>% as.data.frame
+D %>% #
+		as.data.frame %>%#
+		group_by(Parent.ID, Parent.FecundityYear) %>%#
+		# calculate Parent size as observed parent size plus all offspring; this ensures that a parent cannot have size equal to or less than offspring#
+		dplyr::summarise(#
+			Parent_Size_t = Parent.Size_t[1] + sum(Offspring.Size_t)#
+		) %>%#
+		ungroup %>%#
+		dplyr::add_count(Parent.ID, Parent.FecundityYear) %>%#
+		filter(n > 1) %>% head
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+parent_size <- D %>% #
+		as.data.frame %>%#
+		group_by(Parent.ID, Parent.FecundityYear) %>%#
+		# calculate Parent size as observed parent size plus all offspring; this ensures that a parent cannot have size equal to or less than offspring#
+		dplyr::summarise(#
+			Parent_Size_t = Parent.Size_t[1] + sum(Offspring.Size_t)#
+		) %>%
+head(parent_size)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+parent_size <- D %>% #
+		as.data.frame %>%#
+		group_by(Parent.ID, Parent.FecundityYear) %>%#
+		# calculate Parent size as observed parent size plus all offspring; this ensures that a parent cannot have size equal to or less than offspring#
+		dplyr::summarise(#
+			Parent_Size_t = Parent.Size_t[1] + sum(Offspring.Size_t)#
+		) %>%
+)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+parent_size <- D %>% #
+		as.data.frame %>%#
+		group_by(Parent.ID, Parent.FecundityYear) %>%#
+		# calculate Parent size as observed parent size plus all offspring; this ensures that a parent cannot have size equal to or less than offspring#
+		dplyr::summarise(#
+			Parent_Size_t = Parent.Size_t[1] + sum(Offspring.Size_t)#
+		)
+head(parent_size)
+D %>% filter(Parent.ID=="7015", Parent.FecundityYear==2014)
+D %>% filter(Parent.ID=="7149", Parent.FecundityYear==2014)

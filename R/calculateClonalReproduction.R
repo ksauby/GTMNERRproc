@@ -88,13 +88,8 @@ calculateClonalReproduction <- function(
 		group_by(Parent.ID, Parent.FecundityYear) %>%
 		# calculate Parent size as observed parent size plus all offspring; this ensures that a parent cannot have size equal to or less than offspring
 		dplyr::summarise(
-			Parent_Size_t = Parent.Size_t[1] + sum(Offspring.Size_t)
+			Parent_Size_w_clones_t = Parent.Size_t[1] + sum(Offspring.Size_t)
 		)
-		
-		
-		
-		dplyr::select(Parent.ID, Parent.FecundityYear, Parent_Size_t) %>%
-		unique
 	
 	# merge offspring info with parent size info
 	D %<>% 
@@ -103,7 +98,7 @@ calculateClonalReproduction <- function(
 		merge(parent_size, by=c("Parent", "FecundityYear"))
 
 
-	# need to know number of segments produced per size class
+	# need to know number of segments produced per size class - WHY?
 	loss_to_clones <- D %>% 
 		group_by(Parent, FecundityYear) %>%
 		dplyr::summarise(
