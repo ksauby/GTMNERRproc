@@ -9,11 +9,10 @@ createInsectPresDuringStudy <- function(Plant_Surveys_by_Year) {
 	network_summary_time_t <- Plant_Surveys_by_Year %>%
 		group_by(Network, FecundityYear) %>%
 		dplyr::summarise(
-			OldMothNetworkPres_t = max(Old_Moth_Evidence_t, na.rm=T),
-			#InsectNetworkPres = max(Insect_t, na.rm=T),
-			MENetworkPres_t = max(ME_t, na.rm=T),
-			CANetworkPres_t = max(CA_t, na.rm=T),
-			MothNetworkPres_t = max(Moth_Evidence_t, na.rm=T)
+			OldMothNetworkPres_t 	= Maximum(Old_Moth_Evidence_t),
+			MENetworkPres_t 		= Maximum(ME_t),
+			CANetworkPres_t 		= Maximum(CA_t),
+			MothNetworkPres_t 		= Maximum(Moth_Evidence_t)
 		) %>%
 		arrange(FecundityYear) %>%
 		group_by(Network) %>%
@@ -28,20 +27,18 @@ createInsectPresDuringStudy <- function(Plant_Surveys_by_Year) {
 	network_summary <- Plant_Surveys_by_Year %>%
 		group_by(Network) %>%
 		dplyr::summarise(
-			OldMothNetworkPres = max(Old_Moth_Evidence_t, na.rm=T),
-			#InsectNetworkPres = max(Insect_t, na.rm=T),
-			MENetworkPres = max(ME_t, na.rm=T),
-			CANetworkPres = max(CA_t, na.rm=T),
-			MothNetworkPres = max(Moth_Evidence_t, na.rm=T)
+			OldMothNetworkPres 		= Maximum(Old_Moth_Evidence_t),
+			MENetworkPres 			= Maximum(ME_t),
+			CANetworkPres 			= Maximum(CA_t),
+			MothNetworkPres 		= Maximum(Moth_Evidence_t)
 		)
 	Plant_summary <- Plant_Surveys_by_Year %>%
 		group_by(PlantID) %>%
 		dplyr::summarise(
-			OldMothPlantPres = max(Old_Moth_Evidence_t, na.rm=T),
-			#InsectPlantPres = max(Insect_t, na.rm=T),
-			MEPlantPres = max(ME_t, na.rm=T),
-			CAPlantPres = max(CA_t, na.rm=T),
-			MothPlantPres = max(Moth_Evidence_t, na.rm=T)
+			OldMothPlantPres 		= Maximum(Old_Moth_Evidence_t),
+			MEPlantPres 			= Maximum(ME_t),
+			CAPlantPres 			= Maximum(CA_t),
+			MothPlantPres 			= Maximum(Moth_Evidence_t)
 		)
 	Plant_Surveys_by_Year %>% 
 		merge(network_summary, by="Network") %>% 
