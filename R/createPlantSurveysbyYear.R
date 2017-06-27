@@ -58,7 +58,7 @@ createPlantSurveysbyYear <- function(Plant_Surveys_by_Plant) {
 				is.na(Size_t)
 			)
 		) %>%
-		select(
+		dplyr::select(
 			Date,
 			PlantID,
 			FecundityYear
