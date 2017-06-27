@@ -8,7 +8,7 @@
 
 createPlantInfobyPlant <- function(Plant_Info, Plant_Surveys_by_Year) {
 	# one record per plant
-	# 2887 records
+	# 2849 records
 	Plant_Info_Analysis <- Plant_Info %>%
 		group_by(PlantID) %>%
 		dplyr::summarise(
@@ -62,15 +62,6 @@ createPlantInfobyPlant <- function(Plant_Info, Plant_Surveys_by_Year) {
 			CAPlantPres = max(CA_t, na.rm=T),
 			MothPlantPres = max(Moth_Evidence_t, na.rm=T)
 		)
-		
-		
-	################################
-	# I lose 100 plant IDs at this step
-	################################
-	
-	
-	
-	# 2693 plants 
 	Plant_Info_Analysis %<>% 
 		merge(network_summary, by="Network") %>%
 		merge(Plant_summary, by="PlantID")
