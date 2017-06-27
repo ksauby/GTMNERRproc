@@ -10,6 +10,7 @@ createPlantInfobyPlant <- function(Plant_Info, Plant_Surveys_by_Year) {
 	# one record per plant
 	# 2849 records
 	Plant_Info_Analysis <- Plant_Info %>%
+		arrange(Date) %>%
 		group_by(PlantID) %>%
 		dplyr::summarise(
 			Island 				= Island[1],
@@ -20,12 +21,12 @@ createPlantInfobyPlant <- function(Plant_Info, Plant_Surveys_by_Year) {
 			RecruitmentMode 	= paste(Unique(RecruitmentMode), collapse=","),
 			Parent 				= Parent[1],
 			# should figure out the longest span of time a plotplantid was alive
-			DaysAlive 			= max(DaysAlive, na.rm=T),
+			DaysAlive 			= Maximum(DaysAlive),
 			# plant may have died in one plot but is alive in another
-			DeadMissing 		= min(ConfirmedDeadMissing),
-			Dead 				= min(ConfirmedDead),
-			Missing 			= min(ConfirmedMissing),
-			First.Survey.Date.Alive 	= min(First.Survey.Date.Alive)
+			DeadMissing 		= Minimum(ConfirmedDeadMissing),
+			Dead 				= Minimum(ConfirmedDead),
+			Missing 			= Minimum(ConfirmedMissing),
+			First.Survey.Date.Alive 	= First.Survey.Date.Alive[1]
 		) %>%
 		filter(!is.na(Network))
 	# save to figure out if some plants were lost during processing
@@ -47,33 +48,33 @@ createPlantInfobyPlant <- function(Plant_Info, Plant_Surveys_by_Year) {
 	network_summary <- Plant_Surveys_by_Year %>%
 		group_by(Network) %>%
 		dplyr::summarise(
-			OldMothNetworkPres = max(Old_Moth_Evidence_t, na.rm=T),
-			#InsectNetworkPres = max(Insect_t, na.rm=T),
-			MENetworkPres = max(ME_t, na.rm=T),
-			CANetworkPres = max(CA_t, na.rm=T),
-			MothNetworkPres = max(Moth_Evidence_t, na.rm=T)
+			OldMothNetworkPres 	= Maximum(Old_Moth_Evidence_t),
+			MENetworkPres 		= Maximum(ME_t),
+			CANetworkPres 		= Maximum(CA_t),
+			MothNetworkPres 	= Maximum(Moth_Evidence_t)
 		)
 	Plant_summary <- Plant_Surveys_by_Year %>%
 		group_by(PlantID) %>%
 		dplyr::summarise(
-			OldMothPlantPres = max(Old_Moth_Evidence_t, na.rm=T),
-			#InsectPlantPres = max(Insect_t, na.rm=T),
-			MEPlantPres = max(ME_t, na.rm=T),
-			CAPlantPres = max(CA_t, na.rm=T),
-			MothPlantPres = max(Moth_Evidence_t, na.rm=T)
+			OldMothPlantPres 	= Maximum(Old_Moth_Evidence_t),
+			MEPlantPres 		= Maximum(ME_t),
+			CAPlantPres 		= Maximum(CA_t),
+			MothPlantPres 		= Maximum(Moth_Evidence_t)
 		)
 	Plant_Info_Analysis %<>% 
 		merge(network_summary, by="Network") %>%
 		merge(Plant_summary, by="PlantID")
 	# get size at first survey
-	First_Size <- Plant_Surveys_by_Year %>%
+	First_Size <- Plant_Surveys_by_Plant %>%
+		arrange(Date) %>%
 		group_by(PlantID) %>%
-		summarise(
-			minFecundityYear = min(FecundityYear, na.rm=T),
-			First_Size = 
-				min(Size_t[FecundityYear == min(FecundityYear)]),
-			min.Size = min(Size_t, na.rm=T),
-			max.Size = max(Size_t, na.rm=T)
+		dplyr::summarise(
+			First.Survey.Date 			= Date[1],
+			minFecundityYear 			= Minimum(FecundityYear),
+			First_Size 					= Size_t[!(is.na(Size_t))][1],
+			First.Measurement.Date 		= Date[!(is.na(Size_t))][1],
+			min.Size 					= Minimum(Size_t),
+			max.Size 					= Maximum(Size_t)
 		)
 	Plant_Info_Analysis %<>% 
 		merge(First_Size, by=c("PlantID"))

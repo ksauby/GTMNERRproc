@@ -52,16 +52,20 @@ calculateClonalReproduction <- function(
 			"First.Survey.Date.Alive", 
 			"Offspring.First.Survey.Date.Alive"
 		) %>%
+		setnames(
+			"minFecundityYear", 
+			"Offspring.minFecundityYear"
+		) %>%
 		dplyr::select(
 			Parent.ID, 
 			Offspring.ID, 
 			Offspring.First_Size,
 			Offspring.First.Survey.Date.Alive,
-			minFecundityYear
+			Offspring.minFecundityYear
 		) %>%
 		merge(
 			A, 
-			by.x = c("Parent.ID", "minFecundityYear"),
+			by.x = c("Parent.ID", "Offspring.minFecundityYear"),
 			by.y  = c("Parent.ID", "Parent.FecundityYear"),
 			all=T
 		) %>%
@@ -70,41 +74,51 @@ calculateClonalReproduction <- function(
 		# remove plants without identified parents
 		filter(!is.na(Parent.ID))
 		
-		
-		
-		
-		# calculateClonalReproduction - why do some parents have no obs.date & size?
-		C %>% filter(is.na(Parent.Size_t))
-		
-		
-		# were any sizes recorded at all? yes, at least for some
-		PlantIDwoSize <- C %>% 
-			filter(is.na(Offspring.First_Size)) %$% 
-			unique(Offspring.ID)
-		Plant_Surveys_by_Plant %>%
+	# ------------------------------------------------------------- WARNINGS
+	# calculateClonalReproduction - why do some parents have no obs.date & size?
+	# for Plant 7769 its parent wasn't measured the year the offspring was first observed
+	PlantIDwoSize <- C %>% filter(is.na(Parent.Size_t)) %$% 
+		unique(Parent.ID)
+	if (length(temp) > 0) {
+		warning(paste(
+			"Parent obs date and size not available for parent(s)",
+			paste(PlantIDwoSize, collapse=",")
+		))
+	}
+	# were any sizes recorded at all? yes, at least for some
+	PlantIDwoSize <- C %>% 
+		filter(is.na(Offspring.First_Size)) %$% 
+		unique(Offspring.ID)
+	temp <- Plant_Surveys_by_Plant %>%
 		filter(
 			PlantID %in% PlantIDwoSize,
 			!(is.na(Size_t))
-		)
-		
-		
-		
-		
-		
-		
-		
+		) %$%
+		unique(PlantID)
+	if (length(temp) > 0) {
+		warning(paste(
+			"Size data available for",
+			paste(temp, collapse=","),
+			"but not included in Plant Info."
+		))
+	}	
+	# -------------------------------------------------------------------- #
+	
 	D <- C %>%
 		group_by(Parent.ID) %>%
 		# remove NAs
 		filter(!is.na(Parent.Size_t)) %>%
-		filter(!is.na(Offspring.Size_t)) %>%
+		filter(!is.na(Offspring.First_Size)) %>%
 		filter(!is.na(Parent.Obs.Date)) %>%
 		# keep only parent surveys that are before or on the same date as the first offspring obs. date
 		filter(
-			Parent.Obs.Date <= First.Survey.Date.Alive
+			Parent.Obs.Date <= Offspring.First.Survey.Date.Alive
 		) %>%
 		# find Parent observation date (WITH a size obs) closest to (or equal to) date that the offspring was observed
 		filter(Parent.Obs.Date==max(Parent.Obs.Date)) %>%
+		
+		########################################
+		
 		# find Offspring observation date (WITH a size obs) closest to (or equal to) date it was first observed
 		filter(Offspring.Obs.Date==min(Offspring.Obs.Date)) %>%
 		setnames("First.Survey.Date.Alive", "Date")	%>%
