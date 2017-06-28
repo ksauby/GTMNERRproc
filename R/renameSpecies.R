@@ -1,11 +1,11 @@
 #' Rename Species levels
 #'
-#' @param Plant_Surveys Plant Survey Dataset
+#' @param Plant_Surveys Plant Info
 #'
 #' @export
 
-renameSpecies <- function(Plant_Surveys) {
-	Plant_Surveys %>% 
+renameSpecies <- function(dat) {
+	dat %>% 
 	mutate(
 		Species	= replace(
 			Species,

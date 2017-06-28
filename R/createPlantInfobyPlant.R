@@ -16,7 +16,8 @@ createPlantInfobyPlant <- function(Plant_Info, Plant_Surveys_by_Year) {
 				which(Parent=="Unkn"),
 				NA
 			)
-		)
+		) %>%
+		renameSpecies
 	Plant_Info_Analysis %<>%
 		arrange(First.Survey.Date.Alive) %>%
 		group_by(PlantID) %>%
@@ -53,14 +54,14 @@ createPlantInfobyPlant <- function(Plant_Info, Plant_Surveys_by_Year) {
 	# order
 	Plant_Info_Analysis %<>% arrange(desc(Island), desc(Parent))
 	# summarise insect presence on plants and in networks
-	network_summary <- Plant_Surveys_by_Year %>%
-		group_by(Network) %>%
-		dplyr::summarise(
-			OldMothNetworkPres 	= Maximum(Old_Moth_Evidence_t),
-			MENetworkPres 		= Maximum(ME_t),
-			CANetworkPres 		= Maximum(CA_t),
-			MothNetworkPres 	= Maximum(Moth_Evidence_t)
-		)
+	# network_summary <- Plant_Surveys_by_Year %>%
+	#	group_by(Network) %>%
+	#	dplyr::summarise(
+	#		OldMothNetworkPres 	= Maximum(Old_Moth_Evidence_t),
+	#		MENetworkPres 		= Maximum(ME_t),
+	#		CANetworkPres 		= Maximum(CA_t),
+	#		MothNetworkPres 	= Maximum(Moth_Evidence_t)
+	#	)
 	Plant_summary <- Plant_Surveys_by_Year %>%
 		group_by(PlantID) %>%
 		dplyr::summarise(

@@ -12,10 +12,6 @@ createPlantSurveysbyYear <- function(Plant_Surveys_by_Plant) {
 	Plant_Surveys_by_Year <- Plant_Surveys_by_Plant %>% 
 		group_by(FecundityYear, PlantID) %>%
 		dplyr::summarise(
-			Species = Species[1],
-			Network = Network[1],
-			Island = Island[1],
-			RecruitmentMode 			= RecruitmentMode[1],
 			FruitPres_t 				= Maximum(FruitPres_t),
 			Fruit_Flowers_t 			= Maximum(Fruit_Flowers_t),
 			FruitFlowerPres_t 			= Maximum(FruitFlowerPres_t),
@@ -45,8 +41,6 @@ createPlantSurveysbyYear <- function(Plant_Surveys_by_Plant) {
 			PrevFecundityYear = FecundityYear - 1,
 			Alive = abs(DeadMissingbyEndofYear - 1)
 		)
-	# create PrevYear
-	Plant_Surveys_by_Year %<>% createInsectPresDuringStudy
 	# figure out spring/summer survey dates	
 	temp <- Plant_Surveys_by_Plant %>%
 		filter(

@@ -81,4 +81,22 @@ checkPlantSurveys <- function(Plant_Surveys) {
 			"O. pusilla plants recorded with fruit/flowers prior to 2015."
 		))
 	}
+	
+	# ----------------------------------------------------------- ERROR MESSAGES
+	# throw a warning if pusilla has flowers before summer 2015
+	temp <- Plant_Surveys %>%
+		filter(
+			Species=="pusilla",
+			FecundityYear!=2015,
+			Fruit_Flowers_t > 0,
+			!(month(Date) %in% c(5,6,7,8))
+		)
+	if (dim(temp)[1] > 0) {
+		warning(paste(
+			"O. pusilla plants ",
+			paste(temp$PlotPlantID, collapse=", "),
+			"are recorded as having fruit/flowers in a year other than 2015."
+		))
+	}
+	# --------------------------------------------------------------------------
 }

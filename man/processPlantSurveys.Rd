@@ -19,6 +19,21 @@ Steps:
  \item add fruit count column
  \item add fruit/flower count column
  \item check for observations of 0 pads, 0 height, or 0 width; if there are observations, stop
+ \item add column, "DemographicSurvey"
+\itemize{
+	\item survey 1 - spring/summer 2013
+	\item survey 2 - fall/winter 2013/2014
+	\item survey 3 - spring/summer 2014
+	\item survey 4 - winter 2015
+	\item survey 5 - spring/summer 2015
+}
+ \item addFecundityYear
+\itemize{
+	\item 2012 - Date >= "2012-12-02" & Date < "2013-05-01"
+	\item 2013 - Date >= "2013-05-01" & Date < "2014-05-01"
+	\item 2014 - Date >= "2014-05-01" & Date < "2015-05-01"
+	\item 2015 - Date >= "2015-05-01"
+}
 	}
 Column Names:
 \itemize{

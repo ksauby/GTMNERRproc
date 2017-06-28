@@ -12,6 +12,21 @@
 #'  \item add fruit count column
 #'  \item add fruit/flower count column
 #'  \item check for observations of 0 pads, 0 height, or 0 width; if there are observations, stop
+#'  \item add column, "DemographicSurvey"
+#'	\itemize{
+#'		\item survey 1 - spring/summer 2013
+#'		\item survey 2 - fall/winter 2013/2014
+#'		\item survey 3 - spring/summer 2014
+#'		\item survey 4 - winter 2015
+#'		\item survey 5 - spring/summer 2015
+#'	}
+#'  \item addFecundityYear
+#'	\itemize{
+#'		\item 2012 - Date >= "2012-12-02" & Date < "2013-05-01"
+#'		\item 2013 - Date >= "2013-05-01" & Date < "2014-05-01"
+#'		\item 2014 - Date >= "2014-05-01" & Date < "2015-05-01"
+#'		\item 2015 - Date >= "2015-05-01"
+#'	}
 #' 	}
 #' Column Names:
 #' \itemize{
@@ -106,7 +121,7 @@ processPlantSurveys <- function(Plant_Surveys, Plant_Info) {
 	# duplicates for 1795 on 2013-02-10 are okay - I accidentally surveyed the plot twice; keep it for detectability
 	dups = Plant_Surveys %>%
 		group_by(PlantID, DateSurveyed) %>%
-		summarise(Nrecords = length(First_Observer_Initials)) %>%
+		dplyr::summarise(Nrecords = length(First_Observer_Initials)) %>%
 		as.data.frame %>% 
 		arrange(PlantID) %>%
 		filter(Nrecords > 1)
@@ -269,6 +284,16 @@ processPlantSurveys <- function(Plant_Surveys, Plant_Info) {
 			Perpen_Width
 		) %>%
 		apply(1, mysum3)
+	# --------------------------------------------------------------------------
+	Plant_Surveys$Date %<>%
+		strptime("%Y-%m-%d") %>%
+		as.POSIXct(format="%Y-%m-%d", tz="")
+	Plant_Surveys %<>%
+		addSamplingPeriods %>%
+		assignSeason %>%
+		createFecundityYear %>%
+		as.data.frame
+	Plant_Surveys$Date %<>% as.Date
 	# ----------------------------------------------------------------- WARNINGS
 	dups <- Plant_Surveys %>% filter(Size_t==0)
 		if (dim(dups)[1] > 0) {stop("Size values = 0.")}

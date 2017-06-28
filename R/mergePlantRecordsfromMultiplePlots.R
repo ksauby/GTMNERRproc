@@ -44,15 +44,6 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys, date_window=48) {
 			Z[[i]] <- data.frame(Date = max(L.list[[1]]$Date))
 		}
 		Z[[i]][, "PlantID"] 			<- L$PlantID[1]
-		Z[[i]][, "ClusterID"] 			<- L$ClusterID[1]
-		Z[[i]][, "Network"] 			<- L$Network[1]
-		Z[[i]][, "Island"] 				<- L$Island[1]
-		Z[[i]][, "Species"] 			<- L$Species[1]
-		Z[[i]][, "RecruitmentMode"]		<- L$RecruitmentMode %>%
-			.[which(. != "NA")] %>%
-			.[which(!is.na(.))] %>%
-			unique(.) %>%
-			paste(collapse="")
 		# for each window of dates
 		for (j in 1:length(names(L.list))) {
 			K <- eval(parse(text=paste(
@@ -189,13 +180,6 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys, date_window=48) {
 	temp_C %<>% select( 
 		PlantID, 
 		Date, 
-		ClusterID, 
-		Network, 
-		Island,
-		Easting,
-		Northing, 
-		Species, 
-		RecruitmentMode,
 		# insects
 		CA_t, 
 		ME_t, 

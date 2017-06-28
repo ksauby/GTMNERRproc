@@ -14,27 +14,19 @@
 #' @export
 	
 processSurveysMergedbyPlant <- function(Plant_Surveys) {
-	Plant_Surveys %<>%
+	Plant_Surveys %>%
 		mergePlantRecordsfromMultiplePlots %>%
 		calculateFruitPresence %>%
 		calculatePlantVolume %>%
 		determineInsectPresenceDuringStudy %>%
-		renameSpecies %>%
 		createInsectFactorVariables %>%
 		formatasFactors(
-			factors <- c("ClusterID", "Network", "Island", "Species",
-			"DemographicSurvey", "Year", "Season", "C_cactorum", 
-			"M_prodenialis")
-		)
-	# fix RecruitmentMode
-	Plant_Surveys %>% mutate(
-			RecruitmentMode	= replace(
-				RecruitmentMode,
-				which(
-					RecruitmentMode=="ClonalUnknown" |
-					 RecruitmentMode=="UnknownClonal"
-				),
-				"Clonal"
+			factors <- c(
+				"DemographicSurvey", 
+				"Year", 
+				"Season", 
+				"C_cactorum", 
+				"M_prodenialis"
 			)
 		)
 }
