@@ -10,6 +10,14 @@ createPlantInfobyPlant <- function(Plant_Info, Plant_Surveys_by_Year) {
 	# one record per plant
 	# 2849 records
 	Plant_Info_Analysis <- Plant_Info %>%
+		mutate(
+			Parent = replace(
+				Parent,
+				which(Parent=="Unkn"),
+				NA
+			)
+		)
+	Plant_Info_Analysis %<>%
 		arrange(First.Survey.Date.Alive) %>%
 		group_by(PlantID) %>%
 		dplyr::summarise(
@@ -19,7 +27,7 @@ createPlantInfobyPlant <- function(Plant_Info, Plant_Surveys_by_Year) {
 			Species 			= Species[1],
 			# fix/verify
 			RecruitmentMode 	= paste(Unique(RecruitmentMode), collapse=","),
-			Parent 				= Parent[1],
+			Parent 				= paste(Unique(Parent), collapse=","),
 			# should figure out the longest span of time a plotplantid was alive
 			DaysAlive 			= Maximum(DaysAlive),
 			# plant may have died in one plot but is alive in another
@@ -79,12 +87,20 @@ createPlantInfobyPlant <- function(Plant_Info, Plant_Surveys_by_Year) {
 	Plant_Info_Analysis %<>% 
 		merge(First_Size, by=c("PlantID"))
 	# WARNINGS	
-	temp <- Plant_Surveys %>% 
+	temp <- Plant_Info_Analysis %>% 
 		filter(grepl(",", RecruitmentMode)==TRUE)
 	if (dim(temp)[1] > 0) {
 		write.csv(temp, "InconsistentRecruitmentModePlantInfo.csv")
 		warning(paste(
 			"Inconsistent recruitment mode recorded for at least one plant spanning multiple plots. These plant info records have been written to csv."
+		))
+	}	
+	temp <- Plant_Info_Analysis %>% 
+		filter(grepl(",", Parent)==TRUE)
+	if (dim(temp)[1] > 0) {
+		write.csv(temp, "InconsistentParentPlantInfo.csv")
+		warning(paste(
+			"Inconsistent Parent recorded for at least one plant spanning multiple plots. These plant info records have been written to csv."
 		))
 	}	
 	return(Plant_Info_Analysis)
