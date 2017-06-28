@@ -71,7 +71,7 @@ createPlantInfobyPlant <- function(Plant_Info, Plant_Surveys_by_Year) {
 			MothPlantPres 		= Maximum(Moth_Evidence_t)
 		)
 	Plant_Info_Analysis %<>% 
-		merge(network_summary, by="Network") %>%
+		# merge(network_summary, by="Network") %>%
 		merge(Plant_summary, by="PlantID")
 	# get size at first survey
 	First_Size <- Plant_Surveys_by_Plant %>%

@@ -4,10 +4,10 @@
 \alias{renameSpecies}
 \title{Rename Species levels}
 \usage{
-renameSpecies(Plant_Surveys)
+renameSpecies(dat)
 }
 \arguments{
-\item{Plant_Surveys}{Plant Survey Dataset}
+\item{Plant_Surveys}{Plant Info}
 }
 \description{
 Rename Species levels
