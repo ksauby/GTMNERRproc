@@ -5,27 +5,23 @@
 #' 
 #' @export
 
-mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys, date_window=48) {
+mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys, date_window=48,...) {
 	# use same window for all plants
-	seq_of_date_windows <- seq(
-		min(Plant_Surveys$Date), 
-		max(Plant_Surveys$Date) + date_window, 
-		by = date_window
-	)
 	# restrict to plants that span multiple plots
-	temp_A <- filter(Plant_Surveys, N.PlotPlantIDs > 1)
+	temp_A <- filter(Plant_Surveys, N.PlotPlantIDs > 1) %>% arrange(Date)
 	Z = list()
 	for (i in 1:length(unique(temp_A$PlantID))) {
 		# pull all records for this PlantID from the plant surveys
 		L = filter(temp_A, PlantID==unique(temp_A$PlantID)[i])
 		# group by window of dates
-		if (max(L$Date) - min(L$Date) > date_window) {
+		if (max(L$Date) - min(L$Date) > 
+			SequenceofDates[2] - SequenceofDates[1]) {
 			L.list <- L %>%
 				split(
 				.,
 				cut(
 					L$Date,
-					seq_of_date_windows
+					SequenceofDates
 				)
 			)
 			L.list %<>% .[sapply(., function(x) dim(x)[1]) > 0]
@@ -56,16 +52,16 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys, date_window=48) {
 			# save range of dates used to create whole plant survey
 			if (length(unique(K$Date)) > 1) {
 				Z[[i]][j, "RangeofDates"] <- paste(
-					min(K$Date), 
+					K$Date[1], 
 					" - ", 
-					max(K$Date),
+					tail(K$Date, n=1),
 					sep=""
 				)
 				Z[[i]][j, "SizeofDateRange"] <- max(K$Date) - min(K$Date)
 				Z[[i]][j, "maxDate"] <- as.character(max(K$Date))
 				
 			} else {
-				Z[[i]][j, "RangeofDates"] <- unique(K$Date)
+				Z[[i]][j, "RangeofDates"] <- as.character(K$Date[1])
 				Z[[i]][j, "SizeofDateRange"] <- 0
 				Z[[i]][j, "maxDate"] <- as.character(max(K$Date))
 			}
