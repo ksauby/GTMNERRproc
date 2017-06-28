@@ -6,6 +6,12 @@
 #' @export
 
 mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys, date_window=48) {
+	# use same window for all plants
+	seq_of_date_windows <- seq(
+		min(Plant_Surveys$Date), 
+		max(Plant_Surveys$Date) + date_window, 
+		by = date_window
+	)
 	# restrict to plants that span multiple plots
 	temp_A <- filter(Plant_Surveys, N.PlotPlantIDs > 1)
 	Z = list()
@@ -17,15 +23,9 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys, date_window=48) {
 			L.list <- L %>%
 				split(
 				.,
-				# this is really slow for i=2
 				cut(
 					L$Date,
-					# it's doing sequence of seconds
-					seq(
-						min(L$Date), 
-						max(L$Date) + date_window, 
-						by = date_window
-					)
+					seq_of_date_windows
 				)
 			)
 			L.list %<>% .[sapply(., function(x) dim(x)[1]) > 0]
