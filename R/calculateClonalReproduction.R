@@ -75,9 +75,14 @@ calculateClonalReproduction <- function(
 		filter(!is.na(Parent.ID))
 		
 	# ------------------------------------------------------------- WARNINGS
+    C %>%
+   		filter(is.na(Parent.Obs.Date))
 	# calculateClonalReproduction - why do some parents have no obs.date & size?
 	# for Plant 7769 its parent wasn't measured the year the offspring was first observed
-	PlantIDwoSize <- C %>% filter(is.na(Parent.Size_t)) %$% 
+	PlantIDwoSize <- C %>%
+		filter(is.na(Parent.Size_t)) %>%
+		# these are fine:
+		filter(Parent.ID!=8692, Parent.ID!=9076) %$% 
 		unique(Parent.ID)
 	if (length(temp) > 0) {
 		warning(paste(
