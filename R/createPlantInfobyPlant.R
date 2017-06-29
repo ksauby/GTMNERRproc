@@ -31,19 +31,21 @@ createPlantInfobyPlant <- function(Plant_Info, Plant_Surveys_by_Year) {
 			Parent 				= paste(Unique(Parent), collapse=","),
 			First.Survey.Date.Alive 	= First.Survey.Date.Alive[1]
 		) %>%
-		filter(!is.na(Network))
+		filter(!is.na(Network)) %>%
+		mutate(
+			RecruitmentMode = replace(
+				RecruitmentMode,
+				which(RecruitmentMode==""),
+				"Unknown"
+			),
+			Parent = replace(
+				Parent,
+				which(Parent=="NA" | Parent==""),
+				"Unknown"
+			)
+		)
 	# save to figure out if some plants were lost during processing
 	temp1 <- Plant_Info_Analysis$PlantID
-	# Parent
-	Plant_Info_Analysis %<>% mutate(
-		Parent = replace(
-			Parent,
-			which(is.na(Parent)),
-			"Unknown"
-		)
-	)	
-	Plant_Info_Analysis$Parent %<>% NA_Function
-	Plant_Info_Analysis$Parent[which(Plant_Info_Analysis$Parent=="")] <- NA
 	# order
 	Plant_Info_Analysis %<>% arrange(desc(Island), desc(Parent))
 	# summarise insect presence on plants and in networks
@@ -90,13 +92,17 @@ createPlantInfobyPlant <- function(Plant_Info, Plant_Surveys_by_Year) {
 			# assume alive day before first observed: First.Survey.Date - 1
 			# also alive day of last survey: LastDateAlive + 1
 			minDaysAlive	= 
-				(LastDateAlive + 1) - (First.Survey.Date - 1),			
+				(LastDateAlive + 1) - (First.Survey.Date - 1),
 			# assume last day alive was day before death observation: FirstDeadMissingObservation - 1
 			# assume alive day before first observed: First.Survey.Date - 1
 			# the 1s cancel out
 			maxDaysAlive	= 
 				(FirstDeadMissingObservation - 1) -	(First.Survey.Date - 1)
 		)
+		First_Size$minDaysAlive %<>% as.numeric
+		First_Size$maxDaysAlive %<>% as.numeric %<>%
+			Replace_NA_w_Period_Function
+
 	Plant_Info_Analysis %<>% 
 		merge(First_Size, by=c("PlantID"))
 	# WARNINGS	
