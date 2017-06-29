@@ -104,8 +104,28 @@ createPlantInfobyPlant <- function(Plant_Info, Plant_Surveys_by_Year) {
 			Replace_NA_w_Period_Function
 
 	Plant_Info_Analysis %<>% 
-		merge(First_Size, by=c("PlantID"))
-	# WARNINGS	
+		merge(First_Size, by=c("PlantID")) %>%
+	   	renameSpecies %>%
+		mutate(
+			HabitatType = NA,
+			HabitatType = replace(
+				HabitatType,
+				which(
+					Island=="Roadway1" |
+					Island=="Roadway2"
+				),
+				"Barrier Island Habitat"
+			),
+			HabitatType = replace(
+				HabitatType,
+				which(
+					Island!="Roadway1" &
+					Island!="Roadway2"
+				),
+				"Intracoastal Waterway Island"
+			)
+		)
+	# ------------------------------------------------------ WARNING MESSAGES #
 	temp <- Plant_Info_Analysis %>% 
 		filter(grepl(",", RecruitmentMode)==TRUE)
 	if (dim(temp)[1] > 0) {
@@ -122,5 +142,26 @@ createPlantInfobyPlant <- function(Plant_Info, Plant_Surveys_by_Year) {
 			"Inconsistent Parent recorded for at least one plant spanning multiple plots. These plant info records have been written to csv."
 		))
 	}	
+	temp <- Plant_Info_Analysis %>% 
+		dplyr::select(-c(
+			FirstDeadObservation, 
+			FirstMissingObservation, 
+			FirstDeadMissingObservation
+		)) %>% 
+		.[complete.cases(.),]
+	temp2 <- Plant_Info_Analysis[which(!(Plant_Info_Analysis$PlantID %in% temp$PlantID)),] %>% 
+		filter(minDaysAlive > 2,
+		PlantID != 7228 &
+		PlantID != 7435 &
+		PlantID != 7548 &
+		PlantID != 8653
+	)
+	if (dim(temp2)[1] > 0) {
+		write.csv(temp, "PlantInfoMissingInfo.csv")
+		warning(paste(
+			"Some information missing from plant info for some plants. Data written to csv."
+		))
+	}
+	# ------------------------------------------------------------------------ #
 	return(Plant_Info_Analysis)
 }
