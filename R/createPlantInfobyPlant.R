@@ -29,18 +29,11 @@ createPlantInfobyPlant <- function(Plant_Info, Plant_Surveys_by_Year) {
 			# fix/verify
 			RecruitmentMode 	= paste(Unique(RecruitmentMode), collapse=","),
 			Parent 				= paste(Unique(Parent), collapse=","),
-			# should figure out the longest span of time a plotplantid was alive
-			DaysAlive 			= Maximum(DaysAlive),
-			# plant may have died in one plot but is alive in another
-			DeadMissing 		= Minimum(ConfirmedDeadMissing),
-			Dead 				= Minimum(ConfirmedDead),
-			Missing 			= Minimum(ConfirmedMissing),
 			First.Survey.Date.Alive 	= First.Survey.Date.Alive[1]
 		) %>%
 		filter(!is.na(Network))
 	# save to figure out if some plants were lost during processing
 	temp1 <- Plant_Info_Analysis$PlantID
-	Plant_Info_Analysis$DaysAlive %<>% as.numeric
 	# Parent
 	Plant_Info_Analysis %<>% mutate(
 		Parent = replace(
@@ -83,7 +76,26 @@ createPlantInfobyPlant <- function(Plant_Info, Plant_Surveys_by_Year) {
 			First_Size 				= Size_t[!(is.na(Size_t))][1],
 			First.Measurement.Date 	= Date[!(is.na(Size_t))][1],
 			min.Size 				= Minimum(Size_t),
-			max.Size 				= Maximum(Size_t)
+			max.Size 				= Maximum(Size_t),
+			LastDateAlive =
+				Maximum(Date[which(Dead==0 & Missing==0)]) %>% as.Date(origin="1970-01-01"),
+			FirstDeadObservation	= Date[which(Dead==1)][1],
+			FirstMissingObservation	= Date[which(Missing==1)][1],
+			FirstDeadMissingObservation = Minimum(
+				c(
+					FirstDeadObservation,
+					FirstMissingObservation
+				)
+			) %>% as.Date(origin="1970-01-01"),
+			# assume alive day before first observed: First.Survey.Date - 1
+			# also alive day of last survey: LastDateAlive + 1
+			minDaysAlive	= 
+				(LastDateAlive + 1) - (First.Survey.Date - 1),			
+			# assume last day alive was day before death observation: FirstDeadMissingObservation - 1
+			# assume alive day before first observed: First.Survey.Date - 1
+			# the 1s cancel out
+			maxDaysAlive	= 
+				(FirstDeadMissingObservation - 1) -	(First.Survey.Date - 1)
 		)
 	Plant_Info_Analysis %<>% 
 		merge(First_Size, by=c("PlantID"))

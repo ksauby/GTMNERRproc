@@ -167,7 +167,7 @@ processPlantInfo <- function(Plant_Info, Plot_Info) {
 		by="PlotPlantID", 
 		all=T
 	) 
-	temp_dead_missing$FirstDeadMissingObservation = temp_dead_missing %>%
+	temp_dead_missing$FirstDeadMissingObservation <- temp_dead_missing %>%
 		dplyr::select(
 			FirstDeadObservation,
 			FirstMissingObservation
@@ -176,16 +176,15 @@ processPlantInfo <- function(Plant_Info, Plot_Info) {
 		as.Date
 	# merge with Plant_Info
 	Plant_Info <- merge(Plant_Info, temp_dead_missing, by="PlotPlantID", all=T)
+	
+# ------------------------------------------------------------------------------
 	# calculate first/last day alive for PlantID (not individual Plot Plant IDs)
 	Plant_Info %<>% group_by(PlantID) %>%
 	mutate(
 		PlantID.First.Alive = min(First.Survey.Date.Alive, na.rm=T),
-		PlantID.Last.Alive = max(Last.Survey.Date.Alive, na.rm=T)
+		PlantID.Last.Alive = max(Last.Survey.Date.Alive, na.rm=T),
+		FirstDeadMissingObservation = 
 	)
-	# ---------------------- CALCULATE HOW MANY DAYS PLANT WAS KNOWN TO BE ALIVE
-	Plant_Info %<>% 
-		group_by(PlantID) %>%
-		mutate(DaysAlive = PlantID.Last.Alive - PlantID.First.Alive)
 	# -------------------------------------------------- CLEANUP FOR CONSISTENCY
 	Plant_Info[,c(
 		"Quadrant",
