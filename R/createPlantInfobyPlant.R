@@ -101,11 +101,12 @@ createPlantInfobyPlant <- function(Plant_Info, Plant_Surveys_by_Year) {
 		)
 		First_Size$minDaysAlive %<>% as.numeric
 		First_Size$maxDaysAlive %<>% as.numeric %<>%
-			Replace_NA_w_Period_Function
+			Replace_NA_w_Blank_Function
 
 	Plant_Info_Analysis %<>% 
 		merge(First_Size, by=c("PlantID")) %>%
 	   	renameSpecies %>%
+		renamePatches %>%
 		mutate(
 			HabitatType = NA,
 			HabitatType = replace(
@@ -125,6 +126,19 @@ createPlantInfobyPlant <- function(Plant_Info, Plant_Surveys_by_Year) {
 				"Intracoastal Waterway Island"
 			)
 		)
+	# Alternative Plant IDs
+	Plant_Info_Analysis %<>% mutate(
+		PlantIDb = paste(
+			IslandFullNames,
+			PlantID,
+			sep=", "
+		),
+		PlantIDc = paste(
+			IslandFullNames,
+			PlantID,
+			sep="\n"
+		)
+	)
 	# ------------------------------------------------------ WARNING MESSAGES #
 	temp <- Plant_Info_Analysis %>% 
 		filter(grepl(",", RecruitmentMode)==TRUE)
