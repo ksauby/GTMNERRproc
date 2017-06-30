@@ -108,12 +108,9 @@ calculateClonalReproduction <- function(
 	temp <- D %>% 
 		filter(is.na(Offspring.First_Size)) %>%
 		# records for these plants were checked
-		filter(
-			Offspring.ID!=7228 & 
-			Offspring.ID!=8653 & 
-			Offspring.ID!=8842 & 
-			Offspring.ID!=7548
-		)
+		filter(!(
+			Offspring.ID %in% c(7228, 8653, 8842, 7548, 7793, 7794, 7774, 7778, 7795, 7773
+		)))
 	if (dim(temp)[1] > 0) {
 		warning("Some offspring have no recorded first size.")
 	}	
