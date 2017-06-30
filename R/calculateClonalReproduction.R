@@ -83,9 +83,16 @@ calculateClonalReproduction <- function(
 	
 	# keep only offspring records where first survey occurred after the previous parent spring/summer survey but before or on the same day as the current spring/summer survey
 	D <- C %>% filter(
-		Offspring.First.Survey.Date.Alive > Parent.SpringSummer.Obs.Date_t_1,
-		Offspring.First.Survey.Date.Alive <= Parent.SpringSummer.Obs.Date_t
+		(
+			Offspring.First.Survey.Date.Alive>Parent.SpringSummer.Obs.Date_t_1 &
+			Offspring.First.Survey.Date.Alive <= Parent.SpringSummer.Obs.Date_t
+		) |
+		# for plants surveyed during the first year, which do not have a previous parent size
+		(
+			is.na(Parent.SpringSummer.Obs.Date_t_1) &
+			Offspring.First.Survey.Date.Alive <= Parent.SpringSummer.Obs.Date_t
 		)
+	)
 
 	# ------------------------------------------------------------- WARNINGS ---
 	# for which parents are there not size measurements?
@@ -94,9 +101,19 @@ calculateClonalReproduction <- function(
 		warning("Some parents have no recorded size.")
 	}
 	# for which offspring are there no first size measurements?
+	
+	Plant_Info_Analysis %>% filter(is.na(First_Size))  %>% arrange(First.Survey.Date.Alive)
+	
+	
 	temp <- D %>% 
 		filter(is.na(Offspring.First_Size)) %>%
-		filter(Offspring.ID!=7435 & Offspring.ID!=8842)
+		# records for these plants were checked
+		filter(
+			Offspring.ID!=7228 & 
+			Offspring.ID!=8653 & 
+			Offspring.ID!=8842 & 
+			Offspring.ID!=7548
+		)
 	if (dim(temp)[1] > 0) {
 		warning("Some offspring have no recorded first size.")
 	}	
