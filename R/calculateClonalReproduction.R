@@ -24,13 +24,18 @@ calculateClonalReproduction <- function(
 	# PARENT SURVEY DATA
 	# use this dataset to use parent size that is consistent for all offpsring
 	A <- Plant_Surveys_by_Year %>% 
+		group_by(PlantID) %>%
+		mutate(
+			Parent.SpringSummer.Obs.Date_t_1 = lag(SurveyDate_SpringSummer)
+		) %>%
 		dplyr::select(
 			PlantID, 
 			FecundityYear, 
 			SurveyDate_SpringSummer, 
+			Parent.SpringSummer.Obs.Date_t_1,
 			Size_t
 		) %>% 
-		setnames("SurveyDate_SpringSummer", "Parent.Obs.Date") %>%
+		setnames("SurveyDate_SpringSummer", "Parent.SpringSummer.Obs.Date_t") %>%
 		setnames("Size_t", "Parent.Size_t") %>%
 		setnames("FecundityYear", "Parent.FecundityYear") %>%
 		setnames("PlantID", "Parent.ID")
@@ -65,14 +70,13 @@ calculateClonalReproduction <- function(
 		) %>%
 		merge(
 			A, 
-			by.x = c("Parent.ID", "Offspring.minFecundityYear"),
-			by.y  = c("Parent.ID", "Parent.FecundityYear"),
+			by = "Parent.ID",
 			all=T
 		) %>%
 		# remove plants that had no offspring
 		filter(!is.na(Offspring.ID)) %>%
 		# remove plants without identified parents
-		filter(!is.na(Parent.ID))
+		filter(Parent.ID!="Unkn" & Parent.ID!="unkn")
 		
 	# ------------------------------------------------------------- WARNINGS
     C %>%
@@ -109,9 +113,19 @@ calculateClonalReproduction <- function(
 	}	
 	# -------------------------------------------------------------------- #
 	
-	D <- C %>%
-		group_by(Parent.ID) %>%
-		# remove NAs
+	
+	D <- C %>% filter(
+		Offspring.First.Survey.Date.Alive > Parent.SpringSummer.Obs.Date_t_1,
+		Offspring.First.Survey.Date.Alive <= Parent.SpringSummer.Obs.Date_t
+		)
+	
+	
+	# warnings
+	D %>% filter(is.na(Parent.Size_t)) %>% dim
+	D %>% filter(is.na(Offspring.First_Size)) %>% dim
+	D %>% filter(is.na(Parent.SpringSummer.Obs.Date_t)) %>% dim
+		
+	D <- D %>%
 		filter(!is.na(Parent.Size_t)) %>%
 		filter(!is.na(Offspring.First_Size)) %>%
 		filter(!is.na(Parent.Obs.Date)) %>%
