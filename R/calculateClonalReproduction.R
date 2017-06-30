@@ -1,6 +1,7 @@
 #' Calculate Clonal Reproduction
 #'
 #' @description Determine parent plant size before segments were lost to offspring, the number of segments lost of offspring, the number of clonal offspring produced, and the first size observed for each clonal offspring.
+# calculate Parent size as observed parent size plus all offspring; this ensures that a parent cannot have size equal to or less than offspring
 
 #' @return Returns the following variables:
 #' \itemize{
@@ -68,6 +69,7 @@ calculateClonalReproduction <- function(
 			Offspring.First.Survey.Date.Alive,
 			Offspring.minFecundityYear
 		) %>%
+		# join all plant records with each offspring record
 		merge(
 			A, 
 			by = "Parent.ID",
@@ -78,70 +80,36 @@ calculateClonalReproduction <- function(
 		# remove plants without identified parents
 		filter(Parent.ID!="Unkn" & Parent.ID!="unkn")
 		
-	# ------------------------------------------------------------- WARNINGS
-    C %>%
-   		filter(is.na(Parent.Obs.Date))
-	# calculateClonalReproduction - why do some parents have no obs.date & size?
-	# for Plant 7769 its parent wasn't measured the year the offspring was first observed
-	PlantIDwoSize <- C %>%
-		filter(is.na(Parent.Size_t)) %>%
-		# these are fine:
-		filter(Parent.ID!=8692, Parent.ID!=9076) %$% 
-		unique(Parent.ID)
-	if (length(temp) > 0) {
-		warning(paste(
-			"Parent obs date and size not available for parent(s)",
-			paste(PlantIDwoSize, collapse=",")
-		))
-	}
-	# were any sizes recorded at all? yes, at least for some
-	PlantIDwoSize <- C %>% 
-		filter(is.na(Offspring.First_Size)) %$% 
-		unique(Offspring.ID)
-	temp <- Plant_Surveys_by_Plant %>%
-		filter(
-			PlantID %in% PlantIDwoSize,
-			!(is.na(Size_t))
-		) %$%
-		unique(PlantID)
-	if (length(temp) > 0) {
-		warning(paste(
-			"Size data available for",
-			paste(temp, collapse=","),
-			"but not included in Plant Info."
-		))
-	}	
-	# -------------------------------------------------------------------- #
 	
-	
+	# keep only offspring records where first survey occurred after the previous parent spring/summer survey but before or on the same day as the current spring/summer survey
 	D <- C %>% filter(
 		Offspring.First.Survey.Date.Alive > Parent.SpringSummer.Obs.Date_t_1,
 		Offspring.First.Survey.Date.Alive <= Parent.SpringSummer.Obs.Date_t
 		)
-	
-	
-	# warnings
-	D %>% filter(is.na(Parent.Size_t)) %>% dim
-	D %>% filter(is.na(Offspring.First_Size)) %>% dim
-	D %>% filter(is.na(Parent.SpringSummer.Obs.Date_t)) %>% dim
-		
-	D <- D %>%
+
+	# ------------------------------------------------------------- WARNINGS ---
+	# for which parents are there not size measurements?
+	temp <- D %>% filter(is.na(Parent.Size_t))
+	if (dim(temp)[1] > 0) {
+		warning("Some parents have no recorded size.")
+	}
+	# for which offspring are there no first size measurements?
+	temp <- D %>% 
+		filter(is.na(Offspring.First_Size)) %>%
+		filter(Offspring.ID!=7435 & Offspring.ID!=8842)
+	if (dim(temp)[1] > 0) {
+		warning("Some offspring have no recorded first size.")
+	}	
+	# for which parents are there no spring/summer observation dates?
+	temp <- D %>% filter(is.na(Parent.SpringSummer.Obs.Date_t))
+	if (dim(temp)[1] > 0) {
+		warning("Some parents have no spring/summer observation dates.")
+	}
+	# --------------------------------------------------------------------------
+	D %<>%
 		filter(!is.na(Parent.Size_t)) %>%
 		filter(!is.na(Offspring.First_Size)) %>%
-		filter(!is.na(Parent.Obs.Date)) %>%
-		# keep only parent surveys that are before or on the same date as the first offspring obs. date
-		filter(
-			Parent.Obs.Date <= Offspring.First.Survey.Date.Alive
-		) %>%
-		# find Parent observation date (WITH a size obs) closest to (or equal to) date that the offspring was observed
-		filter(Parent.Obs.Date==max(Parent.Obs.Date)) %>%
-		
-		########################################
-		
-		# find Offspring observation date (WITH a size obs) closest to (or equal to) date it was first observed
-		filter(Offspring.Obs.Date==min(Offspring.Obs.Date)) %>%
-		setnames("First.Survey.Date.Alive", "Date")	%>%
-		as.data.frame
+		filter(!is.na(Parent.SpringSummer.Obs.Date_t))
 		
 	# figure out parent size by adding observed size + offspring segments
 	parent_size <- D %>% 
@@ -149,58 +117,100 @@ calculateClonalReproduction <- function(
 		group_by(Parent.ID, Parent.FecundityYear) %>%
 		# calculate Parent size as observed parent size plus all offspring; this ensures that a parent cannot have size equal to or less than offspring
 		dplyr::summarise(
-			Parent_Size_w_clones_t = Parent.Size_t[1] + sum(Offspring.Size_t)
+			SizewClones_t = Parent.Size_t[1] + sum(Offspring.First_Size),
+			NClones_t = length(unique(Offspring.ID)),
+			NSegLosttoClones_t = sum(Offspring.First_Size)
 		)
-	
-	# merge offspring info with parent size info
-	D %<>% 
-		as.data.frame %>%
-	   	select(Parent, FecundityYear, PlantID, Offspring.Size_t) %>%
-		merge(parent_size, by=c("Parent", "FecundityYear"))
-
-
-	# need to know number of segments produced per size class - WHY?
-	loss_to_clones <- D %>% 
-		group_by(Parent, FecundityYear) %>%
-		dplyr::summarise(
-			Clones_t = length(unique(PlantID)),
-			Size_t_w_clone = paste(unique(Parent_Size_t), collapse=","),
-			Loss_to_Offspring = sum(Offspring.Size_t)
-		)
-
-	Plant_Surveys_by_Yearw_clones <- merge(
-			Plant_Surveys_by_Year, 
-			loss_to_clones, 
+	# merge parent size with clones with plant surveys
+	Plant_Surveys_by_Yearw_clones <- Plant_Surveys_by_Year %>%
+		merge(
+			parent_size, 
 			by.x=c("PlantID", "FecundityYear"), 
-			by.y=c("Parent", "FecundityYear"),
+			by.y=c("Parent.ID", "Parent.FecundityYear"),
 			all=T
 		) %>% 
 		as.data.frame
 	Plant_Surveys_by_Yearw_clones %<>%
 		rowwise %>%
+		# replace values for plants that did not produce clones that year
 		mutate(
-			Clones_t = replace(
-				Clones_t,
-				which(is.na(Clones_t)),
+			NClones_t = replace(
+				NClones_t,
+				which(is.na(NClones_t)),
 				0
 			),
-			Size_t_w_clone = replace(
-				Size_t_w_clone,
-				which(is.na(Size_t_w_clone)),
+			SizewClones_t = replace(
+				SizewClones_t,
+				which(is.na(SizewClones_t)),
 				Size_t
 			),
-			Loss_to_Offspring = replace(
-				Loss_to_Offspring,
-				which(is.na(Loss_to_Offspring)),
+			NSegLosttoClones_t = replace(
+				NSegLosttoClones_t,
+				which(is.na(NSegLosttoClones_t)),
 				0
 			)
 		)
-	Plant_Surveys_by_Yearw_clones$Size_t_w_clone %<>% as.numeric
+	Plant_Surveys_by_Yearw_clones$SizewClones_t %<>% as.numeric
 	# presence of clonal reproduction
 	Plant_Surveys_by_Yearw_clones$ClonePres_t <- ifelse(
-		Plant_Surveys_by_Yearw_clones$Loss_to_Offspring > 0,
+		Plant_Surveys_by_Yearw_clones$NSegLosttoClones_t > 0,
 		1,
 		0
 	)	
+	
+	
+	# ------------------------------------------------------------- WARNINGS ---
+	# for which parents of offspring are there no NClones_t records?
+	PlanIntoParents <- Plant_Info_Analysis %>% 
+		filter(Parent!="Unknown") %$% 
+		unique(Parent)
+		PlantSurveyswClones <- Plant_Surveys_by_Yearw_clones %>% 
+		filter(ClonePres_t==1) %$% 
+		unique(PlantID)
+	missingOffspringCounts <- (PlanIntoParents[which(
+		!(PlanIntoParents %in% PlantSurveyswClones) &
+		# the offspring were surveyed before the parents
+		PlanIntoParents != 8692 & PlanIntoParents != 9076
+		)])
+	if (length(missingOffspringCounts) > 0) {
+		warning("Some parents have not been recorded as having offspring.")
+	}		
+	# --------------------------------------------------------------------------
+	
+	
 	return(Plant_Surveys_by_Yearw_clones)
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# ------------------------------------------------------------- WARNINGS
+
+# were any sizes recorded at all? yes, at least for some
+PlantIDwoSize <- C %>% 
+	filter(is.na(Offspring.First_Size)) %$% 
+	unique(Offspring.ID)
+temp <- Plant_Surveys_by_Plant %>%
+	filter(
+		PlantID %in% PlantIDwoSize,
+		!(is.na(Size_t))
+	) %$%
+	unique(PlantID)
+if (length(temp) > 0) {
+	warning(paste(
+		"Size data available for",
+		paste(temp, collapse=","),
+		"but not included in Plant Info."
+	))
+}	
+# -------------------------------------------------------------------- #
