@@ -106,13 +106,13 @@ calculateClonalReproduction <- function(
 		warning("Some parents have no spring/summer observation dates.")
 	}
 	# --------------------------------------------------------------------------
-	D %<>%
+	E <- D %>%
 		filter(!is.na(Parent.Size_t)) %>%
 		filter(!is.na(Offspring.First_Size)) %>%
 		filter(!is.na(Parent.SpringSummer.Obs.Date_t))
 		
 	# figure out parent size by adding observed size + offspring segments
-	parent_size <- D %>% 
+	parent_size <- E %>% 
 		as.data.frame %>%
 		group_by(Parent.ID, Parent.FecundityYear) %>%
 		# calculate Parent size as observed parent size plus all offspring; this ensures that a parent cannot have size equal to or less than offspring
@@ -157,14 +157,12 @@ calculateClonalReproduction <- function(
 		1,
 		0
 	)	
-	
-	
 	# ------------------------------------------------------------- WARNINGS ---
 	# for which parents of offspring are there no NClones_t records?
 	PlanIntoParents <- Plant_Info_Analysis %>% 
 		filter(Parent!="Unknown") %$% 
 		unique(Parent)
-		PlantSurveyswClones <- Plant_Surveys_by_Yearw_clones %>% 
+	PlantSurveyswClones <- Plant_Surveys_by_Yearw_clones %>% 
 		filter(ClonePres_t==1) %$% 
 		unique(PlantID)
 	missingOffspringCounts <- (PlanIntoParents[which(
@@ -172,45 +170,12 @@ calculateClonalReproduction <- function(
 		# the offspring were surveyed before the parents
 		PlanIntoParents != 8692 & PlanIntoParents != 9076
 		)])
-	if (length(missingOffspringCounts) > 0) {
-		warning("Some parents have not been recorded as having offspring.")
+	temp <- D %>% 
+		filter(Parent.ID %in% missingOffspringCounts) %>%
+		filter(Offspring.ID!=7435 & Offspring.ID!=8842)
+	if (dim(temp)[1] > 0) {
+		warning("Some parents for which offspring were observed have no records of having clones after processing of the data.")
 	}		
 	# --------------------------------------------------------------------------
-	
-	
 	return(Plant_Surveys_by_Yearw_clones)
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# ------------------------------------------------------------- WARNINGS
-
-# were any sizes recorded at all? yes, at least for some
-PlantIDwoSize <- C %>% 
-	filter(is.na(Offspring.First_Size)) %$% 
-	unique(Offspring.ID)
-temp <- Plant_Surveys_by_Plant %>%
-	filter(
-		PlantID %in% PlantIDwoSize,
-		!(is.na(Size_t))
-	) %$%
-	unique(PlantID)
-if (length(temp) > 0) {
-	warning(paste(
-		"Size data available for",
-		paste(temp, collapse=","),
-		"but not included in Plant Info."
-	))
-}	
-# -------------------------------------------------------------------- #
