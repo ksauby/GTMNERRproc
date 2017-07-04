@@ -32,16 +32,7 @@ createInsectPresDuringStudy <- function(Plant_Surveys_by_Year) {
 			CANetworkPres 			= Maximum(CA_t),
 			MothNetworkPres 		= Maximum(Moth_Evidence_t)
 		)
-	Plant_summary <- Plant_Surveys_by_Year %>%
-		group_by(PlantID) %>%
-		dplyr::summarise(
-			OldMothPlantPres 		= Maximum(Old_Moth_Evidence_t),
-			MEPlantPres 			= Maximum(ME_t),
-			CAPlantPres 			= Maximum(CA_t),
-			MothPlantPres 			= Maximum(Moth_Evidence_t)
-		)
 	Plant_Surveys_by_Year %>% 
 		merge(network_summary, by="Network") %>% 
-		merge(Plant_summary, by="PlantID") %>%
 		merge(network_summary_time_t, by=c("FecundityYear", "Network"))
 }
