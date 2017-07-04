@@ -103,7 +103,7 @@ createPlantInfobyPlant <- function(Plant_Info, Plant_Surveys_by_Year) {
 		)
 		First_Size$minDaysAlive %<>% as.numeric
 		First_Size$maxDaysAlive %<>% as.numeric %<>%
-			Replace_NA_w_Blank_Function
+			Replace_NA_w_Period_Function
 
 	Plant_Info_Analysis %<>% 
 		merge(First_Size, by=c("PlantID")) %>%
@@ -129,18 +129,18 @@ createPlantInfobyPlant <- function(Plant_Info, Plant_Surveys_by_Year) {
 			)
 		)
 	# Alternative Plant IDs
-	Plant_Info_Analysis %<>% mutate(
-		PlantIDb = paste(
-			IslandFullNames,
-			PlantID,
-			sep=", "
-		),
-		PlantIDc = paste(
-			IslandFullNames,
-			PlantID,
-			sep="\n"
-		)
-	)
+	# Plant_Info_Analysis %<>% mutate(
+	# 	PlantIDb = paste(
+	# 		IslandFullNames,
+	# 		PlantID,
+	# 		sep=", "
+	# 	),
+	# 	PlantIDc = paste(
+	# 		IslandFullNames,
+	# 		PlantID,
+	# 		sep="\n"
+	# 	)
+	# )
 	# ------------------------------------------------------ WARNING MESSAGES #
 	temp <- Plant_Info_Analysis %>% 
 		filter(grepl(",", RecruitmentMode)==TRUE)
@@ -178,6 +178,14 @@ createPlantInfobyPlant <- function(Plant_Info, Plant_Surveys_by_Year) {
 			"Some information missing from plant info for some plants. Data written to csv."
 		))
 	}
+	# No plant should be recorded as alive less than 2 days
+	temp <- Plant_Info_Analysis %>% filter(minDaysAlive < 2)
+	if (dim(temp)[1] > 0) {
+		write.csv(temp,"PlantsAliveLessThan2Days.csv")
+		warning(paste(
+			"Some plants are recorded as alive for less than 2 days. Records written to csv."
+		))
+	}	
 	# ------------------------------------------------------------------------ #
 	return(Plant_Info_Analysis)
 }
