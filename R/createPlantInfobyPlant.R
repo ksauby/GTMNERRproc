@@ -15,7 +15,8 @@ createPlantInfobyPlant <- function(Plant_Info, Plant_Surveys_by_Year) {
 				Parent,
 				which(Parent=="Unkn"),
 				NA
-			)
+			),
+			AliveatEndofStudy = abs(ConfirmedDeadMissing - 1)
 		) %>%
 		renameSpecies
 	Plant_Info_Analysis %<>%
@@ -29,7 +30,8 @@ createPlantInfobyPlant <- function(Plant_Info, Plant_Surveys_by_Year) {
 			# fix/verify
 			RecruitmentMode 	= paste(Unique(RecruitmentMode), collapse=","),
 			Parent 				= paste(Unique(Parent), collapse=","),
-			First.Survey.Date.Alive 	= First.Survey.Date.Alive[1]
+			First.Survey.Date.Alive = First.Survey.Date.Alive[1],
+			AliveatEndofStudy	= Maximum(AliveatEndofStudy)
 		) %>%
 		filter(!is.na(Network)) %>%
 		mutate(

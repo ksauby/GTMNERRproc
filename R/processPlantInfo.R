@@ -97,22 +97,22 @@ processPlantInfo <- function(Plant_Info, Plot_Info) {
 			sequenceDeadobs 		= paste(Dead, collapse=""),
 			sequenceMissingobs 		= paste(Missing, collapse=""),
 			sequenceDeadMissingobs 	= paste(DeadMissing, collapse=""),
-			confirmedDead 			= ifelse(
+			ConfirmedDead 			= ifelse(
 				grepl("11", sequenceDeadobs) == TRUE,
 				1,
 				0
 			),
-			confirmedMissing 		= ifelse(
+			ConfirmedMissing 		= ifelse(
 				grepl("11", sequenceDeadobs) == TRUE,
 				1,
 				0
 			),
-			confirmedDeadMissing 	= ifelse(
+			ConfirmedDeadMissing 	= ifelse(
 				grepl("11", sequenceDeadMissingobs) == TRUE,
 				1,
 				0
 			),
-			inconsistentDeadMissing = ifelse(
+			InconsistentDeadMissing = ifelse(
 				grepl("10", sequenceDeadMissingobs) == TRUE,
 				1,
 				0
@@ -120,7 +120,7 @@ processPlantInfo <- function(Plant_Info, Plot_Info) {
 		)
 	# ERROR MESSAGES
 	Z <- A %>% 
-		filter(inconsistentDeadMissing==1) %>%
+		filter(InconsistentDeadMissing==1) %>%
 		filter(!(
 			PlotPlantID %in% c("8999b", "9113b", "9164a", "9341a", "9917a", 
 			"8873b", "9892b", "9573b")

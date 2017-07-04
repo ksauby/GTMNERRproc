@@ -170,9 +170,11 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys, date_window=48,...
 		"Height_t")] %<>% 
 		apply(., 2, NA_Function
 	)
+	# - Process plants NOT spanning multiple plots --------------------------- #
+	temp_C <- Plant_Surveys %>% filter(N.PlotPlantIDs == 1)	
 	# - Merge plant survey data into one file -------------------------------- #
 	# create new file with those plants in only one plot
-	temp_C <- filter(Plant_Surveys, N.PlotPlantIDs == 1)
+	
 	temp_C %<>% select( 
 		PlantID, 
 		Date, 
