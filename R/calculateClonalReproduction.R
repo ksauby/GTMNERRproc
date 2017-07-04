@@ -101,16 +101,11 @@ calculateClonalReproduction <- function(
 		warning("Some parents have no recorded size.")
 	}
 	# for which offspring are there no first size measurements?
-	
-	Plant_Info_Analysis %>% filter(is.na(First_Size))  %>% arrange(First.Survey.Date.Alive)
-	
-	
 	temp <- D %>% 
 		filter(is.na(Offspring.First_Size)) %>%
 		# records for these plants were checked
 		filter(!(
-			Offspring.ID %in% c(7228, 8653, 8842, 7548, 7793, 7794, 7774, 7778, 7795, 7773
-		)))
+			Offspring.ID %in% c(8653, 8842, 7548)))
 	if (dim(temp)[1] > 0) {
 		warning("Some offspring have no recorded first size.")
 	}	
@@ -164,6 +159,7 @@ calculateClonalReproduction <- function(
 				0
 			)
 		)
+	Plant_Surveys_by_Yearw_clones %<>% as.data.frame
 	Plant_Surveys_by_Yearw_clones$SizewClones_t %<>% as.numeric
 	# presence of clonal reproduction
 	Plant_Surveys_by_Yearw_clones$ClonePres_t <- ifelse(
