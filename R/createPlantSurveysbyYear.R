@@ -57,7 +57,8 @@ createPlantSurveysbyYear <- function(Plant_Surveys_by_Plant) {
 		dplyr::select(
 			Date,
 			PlantID,
-			FecundityYear
+			FecundityYear,
+			OutsideOfPlot
 		) %>%
 		setnames("Date", "SurveyDate_SpringSummer")
 	# merge

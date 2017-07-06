@@ -138,6 +138,8 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys, date_window=48,...
 			}
 			# Number of segments
 			Z[[i]][j, "Size_t"] 					<- mysum(M$Size_t)
+			Z[[i]][j, "SizeInPlots_t"] <- 
+				mysum(M$Size_t[which(M$OutsideOfPlot!="Yes")])
 			Z[[i]][j, "Plant_Segments_w_leaves"] <- 
 				mysum(M$Plant_Segments_w_leaves)
 			Z[[i]][j, "Plant_Segments_wo_leaves"] <-
@@ -171,7 +173,18 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys, date_window=48,...
 		apply(., 2, NA_Function
 	)
 	# - Process plants NOT spanning multiple plots --------------------------- #
-	temp_C <- Plant_Surveys %>% filter(N.PlotPlantIDs == 1)	
+	temp_C <- Plant_Surveys %>% 
+		filter(N.PlotPlantIDs == 1) %>%
+		rowwise %>%
+		mutate(
+			SizeInPlots_t = NA,
+			SizeInPlots_t = replace(
+				SizeInPlots_t,
+				which(OutsideOfPlot!="Yes"),
+				Size_t
+			)
+		) %>%
+		as.data.frame
 	# - Merge plant survey data into one file -------------------------------- #
 	# create new file with those plants in only one plot
 	

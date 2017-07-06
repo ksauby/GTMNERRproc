@@ -48,17 +48,33 @@ estimateCactusDensityperPlot <- function(Plant_Surveys_by_Year, Plot_Info) {
 		mutate(
 			cactus_density_per_plot = 
 				sum(cactus_density,-(Size_t), na.rm=T)/n_plots,
+			# pusilla
 			pusilla_density_per_plot = NA,
-			stricta_density_per_plot = NA,
+			#		if focal plant is pusilla
 			pusilla_density_per_plot = replace(
 				pusilla_density_per_plot,
 				which(Species=="Opuntia pusilla"),
 				sum(pusilla_density,-(Size_t), na.rm=T)/n_plots
 			),
+			# 		if focal plant is stricta
+			pusilla_density_per_plot = replace(
+				pusilla_density_per_plot,
+				which(Species=="Opuntia stricta"),
+				pusilla_density/n_plots
+			),
+			# stricta
+			stricta_density_per_plot = NA,
+			# 		if focal plant is stricta
 			stricta_density_per_plot = replace(
 				stricta_density_per_plot,
 				which(Species=="Opuntia stricta"),
 				sum(stricta_density,-(Size_t), na.rm=T)/n_plots
+			),
+			#		if focal plant is pusilla
+			stricta_density_per_plot = replace(
+				stricta_density_per_plot,
+				which(Species=="Opuntia pusilla"),
+				stricta_density/n_plots
 			)
 		) %>%
 		as.data.frame
