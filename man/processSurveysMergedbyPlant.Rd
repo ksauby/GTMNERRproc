@@ -4,7 +4,7 @@
 \alias{processSurveysMergedbyPlant}
 \title{Process Plant Survey Data, per plant}
 \usage{
-processSurveysMergedbyPlant(Plant_Surveys)
+processSurveysMergedbyPlant(Plant.Surveys, Plant.Info)
 }
 \description{
 Steps:

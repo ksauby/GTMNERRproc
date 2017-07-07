@@ -13,9 +13,9 @@
 #'
 #' @export
 	
-processSurveysMergedbyPlant <- function(Plant_Surveys) {
-	Plant_Surveys %>%
-		mergePlantRecordsfromMultiplePlots %>%
+processSurveysMergedbyPlant <- function(Plant.Surveys, Plant.Info) {
+	Plant.Surveys %>%
+		mergePlantRecordsfromMultiplePlots(Plant.Info) %>%
 		calculateFruitPresence %>%
 		calculatePlantVolume %>%
 		determineInsectPresenceDuringStudy %>%

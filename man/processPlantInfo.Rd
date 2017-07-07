@@ -4,7 +4,7 @@
 \alias{processPlantInfo}
 \title{Process Plant Info}
 \usage{
-processPlantInfo(Plant_Info, Plot_Info)
+processPlantInfo(Plant_Info, Plot_Info, Plant_Surveys)
 }
 \arguments{
 \item{Plant_Info}{Dataset with Plant Information}

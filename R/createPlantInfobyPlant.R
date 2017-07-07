@@ -6,7 +6,7 @@
 #' @export
 #' @importFrom dataproc Unique
 
-createPlantInfobyPlant <- function(Plant_Info, Plant_Surveys_by_Year) {
+createPlantInfobyPlant <- function(Plant_Info, Plant_Surveys_by_Year, Plant_Surveys_by_Plant) {
 	# one record per plant
 	# 2849 records
 	Plant_Info_Analysis <- Plant_Info %>%

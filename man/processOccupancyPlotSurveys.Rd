@@ -4,7 +4,7 @@
 \alias{processOccupancyPlotSurveys}
 \title{Process Plot Survey Data}
 \usage{
-processOccupancyPlotSurveys(Plot_Surveys)
+processOccupancyPlotSurveys(Plot_Surveys, Plot_Info)
 }
 \description{
 Steps:

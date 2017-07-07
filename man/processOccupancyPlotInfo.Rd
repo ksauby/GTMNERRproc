@@ -4,7 +4,7 @@
 \alias{processOccupancyPlotInfo}
 \title{Process Plot Survey Data}
 \usage{
-processOccupancyPlotInfo(Plot_Info)
+processOccupancyPlotInfo(Plot_Info, Plot.Vegetation, GIS_data_updated)
 }
 \description{
 Steps:

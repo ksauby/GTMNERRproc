@@ -5,14 +5,14 @@
 #' 
 #' @export
 
-mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys, date_window=48,...) {
+mergePlantRecordsfromMultiplePlots <- function(Plant.Surveys, Plant.Info, date.window=48,...) {
 	# use same window for all plants
 	# restrict to plants that span multiple plots
-	temp_A <- filter(Plant_Surveys, N.PlotPlantIDs > 1) %>% arrange(Date)
+	temp.A <- filter(Plant.Surveys, N.PlotPlantIDs > 1) %>% arrange(Date)
 	Z = list()
-	for (i in 1:length(unique(temp_A$PlantID))) {
+	for (i in 1:length(unique(temp.A$PlantID))) {
 		# pull all records for this PlantID from the plant surveys
-		L = filter(temp_A, PlantID==unique(temp_A$PlantID)[i])
+		L = filter(temp.A, PlantID==unique(temp.A$PlantID)[i])
 		# group by window of dates
 		if (max(L$Date) - min(L$Date) > 
 			SequenceofDates[2] - SequenceofDates[1]) {
@@ -83,15 +83,15 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys, date_window=48,...
 			# ---------------------------------------------------------------- #
 			# get list of PlotPlantIDs alive at this time
 			# plant would be dead if no PlantID records showed up in N
-			N = Plant_Info %>%
+			N = Plant.Info %>%
 				filter( 
 					PlantID==L$PlantID[1], 
-					# only include plants that are listed as having been added to Plant_Info on or after Date
+					# only include plants that are listed as having been added to Plant.Info on or after Date
 					First.Survey.Date.Alive <= 
-						as.Date(Z[[i]]$Date[j]) + date_window,
+						as.Date(Z[[i]]$Date[j]) + date.window,
 					# exclude dead plants (including date plant was first recorded as dead)
 					FirstDeadMissingObservation > 
-						as.Date(Z[[i]]$Date[j]) + date_window | 
+						as.Date(Z[[i]]$Date[j]) + date.window | 
 						is.na(FirstDeadMissingObservation)==T
 				)	
 			# pull all surveys where plant was marked dead
@@ -158,6 +158,8 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys, date_window=48,...
 			Z[[i]][j, "Fruit_Flowers_t"] 			<- mysum(M$Fruit_Flowers_t)
 			Z[[i]][j, "DemographicSurvey"] 			<- K$DemographicSurvey[1]
 			Z[[i]][j, "FecundityYear"] 				<- K$FecundityYear[1]
+		
+			Z[[i]][j, "OutsideOfPlot"] 				<- ""
 			# Paste PlotPlantIDs together to know which plants were surveyed on this date
 		}
 		Z[[i]] %<>%
@@ -165,15 +167,15 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys, date_window=48,...
 			setnames("maxDate", "Date")
 		cat(i)
 	}
-	temp_B <- do.call(rbind.data.frame, Z)
-	temp_B[,c(
+	temp.B <- do.call(rbind.data.frame, Z)
+	temp.B[,c(
 		"Perpen_Width",
 		"Width_t",
 		"Height_t")] %<>% 
 		apply(., 2, NA_Function
 	)
 	# - Process plants NOT spanning multiple plots --------------------------- #
-	temp_C <- Plant_Surveys %>% 
+	temp.C <- Plant.Surveys %>% 
 		filter(N.PlotPlantIDs == 1) %>%
 		rowwise %>%
 		mutate(
@@ -188,7 +190,7 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys, date_window=48,...
 	# - Merge plant survey data into one file -------------------------------- #
 	# create new file with those plants in only one plot
 	
-	temp_C %<>% select( 
+	temp.C %<>% select( 
 		PlantID, 
 		Date, 
 		# insects
@@ -217,22 +219,23 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys, date_window=48,...
 		Dead, 
 		Missing, 
 		DemographicSurvey,
-		FecundityYear
+		FecundityYear,
+		OutsideOfPlot
 	)
-	temp_C$AllSurveyed <- "TRUE"
-	temp_C$PlantsSurveyed <- "NA"
+	temp.C$AllSurveyed <- "TRUE"
+	temp.C$PlantsSurveyed <- "NA"
 	# merge plants in multiple plots and plants in one plot
-	temp_D <- rbind.fill(temp_B, temp_C)
-	temp_D %<>% arrange(PlantID, Date)
+	temp.D <- rbind.fill(temp.B, temp.C)
+	temp.D %<>% arrange(PlantID, Date)
 	# ----------------------------------------------------------------- WARNINGS
 	# WHICH PLANTS COMPLETELY DIED BUT DO NOT HAVE A SURVEY INDICATING SO IN THE MERGED SURVEYS?
 	# Dead/missing observations from plant surveys before merge
-	temp1 <- temp_A %>% filter(Dead == 1 | Missing == 1)
+	temp1 <- temp.A %>% filter(Dead == 1 | Missing == 1)
 	# Dead/missing observations from plant surveys after merge
-	temp2 <- temp_D %>% filter(Dead == 1 | Missing == 1)
+	temp2 <- temp.D %>% filter(Dead == 1 | Missing == 1)
 	temp <- temp1 %>% filter(!(PlantID %in% temp2$PlantID))
 	# which of these plants completely died?
-	temp3 <- Plant_Info %>%
+	temp3 <- Plant.Info %>%
 		filter(PlantID %in% temp$PlantID) %>%
 		group_by(PlantID) %>%
 		summarise(
@@ -247,7 +250,7 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys, date_window=48,...
 		))
 	}
 	# WARNING IF PLANTS MARKED DEAD HAVE NON-ZERO SIZE/FRUIT COUNT MEASUREMENTS
-	temp <- temp_D %>%
+	temp <- temp.D %>%
 		filter(
 			Dead == 1,
 			!(
@@ -275,7 +278,7 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys, date_window=48,...
 		))
 	}
 	# WARNING IF PLANTS MARKED DEAD HAVE NON-ZERO SIZE/FRUIT COUNT MEASUREMENTS
-	temp <- temp_D %>%
+	temp <- temp.D %>%
 		filter(
 			Missing == 1,
 			!(
@@ -303,7 +306,7 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys, date_window=48,...
 		))
 	}
 	# ------------------------- CHANGE SURVEY INFO TO NA FOR DEAD/MISSING PLANTS
-	temp_D %<>%
+	temp.D %<>%
 		rowwise() %>%
 		mutate(
 			CA_t = replace(
@@ -409,6 +412,6 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys, date_window=48,...
 		) %>%
 		ungroup()
 	# --------------------------------------------------------------------------
-	temp_D$Date %<>% as.Date
-	return(temp_D)
+	temp.D$Date %<>% as.Date
+	return(temp.D)
 }

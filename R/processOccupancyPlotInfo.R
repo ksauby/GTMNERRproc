@@ -21,7 +21,7 @@
 #'
 #' @export
 
-processOccupancyPlotInfo <- function(Plot_Info) {
+processOccupancyPlotInfo <- function(Plot_Info, Plot.Vegetation, GIS_data_updated) {
 	#--------------------------------------- Misc
 	# fix Cluster name
 	"Cluster" -> Plot_Info$Sampling[which(Plot_Info$Sampling=="Clusters")]

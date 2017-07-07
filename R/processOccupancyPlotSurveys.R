@@ -16,7 +16,7 @@
 #'
 #' @export
 
-processOccupancyPlotSurveys <- function(Plot_Surveys) {
+processOccupancyPlotSurveys <- function(Plot_Surveys, Plot_Info) {
 	# ----------------------------------------------------------- ERROR MESSAGES
 	# Duplicates in Plot Surveys
 	dups = Plot_Surveys %>%

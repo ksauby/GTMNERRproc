@@ -8,7 +8,7 @@
 
 #' @export
 
-processPlantInfo <- function(Plant_Info, Plot_Info) {
+processPlantInfo <- function(Plant_Info, Plot_Info, Plant_Surveys) {
 	# --------------------------------------------------- remove InBigPlantStudy
 	Plant_Info %<>% filter(InBigPlantStudy=="")
 	# ----------------------------------------------------------- ERROR MESSAGES
