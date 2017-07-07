@@ -15,6 +15,8 @@ estimateCactusDensityperPlot <- function(Plant_Surveys_by_Year, Plot_Info) {
 	# count plants per demographic plot per demographic survey
 	temp_A <- Plant_Surveys_by_Year %>%
 		# filter(DeadbyEndofYear==0 & MissingbyEndofYear==0) %>%
+		# remove records of plants outside of the plot
+		filter(OutsideOfPlot!="Yes") %>%
 		group_by(FecundityYear, Network, Species) %>%
 		summarise(
 			#N_plants = length(unique(PlantID)),
@@ -78,9 +80,5 @@ estimateCactusDensityperPlot <- function(Plant_Surveys_by_Year, Plot_Info) {
 			)
 		) %>%
 		as.data.frame
-		
-		
-
-		)
 	return(Plant_Surveys_by_Year)
 }
