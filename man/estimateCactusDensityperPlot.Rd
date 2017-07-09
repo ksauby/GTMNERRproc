@@ -4,7 +4,7 @@
 \alias{estimateCactusDensityperPlot}
 \title{Estimate cactus density per plot}
 \usage{
-estimateCactusDensityperPlot(Plant_Surveys_by_Year, Plot_Info)
+estimateCactusDensityperPlot(Plant.Surveys.by.Year, Plot.Info)
 }
 \arguments{
 \item{Plot_Info}{}
