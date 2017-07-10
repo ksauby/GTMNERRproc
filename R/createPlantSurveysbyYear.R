@@ -1,6 +1,6 @@
 #' Create Dataset by Year
 #'
-#' @description Create variabiles indicating whether an insect was present during the study. Useful in particular for Life Table Response Experiments.
+#' @description Create variables indicating whether an insect was present during the study. Useful in particular for Life Table Response Experiments.
 
 #' @param Plant_Surveys_by_Plant Plant Survey Dataset
 #'
@@ -67,4 +67,29 @@ createPlantSurveysbyYear <- function(Plant_Surveys_by_Plant) {
 	########################	
 	Plant_Surveys_by_Year %<>% merge(temp, by=c("PlantID", "FecundityYear"), all.x=T)
 	return(Plant_Surveys_by_Year)
+	
+	
+	
+	# for plants that were dead/missing by end of year but still had measurements in spring/summer, is there a dead record for the following fecundity year?
+	temp2 <- Plant.Info.Analysis %>%
+		filter(FirstDeadMissingObservation < "2015-03-20")
+	temp <- Plant.Surveys.by.Year %>% 
+		group_by(PlantID) %>%
+		dplyr::summarise(
+			ndeadmissing = sum(DeadMissingbyEndofYear, na.rm=T)
+		) %>%
+		filter(
+			ndeadmissing == 1,
+			PlantID %in% temp2$PlantID
+		)
+	if (dim(temp)[1] > 0) {
+		write.csv(temp, "Plantswodeadrecordfollowingfecundityyear.csv")
+		warning("Some plants are missing a dead record for the fecundity year following the last fecundity year for which size was recorded.")
+	}
+	
+	
+	
+	
+	filter(DeadMissingbyEndofYear==1) %>% as.data.frame
+	
 }
