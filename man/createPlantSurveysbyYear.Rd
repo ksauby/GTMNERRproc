@@ -10,6 +10,6 @@ createPlantSurveysbyYear(Plant_Surveys_by_Plant)
 \item{Plant_Surveys_by_Plant}{Plant Survey Dataset}
 }
 \description{
-Create variabiles indicating whether an insect was present during the study. Useful in particular for Life Table Response Experiments.
+Create variables indicating whether an insect was present during the study. Useful in particular for Life Table Response Experiments.
 }
 

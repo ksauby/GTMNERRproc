@@ -74,5 +74,5 @@ estimateCactusDensityperPlot <- function(Plant.Surveys.by.Year, Plot.Info) {
 			)
 		) %>%
 		as.data.frame
-	return(Plant_Surveys_by_Year)
+	return(temp_B)
 }
