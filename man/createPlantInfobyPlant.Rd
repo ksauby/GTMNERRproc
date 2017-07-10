@@ -4,8 +4,8 @@
 \alias{createPlantInfobyPlant}
 \title{Create Plant Info by Plant}
 \usage{
-createPlantInfobyPlant(Plant_Info, Plant_Surveys_by_Year,
-  Plant_Surveys_by_Plant)
+createPlantInfobyPlant(Plant.Info, Plant.Surveys.by.Year,
+  Plant.Surveys.by.Plant)
 }
 \arguments{
 \item{Plant_Surveys_by_Plant}{Plant Survey Dataset}

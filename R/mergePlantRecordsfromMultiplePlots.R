@@ -69,12 +69,34 @@ mergePlantRecordsfromMultiplePlots <- function(Plant.Surveys, Plant.Info, date.w
 			M <- K %>% filter(Dead != 1, Missing != 1)
 			# --------------------------------------------------------- WARNINGS
 			# throw error if a plotplantID is surveyed multiple times within this window and multiple records have size measurements
-			temp <- M %>% filter(SizeFruitMeasured > 0) %>%
+			temp <- M %>% filter(SegmentsMeasured > 0) %>%
 				dplyr::add_count(PlotPlantID) %>%				
 				filter(n > 1)
 			if (dim(temp)[1] > 0) {
 				warning(paste(
-					"Multiple size records for PlotPlantID", 
+					"Multiple records of segment counts for PlotPlantID", 
+					M$PlotPlantID[1], 
+					"around date", 
+					paste(M$Date, collapse=",")
+				))
+			}
+			temp <- M %>% filter(FruitMeasured > 0) %>%
+				dplyr::add_count(PlotPlantID) %>%				
+				filter(n > 1)
+			if (dim(temp)[1] > 0) {
+				warning(paste(
+					"Multiple size records of fruit counts for PlotPlantID", 
+					M$PlotPlantID[1], 
+					"around date", 
+					paste(M$Date, collapse=",")
+				))
+			}
+			temp <- M %>% filter(SizeMeasured > 0) %>%
+				dplyr::add_count(PlotPlantID) %>%				
+				filter(n > 1)
+			if (dim(temp)[1] > 0) {
+				warning(paste(
+					"Multiple records of size measurements for PlotPlantID", 
 					M$PlotPlantID[1], 
 					"around date", 
 					paste(M$Date, collapse=",")

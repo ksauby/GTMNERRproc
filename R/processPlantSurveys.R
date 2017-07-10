@@ -269,16 +269,25 @@ processPlantSurveys <- function(Plant_Surveys, Plant_Info) {
 		) %>%
 		apply(1, mysum)
 	# -------- variable indicating whether size/fruit measured during the survey
-	Plant_Surveys$SizeFruitMeasured <- Plant_Surveys %>%
+	Plant_Surveys$SegmentsMeasured <- Plant_Surveys %>%
+		dplyr::select(
+			Plant_Segments_w_leaves,
+			Plant_Segments_wo_leaves,
+			Plant_Segments_woody,
+			Plant_Segments_total
+		) %>%
+		apply(1, mysum3)
+	Plant_Surveys$FruitMeasured <- Plant_Surveys %>%
 		dplyr::select(
 			Num_FlowerBuds,
 			Num_Flowers,
 			Num_Fruit_red,
 			Num_Fruit_green,
-			Num_Fruit,
-			Plant_Segments_w_leaves,
-			Plant_Segments_wo_leaves,
-			Plant_Segments_woody, 
+			Num_Fruit
+		) %>%
+		apply(1, mysum3)
+	Plant_Surveys$SizeMeasured <- Plant_Surveys %>%
+		dplyr::select(
 			Height_t, 
 			Width_t, 
 			Perpen_Width
