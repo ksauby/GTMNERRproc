@@ -6,10 +6,10 @@
 #' @export
 #' @importFrom dataproc Unique
 
-createPlantInfobyPlant <- function(Plant_Info, Plant_Surveys_by_Year, Plant_Surveys_by_Plant) {
+createPlantInfobyPlant <- function(Plant.Info, Plant.Surveys.by.Year, Plant.Surveys.by.Plant) {
 	# one record per plant
 	# 2849 records
-	Plant_Info_Analysis <- Plant_Info %>%
+	Plant.Info.Analysis <- Plant.Info %>%
 		mutate(
 			Parent = replace(
 				Parent,
@@ -19,7 +19,7 @@ createPlantInfobyPlant <- function(Plant_Info, Plant_Surveys_by_Year, Plant_Surv
 			AliveatEndofStudy = abs(ConfirmedDeadMissing - 1)
 		) %>%
 		renameSpecies
-	Plant_Info_Analysis %<>%
+	Plant.Info.Analysis %<>%
 		arrange(First.Survey.Date.Alive) %>%
 		group_by(PlantID) %>%
 		dplyr::summarise(
@@ -47,9 +47,9 @@ createPlantInfobyPlant <- function(Plant_Info, Plant_Surveys_by_Year, Plant_Surv
 			)
 		)
 	# save to figure out if some plants were lost during processing
-	temp1 <- Plant_Info_Analysis$PlantID
+	temp1 <- Plant.Info.Analysis$PlantID
 	# order
-	Plant_Info_Analysis %<>% arrange(desc(Island), desc(Parent))
+	Plant.Info.Analysis %<>% arrange(desc(Island), desc(Parent))
 	# summarise insect presence on plants and in networks
 	# network_summary <- Plant_Surveys_by_Year %>%
 	#	group_by(Network) %>%
@@ -59,7 +59,7 @@ createPlantInfobyPlant <- function(Plant_Info, Plant_Surveys_by_Year, Plant_Surv
 	#		CANetworkPres 		= Maximum(CA_t),
 	#		MothNetworkPres 	= Maximum(Moth_Evidence_t)
 	#	)
-	Plant_summary <- Plant_Surveys_by_Year %>%
+	Plant_summary <- Plant.Surveys.by.Year %>%
 		group_by(PlantID) %>%
 		dplyr::summarise(
 			OldMothPlantPres 	= Maximum(Old_Moth_Evidence_t),
@@ -67,11 +67,11 @@ createPlantInfobyPlant <- function(Plant_Info, Plant_Surveys_by_Year, Plant_Surv
 			CAPlantPres 		= Maximum(CA_t),
 			MothPlantPres 		= Maximum(Moth_Evidence_t)
 		)
-	Plant_Info_Analysis %<>% 
+	Plant.Info.Analysis %<>% 
 		# merge(network_summary, by="Network") %>%
 		merge(Plant_summary, by="PlantID")
 	# get size at first survey
-	First_Size <- Plant_Surveys_by_Plant %>%
+	First_Size <- Plant.Surveys.by.Plant %>%
 		arrange(Date) %>%
 		group_by(PlantID) %>%
 		dplyr::summarise(
@@ -105,7 +105,7 @@ createPlantInfobyPlant <- function(Plant_Info, Plant_Surveys_by_Year, Plant_Surv
 		First_Size$maxDaysAlive %<>% as.numeric %<>%
 			Replace_NA_w_Period_Function
 
-	Plant_Info_Analysis %<>% 
+	Plant.Info.Analysis %<>% 
 		merge(First_Size, by=c("PlantID")) %>%
 	   	renameSpecies %>%
 		renamePatches %>%
@@ -142,7 +142,18 @@ createPlantInfobyPlant <- function(Plant_Info, Plant_Surveys_by_Year, Plant_Surv
 	# 	)
 	# )
 	# ------------------------------------------------------ WARNING MESSAGES #
-	temp <- Plant_Info_Analysis %>% 
+	temp <- Plant.Info.Analysis %>% 
+		filter(maxDaysAlive!=".")
+	temp$maxDaysAlive %<>% as.numeric
+	temp %<>%
+		filter(minDaysAlive > maxDaysAlive)
+	if (dim(temp)[1] > 0) {
+		write.csv(temp, "minDaysAlive_greater_maxDaysAlive.csv")
+		warning(paste(
+			"minDaysAlive > maxDaysAlive for some plants. Records written to csv."
+		))
+	}	
+	temp <- Plant.Info.Analysis %>% 
 		filter(grepl(",", RecruitmentMode)==TRUE)
 	if (dim(temp)[1] > 0) {
 		write.csv(temp, "InconsistentRecruitmentModePlantInfo.csv")
@@ -150,7 +161,7 @@ createPlantInfobyPlant <- function(Plant_Info, Plant_Surveys_by_Year, Plant_Surv
 			"Inconsistent recruitment mode recorded for at least one plant spanning multiple plots. These plant info records have been written to csv."
 		))
 	}	
-	temp <- Plant_Info_Analysis %>% 
+	temp <- Plant.Info.Analysis %>% 
 		filter(grepl(",", Parent)==TRUE)
 	if (dim(temp)[1] > 0) {
 		write.csv(temp, "InconsistentParentPlantInfo.csv")
@@ -158,14 +169,14 @@ createPlantInfobyPlant <- function(Plant_Info, Plant_Surveys_by_Year, Plant_Surv
 			"Inconsistent Parent recorded for at least one plant spanning multiple plots. These plant info records have been written to csv."
 		))
 	}	
-	temp <- Plant_Info_Analysis %>% 
+	temp <- Plant.Info.Analysis %>% 
 		dplyr::select(-c(
 			FirstDeadObservation, 
 			FirstMissingObservation, 
 			FirstDeadMissingObservation
 		)) %>% 
 		.[complete.cases(.),]
-	temp2 <- Plant_Info_Analysis[which(!(Plant_Info_Analysis$PlantID %in% temp$PlantID)),] %>% 
+	temp2 <- Plant.Info.Analysis[which(!(Plant.Info.Analysis$PlantID %in% temp$PlantID)),] %>% 
 		filter(minDaysAlive > 2,
 		PlantID != 7228 &
 		PlantID != 7435 &
@@ -179,7 +190,7 @@ createPlantInfobyPlant <- function(Plant_Info, Plant_Surveys_by_Year, Plant_Surv
 		))
 	}
 	# No plant should be recorded as alive less than 2 days
-	temp <- Plant_Info_Analysis %>% filter(minDaysAlive < 2)
+	temp <- Plant.Info.Analysis %>% filter(minDaysAlive < 2)
 	if (dim(temp)[1] > 0) {
 		write.csv(temp,"PlantsAliveLessThan2Days.csv")
 		warning(paste(
@@ -187,5 +198,5 @@ createPlantInfobyPlant <- function(Plant_Info, Plant_Surveys_by_Year, Plant_Surv
 		))
 	}	
 	# ------------------------------------------------------------------------ #
-	return(Plant_Info_Analysis)
+	return(Plant.Info.Analysis)
 }
