@@ -126,6 +126,10 @@ mergePlantRecordsfromMultiplePlots <- function(Plant.Surveys, Plant.Info, date.w
 				Z[[i]][j, "PlantsSurveyed"] <- paste(
 					O$PlotPlantID, collapse=","
 				)
+				Z[[i]][j, "DeadDuetoMothDamage"] <- paste(
+					O$DeadDuetoMothDamage,
+					collapse=","
+				)
 			} else
 			# if all PlotPlantIDs were surveyed for a given date:
 			if (dim(M)[1] > 0 & all(M$PlotPlantID %in% N$PlotPlantID)) {
@@ -182,6 +186,11 @@ mergePlantRecordsfromMultiplePlots <- function(Plant.Surveys, Plant.Info, date.w
 			Z[[i]][j, "FecundityYear"] 				<- K$FecundityYear[1]
 		
 			Z[[i]][j, "OutsideOfPlot"] 				<- ""
+			Z[[i]][j, "DeadDuetoMothDamage"] 		<- ""
+			Z[[i]][j, "PlantPictures"]			 	<- paste(
+				K$PlantPictures[which(!is.na(K$PlantPictures))],
+				collapse=","
+			)
 			# Paste PlotPlantIDs together to know which plants were surveyed on this date
 		}
 		Z[[i]] %<>%
@@ -242,7 +251,9 @@ mergePlantRecordsfromMultiplePlots <- function(Plant.Surveys, Plant.Info, date.w
 		Missing, 
 		DemographicSurvey,
 		FecundityYear,
-		OutsideOfPlot
+		OutsideOfPlot,
+		DeadDuetoMothDamage,
+		PlantPictures
 	)
 	temp.C$AllSurveyed <- "TRUE"
 	temp.C$PlantsSurveyed <- "NA"
