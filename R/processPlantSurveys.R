@@ -96,21 +96,21 @@
 #'
 #' @export
 
-processPlantSurveys <- function(Plant_Surveys, Plant_Info) {
+processPlantSurveys <- function(Plant.Surveys, Plant_Info) {
 	# ----------------------------------------------------------------- WARNINGS
 	# check first duplicate data entries
-	dups <- Plant_Surveys %>% 
+	dups <- Plant.Surveys %>% 
 		group_by(PlantID, DateSurveyed) %>%
 		summarise(n.obs = length(Plant_collected)) %>%
 		filter(n.obs > 1)
 	if (dim(dups)[1] > 0) {stop("Duplicates observations for a PlantID, Date combination are present in the dataset.")}
 	# check for PlantID = NA
-	dups <- Plant_Surveys %>% filter(is.na(PlantID))
+	dups <- Plant.Surveys %>% filter(is.na(PlantID))
 	if (dim(dups)[1] > 0) {stop("NA values for PlantID.")}
 	# are all Plant IDs from the Plant Surveys data in Plant Info?
-	dups <- filter(Plant_Surveys, !(PlantID %in% Plant_Info$PlantID))[, 4:5]
+	dups <- filter(Plant.Surveys, !(PlantID %in% Plant_Info$PlantID))[, 4:5]
 	if (dim(
-		filter(Plant_Surveys, !(PlantID %in% Plant_Info$PlantID))[, 4:5]
+		filter(Plant.Surveys, !(PlantID %in% Plant_Info$PlantID))[, 4:5]
 	)[1] > 0) {
 		warning(paste(
 			"These Plant IDs from Plant Surveys are not in Plant Info:",
@@ -119,7 +119,7 @@ processPlantSurveys <- function(Plant_Surveys, Plant_Info) {
 	}
 	# Duplicates in Plant Surveys
 	# duplicates for 1795 on 2013-02-10 are okay - I accidentally surveyed the plot twice; keep it for detectability
-	dups = Plant_Surveys %>%
+	dups = Plant.Surveys %>%
 		group_by(PlantID, DateSurveyed) %>%
 		dplyr::summarise(Nrecords = length(First_Observer_Initials)) %>%
 		as.data.frame %>% 
@@ -132,15 +132,15 @@ processPlantSurveys <- function(Plant_Surveys, Plant_Info) {
 		))
 	}
 	# check for size = 0
-	dups <- Plant_Surveys %>% filter(Max_Height==0)
+	dups <- Plant.Surveys %>% filter(Max_Height==0)
 		if (dim(dups)[1] > 0) {stop("Max. height values = 0.")}
-	dups <- Plant_Surveys %>% filter(Max_Width==0)
+	dups <- Plant.Surveys %>% filter(Max_Width==0)
 		if (dim(dups)[1] > 0) {stop("Max. width values = 0.")}
-	dups <- Plant_Surveys %>% filter(Perpen_Width==0)
+	dups <- Plant.Surveys %>% filter(Perpen_Width==0)
 		if (dim(dups)[1] > 0) {stop("Perpendicular width values = 0.")}
 	# ------------------------------------------------------------- CHANGE NAMES
 	# remame size and height
-	Plant_Surveys %<>%	as.data.table %>%
+	Plant.Surveys %<>%	as.data.table %>%
 		setnames("Max_Height", 				"Height_t") %>%
 		setnames("Max_Width", 				"Width_t") %>%
 		setnames("CACA_Larvae", 			"CA_t") %>%
@@ -153,11 +153,11 @@ processPlantSurveys <- function(Plant_Surveys, Plant_Info) {
 		setnames("Gerstaeckeria", 			"Gerstaeckeria_t") %>%
 		as.data.frame
 	# formatting/preparation necessary for prepping Demographic Plant Info
-	Plant_Surveys$Date %<>% Format_Date_Function
-	Plant_Surveys %<>% arrange(Date)
-	Plant_Surveys %<>% Format_PlantIDs_Function
+	Plant.Surveys$Date %<>% Format_Date_Function
+	Plant.Surveys %<>% arrange(Date)
+	Plant.Surveys %<>% Format_PlantIDs_Function
 	# ------------------------------------------------ CONVERT ALL "999s" to NAs
-	Plant_Surveys[,c(
+	Plant.Surveys[,c(
 		"Plant_Segments_total", 
 		"Plant_Segments_w_leaves",
 		"Plant_Segments_wo_leaves",
@@ -173,7 +173,7 @@ processPlantSurveys <- function(Plant_Surveys, Plant_Info) {
 		apply(2, NA_Function
 	)
 	# ------------------- INSECT SURVEYS, MISSING, DEAD - CHANGE YES, NO to 0, 1
-	Plant_Surveys[,c(
+	Plant.Surveys[,c(
 		"CA_t",
 		"ME_t",
 		"CH_t",
@@ -185,7 +185,7 @@ processPlantSurveys <- function(Plant_Surveys, Plant_Info) {
 		"Missing")] %<>% 
 		apply(2, Yes_Function
 	)
-	Plant_Surveys[,c(
+	Plant.Surveys[,c(
 		"CA_t",
 		"ME_t",
 		"CH_t",
@@ -197,7 +197,7 @@ processPlantSurveys <- function(Plant_Surveys, Plant_Info) {
 		"Missing")] %<>%
 		apply(2, No_Function
 	)
-	Plant_Surveys[,c(
+	Plant.Surveys[,c(
 		"CA_t",
 		"ME_t",
 		"CH_t",
@@ -210,7 +210,7 @@ processPlantSurveys <- function(Plant_Surveys, Plant_Info) {
 		apply(2, NA_Function
 	)
 	# ------------------------------------------------------------- MAKE NUMERIC
-	Plant_Surveys[,c(
+	Plant.Surveys[,c(
 		"CA_t",
 		"ME_t",
 		"CH_t",
@@ -236,13 +236,13 @@ processPlantSurveys <- function(Plant_Surveys, Plant_Info) {
 	)
 	# ------------------------------------------------------------ GERSTAECKERIA
 	# Gerstaeckeria was not reliably surveyed so can only take values of NA or 1
-	Plant_Surveys$Gerstaeckeria_t %<>% Zero_is_NA_Function
+	Plant.Surveys$Gerstaeckeria_t %<>% Zero_is_NA_Function
 	# ---------------------------------------------- Change Missing = NA to zero
-	Plant_Surveys$Missing %<>% NA_is_Zero_Function
+	Plant.Surveys$Missing %<>% NA_is_Zero_Function
 	# ------------------------------------------------- ADD TOTAL SEGMENT COLUMN
 	# do this so that plants that have no segments recorded (all NAs) have a total segment count = NA
 	# for those plants that have fewer than four NAs (at least one segment column has a number), sum the segments
-	Plant_Surveys$Size_t <- Plant_Surveys %>%
+	Plant.Surveys$Size_t <- Plant.Surveys %>%
 		dplyr::select(
 			Plant_Segments_total,
 			Plant_Segments_w_leaves,
@@ -250,16 +250,16 @@ processPlantSurveys <- function(Plant_Surveys, Plant_Info) {
 			Plant_Segments_woody
 		) %>%
 		apply(1, mysum)
-	Plant_Surveys$Size_t %<>% Zero_is_NA_Function
+	Plant.Surveys$Size_t %<>% Zero_is_NA_Function
 	# --------------------------------------------------------- ADD FRUIT COLUMN
-	Plant_Surveys$Fruit_t <- Plant_Surveys %>%
+	Plant.Surveys$Fruit_t <- Plant.Surveys %>%
 		dplyr::select(
 			Num_Fruit_red,
 			Num_Fruit_green,
 			Num_Fruit
 		) %>%
 		apply(1, mysum)
-	Plant_Surveys$Fruit_Flowers_t <- Plant_Surveys %>%
+	Plant.Surveys$Fruit_Flowers_t <- Plant.Surveys %>%
 		dplyr::select(
 			Num_FlowerBuds,
 			Num_Flowers,
@@ -269,7 +269,7 @@ processPlantSurveys <- function(Plant_Surveys, Plant_Info) {
 		) %>%
 		apply(1, mysum)
 	# -------- variable indicating whether size/fruit measured during the survey
-	Plant_Surveys$SegmentsMeasured <- Plant_Surveys %>%
+	Plant.Surveys$SegmentsMeasured <- Plant.Surveys %>%
 		dplyr::select(
 			Plant_Segments_w_leaves,
 			Plant_Segments_wo_leaves,
@@ -277,7 +277,7 @@ processPlantSurveys <- function(Plant_Surveys, Plant_Info) {
 			Plant_Segments_total
 		) %>%
 		apply(1, mysum3)
-	Plant_Surveys$FruitMeasured <- Plant_Surveys %>%
+	Plant.Surveys$FruitMeasured <- Plant.Surveys %>%
 		dplyr::select(
 			Num_FlowerBuds,
 			Num_Flowers,
@@ -286,7 +286,7 @@ processPlantSurveys <- function(Plant_Surveys, Plant_Info) {
 			Num_Fruit
 		) %>%
 		apply(1, mysum3)
-	Plant_Surveys$SizeMeasured <- Plant_Surveys %>%
+	Plant.Surveys$SizeMeasured <- Plant.Surveys %>%
 		dplyr::select(
 			Height_t, 
 			Width_t, 
@@ -294,20 +294,20 @@ processPlantSurveys <- function(Plant_Surveys, Plant_Info) {
 		) %>%
 		apply(1, mysum3)
 	# --------------------------------------------------------------------------
-	Plant_Surveys$Date %<>%
+	Plant.Surveys$Date %<>%
 		strptime("%Y-%m-%d") %>%
 		as.POSIXct(format="%Y-%m-%d", tz="")
-	Plant_Surveys %<>%
+	Plant.Surveys %<>%
 		addSamplingPeriods %>%
 		assignSeason %>%
 		createFecundityYear %>%
 		as.data.frame
-	Plant_Surveys$Date %<>% as.Date
+	Plant.Surveys$Date %<>% as.Date
 	# ----------------------------------------------------------------- WARNINGS
-	dups <- Plant_Surveys %>% filter(Size_t==0)
+	dups <- Plant.Surveys %>% filter(Size_t==0)
 		if (dim(dups)[1] > 0) {stop("Size values = 0.")}
 	# throw a warning if a plant has a recorded size but is also marked either dead or missing
-	temp <- Plant_Surveys %>%
+	temp <- Plant.Surveys %>%
 		filter(!(is.na(Size_t)) & Dead == 1)
 	if (dim(temp)[1] > 0) {
 		warning(paste(
@@ -316,7 +316,7 @@ processPlantSurveys <- function(Plant_Surveys, Plant_Info) {
 			"have size measurements but are also marked dead"
 		))
 	}
-	temp <- Plant_Surveys %>%
+	temp <- Plant.Surveys %>%
 		filter(!(is.na(Size_t)) & Missing == 1)
 	if (dim(temp)[1] > 0) {
 		warning(paste(
@@ -326,5 +326,5 @@ processPlantSurveys <- function(Plant_Surveys, Plant_Info) {
 		))
 	}
 	# ------------------------------------------------------------------------ #
-	return(Plant_Surveys)
+	return(Plant.Surveys)
 }
