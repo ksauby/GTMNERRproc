@@ -109,7 +109,7 @@ mergePlantRecordsfromMultiplePlots <- function(Plant.Surveys, Plant.Info, date.w
 				filter( 
 					PlantID==L$PlantID[1], 
 					# only include plants that are listed as having been added to Plant.Info on or after Date
-					First.Survey.Date.Alive <= 
+					PlantID.First.Alive <= 
 						as.Date(Z[[i]]$Date[j]) + date.window,
 					# exclude dead plants (including date plant was first recorded as dead)
 					FirstDeadMissingObservation > 
@@ -194,7 +194,7 @@ mergePlantRecordsfromMultiplePlots <- function(Plant.Surveys, Plant.Info, date.w
 			# Paste PlotPlantIDs together to know which plants were surveyed on this date
 		}
 		Z[[i]] %<>%
-			select(-(Date)) %>%
+			dplyr::select(-(Date)) %>%
 			setnames("maxDate", "Date")
 		cat(i)
 	}
@@ -221,7 +221,7 @@ mergePlantRecordsfromMultiplePlots <- function(Plant.Surveys, Plant.Info, date.w
 	# - Merge plant survey data into one file -------------------------------- #
 	# create new file with those plants in only one plot
 	
-	temp.C %<>% select( 
+	temp.C %<>% dplyr::select( 
 		PlantID, 
 		Date, 
 		# insects

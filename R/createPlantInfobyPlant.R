@@ -20,7 +20,7 @@ createPlantInfobyPlant <- function(Plant.Info, Plant.Surveys.by.Year, Plant.Surv
 		) %>%
 		renameSpecies
 	Plant.Info.Analysis %<>%
-		arrange(First.Survey.Date.Alive) %>%
+		arrange(PlantID.First.Alive) %>%
 		group_by(PlantID) %>%
 		dplyr::summarise(
 			Island 				= Island[1],
@@ -30,7 +30,7 @@ createPlantInfobyPlant <- function(Plant.Info, Plant.Surveys.by.Year, Plant.Surv
 			# fix/verify
 			RecruitmentMode 	= paste(Unique(RecruitmentMode), collapse=","),
 			Parent 				= paste(Unique(Parent), collapse=","),
-			First.Survey.Date.Alive = First.Survey.Date.Alive[1],
+			First.Survey.Date.Alive = PlantID.First.Alive[1],
 			AliveatEndofStudy	= Maximum(AliveatEndofStudy)
 		) %>%
 		filter(!is.na(Network)) %>%

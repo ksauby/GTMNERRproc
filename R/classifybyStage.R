@@ -7,6 +7,24 @@
 #' @export
 
 classifybyStage <- function(Data) {
+	# can only be seedling for one year
+	#	thus can only consider plants surveyed in their first year/survey for this
+	
+	Plant.Surveys.by.Year -> Data
+	
+	Data %<>%
+		mutate(
+			Stage = NA,
+			Stage = replace(
+				Stage,
+				which(
+					FecundityYear == minFecundityYear &
+					RecruitmentMode == "Seedling"
+				),
+				"Seedling"
+			)
+		)
+	
 	Data$Stage <- Data$RecruitmentMode
 	Data[which(Data$Stage!="Seedling"), ]$Stage <- "Adult"
 	Data[which(is.na(Data$Stage)), ]$Stage <- "Adult"
