@@ -8,11 +8,8 @@
 
 classifybyStage <- function(Data) {
 	# can only be seedling for one year
-	#	thus can only consider plants surveyed in their first year/survey for this
-	
-	Plant.Surveys.by.Year -> Data
-	
-	Data %<>%
+	#	thus can only consider plants surveyed in their first year/survey for this		
+	Data %>%
 		mutate(
 			Stage = NA,
 			Stage = replace(
@@ -22,51 +19,42 @@ classifybyStage <- function(Data) {
 					RecruitmentMode == "Seedling"
 				),
 				"Seedling"
-			)
-		)
-	
-	Data$Stage <- Data$RecruitmentMode
-	Data[which(Data$Stage!="Seedling"), ]$Stage <- "Adult"
-	Data[which(is.na(Data$Stage)), ]$Stage <- "Adult"
-	Data[which(Data$DeadbyEndofYear==1), ]$Stage <- "Dead"
-	Data[which(Data$MissingbyEndofYear==1), ]$Stage <- "Dead"
-	# fix Seedling category
-	stages <- Data$Stage
-	temp <- split(Data, stages)
-	temp$Seedling %<>% 
-		group_by(PlantID) %>%
-		mutate(FirstObs = min(Date)) %>%
-		as.data.frame %>%
-		mutate(
-			# individuals remain a seedling only for one year, then automatically transition to a "juvenile" stage
-			Stage = replace(
-				Stage,
-				which(Date > FirstObs),
-				"Juvenile"
 			),
-			# once the plant reaches two segments, it is no longer a juvenile
 			Stage = replace(
 				Stage,
-				which(Size_t > 1),
-				"Adult"
-			)
-		) %>%
-		group_by(PlantID) %>%
-		mutate(FirstAdult = ifelse(
-			max(Size_t) > 1,
-			min(Date[which(Size_t > 1)]),
-			NA
-		)) %>%
-		# once plants reach "Adult", they remain "Adult", even if they retrogress to one segment
-		mutate(
+				which(
+					Size_t == 1
+				),
+				"1"
+			),
 			Stage = replace(
 				Stage,
-				which(Date > FirstAdult),
-				"Adult"
+				which(
+					Size_t == 2
+				),
+				"2"
+			),
+			Stage = replace(
+				Stage,
+				which(
+					Size_t >= 3 & Size_t <= 5
+				),
+				"3"
+			),
+			Stage = replace(
+				Stage,
+				which(
+					Size_t >= 6 & Size_t <= 10
+				),
+				"4"
+			),
+			Stage = replace(
+				Stage,
+				which(
+					Size_t >= 11
+				),
+				"5"
 			)
-		) %>%
-		dplyr::select(-c(FirstObs, FirstAdult)) %>%
-		as.data.frame
-		temp$Seedling$FirstAdult %<>% as.Date
-	Data <- do.call(rbind.fill, temp)
+			
+		)
 }
