@@ -11,50 +11,19 @@ classifybyStage <- function(Data) {
 	#	thus can only consider plants surveyed in their first year/survey for this		
 	Data %>%
 		mutate(
-			Stage = NA,
-			Stage = replace(
-				Stage,
+			stage = "Adult",
+			stage = replace(
+				stage,
 				which(
 					FecundityYear == minFecundityYear &
 					RecruitmentMode == "Seedling"
 				),
 				"Seedling"
-			),
-			Stage = replace(
-				Stage,
-				which(
-					Size_t == 1
-				),
-				"1"
-			),
-			Stage = replace(
-				Stage,
-				which(
-					Size_t == 2
-				),
-				"2"
-			),
-			Stage = replace(
-				Stage,
-				which(
-					Size_t >= 3 & Size_t <= 5
-				),
-				"3"
-			),
-			Stage = replace(
-				Stage,
-				which(
-					Size_t >= 6 & Size_t <= 10
-				),
-				"4"
-			),
-			Stage = replace(
-				Stage,
-				which(
-					Size_t >= 11
-				),
-				"5"
 			)
-			
 		)
+		
+		
+		
+		# WHEN DOES ONE BECOME CLASSIFIED AS DEAD
+		
 }
