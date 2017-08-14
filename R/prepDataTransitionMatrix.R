@@ -19,34 +19,26 @@ prepDataTransitionMatrix <- function(
 	SeedBankSize,
 	SeedsPerFruit
 ) {
+	# Dat$stage <- Dat$Stage
 	Dat_census <- Dat %>% 
+	rowwise() %>%
 	mutate(
-		Stage=replace(
-			Stage, 
-			which(Stage=="Adult"),
+		stage=replace(
+			stage, 
+			which(stage=="Adult"),
 			cut(Size_t, SizeClass, include.lowest=T, labels=FALSE)
 		)
 	)
-	
-	
-	
-	size.class <- cut(Dat$Size_t, SizeClass, include.lowest=T, labels=FALSE)
-	Dat <- cbind(Dat, size.class)
-	
-	
-	
-	
+	Dat_census %<>%
 		dplyr::select(
-			Year, 
+			FecundityYear, 
 			PlantID, 
-			Stage, 
-			size.class, 
+			stage, 
+			Size_t, 
 			Fruit_Flowers_t,
 			Size_t,
 			Island
-		) %>%
-		setnames("Stage", "stage")# %>%
-		#setnames("size.class", "Size_t")
+		)
 	# create stages based on sizes for adults 
 	Sizes <- Dat_census[which(
 		Dat_census$stage != "Dead" &

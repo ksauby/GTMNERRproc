@@ -4,7 +4,7 @@
 \alias{processPlantSurveys}
 \title{Process GTMNERR Plant Survey Data}
 \usage{
-processPlantSurveys(Plant_Surveys, Plant_Info)
+processPlantSurveys(Plant.Surveys, Plant_Info)
 }
 \description{
 Steps:

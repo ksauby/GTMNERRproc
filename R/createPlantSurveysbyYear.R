@@ -30,9 +30,8 @@ createPlantSurveysbyYear <- function(Plant_Surveys_by_Plant) {
 			Insect_Evidence_t 			= Maximum(Insect_Evidence_t),
 			DeadbyEndofYear 			= Maximum(Dead),
 			MissingbyEndofYear 			= Maximum(Missing),
-			DeadMissingbyEndofYear = sum(
-				c(DeadbyEndofYear, MissingbyEndofYear),
-				na.rm=T
+			DeadMissingbyEndofYear = mysum3(
+				c(DeadbyEndofYear, MissingbyEndofYear)
 			)
 		) %>%
 		ungroup() %>%

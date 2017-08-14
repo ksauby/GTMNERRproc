@@ -19,11 +19,14 @@ classifybyStage <- function(Data) {
 					RecruitmentMode == "Seedling"
 				),
 				"Seedling"
+			),
+			stage = replace(
+				stage,
+				which(
+					is.na(Size_t) &
+					DeadMissingbyEndofYear == 1
+				),
+				"Dead"
 			)
 		)
-		
-		
-		
-		# WHEN DOES ONE BECOME CLASSIFIED AS DEAD
-		
 }
