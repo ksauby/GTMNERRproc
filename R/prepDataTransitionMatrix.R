@@ -27,7 +27,7 @@ prepDataTransitionMatrix <- function(
 			stage, 
 			which(stage=="Adult"),
 			cut(Size_t, SizeClass, include.lowest=T, labels=FALSE)
-		)
+		),
 	)
 	Dat_census %<>%
 		dplyr::select(
@@ -38,20 +38,9 @@ prepDataTransitionMatrix <- function(
 			Fruit_Flowers_t,
 			Size_t,
 			Island
-		)
-	# create stages based on sizes for adults 
-	Sizes <- Dat_census[which(
-		Dat_census$stage != "Dead" &
-		Dat_census$stage != "Seedling" &
-		Dat_census$stage != "Juvenile"
-	), ]$size.class
-	Dat_census[which(
-		Dat_census$stage != "Dead" &
-		Dat_census$stage != "Seedling" &
-		Dat_census$stage != "Juvenile"
-	), ]$stage <- Sizes
-	Dat_census[which(Dat_census$stage == "Dead"), ]$stage <- "dead"
-	Dat_census %<>% dplyr::select(-size.class)
+		) %>%
+		dplyr::select(-Size_t)
+		colnames(Dat_census)[which(names(Dat_census) == "FecundityYear")] <- "Year"
 	# merge year with year - 1
 	trans <- subset(
 		merge(

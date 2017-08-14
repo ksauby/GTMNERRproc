@@ -26,7 +26,7 @@ classifybyStage <- function(Data) {
 					is.na(Size_t) &
 					DeadMissingbyEndofYear == 1
 				),
-				"Dead"
+				"dead"
 			)
 		)
 }
