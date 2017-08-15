@@ -11,20 +11,20 @@
 #'  	\item Loss_to_Offspring: number of segments lost to clonal offspring
 #' 	}
 #'
-#' @param Plant_Surveys_by_Year
-#' @param Plant_Surveys_by_Plant
-#' @param Plant_Info_Analysis
+#' @param Plant.Surveys.by.Year
+#' @param Plant.Surveys.by.Plant
+#' @param Plant.Info.Analysis
 #'
 #' @export
 
 calculateClonalReproduction <- function(
-	Plant_Surveys_by_Year, 
-	Plant_Surveys_by_Plant, 
-	Plant_Info_Analysis
+	Plant.Surveys.by.Year, 
+	Plant.Surveys.by.Plant, 
+	Plant.Info.Analysis
 ) {
 	# PARENT SURVEY DATA
 	# use this dataset to use parent size that is consistent for all offpsring
-	A <- Plant_Surveys_by_Year %>% 
+	A <- Plant.Surveys.by.Year %>% 
 		group_by(PlantID) %>%
 		mutate(
 			Parent.SpringSummer.Obs.Date_t_1 = lag(SurveyDate_SpringSummer)
@@ -35,33 +35,31 @@ calculateClonalReproduction <- function(
 			SurveyDate_SpringSummer, 
 			Parent.SpringSummer.Obs.Date_t_1,
 			Size_t
-		) %>% 
-		setnames("SurveyDate_SpringSummer", "Parent.SpringSummer.Obs.Date_t") %>%
-		setnames("Size_t", "Parent.Size_t") %>%
-		setnames("FecundityYear", "Parent.FecundityYear") %>%
-		setnames("PlantID", "Parent.ID")
+		)
+	colnames(A)[which(names(A) == "SurveyDate_SpringSummer")] <- 
+		"Parent.SpringSummer.Obs.Date_t"
+	colnames(A)[which(names(A) == "Size_t")] <- "Parent.Size_t"
+	colnames(A)[which(names(A) == "FecundityYear")] <- "Parent.FecundityYear"
+	colnames(A)[which(names(A) == "PlantID")] <- "Parent.ID"
 	# OFFSPRING SURVEY DATA
 	# use this dataset to figure out first size of offspring
-	B <- Plant_Surveys_by_Plant %>% 
+	B <- Plant.Surveys.by.Plant %>% 
 		dplyr::select(PlantID, Date, Size_t) %>% 
-		setnames("Date", "Offspring.Obs.Date") %>%
-		setnames("Size_t", "Offspring.Size_t") %>%
-		setnames("PlantID", "Offspring.ID")
-	# merge parent data (from A) with offspring info (from Plant_Info_Analysis)
-	C <- Plant_Info_Analysis 
+	colnames(B)[which(names(B) == "Date")] <- "Offspring.Obs.Date"
+	colnames(B)[which(names(B) == "Size_t")] <- "Offspring.Size_t"
+	colnames(B)[which(names(B) == "PlantID")] <- "Offspring.ID"
+	# merge parent data (from A) with offspring info (from Plant.Info.Analysis)
+	C <- Plant.Info.Analysis 
 	C %<>%
-		mutate(Parent = substr(x=Parent,start=1,stop=4)) %>%
-		setnames("PlantID", "Offspring.ID") %>%
-		setnames("Parent", "Parent.ID") %>%
-		setnames("First_Size", "Offspring.First_Size") %>%
-		setnames(
-			"First.Survey.Date.Alive", 
-			"Offspring.First.Survey.Date.Alive"
-		) %>%
-		setnames(
-			"minFecundityYear", 
-			"Offspring.minFecundityYear"
-		) %>%
+		mutate(Parent = substr(x=Parent,start=1,stop=4))
+	colnames(C)[which(names(C) == "PlantID")] <- "Offspring.ID"
+	colnames(C)[which(names(C) == "Parent")] <- "Parent.ID"
+	colnames(C)[which(names(C) == "First_Size")] <- "Offspring.First_Size"
+	colnames(C)[which(names(C) == "First.Survey.Date.Alive")] <- 
+		"Offspring.First.Survey.Date.Alive"
+	colnames(C)[which(names(C) == "minFecundityYear")] <- 
+		"Offspring.minFecundityYear"
+	C %<>%
 		dplyr::select(
 			Parent.ID, 
 			Offspring.ID, 
@@ -131,7 +129,7 @@ calculateClonalReproduction <- function(
 			NSegLosttoClones_t = sum(Offspring.First_Size)
 		)
 	# merge parent size with clones with plant surveys
-	Plant_Surveys_by_Yearw_clones <- Plant_Surveys_by_Year %>%
+	Plant.Surveys.by.Yearw_clones <- Plant.Surveys.by.Year %>%
 		merge(
 			parent_size, 
 			by.x=c("PlantID", "FecundityYear"), 
@@ -139,7 +137,7 @@ calculateClonalReproduction <- function(
 			all=T
 		) %>% 
 		as.data.frame
-	Plant_Surveys_by_Yearw_clones %<>%
+	Plant.Surveys.by.Yearw_clones %<>%
 		rowwise %>%
 		# replace values for plants that did not produce clones that year
 		mutate(
@@ -159,20 +157,20 @@ calculateClonalReproduction <- function(
 				0
 			)
 		)
-	Plant_Surveys_by_Yearw_clones %<>% as.data.frame
-	Plant_Surveys_by_Yearw_clones$SizewClones_t %<>% as.numeric
+	Plant.Surveys.by.Yearw_clones %<>% as.data.frame
+	Plant.Surveys.by.Yearw_clones$SizewClones_t %<>% as.numeric
 	# presence of clonal reproduction
-	Plant_Surveys_by_Yearw_clones$ClonePres_t <- ifelse(
-		Plant_Surveys_by_Yearw_clones$NSegLosttoClones_t > 0,
+	Plant.Surveys.by.Yearw_clones$ClonePres_t <- ifelse(
+		Plant.Surveys.by.Yearw_clones$NSegLosttoClones_t > 0,
 		1,
 		0
 	)	
 	# ------------------------------------------------------------- WARNINGS ---
 	# for which parents of offspring are there no NClones_t records?
-	PlanIntoParents <- Plant_Info_Analysis %>% 
+	PlanIntoParents <- Plant.Info.Analysis %>% 
 		filter(Parent!="Unknown") %$% 
 		unique(Parent)
-	PlantSurveyswClones <- Plant_Surveys_by_Yearw_clones %>% 
+	PlantSurveyswClones <- Plant.Surveys.by.Yearw_clones %>% 
 		filter(ClonePres_t==1) %$% 
 		unique(PlantID)
 	missingOffspringCounts <- (PlanIntoParents[which(
@@ -187,5 +185,5 @@ calculateClonalReproduction <- function(
 		warning("Some parents for which offspring were observed have no records of having clones after processing of the data.")
 	}		
 	# --------------------------------------------------------------------------
-	return(Plant_Surveys_by_Yearw_clones)
+	return(Plant.Surveys.by.Yearw_clones)
 }

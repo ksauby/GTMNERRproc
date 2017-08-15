@@ -36,11 +36,11 @@ prepDataTransitionMatrix <- function(
 			stage, 
 			Size_t, 
 			Fruit_Flowers_t,
-			Size_t,
-			Island
+			Size_t
 		) %>%
 		dplyr::select(-Size_t)
-		colnames(Dat_census)[which(names(Dat_census) == "FecundityYear")] <- "Year"
+		colnames(Dat_census)[which(names(Dat_census) == "FecundityYear")] <- 
+			"Year"
 	# merge year with year - 1
 	trans <- subset(
 		merge(
@@ -53,19 +53,22 @@ prepDataTransitionMatrix <- function(
 	)
 	# rename rows and columns
 	rownames(trans) <- 1:nrow(trans)
-	colnames(trans)[2:10] <- c(
-		"Year", 
-		"stage",
-		"Repro", 
-		"Size",
-		"Island",
-		"Year2", 
-		"fate",
-		"Repro2",
-		"Size2"
-	)
+	colnames(trans)[which(names(trans) == "Year.x")] <- 
+		"Year"
+	colnames(trans)[which(names(trans) == "stage.x")] <- 
+		"stage"
+	colnames(trans)[which(names(trans) == "Fruit_Flowers_t.x")] <- 
+		"Repro"
+	colnames(trans)[which(names(trans) == "Year.y")] <- 
+		"Year2"
+	colnames(trans)[which(names(trans) == "stage.y")] <- 
+		"fate"
+	colnames(trans)[which(names(trans) == "Fruit_Flowers_t.y")] <- 
+		"Repro2"
+
+
 	# year-specific transition matrix
-	trans01 <- subset(trans, Year == TransitionYear, c(PlantID, stage, Repro, fate, Size, Size2, Island, Repro2))
+	trans01 <- subset(trans, Year == TransitionYear, c(PlantID, stage, Repro, fate, Repro2))
 	seedlings <- nrow(subset(
 		Dat_census, 
 		Year == TransitionYear & stage =="Seedling"
@@ -86,7 +89,7 @@ prepDataTransitionMatrix <- function(
 		na.omit %>% 
 		as.vector %>%
 		sort
-	stages <- c("Seed", "Seedling", "Juvenile", stages, "dead")
+	stages <- c("Seed", "Seedling", stages, "dead")
 	trans01$stage <- factor(trans01$stage, levels=stages, ordered=T)
 	trans01$fate <- factor(trans01$fate, levels=stages, ordered=T)
 	return(list(trans01, recruitment.rate, stages))
