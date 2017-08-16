@@ -4,11 +4,11 @@
 \alias{calculateClonalReproduction}
 \title{Calculate Clonal Reproduction}
 \usage{
-calculateClonalReproduction(Plant_Surveys_by_Year, Plant_Surveys_by_Plant,
-  Plant_Info_Analysis)
+calculateClonalReproduction(Plant.Surveys.by.Year, Plant.Surveys.by.Plant,
+  Plant.Info.Analysis)
 }
 \arguments{
-\item{Plant_Info_Analysis}{}
+\item{Plant.Info.Analysis}{}
 }
 \value{
 Returns the following variables:

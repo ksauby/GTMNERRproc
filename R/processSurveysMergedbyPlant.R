@@ -22,7 +22,6 @@ processSurveysMergedbyPlant <- function(Plant.Surveys, Plant.Info) {
 		createInsectFactorVariables %>%
 		formatasFactors(
 			factors <- c(
-				"DemographicSurvey", 
 				"Year", 
 				"Season", 
 				"C_cactorum", 

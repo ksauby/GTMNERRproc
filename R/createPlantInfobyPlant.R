@@ -76,6 +76,7 @@ createPlantInfobyPlant <- function(Plant.Info, Plant.Surveys.by.Year, Plant.Surv
 		group_by(PlantID) %>%
 		dplyr::summarise(
 			First.Survey.Date 		= Date[1],
+			First.DemographicSurvey = Minimum(DemographicSurvey),
 			minFecundityYear 		= Minimum(FecundityYear),
 			First_Size 				= Size_t[!(is.na(Size_t))][1],
 			First.Measurement.Date 	= Date[!(is.na(Size_t))][1],

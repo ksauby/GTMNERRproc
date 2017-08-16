@@ -44,7 +44,7 @@ calculateClonalReproduction <- function(
 	# OFFSPRING SURVEY DATA
 	# use this dataset to figure out first size of offspring
 	B <- Plant.Surveys.by.Plant %>% 
-		dplyr::select(PlantID, Date, Size_t) %>% 
+		dplyr::select(PlantID, Date, Size_t)
 	colnames(B)[which(names(B) == "Date")] <- "Offspring.Obs.Date"
 	colnames(B)[which(names(B) == "Size_t")] <- "Offspring.Size_t"
 	colnames(B)[which(names(B) == "PlantID")] <- "Offspring.ID"
