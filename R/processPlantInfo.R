@@ -81,9 +81,9 @@ processPlantInfo <- function(Plant.Info, Plot.Info, Plant.Surveys) {
 		group_by(PlotPlantID) %>%
 		dplyr::summarise(
 			# simply the first survey date
-			First.Survey.Date.Alive = min(Date),
+			PlotPlantID.First.Survey.Date.Alive = min(Date),
 			# should be max date the plant was alive
-			Last.Survey.Date.Alive = max(Date)
+			PlotPlantID.Last.Survey.Date.Alive = max(Date)
 		) %>%
 		merge(Plant.Info, by="PlotPlantID")
 	# ----------------------------------------------------------- PLANT SURVIVAL
@@ -181,8 +181,8 @@ processPlantInfo <- function(Plant.Info, Plot.Info, Plant.Surveys) {
 # calculate first/last day alive for PlantID (not individual Plot Plant IDs)
 	Plant.Info %<>% group_by(PlantID) %>%
 		mutate(
-			PlantID.First.Alive = min(First.Survey.Date.Alive, na.rm=T),
-			PlantID.Last.Alive = max(Last.Survey.Date.Alive, na.rm=T)
+			PlantID.First.Alive = min(PlotPlantID.First.Survey.Date.Alive, na.rm=T),
+			PlantID.Last.Alive = max(PlotPlantID.Last.Survey.Date.Alive, na.rm=T)
 		)
 		
 	# -------------------------------------------------- CLEANUP FOR CONSISTENCY
