@@ -66,7 +66,10 @@ mergePlantRecordsfromMultiplePlots <- function(Plant.Surveys, Plant.Info, date.w
 				Z[[i]][j, "maxDate"] <- as.character(max(K$Date))
 			}
 			# pull all plant survey records for this date from plant surveys within the window of dates, excluding dead/missing
-			M <- K %>% filter(Dead != 1, Missing != 1)
+			M <- K %>% filter(
+				Dead != 1 | is.na(Dead), 
+				Missing != 1 | is.na(Missing)
+			)
 			# --------------------------------------------------------- WARNINGS
 			# throw error if a plotplantID is surveyed multiple times within this window and multiple records have size measurements
 			temp <- M %>% filter(SegmentsMeasured > 0) %>%

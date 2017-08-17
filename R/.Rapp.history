@@ -1,213 +1,199 @@
-(276.29+8.75)/365
-16*3
-16*4
-84/12
-9/12
-9/12*14
-22+60+78+80+88+98
-22+38+18+2+8+10
-239/785
-(239+53)/785
-.492+.139
-.412+.166+.002
-.412/.58
-.166/.58
-.412*.58
-.71*.58
-98-54
-22+49+43+33+36+44
-60-11
-78-26
-80-35
-88-47
-98-52
-22+49+52+45+41+46
-library(RMark)
-?test_ddl
-data(dipper)    dipper.processed=process.data(dipper,groups=("sex"))    release.gof(dipper.processed)
-4+19+7+12
-4+17.83+7+12
-40.83/42
-40.83/42*14
-14
-(11.25+5)/(25.5 + 10.25 - 14)
-365*0.6666
-365*0.6666 - 75.89
-5/6 * 2
-5/6 * 2 + 75.89
-365*0.6666 -77.55667
-365*0.6666 -77.55667 - 6 - 13 - 1
-145.7523/2
-15*3
-11*5
-8/12*14
-4+15.33+5.5+12
-(4+15.33+5.5+12)
-(4+15.33+5.5+12)/(4+19+7+12)
-(4+19+7+12)
-(4+15.33+5.5+12)/(4+19+7+12)*14
-2.5+17.5+12
-32/42
-32/42 * 14
-4+12+6.5+12
-(4+12+6.5+12)/42 * 14
-5/6*2
-5/6*2 + 0.25
-5/6*2 + 0.5
-2577.77/12
-15/20
-15/20*6
-300 - 4*50
-300 - 4*40
-4.5/12*14
-9+9+7+9
-33.5/34 * 14
-32/34 * 14
-32/34*14
-7+8.5+7+7
-(7+8.5+7+7)/34 * 14
-(7+5.5+5.5+8.5)/34 * 14
-(7+5.5+5.5+8.5)/(9+7+9+9) * 14
-9+7+9+9
-(14.25+7.25)/(24.75+10.25-9)
-(16.5+7.75)/(24.75+10.25)
-(16.5+7.75)/(24.75+10.25)*6
-(5.25+5.5)/(22.5+10.5)
-(5.25+5.5)/(22.5+10.5)*6
-(9.75+5.5)/(24.7+10.25-5)*6
-(9.75+5.5)/(24.7+10.25-5)
-3.98/6
-(9.75+5.5)/(24.7+10.25-10)
-(9.75+5.5)/(24.7+10.25-10)*6
-5/6*2
-1.83-5/6*2
-1.83-4/6*2
-5/6*2 + 0.5
-4/6*2 + 0.5
-4/6*2
-4/6 + 0.5
-4/6*2 + 0.5
-33/34 * 14
-17.5*4
-24*4 + 1.75*4
-library(dplyr)
-library(plyr)
-600*.22
-library(Mage)
-??prepDataTransitionMatrix
-??projection.matrix
-1/0.167
-0.167*3
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis')
-library(ProjectTemplate)#
-#
-# when working on a Windows computer#
-# setwd("C:/Users/KSauby/Dropbox/gradschool/Research/Projects/sampling")#
-#
-# load project#
-load.project()
-str(Plant.Surveys.by.Year)
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
-# --------------------------------------------------------------------------- ##
-# --------------------------------------------------------------------------- ##
-# -------- CREATE TRANSITION MATRIX DATASETS -------------------------------- ##
-Plant_Surveys_TM <- Plant.Surveys.by.Year %>% 	#
-	as.data.frame %>%#
- 	droplevels %>% #
- 	dplyr::select(#
- 		Species,#
-		PlantID,#
-		Stage,#
-		FecundityYear,#
- 		Network,#
- 		Island,#
-		Size_t,#
-		Fruit_Flowers_t,#
- 		CA_t,#
-		ME_t,#
-		Old_Moth_Evidence_t,#
-		DeadMissingbyEndofYear#
- 	) %>%#
-	filter(FecundityYear > 2012) %>%#
-	.[complete.cases(.$"Stage"),]#
-# stricta only#
-Plant_Surveys_TM_stricta <- Plant_Surveys_TM %>% #
-	filter(Species=="Opuntia stricta")#
-Plant_Surveys_TM_stricta %>% write.csv("../data/Plant_Surveys_TM_stricta.csv")
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
-Plant.Surveys.by.Year <- createPlantSurveysbyYear(Plant.Surveys.by.Plant)#
-#
-# --------------------------------------------------------------------------- ##
-# which plants are missing size surveys in the spring/summer that were NOT dead/missing, and that have a photo?#
-# which plants are missing fruit/flowers surveys in the spring/summer that were NOT dead/missing, and that have a photo?#
-#
-# these plantID and fecundity year combos are missing spring/summer surveys#
-temp1 <- Plant.Surveys.by.Year %>% #
-	filter(#
-		is.na(SurveyDate_SpringSummer),#
-		DeadMissingbyEndofYear != 1#
-	) %>%#
-	dplyr::select(PlantID, FecundityYear)#
-temp1 <- Plant.Surveys.by.Plant %>%#
-	filter(#
-		Dead != 1 & Missing != 1,#
-		month(Date) == 5 |#
-		month(Date) == 6 |#
-		month(Date) == 7 |#
-		month(Date) == 8 |#
-		month(Date) == 9,#
-		is.na(Size_t)#
-	) %>%#
-	merge(#
-		temp1,#
-		by = c("PlantID", "FecundityYear")#
-	) %>%#
-	filter(!(#
-			PlantID == 7548 & Date == "2014-09-05" |#
-			PlantID == 7773 & Date == "2014-09-21" |#
-			PlantID == 7774 & Date == "2014-09-21" |#
-			PlantID == 7778 & Date == "2014-09-21" |#
-			PlantID == 7791 & Date == "2014-09-21" |#
-			PlantID == 7792 & Date == "2014-09-21" |#
-			PlantID == 7793 & Date == "2014-09-21" |#
-			PlantID == 7794 & Date == "2014-09-21" |#
-			PlantID == 7795 & Date == "2014-09-21" |#
-			PlantID == 7807 & Date == "2014-09-21" |#
-			PlantID == 7810 & Date == "2014-09-21" |#
-			PlantID == 8088 & Date == "2014-09-21" |#
-			PlantID == 8088 & Date == "2014-06-28" |#
-			PlantID == 8088 & Date == "2014-06-04" |#
-			PlantID == 8647 & Date == "2013-07-18" |#
-			PlantID == 8652 & Date == "2013-07-23" |#
-			PlantID == 8653 & Date == "2013-07-23" |#
-			PlantID == 9156 & Date == "2014-06-10" |#
-			PlantID == 9156 & Date == "2014-09-11" |#
-			PlantID == 9561 & Date == "2014-06-24" |#
-			PlantID == 9561 & Date == "2014-05-12" |#
-			PlantID == 9682 & Date == "2014-06-02" |#
-			PlantID == 9024 & Date == "2014-06-25" |#
-			PlantID == 9220 & Date == "2013-07-18" |#
-			PlantID == 9220 & Date == "2013-05-21" |#
-			PlantID == 9371 & Date == "2015-05-26"#
-	)) %>%#
-	dplyr::select(PlantID, Date)#
-if (dim(temp)[1] > 0) {#
-	write.csv(temp1, "SpringSummerSurveyswoSizeFruit.csv")#
-	warning("Some plants are missing size/fruit records for spring/summer surveys. Data written to csv file.")#
-}#
-# --------------------------------------------------------------------------- ##
-#
-Plant.Info.Analysis <- createPlantInfobyPlant(Plant.Info, Plant.Surveys.by.Year, Plant.Surveys.by.Plant)#
-#
-Plant.Surveys.by.Year <- Plant.Info.Analysis %>%#
-	merge(Plant.Surveys.by.Year, by="PlantID")#
-#
-Plant.Surveys.by.Year[which(is.na(Plant.Surveys.by.Year$OutsideOfPlot)),]$OutsideOfPlot <- ""#
-#
-Plant.Surveys.by.Year %<>% filter(OutsideOfPlot!="Yes")#
-#
-Plant.Surveys.by.Plant <- Plant.Info.Analysis %>%#
-	merge(Plant.Surveys.by.Plant, by="PlantID")
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+Plant.Info %>%#
+				filter( #
+					PlantID==L$PlantID[1]) %>%#
+					filter(#
+					# only include plants that are listed as having been added to Plant.Info on or after Date#
+					as.Date(PlantID.First.Alive) <= #
+						as.Date(Z[[i]]$Date[j]) + date.window) %>%#
+					# exclude dead plants (including date plant was first recorded as dead)#
+				filter(	FirstDeadMissingObservation > #
+						as.Date(Z[[i]]$Date[j]) + date.window | #
+						is.na(FirstDeadMissingObservation)==T#
+				)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+Plant.Info %>%#
+				filter( #
+					PlantID==L$PlantID[1])
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+Plant.Info %>%#
+				filter( #
+					PlantID==L$PlantID[1]) %>%#
+					filter(#
+					# only include plants that are listed as having been added to Plant.Info on or after Date#
+					as.Date(PlantID.First.Alive) <= #
+						as.Date(Z[[i]]$Date[j]) + date.window)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+as.Date(Z[[i]]$Date[j]) + date.window)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+as.Date(Z[[i]]$Date[j]) + date.window
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+Plant.Info %>%#
+				filter( #
+					PlantID==L$PlantID[1]) %>%#
+					filter(#
+					# only include plants that are listed as having been added to Plant.Info on or after Date#
+					as.Date(PlantID.First.Alive) <= #
+						(as.Date(Z[[i]]$Date[j]) + date.window)) %>%#
+					# exclude dead plants (including date plant was first recorded as dead)#
+				filter(	FirstDeadMissingObservation > #
+						as.Date(Z[[i]]$Date[j]) + date.window | #
+						is.na(FirstDeadMissingObservation)==T#
+				)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+Plant.Info %>%#
+				filter( #
+					PlantID==L$PlantID[1]) %>%#
+					filter(#
+					# only include plants that are listed as having been added to Plant.Info on or after Date#
+	as.POSIXct(strptime(as.Date(PlantID.First.Alive, format = "%Y-%m-%d"))) <= #
+	(as.POSIXct(strptime(as.Date(Z[[i]]$Date[j]))) + date.window)#
+	)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+Plant.Info %>%#
+				filter( #
+					PlantID==L$PlantID[1]) %>%#
+					filter(#
+					# only include plants that are listed as having been added to Plant.Info on or after Date#
+	as.POSIXct(strptime(as.Date(PlantID.First.Alive, format = "%Y-%m-%d"))) <= #
+	(as.POSIXct(strptime(as.Date(Z[[i]]$Date[j], format = "%Y-%m-%d"))) + date.window)#
+	)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+as.POSIXct(strptime(as.Date(Z[[i]]$Date[j], format = "%Y-%m-%d")))
+as.Date(Z[[i]]$Date[j], format = "%Y-%m-%d")
+strptime(as.Date(Z[[i]]$Date[j], format = "%Y-%m-%d"))
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+Z[[i]]$Date[j]
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+as.Date(Z[[i]]$Date[j], format = "%Y-%m-%d")
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+strptime(as.Date(Z[[i]]$Date[j], format = "%Y-%m-%d"))
+dat = data.frame(#
+     Date = as.POSIXct(strptime(as.Date("2011-12-01", format = "%Y-%m-%d") + #
+       (0:10)*30, format="%Y-%m-%d"))#
+)
+dat
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+strptime(as.Date(as.character(Z[[i]]$Date[j]), format = "%Y-%m-%d"))
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+as.Date(as.character(Z[[i]]$Date[j])
+, format = "%Y-%m-%d")
+?strptime
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+as.POSIXct(strptime(as.Date(Z[[i]]$Date[j]), format = "%Y-%m-%d"))
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+Plant.Info %>%#
+				filter( #
+					PlantID==L$PlantID[1]) %>%#
+					filter(#
+					# only include plants that are listed as having been added to Plant.Info on or after Date#
+	as.POSIXct(strptime(as.Date(PlantID.First.Alive, format = "%Y-%m-%d"))) <= #
+	(as.POSIXct(strptime(as.Date(Z[[i]]$Date[j]), format = "%Y-%m-%d")) + date.window)#
+	)
+as.POSIXct(strptime(as.Date(Plant.Info$PlantID.First.Alive, format = "%Y-%m-%d"))) %>% head
+head(Plant.Info$PlantID.First.Alive)
+as.Date(Plant.Info$PlantID.First.Alive, format = "%Y-%m-%d") %>% head
+class(Plant.Info$PlantID.First.Alive)
+as.POSIXct(strptime(as.Date(as.character(Plant.Info$PlantID.First.Alive), format = "%Y-%m-%d"))) %>% head
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+as.POSIXct(strptime(Z[[i]]$Date[j], format = "%Y-%m-%d"))
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+Plant.Info %>%#
+				filter( #
+					PlantID==L$PlantID[1]) %>%#
+					filter(#
+					# only include plants that are listed as having been added to Plant.Info on or after Date#
+	as.POSIXct(strptime(PlantID.First.Alive, format = "%Y-%m-%d")) <= #
+	(as.POSIXct(strptime(Z[[i]]$Date[j], format = "%Y-%m-%d")) + date.window)#
+	)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+Plant.Info %>%#
+				filter( #
+					PlantID==L$PlantID[1]) %>%#
+					filter(#
+					# only include plants that are listed as having been added to Plant.Info on or after Date#
+	as.POSIXct(strptime(PlantID.First.Alive, format = "%Y-%m-%d")) <= #
+	(as.POSIXct(strptime(Z[[i]]$Date[j], format = "%Y-%m-%d")
+)
+)
+)
+as.POSIXct(strptime(Plant.Info$PlantID.First.Alive, format = "%Y-%m-%d"))
+as.POSIXct(strptime(Plant.Info$PlantID.First.Alive, format = "%Y-%m-%d")) %>% head
+temp <-Plant.Info %>%#
+				filter( #
+					PlantID==L$PlantID[1])
+as.POSIXct(strptime(temp$PlantID.First.Alive, format = "%Y-%m-%d")) %>% head
+as.POSIXct(strptime(temp$PlantID.First.Alive, format = "%Y-%m-%d")) <= #
+	(as.POSIXct(strptime(Z[[i]]$Date[j], format = "%Y-%m-%d")) + date.window)
+Z[[i]]$Date[j]
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+Plant.Info %>%#
+				filter( #
+					PlantID==L$PlantID[1])
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+N = Plant.Info %>%#
+				filter( #
+					PlantID==L$PlantID[1]),#
+					# only include plants that are listed as having been added to Plant.Info on or after Date#
+					as.POSIXct(#
+						strptime(#
+							PlotPlantID.First.Alive, format = "%Y-%m-%d"#
+						)#
+					) <= #
+					(as.POSIXct(#
+						strptime(#
+							Z[[i]]$Date[j], format = "%Y-%m-%d"#
+						)#
+					) + date.window),#
+					# exclude dead plants (including date plant was first recorded as dead)#
+					FirstDeadMissingObservation > #
+						as.Date(Z[[i]]$Date[j]) + date.window | #
+						is.na(FirstDeadMissingObservation)==T#
+				)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+Plant.Info %>%#
+				filter( #
+					PlantID==L$PlantID[1]),#
+					# only include plants that are listed as having been added to Plant.Info on or after Date#
+					as.POSIXct(#
+						strptime(#
+							PlotPlantID.First.Alive, format = "%Y-%m-%d"#
+						)#
+					) <= #
+					(as.POSIXct(#
+						strptime(#
+							Z[[i]]$Date[j], format = "%Y-%m-%d"#
+						)#
+					) + date.window)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+Plant.Info %>%#
+				filter( #
+					PlantID==L$PlantID[1],#
+					# only include plants that are listed as having been added to Plant.Info on or after Date#
+					as.POSIXct(#
+						strptime(#
+							PlotPlantID.First.Alive, format = "%Y-%m-%d"#
+						)#
+					) <= #
+					(as.POSIXct(#
+						strptime(#
+							Z[[i]]$Date[j], format = "%Y-%m-%d"#
+						)#
+					) + date.window),#
+					# exclude dead plants (including date plant was first recorded as dead)#
+					FirstDeadMissingObservation > #
+						as.Date(Z[[i]]$Date[j]) + date.window | #
+						is.na(FirstDeadMissingObservation)==T#
+				)
+setwd('/Users/KSauby/Documents/Projects')
+setwd("./GTMNERRproc")#
+#setwd("./dataproc")#
+#setwd("./modresproc")#
+#setwd("./unmarked")#
+#setwd("./RPresence")#
+#devtools::test()#
+devtools::document()#
+devtools::install()
 setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
 # ---------------------------------------------------------- Shorten names#
 Plot.Info <- OccupancySRSWOR.Plot.Surveys.Info#
@@ -225,13 +211,13 @@ Seed.Abund.Surveys <- Seed.Abundance.Surveys#
 GIS.data.upd <- GIS.data.updated
 setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
 D.Plot.Surveys$Date %<>% as.Date("%m/%d/%Y") # Demographic Plot Surveys#
-Plant.Surveys %<>% processPlantSurveys(Plant.Info) # Plant Surveys#
+Plant.Surveys %<>% processPlantSurveys(Plant.Info) # Plant Surveys
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
 Plant.Surveys %<>% fixInconsistentDeadMissingRecords#
 #
-placeholder -> Plant.Info#
-#
-Plant.Info %<>% processPlantInfo(Plot.Info, Plant.Surveys)#
-#
+Plant.Info %<>% processPlantInfo(Plot.Info, Plant.Surveys)
+str(Plant.Info)
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
 # edit 9164 - recorded missing three consecutive records#
 Plant.Surveys %<>%#
 mutate(#
@@ -270,428 +256,14 @@ Plant.Surveys <- Plant.Info %>%#
 	dplyr::summarise(#
 		N.PlotPlantIDs = length(unique(PlotPlantID))#
 	) %>%#
-	merge(Plant.Surveys, by="PlantID")#
-Plant.Surveys.by.Plant <- Plant.Surveys %>% #
-	processSurveysMergedbyPlant(Plant.Info)#
-Plant.Surveys.by.Plant %>% filter(AllSurveyed==F) %>% write.csv("incompletesurveys.csv")#
-#
-Plant.Surveys %>% filter(N.PlotPlantIDs > 1) %>% filter(Dead==1 | Missing == 1) %>% write.csv("deadmissing.csv")#
-#
-h <- function(w) if( any( grepl( "no non-missing arguments to max", w) ) ) invokeRestart( "muffleWarning" )#
-Plant.Surveys.by.Plant <- withCallingHandlers(#
-	createPlantInsectPresence(Plant.Surveys.by.Plant),#
-	warning = h#
-)#
-#
-# find and keep only first dead/missing observation#
-temp <- Plant.Surveys.by.Plant %>% findFirstDeadMissingObservation#
-# create Fecundity and RGR dataset#
-Plant.Surveys.by.Year <- createPlantSurveysbyYear(Plant.Surveys.by.Plant)#
-#
-# --------------------------------------------------------------------------- ##
-# which plants are missing size surveys in the spring/summer that were NOT dead/missing, and that have a photo?#
-# which plants are missing fruit/flowers surveys in the spring/summer that were NOT dead/missing, and that have a photo?#
-#
-# these plantID and fecundity year combos are missing spring/summer surveys#
-temp1 <- Plant.Surveys.by.Year %>% #
-	filter(#
-		is.na(SurveyDate_SpringSummer),#
-		DeadMissingbyEndofYear != 1#
-	) %>%#
-	dplyr::select(PlantID, FecundityYear)#
-temp1 <- Plant.Surveys.by.Plant %>%#
-	filter(#
-		Dead != 1 & Missing != 1,#
-		month(Date) == 5 |#
-		month(Date) == 6 |#
-		month(Date) == 7 |#
-		month(Date) == 8 |#
-		month(Date) == 9,#
-		is.na(Size_t)#
-	) %>%#
-	merge(#
-		temp1,#
-		by = c("PlantID", "FecundityYear")#
-	) %>%#
-	filter(!(#
-			PlantID == 7548 & Date == "2014-09-05" |#
-			PlantID == 7773 & Date == "2014-09-21" |#
-			PlantID == 7774 & Date == "2014-09-21" |#
-			PlantID == 7778 & Date == "2014-09-21" |#
-			PlantID == 7791 & Date == "2014-09-21" |#
-			PlantID == 7792 & Date == "2014-09-21" |#
-			PlantID == 7793 & Date == "2014-09-21" |#
-			PlantID == 7794 & Date == "2014-09-21" |#
-			PlantID == 7795 & Date == "2014-09-21" |#
-			PlantID == 7807 & Date == "2014-09-21" |#
-			PlantID == 7810 & Date == "2014-09-21" |#
-			PlantID == 8088 & Date == "2014-09-21" |#
-			PlantID == 8088 & Date == "2014-06-28" |#
-			PlantID == 8088 & Date == "2014-06-04" |#
-			PlantID == 8647 & Date == "2013-07-18" |#
-			PlantID == 8652 & Date == "2013-07-23" |#
-			PlantID == 8653 & Date == "2013-07-23" |#
-			PlantID == 9156 & Date == "2014-06-10" |#
-			PlantID == 9156 & Date == "2014-09-11" |#
-			PlantID == 9561 & Date == "2014-06-24" |#
-			PlantID == 9561 & Date == "2014-05-12" |#
-			PlantID == 9682 & Date == "2014-06-02" |#
-			PlantID == 9024 & Date == "2014-06-25" |#
-			PlantID == 9220 & Date == "2013-07-18" |#
-			PlantID == 9220 & Date == "2013-05-21" |#
-			PlantID == 9371 & Date == "2015-05-26"#
-	)) %>%#
-	dplyr::select(PlantID, Date)#
-if (dim(temp)[1] > 0) {#
-	write.csv(temp1, "SpringSummerSurveyswoSizeFruit.csv")#
-	warning("Some plants are missing size/fruit records for spring/summer surveys. Data written to csv file.")#
-}#
-# --------------------------------------------------------------------------- ##
-#
-Plant.Info.Analysis <- createPlantInfobyPlant(Plant.Info, Plant.Surveys.by.Year, Plant.Surveys.by.Plant)#
-#
-Plant.Surveys.by.Year <- Plant.Info.Analysis %>%#
-	merge(Plant.Surveys.by.Year, by="PlantID")#
-#
-Plant.Surveys.by.Year[which(is.na(Plant.Surveys.by.Year$OutsideOfPlot)),]$OutsideOfPlot <- ""#
-#
-Plant.Surveys.by.Year %<>% filter(OutsideOfPlot!="Yes")#
-#
-Plant.Surveys.by.Plant <- Plant.Info.Analysis %>%#
-	merge(Plant.Surveys.by.Plant, by="PlantID")
+	merge(Plant.Surveys, by="PlantID")
 setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-#' Classify plants by Stage#
-#'#
-#' @description Classify plants by stage. Individuals remain a seedling only for one year, then automatically transition to a "juvenile" stage. Once a juvenile plant reaches two segments in size, it is no longer a juvenile. Once a plant reaches the "Adult" stage, they remain "Adult", even if they retrogress to one segment.#
-#'#
-#' @param Data#
-#'#
-#' @export#
-#
-classifybyStage <- function(Data) {#
-	# can only be seedling for one year#
-	#	thus can only consider plants surveyed in their first year/survey for this		#
-	Data %>%#
-		mutate(#
-			Stage = NA,#
-			Stage = replace(#
-				Stage,#
-				which(#
-					FecundityYear == minFecundityYear &#
-					RecruitmentMode == "Seedling"#
-				),#
-				"Seedling"#
-			),#
-			Stage = replace(#
-				Stage,#
-				which(#
-					Size_t == 1#
-				),#
-				"1"#
-			),#
-			Stage = replace(#
-				Stage,#
-				which(#
-					Size_t == 2#
-				),#
-				"2"#
-			),#
-			Stage = replace(#
-				Stage,#
-				which(#
-					Size_t >= 3 & Size_t <= 5#
-				),#
-				"3"#
-			),#
-			Stage = replace(#
-				Stage,#
-				which(#
-					Size_t >= 6 & Size_t <= 10#
-				),#
-				"4"#
-			),#
-			Stage = replace(#
-				Stage,#
-				which(#
-					Size_t >= 11#
-				),#
-				"5"#
-			)#
-		)#
-}
+temp.A <- filter(Plant.Surveys, N.PlotPlantIDs > 1) %>% arrange(Date)#
+	Z = list()
+L = filter(temp.A, PlantID==9164)
+i=1
 setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-#' Add Sampling Period Variable#
-#'#
-#' @param Plant_Surveys Plant Survey Dataset#
-#'#
-#' @export#
-#
-addSamplingPeriods <- function(Plant_Surveys) {#
-	Plant_Surveys$DemographicSurvey <- "NA"#
-	Plant_Surveys %<>% #
-		group_by(Date) %>% #
-		dplyr::mutate(#
-			# SURVEY 0#
-			DemographicSurvey = replace(#
-				DemographicSurvey, #
-				which(Date < "2013-05-14"), #
-				"0"#
-			),#
-			# SURVEY 1 - SPRING/SUMMER 2013#
-			DemographicSurvey = replace(#
-				DemographicSurvey, #
-				which(Date >= "2013-05-14" & Date <= "2013-08-06"), #
-				"1"#
-			),#
-			# SURVEY 2 - FALL/WINTER 2013/2014#
-			DemographicSurvey = replace(#
-				DemographicSurvey, #
-				which(Date >= "2013-12-13" & Date <= "2014-01-28"), #
-				"2"#
-			),#
-			# SURVEY 3 - SPRING/SUMMER 2014#
-			DemographicSurvey = replace(#
-				DemographicSurvey, #
-				which(Date >= "2014-05-06" & Date <= "2014-09-24"),#
-				"3"#
-			),#
-			# SURVEY 4 - WINTER 2015#
-			DemographicSurvey = replace(#
-				DemographicSurvey, #
-				which(Date >= "2015-01-08" & Date <= "2015-02-21"),#
-				"4"#
-			),#
-			# SURVEY 5 - SPRING/SUMMER 2015#
-			DemographicSurvey = replace(#
-				DemographicSurvey, #
-				which(Date >= "2015-05-01"),#
-				"5"#
-			)#
-		) %>%#
-		ungroup()#
-	return(Plant_Surveys)#
-}
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-#' Create Plant Info by Plant#
-#'#
-#' @description Create variables giving evidence of moths and insects, including moth presence or damage.#
-#' @param Plant_Surveys_by_Plant Plant Survey Dataset#
-#'#
-#' @export#
-#' @importFrom dataproc Unique#
-#
-createPlantInfobyPlant <- function(Plant.Info, Plant.Surveys.by.Year, Plant.Surveys.by.Plant) {#
-	# one record per plant#
-	# 2849 records#
-	Plant.Info.Analysis <- Plant.Info %>%#
-		mutate(#
-			Parent = replace(#
-				Parent,#
-				which(Parent=="Unkn"),#
-				NA#
-			),#
-			AliveatEndofStudy = abs(ConfirmedDeadMissing - 1)#
-		) %>%#
-		renameSpecies#
-	Plant.Info.Analysis %<>%#
-		arrange(PlantID.First.Alive) %>%#
-		group_by(PlantID) %>%#
-		dplyr::summarise(#
-			Island 				= Island[1],#
-			Network 			= Network[1],#
-			# make sure they are all the same species#
-			Species 			= Species[1],#
-			# fix/verify#
-			RecruitmentMode 	= paste(Unique(RecruitmentMode), collapse=","),#
-			Parent 				= paste(Unique(Parent), collapse=","),#
-			First.Survey.Date.Alive = PlantID.First.Alive[1],#
-			AliveatEndofStudy	= Maximum(AliveatEndofStudy)#
-		) %>%#
-		filter(!is.na(Network)) %>%#
-		mutate(#
-			RecruitmentMode = replace(#
-				RecruitmentMode,#
-				which(RecruitmentMode==""),#
-				"Unknown"#
-			),#
-			Parent = replace(#
-				Parent,#
-				which(Parent=="NA" | Parent==""),#
-				"Unknown"#
-			)#
-		)#
-	# save to figure out if some plants were lost during processing#
-	temp1 <- Plant.Info.Analysis$PlantID#
-	# order#
-	Plant.Info.Analysis %<>% arrange(desc(Island), desc(Parent))#
-	# summarise insect presence on plants and in networks#
-	# network_summary <- Plant_Surveys_by_Year %>%#
-	#	group_by(Network) %>%#
-	#	dplyr::summarise(#
-	#		OldMothNetworkPres 	= Maximum(Old_Moth_Evidence_t),#
-	#		MENetworkPres 		= Maximum(ME_t),#
-	#		CANetworkPres 		= Maximum(CA_t),#
-	#		MothNetworkPres 	= Maximum(Moth_Evidence_t)#
-	#	)#
-	Plant_summary <- Plant.Surveys.by.Year %>%#
-		group_by(PlantID) %>%#
-		dplyr::summarise(#
-			OldMothPlantPres 	= Maximum(Old_Moth_Evidence_t),#
-			MEPlantPres 		= Maximum(ME_t),#
-			CAPlantPres 		= Maximum(CA_t),#
-			MothPlantPres 		= Maximum(Moth_Evidence_t)#
-		)#
-	Plant.Info.Analysis %<>% #
-		# merge(network_summary, by="Network") %>%#
-		merge(Plant_summary, by="PlantID")#
-	# get size at first survey#
-	First_Size <- Plant.Surveys.by.Plant %>%#
-		arrange(Date) %>%#
-		group_by(PlantID) %>%#
-		dplyr::summarise(#
-			First.Survey.Date 		= Date[1],#
-			minFecundityYear 		= Minimum(FecundityYear),#
-			First_Size 				= Size_t[!(is.na(Size_t))][1],#
-			First.Measurement.Date 	= Date[!(is.na(Size_t))][1],#
-			min.Size 				= Minimum(Size_t),#
-			max.Size 				= Maximum(Size_t),#
-			LastDateAlive =#
-				Maximum(Date[which(Dead==0 & Missing==0)]) %>% as.Date(origin="1970-01-01"),#
-			FirstDeadObservation	= Date[which(Dead==1)][1],#
-			FirstMissingObservation	= Date[which(Missing==1)][1],#
-			FirstDeadMissingObservation = Minimum(#
-				c(#
-					FirstDeadObservation,#
-					FirstMissingObservation#
-				)#
-			) %>% as.Date(origin="1970-01-01"),#
-			# assume alive day before first observed: First.Survey.Date - 1#
-			# also alive day of last survey: LastDateAlive + 1#
-			minDaysAlive	= #
-				(LastDateAlive + 1) - (First.Survey.Date - 1),#
-			# assume last day alive was day before death observation: FirstDeadMissingObservation - 1#
-			# assume alive day before first observed: First.Survey.Date - 1#
-			# the 1s cancel out#
-			maxDaysAlive	= #
-				(FirstDeadMissingObservation - 1) -	(First.Survey.Date - 1)#
-		)#
-		First_Size$minDaysAlive %<>% as.numeric#
-		First_Size$maxDaysAlive %<>% as.numeric %<>%#
-			Replace_NA_w_Period_Function#
-#
-	Plant.Info.Analysis %<>% #
-		merge(First_Size, by=c("PlantID")) %>%#
-	   	renameSpecies %>%#
-		renamePatches %>%#
-		mutate(#
-			HabitatType = NA,#
-			HabitatType = replace(#
-				HabitatType,#
-				which(#
-					Island=="Roadway1" |#
-					Island=="Roadway2"#
-				),#
-				"Barrier Island Habitat"#
-			),#
-			HabitatType = replace(#
-				HabitatType,#
-				which(#
-					Island!="Roadway1" &#
-					Island!="Roadway2"#
-				),#
-				"Intracoastal Waterway Island"#
-			)#
-		)#
-	# Alternative Plant IDs#
-	# Plant_Info_Analysis %<>% mutate(#
-	# 	PlantIDb = paste(#
-	# 		IslandFullNames,#
-	# 		PlantID,#
-	# 		sep=", "#
-	# 	),#
-	# 	PlantIDc = paste(#
-	# 		IslandFullNames,#
-	# 		PlantID,#
-	# 		sep="\n"#
-	# 	)#
-	# )#
-	# ------------------------------------------------------ WARNING MESSAGES ##
-	temp <- Plant.Info.Analysis %>% #
-		filter(maxDaysAlive!=".")#
-	temp$maxDaysAlive %<>% as.numeric#
-	temp %<>%#
-		filter(minDaysAlive > maxDaysAlive)#
-	if (dim(temp)[1] > 0) {#
-		write.csv(temp, "minDaysAlive_greater_maxDaysAlive.csv")#
-		warning(paste(#
-			"minDaysAlive > maxDaysAlive for some plants. Records written to csv."#
-		))#
-	}	#
-	temp <- Plant.Info.Analysis %>% #
-		filter(grepl(",", RecruitmentMode)==TRUE)#
-	if (dim(temp)[1] > 0) {#
-		write.csv(temp, "InconsistentRecruitmentModePlantInfo.csv")#
-		warning(paste(#
-			"Inconsistent recruitment mode recorded for at least one plant spanning multiple plots. These plant info records have been written to csv."#
-		))#
-	}	#
-	temp <- Plant.Info.Analysis %>% #
-		filter(grepl(",", Parent)==TRUE)#
-	if (dim(temp)[1] > 0) {#
-		write.csv(temp, "InconsistentParentPlantInfo.csv")#
-		warning(paste(#
-			"Inconsistent Parent recorded for at least one plant spanning multiple plots. These plant info records have been written to csv."#
-		))#
-	}	#
-	temp <- Plant.Info.Analysis %>% #
-		dplyr::select(-c(#
-			FirstDeadObservation, #
-			FirstMissingObservation, #
-			FirstDeadMissingObservation#
-		)) %>% #
-		.[complete.cases(.),]#
-	temp2 <- Plant.Info.Analysis[which(!(Plant.Info.Analysis$PlantID %in% temp$PlantID)),] %>% #
-		filter(minDaysAlive > 2,#
-		PlantID != 7228 &#
-		PlantID != 7435 &#
-		PlantID != 7548 &#
-		PlantID != 8653#
-	)#
-	if (dim(temp2)[1] > 0) {#
-		write.csv(temp, "PlantInfoMissingInfo.csv")#
-		warning(paste(#
-			"Some information missing from plant info for some plants. Data written to csv."#
-		))#
-	}#
-	# No plant should be recorded as alive less than 2 days#
-	temp <- Plant.Info.Analysis %>% filter(minDaysAlive < 2)#
-	if (dim(temp)[1] > 0) {#
-		write.csv(temp,"PlantsAliveLessThan2Days.csv")#
-		warning(paste(#
-			"Some plants are recorded as alive for less than 2 days. Records written to csv."#
-		))#
-	}	#
-	# ------------------------------------------------------------------------ ##
-	return(Plant.Info.Analysis)#
-}
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-#' Merge Plants from Multiple Plots#
-#' #
-#' @param Plant_Surveys Plant survey dataset#
-#' @description Only merge data collected on the same day. Merge survey data for individual plants in more than one plot. Then combine back into one file with surveys of plants in only one plot.#
-#' #
-#' @export#
-#
-mergePlantRecordsfromMultiplePlots <- function(Plant.Surveys, Plant.Info, date.window=48,...) {#
-	# use same window for all plants#
-	# restrict to plants that span multiple plots#
-	temp.A <- filter(Plant.Surveys, N.PlotPlantIDs > 1) %>% arrange(Date)#
-	Z = list()#
-	for (i in 1:length(unique(temp.A$PlantID))) {#
-		# pull all records for this PlantID from the plant surveys#
-		L = filter(temp.A, PlantID==unique(temp.A$PlantID)[i])#
-		# group by window of dates#
-		if (max(L$Date) - min(L$Date) > #
+if (max(L$Date) - min(L$Date) > #
 			SequenceofDates[2] - SequenceofDates[1]) {#
 			L.list <- L %>%#
 				split(#
@@ -715,10 +287,10 @@ mergePlantRecordsfromMultiplePlots <- function(Plant.Surveys, Plant.Info, date.w
 			names(L.list) <- max(L.list[[1]]$Date)#
 			Z[[i]] <- data.frame(Date = max(L.list[[1]]$Date))#
 		}#
-		Z[[i]][, "PlantID"] 			<- L$PlantID[1]#
-		# for each window of dates#
-		for (j in 1:length(names(L.list))) {#
-			K <- eval(parse(text=paste(#
+		Z[[i]][, "PlantID"] 			<- L$PlantID[1]
+j=1
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+K <- eval(parse(text=paste(#
 				"L.list$", #
 				'"', #
 				names(L.list)[j], #
@@ -741,9 +313,10 @@ mergePlantRecordsfromMultiplePlots <- function(Plant.Surveys, Plant.Info, date.w
 				Z[[i]][j, "maxDate"] <- as.character(max(K$Date))#
 			}#
 			# pull all plant survey records for this date from plant surveys within the window of dates, excluding dead/missing#
-			M <- K %>% filter(Dead != 1, Missing != 1)#
-			# --------------------------------------------------------- WARNINGS#
-			# throw error if a plotplantID is surveyed multiple times within this window and multiple records have size measurements#
+			M <- K %>% filter(Dead != 1, Missing != 1)
+M
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+this window and multiple records have size measurements#
 			temp <- M %>% filter(SegmentsMeasured > 0) %>%#
 				dplyr::add_count(PlotPlantID) %>%				#
 				filter(n > 1)#
@@ -777,614 +350,158 @@ mergePlantRecordsfromMultiplePlots <- function(Plant.Surveys, Plant.Info, date.w
 					paste(M$Date, collapse=",")#
 				))#
 			}#
-			# ---------------------------------------------------------------- ##
-			# get list of PlotPlantIDs alive at this time#
-			# plant would be dead if no PlantID records showed up in N#
-			N = Plant.Info %>%#
+			# ----------------------
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+Plant.Info %>%#
 				filter( #
-					PlantID==L$PlantID[1], #
+					PlantID==L$PlantID[1],#
 					# only include plants that are listed as having been added to Plant.Info on or after Date#
-					PlantID.First.Alive <= #
-						as.Date(Z[[i]]$Date[j]) + date.window,#
+					as.POSIXct(#
+						strptime(#
+							PlotPlantID.First.Alive, format = "%Y-%m-%d"#
+						)#
+					) <= #
+					(as.POSIXct(#
+						strptime(#
+							Z[[i]]$Date[j], format = "%Y-%m-%d"#
+						)#
+					) + date.window),#
 					# exclude dead plants (including date plant was first recorded as dead)#
 					FirstDeadMissingObservation > #
 						as.Date(Z[[i]]$Date[j]) + date.window | #
 						is.na(FirstDeadMissingObservation)==T#
-				)	#
-			# pull all surveys where plant was marked dead#
-			O <- K %>% filter(Dead == 1 | Missing == 1)#
-			# the plant can only be marked dead if no live part was surveyed and no parts remained unsurveyed#
-			if (dim(M)[1] == 0 & dim(N)[1] == 0 & dim(O)[1] > 0) {#
-				Z[[i]][j, "Dead"]	 <- Maximum(O$Dead)#
-				Z[[i]][j, "Missing"] <- Maximum(O$Missing)#
-				Z[[i]][j, "AllSurveyed"] 			<- "TRUE"#
-				Z[[i]][j, "PlantsSurveyed"] <- paste(#
-					O$PlotPlantID, collapse=","#
-				)#
-				Z[[i]][j, "DeadDuetoMothDamage"] <- paste(#
-					O$DeadDuetoMothDamage,#
-					collapse=","#
-				)#
-			} else#
-			# if all PlotPlantIDs were surveyed for a given date:#
-			if (dim(M)[1] > 0 & all(M$PlotPlantID %in% N$PlotPlantID)) {#
-				Z[[i]][j, "CA_t"] 					<- mysum2(M$CA_t)#
-				Z[[i]][j, "ME_t"] 					<- mysum2(M$ME_t)#
-				Z[[i]][j, "CH_t"] 					<- mysum2(M$CH_t)#
-				Z[[i]][j, "DA_t"] 					<- mysum2(M$DA_t)#
-				Z[[i]][j, "Unknown_Moth_t"] 		<- mysum2(M$Unknown_Moth_t)#
-				Z[[i]][j, "Gerstaeckeria_t"] 		<- mysum2(M$Gerstaeckeria_t)#
-				Z[[i]][j, "Old_Moth_Evidence_t"]<- mysum2(M$Old_Moth_Evidence_t)#
-				Z[[i]][j, "AllSurveyed"] 			<- "TRUE"#
-				Z[[i]][j, "Dead"] <- 0#
-				Z[[i]][j, "Missing"] <- 0#
-				Z[[i]][j, "PlantsSurveyed"] <- paste(#
-					M$PlotPlantID, collapse=","#
-				)#
-			} else {#
-				# if all PlotPlantIDs were NOT surveyed on this date consider the insect to be detected if the sum is greater than zero#
-				Z[[i]][j, "CA_t"] 					<- mysum1(M$CA_t)#
-				Z[[i]][j, "ME_t"] 					<- mysum1(M$ME_t)#
-				Z[[i]][j, "CH_t"] 					<- mysum1(M$CH_t)#
-				Z[[i]][j, "DA_t"] 					<- mysum1(M$DA_t)#
-				Z[[i]][j, "Unknown_Moth_t"] 		<- mysum1(M$Unknown_Moth_t)#
-				Z[[i]][j, "Gerstaeckeria_t"] 		<- mysum1(M$Gerstaeckeria_t)#
-				Z[[i]][j, "Old_Moth_Evidence_t"]<- mysum1(M$Old_Moth_Evidence_t)#
-				Z[[i]][j, "AllSurveyed"] 			<- "FALSE"#
-				Z[[i]][j, "Dead"] <- 0#
-				Z[[i]][j, "Missing"] <- 0#
-				Z[[i]][j, "PlantsSurveyed"] <- paste(#
-					M$PlotPlantID, collapse=","#
-				)#
-			}#
-			# Number of segments#
-			Z[[i]][j, "Size_t"] 					<- mysum(M$Size_t)#
-			Z[[i]][j, "SizeInPlots_t"] <- #
-				mysum(M$Size_t[which(M$OutsideOfPlot!="Yes")])#
-			Z[[i]][j, "Plant_Segments_w_leaves"] <- #
-				mysum(M$Plant_Segments_w_leaves)#
-			Z[[i]][j, "Plant_Segments_wo_leaves"] <-#
-			 	mysum(M$Plant_Segments_wo_leaves)#
-			Z[[i]][j, "Plant_Segments_woody"] <- mysum(M$Plant_Segments_woody)#
-			# Size#
-			Z[[i]][j, "Height_t"] 			<- Maximum(M$Height_t)#
-			Z[[i]][j, "Width_t"] 			<- Maximum(M$Width_t)#
-			Z[[i]][j, "Perpen_Width"] 		<- Maximum(M$Perpen_Width)#
-			# Fruit	and Flowers#
-			Z[[i]][j, "Num_FlowerBuds"] 			<- mysum(M$Num_FlowerBuds)#
-			Z[[i]][j, "Num_Fruit_red"] 				<- mysum(M$Num_Fruit_red)#
-			Z[[i]][j, "Num_Fruit_green"] 			<- mysum(M$Num_Fruit_green)#
-			Z[[i]][j, "Num_Flowers"] 				<- mysum(M$Num_Flowers)#
-			Z[[i]][j, "Fruit_t"] 					<- mysum(M$Fruit_t)#
-			Z[[i]][j, "Fruit_Flowers_t"] 			<- mysum(M$Fruit_Flowers_t)#
-			Z[[i]][j, "DemographicSurvey"] 			<- K$DemographicSurvey[1]#
-			Z[[i]][j, "FecundityYear"] 				<- K$FecundityYear[1]#
-			Z[[i]][j, "OutsideOfPlot"] 				<- ""#
-			Z[[i]][j, "DeadDuetoMothDamage"] 		<- ""#
-			Z[[i]][j, "PlantPictures"]			 	<- paste(#
-				K$PlantPictures[which(!is.na(K$PlantPictures))],#
-				collapse=","#
-			)#
-			# Paste PlotPlantIDs together to know which plants were surveyed on this date#
-		}#
-		Z[[i]] %<>%#
-			dplyr::select(-(Date)) %>%#
-			setnames("maxDate", "Date")#
-		cat(i)#
-	}#
-	temp.B <- do.call(rbind.data.frame, Z)#
-	temp.B[,c(#
-		"Perpen_Width",#
-		"Width_t",#
-		"Height_t")] %<>% #
-		apply(., 2, NA_Function#
-	)#
-	# - Process plants NOT spanning multiple plots --------------------------- ##
-	temp.C <- Plant.Surveys %>% #
-		filter(N.PlotPlantIDs == 1) %>%#
-		rowwise %>%#
-		mutate(#
-			SizeInPlots_t = NA,#
-			SizeInPlots_t = replace(#
-				SizeInPlots_t,#
-				which(OutsideOfPlot!="Yes"),#
-				Size_t#
-			)#
-		) %>%#
-		as.data.frame#
-	# - Merge plant survey data into one file -------------------------------- ##
-	# create new file with those plants in only one plot#
-	temp.C %<>% dplyr::select( #
-		PlantID, #
-		Date, #
-		# insects#
-		CA_t, #
-		ME_t, #
-		CH_t,#
-		DA_t,#
-		Unknown_Moth_t, #
-		Gerstaeckeria_t,#
-		Old_Moth_Evidence_t, #
-		# size#
-		Size_t, #
-		Plant_Segments_w_leaves, #
-		Plant_Segments_wo_leaves, #
-		Plant_Segments_woody, #
-		Height_t, #
-		Width_t, #
-		Perpen_Width, #
-		# fruit#
-		Num_FlowerBuds, #
-		Num_Fruit_red, #
-		Num_Fruit_green, #
-		Num_Flowers,#
-		Fruit_t, #
-		Fruit_Flowers_t,#
-		Dead, #
-		Missing, #
-		DemographicSurvey,#
-		FecundityYear,#
-		OutsideOfPlot,#
-		DeadDuetoMothDamage,#
-		PlantPictures#
-	)#
-	temp.C$AllSurveyed <- "TRUE"#
-	temp.C$PlantsSurveyed <- "NA"#
-	# merge plants in multiple plots and plants in one plot#
-	temp.D <- rbind.fill(temp.B, temp.C)#
-	temp.D %<>% arrange(PlantID, Date)#
-	# ----------------------------------------------------------------- WARNINGS#
-	# WHICH PLANTS COMPLETELY DIED BUT DO NOT HAVE A SURVEY INDICATING SO IN THE MERGED SURVEYS?#
-	# Dead/missing observations from plant surveys before merge#
-	temp1 <- temp.A %>% filter(Dead == 1 | Missing == 1)#
-	# Dead/missing observations from plant surveys after merge#
-	temp2 <- temp.D %>% filter(Dead == 1 | Missing == 1)#
-	temp <- temp1 %>% filter(!(PlantID %in% temp2$PlantID))#
-	# which of these plants completely died?#
-	temp3 <- Plant.Info %>%#
-		filter(PlantID %in% temp$PlantID) %>%#
-		group_by(PlantID) %>%#
-		summarise(#
-			Dead = sum(ConfirmedDeadMissing, na.rm=T)/#
-				length(ConfirmedDeadMissing)#
-		) %>%#
-		filter(Dead >= 1)#
-	if (dim(temp3)[1] > 0) {#
-		write.csv(temp3,"PlantsNotSurveyedasDead.csv")#
-		warning(paste(#
-			"Plant that is missing/dead is not indicated as such in merged surveys. Date written to csv file."#
-		))#
-	}#
-	# WARNING IF PLANTS MARKED DEAD HAVE NON-ZERO SIZE/FRUIT COUNT MEASUREMENTS#
-	temp <- temp.D %>%#
-		filter(#
-			Dead == 1,#
-			!(#
-				is.na(Size_t) |#
-				is.na(Plant_Segments_w_leaves) |#
-				is.na(Plant_Segments_wo_leaves) |#
-				is.na(Plant_Segments_woody) |#
-				is.na(Height_t) |#
-				is.na(Width_t) |#
-				is.na(Perpen_Width)#
-			) |#
-			Num_FlowerBuds > 0 |#
-			Num_Fruit_red > 0 |#
-			Num_Fruit_green > 0 |#
-			Num_Flowers > 0 |#
-			Fruit_t > 0 |#
-			Fruit_Flowers_t#
-		)#
-	if (dim(temp)[1] > 0) {#
-		write.csv(temp,"Deadplantswsizemeasurements.csv")#
-		warning(paste(#
-			"Plant ",#
-			paste(temp$PlantID, collapse=","),#
-			"Marked dead but has size/fruit measurements. Information written to csv file."#
-		))#
-	}#
-	# WARNING IF PLANTS MARKED DEAD HAVE NON-ZERO SIZE/FRUIT COUNT MEASUREMENTS#
-	temp <- temp.D %>%#
-		filter(#
-			Missing == 1,#
-			!(#
-				is.na(Size_t) |#
-				is.na(Plant_Segments_w_leaves) |#
-				is.na(Plant_Segments_wo_leaves) |#
-				is.na(Plant_Segments_woody) |#
-				is.na(Height_t) |#
-				is.na(Width_t) |#
-				is.na(Perpen_Width)#
-			) |#
-			Num_FlowerBuds > 0 |#
-			Num_Fruit_red > 0 |#
-			Num_Fruit_green > 0 |#
-			Num_Flowers > 0 |#
-			Fruit_t > 0 |#
-			Fruit_Flowers_t#
-		)#
-	if (dim(temp)[1] > 0) {#
-		write.csv(temp,"Missingplantswsizemeasurements.csv")#
-		warning(paste(#
-			"Plant ",#
-			paste(temp$PlantID, collapse=","),#
-			"Marked missing but has size/fruit measurements. Information written to csv file."#
-		))#
-	}#
-	# ------------------------- CHANGE SURVEY INFO TO NA FOR DEAD/MISSING PLANTS#
-	temp.D %<>%#
-		rowwise() %>%#
-		mutate(#
-			CA_t = replace(#
-				CA_t,#
-				which(Dead == 1 | Missing == 1),#
-				NA#
-			),#
-			ME_t = replace(#
-				ME_t,#
-				which(Dead == 1 | Missing == 1),#
-				NA#
-			),#
-			CH_t = replace(#
-				CH_t,#
-				which(Dead == 1 | Missing == 1),#
-				NA#
-			),#
-			DA_t = replace(#
-				DA_t,#
-				which(Dead == 1 | Missing == 1),#
-				NA#
-			),#
-			Unknown_Moth_t = replace(#
-				Unknown_Moth_t,#
-				which(Dead == 1 | Missing == 1),#
-				NA#
-			),#
-			Gerstaeckeria_t = replace(#
-				Gerstaeckeria_t,#
-				which(Dead == 1 | Missing == 1),#
-				NA#
-			),#
-			Old_Moth_Evidence_t = replace(#
-				Old_Moth_Evidence_t,#
-				which(Dead == 1 | Missing == 1),#
-				NA#
-			),#
-			Size_t = replace(#
-				Size_t,#
-				which(Dead == 1 | Missing == 1),#
-				NA#
-			),#
-			Plant_Segments_w_leaves = replace(#
-				Plant_Segments_w_leaves,#
-				which(Dead == 1 | Missing == 1),#
-				NA#
-			),#
-			Plant_Segments_wo_leaves = replace(#
-				Plant_Segments_wo_leaves,#
-				which(Dead == 1 | Missing == 1),#
-				NA#
-			),#
-			Plant_Segments_woody = replace(#
-				Plant_Segments_woody,#
-				which(Dead == 1 | Missing == 1),#
-				NA#
-			),#
-			Height_t = replace(#
-				Height_t,#
-				which(Dead == 1 | Missing == 1),#
-				NA#
-			),#
-			Width_t = replace(#
-				Width_t,#
-				which(Dead == 1 | Missing == 1),#
-				NA#
-			),#
-			Perpen_Width = replace(#
-				Perpen_Width,#
-				which(Dead == 1 | Missing == 1),#
-				NA#
-			),#
-			Num_FlowerBuds = replace(#
-				Num_FlowerBuds,#
-				which(Dead == 1 | Missing == 1),#
-				NA#
-			),#
-			Num_Fruit_red = replace(#
-				Num_Fruit_red,#
-				which(Dead == 1 | Missing == 1),#
-				NA#
-			),#
-			Num_Fruit_green = replace(#
-				Num_Fruit_green,#
-				which(Dead == 1 | Missing == 1),#
-				NA#
-			),#
-			Num_Flowers = replace(#
-				Num_Flowers,#
-				which(Dead == 1 | Missing == 1),#
-				NA#
-			),#
-			Fruit_t = replace(#
-				Fruit_t,#
-				which(Dead == 1 | Missing == 1),#
-				NA#
-			),#
-			Fruit_Flowers_t = replace(#
-				Fruit_Flowers_t,#
-				which(Dead == 1 | Missing == 1),#
-				NA#
-			)#
-		) %>%#
-		ungroup()#
-	# --------------------------------------------------------------------------#
-	temp.D$Date %<>% as.Date#
-	return(temp.D)#
-}
+				)
+str(Plant.Info)
 setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-#' Process Plant Info#
-#'#
-#' @description Process Plant Info#
-#' @param Plant.Info Dataset with Plant Information#
-#' @param Plot.Info Dataset with Plot Information#
-#'#
-#' @importFrom dplyr select summarise group_by arrange#
-#
-#' @export#
-#
-processPlantInfo <- function(Plant.Info, Plot.Info, Plant.Surveys) {#
-	# --------------------------------------------------- remove InBigPlantStudy#
-	Plant.Info %<>% filter(InBigPlantStudy=="")#
-	# ----------------------------------------------------------- ERROR MESSAGES#
-	# Plants listed as species Not Recorded#
-	dups <- Plant.Info[which(Plant.Info$HostSpecies=="Not Recorded"), ]#
-	if (dim(dups)[1] > 0) {#
-		warning(paste(#
-			"Species identity not recorded for plantID: ",#
-			paste(dups$PlantID, collapse=", ")#
-		))#
-	}#
-	# are any plant IDs in Plant Info not in the surveys?#
-	dups <- Plant.Info[which(Plant.Info$OutsideOfCluster!="Yes"),] %>%#
-		filter(!(PlantID %in% Plant.Surveys$PlotPlantID)) %>% #
-		.[,2:5]#
-	if (dim(dups)[1] > 0) {#
-		warning(paste(#
-			"Some plant IDs are not in Plant Surveys data: ",#
-			paste(dups$PlantID, collapse=", ")#
-		))#
-	}#
-	# make sure that there is plot info for each tag number in plant info#
-	dups <- Plant.Info %>%#
-		filter(!(Tag_Number %in% Plot.Info$Tag_Number))#
-	if (dim(dups)[1] > 0) {#
-		warning(paste(#
-			"Plants (",#
-			paste(unique(dups$PlantID), collapse=", "),#
-			") are listed as being in plots not in Plot Info data (",#
-			paste(unique(dups$Tag_Number), collapse=", "),#
-			")"#
-		))#
-	}#
-	# ----------------- ADD INFO FROM Plot.Info (Cluster, Network, Island, etc.)#
-	Plant.Info <- Plot.Info %>%#
-		dplyr::select(#
-			Island, #
-			Tag_Number, #
-			Cluster, #
-			Cluster2, #
-			Network, #
-			Sampling, #
-			SurveyOrder#
-		) %>%#
-		merge(Plant.Info, by = "Tag_Number", all.y=TRUE) %>%#
-		as.data.table %>%#
-		setnames("HostSpecies", "Species") %>%#
-		as.data.frame#
-	#---------------------------------------------------------- FORMAT PLANT IDs#
-	Plant.Info %<>% Format_PlantIDs_Function#
-	#------------------------------------------------------------- FORMAT PARENT#
-	Plant.Info$Parent %<>% str_replace_all(fixed(" "), "")#
-	# remove 5th digit from plant ID#
-	Plant.Info$Parent %<>% substr(1,4) #
-	#---------------------- CALCULATE AND ADD NUMBER OF PlotPlantIDs PER PlantID#
-	Plant.Info <- Plant.Info %>%#
-		group_by(PlantID) %>%#
-		dplyr::summarise(#
-			N.PlotPlantIDs = length(unique(PlotPlantID))#
-		) %>%#
-		merge(Plant.Info, by="PlantID")#
-	#-------------------------- ADD FIRST and LAST DATE PlotPlantID WAS SURVEYED#
-	# particularly relevant for plants that grew into plots over the course of the study (and thus the number of PlotPlantIDs for a given PlantID changed over time)#
-	# also helps calculate the number of days a plant was known to have survived#
-	Plant.Info <- Plant.Surveys %>%#
-		filter(#
-			Dead != 1,#
-			Missing != 1#
-		) %>%#
-		group_by(PlotPlantID) %>%#
-		dplyr::summarise(#
-			# simply the first survey date#
-			First.Survey.Date.Alive = min(Date),#
-			# should be max date the plant was alive#
-			Last.Survey.Date.Alive = max(Date)#
-		) %>%#
-		merge(Plant.Info, by="PlotPlantID")#
-	# ----------------------------------------------------------- PLANT SURVIVAL#
-	# indicate whether plant was listed as dead or missing#
-	A <- Plant.Surveys %>%#
-		rowwise() %>%#
-		mutate(DeadMissing = sum(Dead,Missing,na.rm=T)) %>%#
-		arrange(Date) %>%#
-		group_by(PlotPlantID) %>%#
-		dplyr::summarise(#
-			sequenceDeadobs 		= paste(Dead, collapse=""),#
-			sequenceMissingobs 		= paste(Missing, collapse=""),#
-			sequenceDeadMissingobs 	= paste(DeadMissing, collapse=""),#
-			ConfirmedDead 			= ifelse(#
-				grepl("11", sequenceDeadobs) == TRUE,#
-				1,#
-				0#
-			),#
-			ConfirmedMissing 		= ifelse(#
-				grepl("11", sequenceDeadobs) == TRUE,#
-				1,#
-				0#
-			),#
-			ConfirmedDeadMissing 	= ifelse(#
-				grepl("11", sequenceDeadMissingobs) == TRUE,#
-				1,#
-				0#
-			),#
-			InconsistentDeadMissing = ifelse(#
-				grepl("10", sequenceDeadMissingobs) == TRUE,#
-				1,#
-				0#
-			)#
-		)#
-	# ERROR MESSAGES#
-	Z <- A %>% #
-		filter(InconsistentDeadMissing==1) %>%#
-		filter(!(#
-			PlotPlantID %in% c("8999b", "9113b", "9164a", "9341a", "9917a", #
-			"8873b", "9892b", "9573b", "9810b", "9852b")#
-		)) #
-	if (dim(Z)[1] > 0) {#
-		write.csv(Z, "inconsistentDeadMissing.csv")#
-		warning(paste(#
-			"Plants with inconsistent records of dead/missing/alive present in dataset. These plants have been saved to a csv."#
-		))#
-	}#
-	# info for plants NOT observed in summer 2015#
-	B <- Plant.Surveys %>% #
-		filter(Date >= "2015-05-01")#
-	C <- A %>% filter(!(PlotPlantID %in% B$PlotPlantID))#
-	# info for plants observed in summer 2015 - these do not need 2 consecutive obs. of dead/missing to be confirmed dead/missing#
-	 B %<>%#
-		rowwise() %>%#
-		mutate(DeadMissing = sum(Dead,Missing,na.rm=T)) %>%#
-		arrange(Date) %>%#
-		group_by(PlotPlantID) %>%#
-		dplyr::summarise(#
-			ConfirmedDead 			= Dead_Missing_Function(Dead),#
-			ConfirmedMissing 		= Dead_Missing_Function(Missing),#
-			ConfirmedDeadMissing 	= Dead_Missing_Function(c(Dead,Missing))#
-		)#
-	# paste together#
-	#		info for plants NOT observed in summer 2015 &#
-	#		info for plants observed in summer 2015#
-	Plant.Info <- rbind.fill(B, C) %>%#
-		merge(Plant.Info, ., by="PlotPlantID")#
-	#---------------- ADD FIRST DATE PlotPlantID WAS RECORDED AS DEAD OR MISSING#
-	# earliest date PlotPlantID was recorded as dead#
-	temp_dead_obs <- filter(Plant.Surveys, Dead=="1") %>%#
-		group_by(PlotPlantID) %>%#
-		dplyr::summarise(FirstDeadObservation = min(Date))#
-	# earliest date PlotPlantID was recorded as missing#
-	temp_missing_obs <- filter(Plant.Surveys, Missing=="1") %>%#
-		group_by(PlotPlantID) %>%#
-		dplyr::summarise(FirstMissingObservation = min(Date))#
-	# earliest date PlotPlantID was recorded as missing or dead#
-	temp_dead_missing <- merge(#
-		temp_dead_obs, #
-		temp_missing_obs, #
-		by="PlotPlantID", #
-		all=T#
-	) #
-	temp_dead_missing$FirstDeadMissingObservation <- temp_dead_missing %>%#
-		dplyr::select(#
-			FirstDeadObservation,#
-			FirstMissingObservation#
-		) %>% #
-		apply(., 1, min, na.rm=T) %>%#
-		as.Date#
-	# merge with Plant.Info#
-	Plant.Info <- merge(Plant.Info, temp_dead_missing, by="PlotPlantID", all=T)#
-# ------------------------------------------------------------------------------#
-# calculate first/last day alive for PlantID (not individual Plot Plant IDs)#
-	Plant.Info %<>% group_by(PlantID) %>%#
-		mutate(#
-			PlantID.First.Alive = min(First.Survey.Date.Alive, na.rm=T),#
-			PlantID.Last.Alive = max(Last.Survey.Date.Alive, na.rm=T)#
-		)#
-	# -------------------------------------------------- CLEANUP FOR CONSISTENCY#
-	Plant.Info[,c(#
-		"Quadrant",#
-		"ReproductiveMode",#
-		"Parent")] %<>%#
-		apply(., 2, as.character#
-	)#
-	Plant.Info[,c(#
-		"Quadrant",#
-		"ReproductiveMode",#
-		"Parent")] %<>%#
-		apply(., 2, NA_Function#
-	)#
-	Plant.Info[,c(#
-		"Quadrant",#
-		"ReproductiveMode",#
-		"Parent")] %<>%#
-		apply(., 2, as.factor#
-	)#
-	# ------------------------------------------------- modify Reproductive Mode#
-	Plant.Info$ReproductiveMode %<>% WoodyTrunk_Function()#
-	Plant.Info %<>% setnames("ReproductiveMode", "RecruitmentMode")#
-	Plant.Info %<>% mutate(#
-		RecruitmentMode = replace(#
-			RecruitmentMode,#
-			which(RecruitmentMode=="WoodyTrunk"),#
-			NA#
-		),#
-		RecruitmentMode = replace(#
-			RecruitmentMode,#
-			which(is.na(RecruitmentMode)),#
-			NA#
-		)#
-	)#
-	# ------------------------------------------------- ADD InDemomographicStudy#
-	# save all Plant.Info#
-	Plant.Info_All <- Plant.Info#
-	Plant.Info %<>% merge(#
-		., #
-		ClustersInDemographicStudy, #
-		by = "Cluster"#
-	) %>%#
-	filter(InDemographicStudy == "yes")#
-	# ------------------------------------------------------------ ADD ClusterID#
-	#	do this because some clusters share plots#
-	Plot.Info_Cluster <- Plot.Info %>%#
-		dplyr::select(Tag_Number, Cluster, Cluster2) %>%#
-		reshape2:::melt.data.frame(., id.vars=c("Tag_Number"), #
-			value.name="ClusterID") %>%#
-		filter(ClusterID!=0) %>%#
-		.[, -2] %>%#
-		arrange(Tag_Number)#
-	Plot.Info_Cluster %<>%#
-		group_by(Tag_Number) %>%#
-		dplyr::summarise(ClusterID = paste(ClusterID, collapse=", "))#
-	# CLUSTER ID FOR PLOTS *NOT* IN CLUSTERS#
-	temp_A = Plot.Info %>%#
-		dplyr::select(Tag_Number, Cluster) %>%#
-		filter(Cluster==0)#
-	temp_A$ClusterID <- temp_A$Tag_Number#
-	temp_A %<>% .[, -2]#
-	Plot.Info_Cluster %<>% rbind.fill(temp_A) %>% #
-		merge(Plot.Info, by="Tag_Number") %>%#
-		dplyr::select(ClusterID, Tag_Number)#
-	Plant.Info %<>% merge(Plot.Info_Cluster, by="Tag_Number", all.x=T)#
-	# ----------------------------------------------------------- ERROR MESSAGES#
-	temp <- Plant.Info %>% #
-		filter(RecruitmentMode=="Seedling") %>% #
-		filter(Species=="pusilla")#
-	if (dim(temp)[1] > 0) {#
-		write.csv(temp,"Pusillaseedlings.csv")#
-		warning(#
-			"O. pusilla plants marked as seedlings. Information written to csv file."#
-		)#
-	}#
-	# ------------------------------------------------------------------------ ##
-	return(Plant.Info)#
-}
+Plant.Info %>%#
+				filter( #
+					PlantID==L$PlantID[1],#
+					# only include plants that are listed as having been added to Plant.Info on or after Date#
+					as.POSIXct(#
+						strptime(#
+							PlotPlantID.First.Survey.Date.Alive, format = "%Y-%m-%d"#
+						)#
+					) <= #
+					(as.POSIXct(#
+						strptime(#
+							Z[[i]]$Date[j], format = "%Y-%m-%d"#
+						)#
+					) + date.window),#
+					# exclude dead plants (including date plant was first recorded as dead)#
+					FirstDeadMissingObservation > #
+						as.Date(Z[[i]]$Date[j]) + date.window | #
+						is.na(FirstDeadMissingObservation)==T#
+				)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+Plant.Info %>%#
+				filter( #
+					PlantID==L$PlantID[1],#
+					# only include plants that are listed as having been added to Plant.Info on or after Date#
+					as.POSIXct(#
+						strptime(#
+							PlotPlantID.First.Survey.Date.Alive, format = "%Y-%m-%d"#
+						)#
+					) <= #
+					(as.POSIXct(#
+						strptime(#
+							Z[[i]]$Date[j], format = "%Y-%m-%d"#
+						)#
+					) + date.window)
+)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+Plant.Info %>%#
+				filter( #
+					PlantID==L$PlantID[1]
+)
+x <- Plant.Info %>%#
+				filter( #
+					PlantID==L$PlantID[1]
+)
+as.POSIXct(#
+						strptime(#
+							x$PlotPlantID.First.Survey.Date.Alive, format = "%Y-%m-%d"#
+						)#
+					) <= #
+					(as.POSIXct(#
+						strptime(#
+							Z[[i]]$Date[j], format = "%Y-%m-%d"#
+						)#
+					) + date.window)
+x$PlotPlantID.First.Survey.Date.Alive
+Z[[i]]$Date[j]
+date.window
+Z[[i]]$Date[j] + 48
+as.POSIXct(#
++ 						strptime(#
++ 							Z[[i]]$Date[j], format = "%Y-%m-%d"#
++ 						)#
++ 					) + date.window
+as.POSIXct(#
+						strptime(#
+							Z[[i]]$Date[j], format = "%Y-%m-%d"#
+						)#
+					) + date.window)
+as.POSIXct(#
+						strptime(#
+							Z[[i]]$Date[j], format = "%Y-%m-%d"#
+						)#
+					) + date.window
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+as.POSIXct(#
+						strptime(#
+							Z[[i]]$Date[j] + date.window, format = "%Y-%m-%d"#
+						)#
+					)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+Z[[i]]$Date[j] + date.window
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+as.character(Z[[i]]$Date[j]) + date.window
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+as.POSIXct(#
+						strptime(#
+							Z[[i]]$Date[j], format = "%Y-%m-%d"#
+						)#
+					) + date.window
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+Z[[i]]$Date[j]
+as.POSIXct(#
+						strptime(#
+							as.Date(Z[[i]]$Date[j], format = "%Y-%m-%d")#
+						)#
+					) + date.window
+? strptime
+as.POSIXct(#
+						strptime(#
+							Z[[i]]$Date[j], format = "%Y-%m-%d"#
+						)#
+					) + date.window
+as.POSIXct(#
+						strptime(#
+							Z[[i]]$Date[j], format = "%Y-%m-%d", tz=""#
+						)#
+					) + date.window
+as.POSIXct(#
+						strptime(#
+							Z[[i]]$Date[j], format = "%Y-%m-%d", usetz=F#
+						)#
+					) + date.window
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+Plant.Info %>%#
+				filter( #
+					PlantID==L$PlantID[1],#
+					# only include plants that are listed as having been added to Plant.Info on or after Date#
+					as.Date(PlotPlantID.First.Survey.Date.Alive) <= #
+					(as.Date(Z[[i]]$Date[j]) + date.window)
+)
+setwd('/Users/KSauby/Documents/Projects')
+setwd("./GTMNERRproc")#
+#setwd("./dataproc")#
+#setwd("./modresproc")#
+#setwd("./unmarked")#
+#setwd("./RPresence")#
+#devtools::test()#
+devtools::document()#
+devtools::install()
 setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
 # ---------------------------------------------------------- Shorten names#
 Plot.Info <- OccupancySRSWOR.Plot.Surveys.Info#
@@ -1404,8 +521,6 @@ setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
 D.Plot.Surveys$Date %<>% as.Date("%m/%d/%Y") # Demographic Plot Surveys#
 Plant.Surveys %<>% processPlantSurveys(Plant.Info) # Plant Surveys#
 Plant.Surveys %<>% fixInconsistentDeadMissingRecords#
-#
-placeholder -> Plant.Info#
 #
 Plant.Info %<>% processPlantInfo(Plot.Info, Plant.Surveys)#
 #
@@ -1576,7 +691,7 @@ setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
 Plant.Surveys.by.Year %<>% calculateClonalReproduction(Plant.Surveys.by.Plant, #
 	Plant.Info.Analysis)
 setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
-x -> Plant.Surveys.by.Year#
+x <- Plant.Surveys.by.Year#
 #
 Plant.Surveys.by.Year %<>%#
 	# dplyr::select(-Size_t) %>%#
@@ -1685,26 +800,7 @@ Original.Plant.Data %<>% processOriginalPlantData#
 #
 # --------------------------------------------------------------------------- ##
 Plant.Surveys.by.Year %>% write.csv("../data/Plant_Surveys_by_Year.csv")#
-# --------------------------------------------------------------------------- ##
-Plant.Surveys.by.Year %>% #
-	filter(is.na(Size_t)) %>% #
-	filter(Stage!="DeadbyEndofYear") %>%#
-	write.csv("../data/PlantSurveys_SizeNAs.csv")#
-#
-Plant.Surveys.by.Year %>% #
-	filter(is.na(CA_t)) %>%#
-	filter(Stage!="DeadbyEndofYear") %>%#
-	write.csv("../data/PlantSurveys_CANAs.csv")#
-#
-Plant.Surveys.by.Year %>%#
-	filter(is.na(ME_t)) %>%#
-	filter(Stage!="DeadbyEndofYear") %>%#
-	write.csv("../data/PlantSurveys_MENAs.csv")#
-#
-Plant.Surveys.by.Year %>% #
-	filter(is.na(Old_Moth_Evidence_t)) %>% #
-	filter(Stage!="DeadbyEndofYear") %>% #
-	write.csv("../data/PlantSurveys_OldMothNAs.csv")
+# ---------------------------------------------------------------------------
 setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
 # ---------------------------------------------------- DATA CHECKING#
 # compare these numbers to the numbers after data is further processed#
@@ -1730,399 +826,1115 @@ Plot.Surveys %<>% processOccupancyPlotSurveys(Plot.Info)#
 write.csv(Plot.Info, "../data/Plot_Info.csv")#
 write.csv(Plot.Surveys, "../data/Plot_Surveys.csv")
 setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
-Plant.Surveys.by.Year %<>% estimateCactusDensityperPlot(Plot.Info)#
-#
-# for ones without size - were they measured in the winter? exclude those since I usually didn't record size then#
-# are all outside of plot accounted for?
+Plant.Surveys.by.Year %<>% estimateCactusDensityperPlot(Plot.Info)
 setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
-# --------------------------------------------------------------------------- ##
-# --------------------------------------------------------------------------- ##
-# -------- CREATE TRANSITION MATRIX DATASETS -------------------------------- ##
-Plant_Surveys_TM <- Plant.Surveys.by.Year %>% 	#
-	as.data.frame %>%#
- 	droplevels %>% #
- 	dplyr::select(#
- 		Species,#
-		PlantID,#
-		Stage,#
-		FecundityYear,#
- 		Network,#
- 		Island,#
-		Size_t,#
-		Fruit_Flowers_t,#
- 		CA_t,#
-		ME_t,#
-		Old_Moth_Evidence_t,#
-		DeadMissingbyEndofYear#
- 	) %>%#
-	filter(FecundityYear > 2012) %>%#
-	.[complete.cases(.$"Stage"),]#
-# stricta only#
-Plant_Surveys_TM_stricta <- Plant_Surveys_TM %>% #
-	filter(Species=="Opuntia stricta")#
-Plant_Surveys_TM_stricta %>% write.csv("../data/Plant_Surveys_TM_stricta.csv")
-head(Plant_Surveys_TM_stricta)
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-#' Classify plants by Stage#
-#'#
-#' @description Classify plants by stage. Individuals remain a seedling only for one year, then automatically transition to a "juvenile" stage. Once a juvenile plant reaches two segments in size, it is no longer a juvenile. Once a plant reaches the "Adult" stage, they remain "Adult", even if they retrogress to one segment.#
-#'#
-#' @param Data#
-#'#
-#' @export#
+Plant.Surveys.by.Year %>% filter(is.na(Species)) %$% dim(.)[1]#
+Plant.Surveys.by.Year %>% filter(is.na(PlantID)) %$% dim(.)[1]#
+Plant.Surveys.by.Year %>% filter(is.na(RecruitmentMode)) %$% dim(.)[1]#
+Plant.Surveys.by.Year %>% filter(is.na(Network)) %$% dim(.)[1]#
+Plant.Surveys.by.Year %>% filter(is.na(Island)) %$% dim(.)[1]#
+Plant.Surveys.by.Year %>% filter(is.na(HabitatType)) %$% dim(.)[1]#
+Plant.Surveys.by.Year %>% filter(is.na(cactus_density_per_plot)) %$% dim(.)[1]#
+# 4812 without RGR#
+Plant.Surveys.by.Year %>% filter(is.na(RGR_Size365)) %$% dim(.)[1]
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
+Plant.Surveys.by.Year %>% filter(#
+	is.na(RGR_Size365),#
+	minFecundityYear == FecundityYear | # first-year surveys#
+	Alive == 0 | # dead so would have no current size#
+	PrevFecundityYear == 2012 | # no spring/summer survey in 2012#
+	PrevFecundityYear == 2011 # no spring/summer survey in 2011#
+) %$% dim(.)[1]
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
+Plant.Surveys.by.Year %>% filter(#
+	is.na(RGR_Size365),#
+	minFecundityYear != FecundityYear, # first-year surveys#
+	Alive != 0, # dead so would have no current size#
+	PrevFecundityYear != 2012, # no spring/summer survey in 2012#
+	PrevFecundityYear != 2011 # no spring/summer survey in 2011#
+) %>% head
+Plant.Surveys.by.Year %>% filter(#
+	is.na(RGR_Size365),#
+	minFecundityYear != FecundityYear, # first-year surveys#
+	Alive != 0, # dead so would have no current size#
+	PrevFecundityYear != 2012, # no spring/summer survey in 2012#
+	PrevFecundityYear != 2011 # no spring/summer survey in 2011#
+) %>% tail
+Plant.Surveys.by.Year %>% filter(PlantID==9164)
+Plant.Surveys.by.Plant %>% filter(PlantID==9164)
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
+# ---------------------------------------------------------- Shorten names#
+Plot.Info <- OccupancySRSWOR.Plot.Surveys.Info#
+Plot.Surveys <- OccupancySRSWOR.Plot.Surveys#
+Plant.Surveys <- Demographic.Plant.Surveys#
+# Plant.Surveys <- Plant.Surveys.processed.26jun17#
+Plant.Info <- Demographic.Plant.Info#
+# Plant.Info <- Plant.Info.processed.26jun17#
+Plant.Surveys.All <- Demographic.Plant.Surveys#
+Plant.Info.All <- Demographic.Plant.Info#
+D.Plot.Surveys <- Demographic.Plot.Surveys#
+Original.Plant.Data <- Original.Demographic.Plant.Data#
+Seed.Abund <- Seed.Abundance#
+Seed.Abund.Surveys <- Seed.Abundance.Surveys#
+GIS.data.upd <- GIS.data.updated
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
+D.Plot.Surveys$Date %<>% as.Date("%m/%d/%Y") # Demographic Plot Surveys#
+Plant.Surveys %<>% processPlantSurveys(Plant.Info) # Plant Surveys#
+Plant.Surveys %<>% fixInconsistentDeadMissingRecords#
 #
-classifybyStage <- function(Data) {#
-	# can only be seedling for one year#
-	#	thus can only consider plants surveyed in their first year/survey for this		#
-	Data %>%#
-		mutate(#
-			Stage = "Adult",#
-			Stage = replace(#
-				Stage,#
-				which(#
-					FecundityYear == minFecundityYear &#
-					RecruitmentMode == "Seedling"#
-				),#
-				"Seedling"#
+Plant.Info %<>% processPlantInfo(Plot.Info, Plant.Surveys)#
+#
+# edit 9164 - recorded missing three consecutive records#
+Plant.Surveys %<>%#
+mutate(#
+	Missing = replace(#
+		Missing,#
+		which(PlantID==9164 & Date=="2013-07-18"),#
+		NA#
+	),#
+	Missing = replace(#
+		Missing,#
+		which(PlantID==9164 & Date=="2014-01-10"),#
+		NA#
+	),#
+	Dead = replace(#
+		Dead,#
+		which(PlantID==9164 & Date=="2014-01-10"),#
+		NA#
+	),#
+	Missing = replace(#
+		Missing,#
+		which(PlantID==9164 & Date=="2014-06-09"),#
+		NA#
+	)#
+)#
+# measured two days in a row; remove second measurement#
+Plant.Surveys %<>% filter(!(PlantID==9282 & Date=="2014-06-15"))#
+Plant.Surveys %<>% filter(!(PlotPlantID=="9352" & Date=="2015-05-26"))#
+#
+# saved here#
+# write.csv(Plant.Surveys, "../data/Plant_Surveys_processed_26jun17.csv")#
+# write.csv(Plant.Info, "../data/Plant_Info_processed_26jun17.csv")#
+Plant.Surveys$Date %<>% as.Date#
+#
+Plant.Surveys <- Plant.Info %>%#
+	group_by(PlantID) %>%#
+	dplyr::summarise(#
+		N.PlotPlantIDs = length(unique(PlotPlantID))#
+	) %>%#
+	merge(Plant.Surveys, by="PlantID")#
+Plant.Surveys.by.Plant <- Plant.Surveys %>% #
+	processSurveysMergedbyPlant(Plant.Info)#
+Plant.Surveys.by.Plant %>% filter(AllSurveyed==F) %>% write.csv("incompletesurveys.csv")#
+#
+Plant.Surveys %>% filter(N.PlotPlantIDs > 1) %>% filter(Dead==1 | Missing == 1) %>% write.csv("deadmissing.csv")#
+#
+h <- function(w) if( any( grepl( "no non-missing arguments to max", w) ) ) invokeRestart( "muffleWarning" )#
+Plant.Surveys.by.Plant <- withCallingHandlers(#
+	createPlantInsectPresence(Plant.Surveys.by.Plant),#
+	warning = h#
+)#
+#
+# find and keep only first dead/missing observation#
+temp <- Plant.Surveys.by.Plant %>% findFirstDeadMissingObservation#
+# create Fecundity and RGR dataset#
+Plant.Surveys.by.Year <- createPlantSurveysbyYear(Plant.Surveys.by.Plant)#
+#
+# --------------------------------------------------------------------------- ##
+# which plants are missing size surveys in the spring/summer that were NOT dead/missing, and that have a photo?#
+# which plants are missing fruit/flowers surveys in the spring/summer that were NOT dead/missing, and that have a photo?#
+#
+# these plantID and fecundity year combos are missing spring/summer surveys#
+temp1 <- Plant.Surveys.by.Year %>% #
+	filter(#
+		is.na(SurveyDate_SpringSummer),#
+		DeadMissingbyEndofYear != 1#
+	) %>%#
+	dplyr::select(PlantID, FecundityYear)#
+temp1 <- Plant.Surveys.by.Plant %>%#
+	filter(#
+		Dead != 1 & Missing != 1,#
+		month(Date) == 5 |#
+		month(Date) == 6 |#
+		month(Date) == 7 |#
+		month(Date) == 8 |#
+		month(Date) == 9,#
+		is.na(Size_t)#
+	) %>%#
+	merge(#
+		temp1,#
+		by = c("PlantID", "FecundityYear")#
+	) %>%#
+	filter(!(#
+			PlantID == 7548 & Date == "2014-09-05" |#
+			PlantID == 7773 & Date == "2014-09-21" |#
+			PlantID == 7774 & Date == "2014-09-21" |#
+			PlantID == 7778 & Date == "2014-09-21" |#
+			PlantID == 7791 & Date == "2014-09-21" |#
+			PlantID == 7792 & Date == "2014-09-21" |#
+			PlantID == 7793 & Date == "2014-09-21" |#
+			PlantID == 7794 & Date == "2014-09-21" |#
+			PlantID == 7795 & Date == "2014-09-21" |#
+			PlantID == 7807 & Date == "2014-09-21" |#
+			PlantID == 7810 & Date == "2014-09-21" |#
+			PlantID == 8088 & Date == "2014-09-21" |#
+			PlantID == 8088 & Date == "2014-06-28" |#
+			PlantID == 8088 & Date == "2014-06-04" |#
+			PlantID == 8647 & Date == "2013-07-18" |#
+			PlantID == 8652 & Date == "2013-07-23" |#
+			PlantID == 8653 & Date == "2013-07-23" |#
+			PlantID == 9156 & Date == "2014-06-10" |#
+			PlantID == 9156 & Date == "2014-09-11" |#
+			PlantID == 9561 & Date == "2014-06-24" |#
+			PlantID == 9561 & Date == "2014-05-12" |#
+			PlantID == 9682 & Date == "2014-06-02" |#
+			PlantID == 9024 & Date == "2014-06-25" |#
+			PlantID == 9220 & Date == "2013-07-18" |#
+			PlantID == 9220 & Date == "2013-05-21" |#
+			PlantID == 9371 & Date == "2015-05-26"#
+	)) %>%#
+	dplyr::select(PlantID, Date)#
+if (dim(temp)[1] > 0) {#
+	write.csv(temp1, "SpringSummerSurveyswoSizeFruit.csv")#
+	warning("Some plants are missing size/fruit records for spring/summer surveys. Data written to csv file.")#
+}#
+# --------------------------------------------------------------------------- ##
+#
+Plant.Info.Analysis <- createPlantInfobyPlant(Plant.Info, Plant.Surveys.by.Year, Plant.Surveys.by.Plant)#
+#
+Plant.Surveys.by.Year <- Plant.Info.Analysis %>%#
+	merge(Plant.Surveys.by.Year, by="PlantID")#
+#
+Plant.Surveys.by.Year[which(is.na(Plant.Surveys.by.Year$OutsideOfPlot)),]$OutsideOfPlot <- ""#
+#
+Plant.Surveys.by.Year %<>% filter(OutsideOfPlot!="Yes")#
+#
+Plant.Surveys.by.Plant <- Plant.Info.Analysis %>%#
+	merge(Plant.Surveys.by.Plant, by="PlantID")
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+temp.A <- filter(Plant.Surveys, N.PlotPlantIDs > 1) %>% arrange(Date)#
+	Z = list()
+L = filter(temp.A, PlantID==9164)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+if (max(L$Date) - min(L$Date) > #
+			SequenceofDates[2] - SequenceofDates[1]) {#
+			L.list <- L %>%#
+				split(#
+				.,#
+				cut(#
+					L$Date,#
+					SequenceofDates#
+				)#
 			)#
-		)#
-}
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
-# --------------------------------------------------------------------------- ##
-Plant.Surveys.by.Year %<>% classifybyStage#
-#
-Data <- Plant.Surveys.by.Year#
-# process original plant data (before new PlantIDs were given) for occupancy surveys#
-Original.Plant.Data %<>% processOriginalPlantData#
-#
-# --------------------------------------------------------------------------- ##
-Plant.Surveys.by.Year %>% write.csv("../data/Plant_Surveys_by_Year.csv")#
-# --------------------------------------------------------------------------- ##
-Plant.Surveys.by.Year %>% #
-	filter(is.na(Size_t)) %>% #
-	filter(Stage!="DeadbyEndofYear") %>%#
-	write.csv("../data/PlantSurveys_SizeNAs.csv")#
-#
-Plant.Surveys.by.Year %>% #
-	filter(is.na(CA_t)) %>%#
-	filter(Stage!="DeadbyEndofYear") %>%#
-	write.csv("../data/PlantSurveys_CANAs.csv")#
-#
-Plant.Surveys.by.Year %>%#
-	filter(is.na(ME_t)) %>%#
-	filter(Stage!="DeadbyEndofYear") %>%#
-	write.csv("../data/PlantSurveys_MENAs.csv")#
-#
-Plant.Surveys.by.Year %>% #
-	filter(is.na(Old_Moth_Evidence_t)) %>% #
-	filter(Stage!="DeadbyEndofYear") %>% #
-	write.csv("../data/PlantSurveys_OldMothNAs.csv")
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
-Plant.Surveys.by.Year %<>% estimateCactusDensityperPlot(Plot.Info)#
-#
-# for ones without size - were they measured in the winter? exclude those since I usually didn't record size then#
-# are all outside of plot accounted for?
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
-# ---------------------------------------------------- DATA CHECKING#
-# compare these numbers to the numbers after data is further processed#
-#
-# number of CACA observations#
-length(Plot.Surveys[which(Plot.Surveys$CACA_on_Stricta=="Yes"), ]$CACA_on_Stricta)#
-# number of MEPR observations#
-length(Plot.Surveys[which(Plot.Surveys$MEPR_on_Stricta=="Yes"), ]$MEPR_on_Stricta)#
-# don't exclude all plots for the demography study#
-#
-# --------------------------------------------------------------------------- ##
-# --------------- Occupancy Plot Info --------------------------------------- ##
-# --------------------------------------------------------------------------- ##
-#
-Plot.Info %<>% processOccupancyPlotInfo(Plot.Vegetation, GIS.data.upd)#
-#
-# check errors by keeping track of dataframe size#
-Plot.Info.Size = as.data.frame(matrix(NA, 1, 1))#
-Plot.Info.Size[, 1] = dim(Plot.Info)[1]#
-#
-Plot.Surveys %<>% processOccupancyPlotSurveys(Plot.Info)#
-#
-write.csv(Plot.Info, "../data/Plot_Info.csv")#
-write.csv(Plot.Surveys, "../data/Plot_Surveys.csv")
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
-Plant.Surveys.by.Year %<>% estimateCactusDensityperPlot(Plot.Info)#
-#
-# for ones without size - were they measured in the winter? exclude those since I usually didn't record size then#
-# are all outside of plot accounted for?
-head(Plant.Surveys.by.Year)
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
-# --------------------------------------------------------------------------- ##
-# --------------------------------------------------------------------------- ##
-# -------- CREATE TRANSITION MATRIX DATASETS -------------------------------- ##
-Plant_Surveys_TM <- Plant.Surveys.by.Year %>% 	#
-	as.data.frame %>%#
- 	droplevels %>% #
- 	dplyr::select(#
- 		Species,#
-		PlantID,#
-		Stage,#
-		FecundityYear,#
- 		Network,#
- 		Island,#
-		Size_t,#
-		Fruit_Flowers_t,#
- 		CA_t,#
-		ME_t,#
-		Old_Moth_Evidence_t,#
-		DeadMissingbyEndofYear#
- 	) %>%#
-	filter(FecundityYear > 2012) %>%#
-	.[complete.cases(.$"Stage"),]#
-# stricta only#
-Plant_Surveys_TM_stricta <- Plant_Surveys_TM %>% #
-	filter(Species=="Opuntia stricta")#
-Plant_Surveys_TM_stricta %>% write.csv("../data/Plant_Surveys_TM_stricta.csv")#
-# networks w CA
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis')
-# Misc Demography Data#
-cache("Original.Plant.Data")#
-cache("Plant.Surveys.by.Year")#
-cache("Plant.Surveys.by.Plant")#
-cache("Plant.Info")#
-cache("Plant.Surveys")#
-cache("Plant_Surveys_TM")
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis')
-cache("Plant_Surveys_TM_stricta")
-head(Plant_Surveys_TM_stricta)
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/transition_matrices')
-#####################################
-# stage-structured projection model#
-#####################################
-sizeclass <- c(0:3,5,11,140)#
-Dat <- dataset <- Plant_Surveys_TM_stricta# %>% setnames("SamplingYear", "Year")#
-Dat$allYears <- 2014#
-seed.survival <- 0.126#
-seed.bank.size <- 1000#
-seeds.per.fruit <- 60
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/transition_matrices')
-# transition matrix#
-TM <- prepDataTransitionMatrix(#
-	Dat=Plant_Surveys_TM_stricta,#
-	SizeClass=sizeclass,#
-	TransitionYear=2014,#
-	SeedSurvival=seed.survival,#
-	SeedBankSize=seed.bank.size,#
-	SeedsPerFruit=seeds.per.fruit#
+			L.list %<>% .[sapply(., function(x) dim(x)[1]) > 0]#
+			L.list %<>% lapply(., function(x) split(x, x$DemographicSurvey))#
+			L.list %<>% unlist(recursive=F)#
+			list.names <- gsub("\\..*","", names(L.list))#
+			demography.surveys <- gsub("^.*\\.","", names(L.list))#
+			Z[[i]] 	<- data.frame(#
+				Date = list.names,#
+				DemographicSurvey = demography.surveys#
+			)#
+		} else {#
+			L.list <- list(L)#
+			names(L.list) <- max(L.list[[1]]$Date)#
+			Z[[i]] <- data.frame(Date = max(L.list[[1]]$Date))#
+		}#
+		Z[[i]][, "PlantID"] 			<- L$PlantID[1]#
+		# for each window of dates#
+		for (j in 1:length(names(L.list))) {#
+			K <- eval(parse(text=paste(#
+				"L.list$", #
+				'"', #
+				names(L.list)[j], #
+				'"', #
+				sep=""#
+			)))#
+			# save range of dates used to create whole plant survey#
+			if (length(unique(K$Date)) > 1) {#
+				Z[[i]][j, "RangeofDates"] <- paste(#
+					K$Date[1], #
+					" - ", #
+					tail(K$Date, n=1),#
+					sep=""#
+				)#
+				Z[[i]][j, "SizeofDateRange"] <- max(K$Date) - min(K$Date)#
+				Z[[i]][j, "maxDate"] <- as.character(max(K$Date))#
+			} else {#
+				Z[[i]][j, "RangeofDates"] <- as.character(K$Date[1])#
+				Z[[i]][j, "SizeofDateRange"] <- 0#
+				Z[[i]][j, "maxDate"] <- as.character(max(K$Date))#
+			}#
+			# pull all plant survey records for this date from plant surveys within the window of dates, excluding dead/missing#
+			M <- K %>% filter(Dead != 1, Missing != 1)#
+			# --------------------------------------------------------- WARNINGS#
+			# throw error if a plotplantID is surveyed multiple times within this window and multiple records have size measurements#
+			temp <- M %>% filter(SegmentsMeasured > 0) %>%#
+				dplyr::add_count(PlotPlantID) %>%				#
+				filter(n > 1)#
+			if (dim(temp)[1] > 0) {#
+				warning(paste(#
+					"Multiple records of segment counts for PlotPlantID", #
+					M$PlotPlantID[1], #
+					"around date", #
+					paste(M$Date, collapse=",")#
+				))#
+			}#
+			temp <- M %>% filter(FruitMeasured > 0) %>%#
+				dplyr::add_count(PlotPlantID) %>%				#
+				filter(n > 1)#
+			if (dim(temp)[1] > 0) {#
+				warning(paste(#
+					"Multiple size records of fruit counts for PlotPlantID", #
+					M$PlotPlantID[1], #
+					"around date", #
+					paste(M$Date, collapse=",")#
+				))#
+			}#
+			temp <- M %>% filter(SizeMeasured > 0) %>%#
+				dplyr::add_count(PlotPlantID) %>%				#
+				filter(n > 1)#
+			if (dim(temp)[1] > 0) {#
+				warning(paste(#
+					"Multiple records of size measurements for PlotPlantID", #
+					M$PlotPlantID[1], #
+					"around date", #
+					paste(M$Date, collapse=",")#
+				))#
+			}#
+			# ---------------------------------------------------------------- ##
+			# get list of PlotPlantIDs alive at this time#
+			# plant would be dead if no PlantID records showed up in N#
+			N = Plant.Info %>%#
+				filter( #
+					PlantID==L$PlantID[1],#
+					# only include plants that are listed as having been added to Plant.Info on or after Date#
+					as.Date(PlotPlantID.First.Survey.Date.Alive) <= #
+					(as.Date(Z[[i]]$Date[j]) + date.window),#
+					# exclude dead plants (including date plant was first recorded as dead)#
+					FirstDeadMissingObservation > #
+						as.Date(Z[[i]]$Date[j]) + date.window | #
+						is.na(FirstDeadMissingObservation)==T#
+				)	#
+			# pull all surveys where plant was marked dead#
+			O <- K %>% filter(Dead == 1 | Missing == 1)#
+			# the plant can only be marked dead if no live part was surveyed and no parts remained unsurveyed#
+			if (dim(M)[1] == 0 & dim(N)[1] == 0 & dim(O)[1] > 0) {#
+				Z[[i]][j, "Dead"]	 <- Maximum(O$Dead)#
+				Z[[i]][j, "Missing"] <- Maximum(O$Missing)#
+				Z[[i]][j, "AllSurveyed"] 			<- "TRUE"#
+				Z[[i]][j, "PlantsSurveyed"] <- paste(#
+					O$PlotPlantID, collapse=","#
+				)#
+				Z[[i]][j, "DeadDuetoMothDamage"] <- paste(#
+					O$DeadDuetoMothDamage,#
+					collapse=","#
+				)#
+			} else#
+			# if all PlotPlantIDs were surveyed for a given date:#
+			if (dim(M)[1] > 0 & all(M$PlotPlantID %in% N$PlotPlantID)) {#
+				Z[[i]][j, "CA_t"] 					<- mysum2(M$CA_t)#
+				Z[[i]][j, "ME_t"] 					<- mysum2(M$ME_t)#
+				Z[[i]][j, "CH_t"] 					<- mysum2(M$CH_t)#
+				Z[[i]][j, "DA_t"] 					<- mysum2(M$DA_t)#
+				Z[[i]][j, "Unknown_Moth_t"] 		<- mysum2(M$Unknown_Moth_t)#
+				Z[[i]][j, "Gerstaeckeria_t"] 		<- mysum2(M$Gerstaeckeria_t)#
+				Z[[i]][j, "Old_Moth_Evidence_t"]<- mysum2(M$Old_Moth_Evidence_t)#
+				Z[[i]][j, "AllSurveyed"] 			<- "TRUE"#
+				Z[[i]][j, "Dead"] <- 0#
+				Z[[i]][j, "Missing"] <- 0#
+				Z[[i]][j, "PlantsSurveyed"] <- paste(#
+					M$PlotPlantID, collapse=","#
+				)#
+			} else {#
+				# if all PlotPlantIDs were NOT surveyed on this date consider the insect to be detected if the sum is greater than zero#
+				Z[[i]][j, "CA_t"] 					<- mysum1(M$CA_t)#
+				Z[[i]][j, "ME_t"] 					<- mysum1(M$ME_t)#
+				Z[[i]][j, "CH_t"] 					<- mysum1(M$CH_t)#
+				Z[[i]][j, "DA_t"] 					<- mysum1(M$DA_t)#
+				Z[[i]][j, "Unknown_Moth_t"] 		<- mysum1(M$Unknown_Moth_t)#
+				Z[[i]][j, "Gerstaeckeria_t"] 		<- mysum1(M$Gerstaeckeria_t)#
+				Z[[i]][j, "Old_Moth_Evidence_t"]<- mysum1(M$Old_Moth_Evidence_t)#
+				Z[[i]][j, "AllSurveyed"] 			<- "FALSE"#
+				Z[[i]][j, "Dead"] <- 0#
+				Z[[i]][j, "Missing"] <- 0#
+				Z[[i]][j, "PlantsSurveyed"] <- paste(#
+					M$PlotPlantID, collapse=","#
+				)#
+			}#
+			# Number of segments#
+			Z[[i]][j, "Size_t"] 					<- mysum(M$Size_t)#
+			Z[[i]][j, "SizeInPlots_t"] <- #
+				mysum(M$Size_t[which(M$OutsideOfPlot!="Yes")])#
+			Z[[i]][j, "Plant_Segments_w_leaves"] <- #
+				mysum(M$Plant_Segments_w_leaves)#
+			Z[[i]][j, "Plant_Segments_wo_leaves"] <-#
+			 	mysum(M$Plant_Segments_wo_leaves)#
+			Z[[i]][j, "Plant_Segments_woody"] <- mysum(M$Plant_Segments_woody)#
+			# Size#
+			Z[[i]][j, "Height_t"] 			<- Maximum(M$Height_t)#
+			Z[[i]][j, "Width_t"] 			<- Maximum(M$Width_t)#
+			Z[[i]][j, "Perpen_Width"] 		<- Maximum(M$Perpen_Width)#
+			# Fruit	and Flowers#
+			Z[[i]][j, "Num_FlowerBuds"] 			<- mysum(M$Num_FlowerBuds)#
+			Z[[i]][j, "Num_Fruit_red"] 				<- mysum(M$Num_Fruit_red)#
+			Z[[i]][j, "Num_Fruit_green"] 			<- mysum(M$Num_Fruit_green)#
+			Z[[i]][j, "Num_Flowers"] 				<- mysum(M$Num_Flowers)#
+			Z[[i]][j, "Fruit_t"] 					<- mysum(M$Fruit_t)#
+			Z[[i]][j, "Fruit_Flowers_t"] 			<- mysum(M$Fruit_Flowers_t)#
+			Z[[i]][j, "DemographicSurvey"] 			<- K$DemographicSurvey[1]#
+			Z[[i]][j, "FecundityYear"] 				<- K$FecundityYear[1]#
+			Z[[i]][j, "OutsideOfPlot"] 				<- ""#
+			Z[[i]][j, "DeadDuetoMothDamage"] 		<- ""#
+			Z[[i]][j, "PlantPictures"]			 	<- paste(#
+				K$PlantPictures[which(!is.na(K$PlantPictures))],#
+				collapse=","#
+			)#
+			# Paste PlotPlantIDs together to know which plants were surveyed on this date#
+		}
+Z
+j=1
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+K <- eval(parse(text=paste(#
+				"L.list$", #
+				'"', #
+				names(L.list)[j], #
+				'"', #
+				sep=""#
+			)))#
+			# save range of dates used to create whole plant survey#
+			if (length(unique(K$Date)) > 1) {#
+				Z[[i]][j, "RangeofDates"] <- paste(#
+					K$Date[1], #
+					" - ", #
+					tail(K$Date, n=1),#
+					sep=""#
+				)#
+				Z[[i]][j, "SizeofDateRange"] <- max(K$Date) - min(K$Date)#
+				Z[[i]][j, "maxDate"] <- as.character(max(K$Date))#
+			} else {#
+				Z[[i]][j, "RangeofDates"] <- as.character(K$Date[1])#
+				Z[[i]][j, "SizeofDateRange"] <- 0#
+				Z[[i]][j, "maxDate"] <- as.character(max(K$Date))#
+			}#
+			# pull all plant survey records for this date from plant surveys within the window of dates, excluding dead/missing#
+			M <- K %>% filter(Dead != 1, Missing != 1)#
+			# --------------------------------------------------------- WARNINGS#
+			# throw error if a plotplantID is surveyed multiple times within this window and multiple records have size measurements#
+			temp <- M %>% filter(SegmentsMeasured > 0) %>%#
+				dplyr::add_count(PlotPlantID) %>%				#
+				filter(n > 1)#
+			if (dim(temp)[1] > 0) {#
+				warning(paste(#
+					"Multiple records of segment counts for PlotPlantID", #
+					M$PlotPlantID[1], #
+					"around date", #
+					paste(M$Date, collapse=",")#
+				))#
+			}#
+			temp <- M %>% filter(FruitMeasured > 0) %>%#
+				dplyr::add_count(PlotPlantID) %>%				#
+				filter(n > 1)#
+			if (dim(temp)[1] > 0) {#
+				warning(paste(#
+					"Multiple size records of fruit counts for PlotPlantID", #
+					M$PlotPlantID[1], #
+					"around date", #
+					paste(M$Date, collapse=",")#
+				))#
+			}#
+			temp <- M %>% filter(SizeMeasured > 0) %>%#
+				dplyr::add_count(PlotPlantID) %>%				#
+				filter(n > 1)#
+			if (dim(temp)[1] > 0) {#
+				warning(paste(#
+					"Multiple records of size measurements for PlotPlantID", #
+					M$PlotPlantID[1], #
+					"around date", #
+					paste(M$Date, collapse=",")#
+				))#
+			}#
+			# --------------------
+M
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+Plant.Info %>%#
+				filter( #
+					PlantID==L$PlantID[1],#
+					# only include plants that are listed as having been added to Plant.Info on or after Date#
+					as.Date(PlotPlantID.First.Survey.Date.Alive) <= #
+					(as.Date(Z[[i]]$Date[j]) + date.window),#
+					# exclude dead plants (including date plant was first recorded as dead)#
+					FirstDeadMissingObservation > #
+						as.Date(Z[[i]]$Date[j]) + date.window | #
+						is.na(FirstDeadMissingObservation)==T#
+				)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+N = Plant.Info %>%#
+				filter( #
+					PlantID==L$PlantID[1],#
+					# only include plants that are listed as having been added to Plant.Info on or after Date#
+					as.Date(PlotPlantID.First.Survey.Date.Alive) <= #
+					(as.Date(Z[[i]]$Date[j]) + date.window),#
+					# exclude dead plants (including date plant was first recorded as dead)#
+					FirstDeadMissingObservation > #
+						as.Date(Z[[i]]$Date[j]) + date.window | #
+						is.na(FirstDeadMissingObservation)==T#
+				)	#
+			# pull all surveys where plant was marked dead#
+			O <- K %>% filter(Dead == 1 | Missing == 1)#
+			# the plant can only be marked dead if no live part was surveyed and no parts remained unsurveyed#
+			if (dim(M)[1] == 0 & dim(N)[1] == 0 & dim(O)[1] > 0) {#
+				Z[[i]][j, "Dead"]	 <- Maximum(O$Dead)#
+				Z[[i]][j, "Missing"] <- Maximum(O$Missing)#
+				Z[[i]][j, "AllSurveyed"] 			<- "TRUE"#
+				Z[[i]][j, "PlantsSurveyed"] <- paste(#
+					O$PlotPlantID, collapse=","#
+				)#
+				Z[[i]][j, "DeadDuetoMothDamage"] <- paste(#
+					O$DeadDuetoMothDamage,#
+					collapse=","#
+				)#
+			} else#
+			# if all PlotPlantIDs were surveyed for a given date:#
+			if (dim(M)[1] > 0 & all(M$PlotPlantID %in% N$PlotPlantID)) {#
+				Z[[i]][j, "CA_t"] 					<- mysum2(M$CA_t)#
+				Z[[i]][j, "ME_t"] 					<- mysum2(M$ME_t)#
+				Z[[i]][j, "CH_t"] 					<- mysum2(M$CH_t)#
+				Z[[i]][j, "DA_t"] 					<- mysum2(M$DA_t)#
+				Z[[i]][j, "Unknown_Moth_t"] 		<- mysum2(M$Unknown_Moth_t)#
+				Z[[i]][j, "Gerstaeckeria_t"] 		<- mysum2(M$Gerstaeckeria_t)#
+				Z[[i]][j, "Old_Moth_Evidence_t"]<- mysum2(M$Old_Moth_Evidence_t)#
+				Z[[i]][j, "AllSurveyed"] 			<- "TRUE"#
+				Z[[i]][j, "Dead"] <- 0#
+				Z[[i]][j, "Missing"] <- 0#
+				Z[[i]][j, "PlantsSurveyed"] <- paste(#
+					M$PlotPlantID, collapse=","#
+				)#
+			} else {#
+				# if all PlotPlantIDs were NOT surveyed on this date consider the insect to be detected if the sum is greater than zero#
+				Z[[i]][j, "CA_t"] 					<- mysum1(M$CA_t)#
+				Z[[i]][j, "ME_t"] 					<- mysum1(M$ME_t)#
+				Z[[i]][j, "CH_t"] 					<- mysum1(M$CH_t)#
+				Z[[i]][j, "DA_t"] 					<- mysum1(M$DA_t)#
+				Z[[i]][j, "Unknown_Moth_t"] 		<- mysum1(M$Unknown_Moth_t)#
+				Z[[i]][j, "Gerstaeckeria_t"] 		<- mysum1(M$Gerstaeckeria_t)#
+				Z[[i]][j, "Old_Moth_Evidence_t"]<- mysum1(M$Old_Moth_Evidence_t)#
+				Z[[i]][j, "AllSurveyed"] 			<- "FALSE"#
+				Z[[i]][j, "Dead"] <- 0#
+				Z[[i]][j, "Missing"] <- 0#
+				Z[[i]][j, "PlantsSurveyed"] <- paste(#
+					M$PlotPlantID, collapse=","#
+				)#
+			}
+Z
+j=2
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+K <- eval(parse(text=paste(#
+				"L.list$", #
+				'"', #
+				names(L.list)[j], #
+				'"', #
+				sep=""#
+			)))#
+			# save range of dates used to create whole plant survey#
+			if (length(unique(K$Date)) > 1) {#
+				Z[[i]][j, "RangeofDates"] <- paste(#
+					K$Date[1], #
+					" - ", #
+					tail(K$Date, n=1),#
+					sep=""#
+				)#
+				Z[[i]][j, "SizeofDateRange"] <- max(K$Date) - min(K$Date)#
+				Z[[i]][j, "maxDate"] <- as.character(max(K$Date))#
+			} else {#
+				Z[[i]][j, "RangeofDates"] <- as.character(K$Date[1])#
+				Z[[i]][j, "SizeofDateRange"] <- 0#
+				Z[[i]][j, "maxDate"] <- as.character(max(K$Date))#
+			}#
+			# pull all plant survey records for this date from plant surveys within the window of dates, excluding dead/missing#
+			M <- K %>% filter(Dead != 1, Missing != 1)
+M
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+eval(parse(text=paste(#
+				"L.list$", #
+				'"', #
+				names(L.list)[j], #
+				'"', #
+				sep=""#
+			)))
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+if (length(unique(K$Date)) > 1) {#
+				Z[[i]][j, "RangeofDates"] <- paste(#
+					K$Date[1], #
+					" - ", #
+					tail(K$Date, n=1),#
+					sep=""#
+				)#
+				Z[[i]][j, "SizeofDateRange"] <- max(K$Date) - min(K$Date)#
+				Z[[i]][j, "maxDate"] <- as.character(max(K$Date))#
+			} else {#
+				Z[[i]][j, "RangeofDates"] <- as.character(K$Date[1])#
+				Z[[i]][j, "SizeofDateRange"] <- 0#
+				Z[[i]][j, "maxDate"] <- as.character(max(K$Date))#
+			}
+Z[[i]]
+j=1
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+K <- eval(parse(text=paste(#
+				"L.list$", #
+				'"', #
+				names(L.list)[j], #
+				'"', #
+				sep=""#
+			)))#
+			# save range of dates used to create whole plant survey#
+			if (length(unique(K$Date)) > 1) {#
+				Z[[i]][j, "RangeofDates"] <- paste(#
+					K$Date[1], #
+					" - ", #
+					tail(K$Date, n=1),#
+					sep=""#
+				)#
+				Z[[i]][j, "SizeofDateRange"] <- max(K$Date) - min(K$Date)#
+				Z[[i]][j, "maxDate"] <- as.character(max(K$Date))#
+			} else {#
+				Z[[i]][j, "RangeofDates"] <- as.character(K$Date[1])#
+				Z[[i]][j, "SizeofDateRange"] <- 0#
+				Z[[i]][j, "maxDate"] <- as.character(max(K$Date))#
+			}#
+			# pull all plant survey records for this date from plant surveys within the window of dates, excluding dead/missing#
+			M <- K %>% filter(Dead != 1, Missing != 1)#
+			# --------------------------------------------------------- WARNINGS#
+			# throw error if a plotplantID is surveyed multiple times within this window and multiple records have size measurements#
+			temp <- M %>% filter(SegmentsMeasured > 0) %>%#
+				dplyr::add_count(PlotPlantID) %>%				#
+				filter(n > 1)#
+			if (dim(temp)[1] > 0) {#
+				warning(paste(#
+					"Multiple records of segment counts for PlotPlantID", #
+					M$PlotPlantID[1], #
+					"around date", #
+					paste(M$Date, collapse=",")#
+				))#
+			}#
+			temp <- M %>% filter(FruitMeasured > 0) %>%#
+				dplyr::add_count(PlotPlantID) %>%				#
+				filter(n > 1)#
+			if (dim(temp)[1] > 0) {#
+				warning(paste(#
+					"Multiple size records of fruit counts for PlotPlantID", #
+					M$PlotPlantID[1], #
+					"around date", #
+					paste(M$Date, collapse=",")#
+				))#
+			}
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+temp <- M %>% filter(SizeMeasured > 0) %>%#
+				dplyr::add_count(PlotPlantID) %>%				#
+				filter(n > 1)#
+			if (dim(temp)[1] > 0) {#
+				warning(paste(#
+					"Multiple records of size measurements for PlotPlantID", #
+					M$PlotPlantID[1], #
+					"around date", #
+					paste(M$Date, collapse=",")#
+				))#
+			}
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+N = Plant.Info %>%#
+				filter( #
+					PlantID==L$PlantID[1],#
+					# only include plants that are listed as having been added to Plant.Info on or after Date#
+					as.Date(PlotPlantID.First.Survey.Date.Alive) <= #
+					(as.Date(Z[[i]]$Date[j]) + date.window),#
+					# exclude dead plants (including date plant was first recorded as dead)#
+					FirstDeadMissingObservation > #
+						as.Date(Z[[i]]$Date[j]) + date.window | #
+						is.na(FirstDeadMissingObservation)==T#
+				)	#
+			# pull all surveys where plant was marked dead#
+			O <- K %>% filter(Dead == 1 | Missing == 1)#
+			# the plant can only be marked dead if no live part was surveyed and no parts remained unsurveyed#
+			if (dim(M)[1] == 0 & dim(N)[1] == 0 & dim(O)[1] > 0) {#
+				Z[[i]][j, "Dead"]	 <- Maximum(O$Dead)#
+				Z[[i]][j, "Missing"] <- Maximum(O$Missing)#
+				Z[[i]][j, "AllSurveyed"] 			<- "TRUE"#
+				Z[[i]][j, "PlantsSurveyed"] <- paste(#
+					O$PlotPlantID, collapse=","#
+				)#
+				Z[[i]][j, "DeadDuetoMothDamage"] <- paste(#
+					O$DeadDuetoMothDamage,#
+					collapse=","#
+				)#
+			} else#
+			# if all PlotPlantIDs were surveyed for a given date:#
+			if (dim(M)[1] > 0 & all(M$PlotPlantID %in% N$PlotPlantID)) {#
+				Z[[i]][j, "CA_t"] 					<- mysum2(M$CA_t)#
+				Z[[i]][j, "ME_t"] 					<- mysum2(M$ME_t)#
+				Z[[i]][j, "CH_t"] 					<- mysum2(M$CH_t)#
+				Z[[i]][j, "DA_t"] 					<- mysum2(M$DA_t)#
+				Z[[i]][j, "Unknown_Moth_t"] 		<- mysum2(M$Unknown_Moth_t)#
+				Z[[i]][j, "Gerstaeckeria_t"] 		<- mysum2(M$Gerstaeckeria_t)#
+				Z[[i]][j, "Old_Moth_Evidence_t"]<- mysum2(M$Old_Moth_Evidence_t)#
+				Z[[i]][j, "AllSurveyed"] 			<- "TRUE"#
+				Z[[i]][j, "Dead"] <- 0#
+				Z[[i]][j, "Missing"] <- 0#
+				Z[[i]][j, "PlantsSurveyed"] <- paste(#
+					M$PlotPlantID, collapse=","#
+				)#
+			} else {#
+				# if all PlotPlantIDs were NOT surveyed on this date consider the insect to be detected if the sum is greater than zero#
+				Z[[i]][j, "CA_t"] 					<- mysum1(M$CA_t)#
+				Z[[i]][j, "ME_t"] 					<- mysum1(M$ME_t)#
+				Z[[i]][j, "CH_t"] 					<- mysum1(M$CH_t)#
+				Z[[i]][j, "DA_t"] 					<- mysum1(M$DA_t)#
+				Z[[i]][j, "Unknown_Moth_t"] 		<- mysum1(M$Unknown_Moth_t)#
+				Z[[i]][j, "Gerstaeckeria_t"] 		<- mysum1(M$Gerstaeckeria_t)#
+				Z[[i]][j, "Old_Moth_Evidence_t"]<- mysum1(M$Old_Moth_Evidence_t)#
+				Z[[i]][j, "AllSurveyed"] 			<- "FALSE"#
+				Z[[i]][j, "Dead"] <- 0#
+				Z[[i]][j, "Missing"] <- 0#
+				Z[[i]][j, "PlantsSurveyed"] <- paste(#
+					M$PlotPlantID, collapse=","#
+				)#
+			}#
+			# Number of segments#
+			Z[[i]][j, "Size_t"] 					<- mysum(M$Size_t)#
+			Z[[i]][j, "SizeInPlots_t"] <- #
+				mysum(M$Size_t[which(M$OutsideOfPlot!="Yes")])#
+			Z[[i]][j, "Plant_Segments_w_leaves"] <- #
+				mysum(M$Plant_Segments_w_leaves)#
+			Z[[i]][j, "Plant_Segments_wo_leaves"] <-#
+			 	mysum(M$Plant_Segments_wo_leaves)#
+			Z[[i]][j, "Plant_Segments_woody"] <- mysum(M$Plant_Segments_woody)#
+			# Size#
+			Z[[i]][j, "Height_t"] 			<- Maximum(M$Height_t)#
+			Z[[i]][j, "Width_t"] 			<- Maximum(M$Width_t)#
+			Z[[i]][j, "Perpen_Width"] 		<- Maximum(M$Perpen_Width)#
+			# Fruit	and Flowers#
+			Z[[i]][j, "Num_FlowerBuds"] 			<- mysum(M$Num_FlowerBuds)#
+			Z[[i]][j, "Num_Fruit_red"] 				<- mysum(M$Num_Fruit_red)#
+			Z[[i]][j, "Num_Fruit_green"] 			<- mysum(M$Num_Fruit_green)#
+			Z[[i]][j, "Num_Flowers"] 				<- mysum(M$Num_Flowers)#
+			Z[[i]][j, "Fruit_t"] 					<- mysum(M$Fruit_t)#
+			Z[[i]][j, "Fruit_Flowers_t"] 			<- mysum(M$Fruit_Flowers_t)#
+			Z[[i]][j, "DemographicSurvey"] 			<- K$DemographicSurvey[1]#
+			Z[[i]][j, "FecundityYear"] 				<- K$FecundityYear[1]#
+			Z[[i]][j, "OutsideOfPlot"] 				<- ""#
+			Z[[i]][j, "DeadDuetoMothDamage"] 		<- ""#
+			Z[[i]][j, "PlantPictures"]			 	<- paste(#
+				K$PlantPictures[which(!is.na(K$PlantPictures))],#
+				collapse=","#
+			)
+Z[[i]]
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+eval(parse(text=paste(#
+				"L.list$", #
+				'"', #
+				names(L.list)[j], #
+				'"', #
+				sep=""#
+			)))
+j=2
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+eval(parse(text=paste(#
+				"L.list$", #
+				'"', #
+				names(L.list)[j], #
+				'"', #
+				sep=""#
+			)))
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+Plant.Info %>%#
+				filter( #
+					PlantID==L$PlantID[1],#
+					# only include plants that are listed as having been added to Plant.Info on or after Date#
+					as.Date(PlotPlantID.First.Survey.Date.Alive) <= #
+					(as.Date(Z[[i]]$Date[j]) + date.window),#
+					# exclude dead plants (including date plant was first recorded as dead)#
+					FirstDeadMissingObservation > #
+						as.Date(Z[[i]]$Date[j]) + date.window | #
+						is.na(FirstDeadMissingObservation)==T#
+				)
+j=1
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+K <- eval(parse(text=paste(#
+				"L.list$", #
+				'"', #
+				names(L.list)[j], #
+				'"', #
+				sep=""#
+			)))#
+			# save range of dates used to create whole plant survey#
+			if (length(unique(K$Date)) > 1) {#
+				Z[[i]][j, "RangeofDates"] <- paste(#
+					K$Date[1], #
+					" - ", #
+					tail(K$Date, n=1),#
+					sep=""#
+				)#
+				Z[[i]][j, "SizeofDateRange"] <- max(K$Date) - min(K$Date)#
+				Z[[i]][j, "maxDate"] <- as.character(max(K$Date))#
+			} else {#
+				Z[[i]][j, "RangeofDates"] <- as.character(K$Date[1])#
+				Z[[i]][j, "SizeofDateRange"] <- 0#
+				Z[[i]][j, "maxDate"] <- as.character(max(K$Date))#
+			}#
+			# pull all plant survey records for this date from plant surveys within the window of dates, excluding dead/missing#
+			M <- K %>% filter(Dead != 1, Missing != 1)#
+			# --------------------------------------------------------- WARNINGS#
+			# throw error if a plotplantID is surveyed multiple times within this window and multiple records have size measurements#
+			temp <- M %>% filter(SegmentsMeasured > 0) %>%#
+				dplyr::add_count(PlotPlantID) %>%				#
+				filter(n > 1)#
+			if (dim(temp)[1] > 0) {#
+				warning(paste(#
+					"Multiple records of segment counts for PlotPlantID", #
+					M$PlotPlantID[1], #
+					"around date", #
+					paste(M$Date, collapse=",")#
+				))#
+			}#
+			temp <- M %>% filter(FruitMeasured > 0) %>%#
+				dplyr::add_count(PlotPlantID) %>%				#
+				filter(n > 1)#
+			if (dim(temp)[1] > 0) {#
+				warning(paste(#
+					"Multiple size records of fruit counts for PlotPlantID", #
+					M$PlotPlantID[1], #
+					"around date", #
+					paste(M$Date, collapse=",")#
+				))#
+			}#
+			temp <- M %>% filter(SizeMeasured > 0) %>%#
+				dplyr::add_count(PlotPlantID) %>%				#
+				filter(n > 1)#
+			if (dim(temp)[1] > 0) {#
+				warning(paste(#
+					"Multiple records of size measurements for PlotPlantID", #
+					M$PlotPlantID[1], #
+					"around date", #
+					paste(M$Date, collapse=",")#
+				))#
+			}
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+Plant.Info %>%#
+				filter( #
+					PlantID==L$PlantID[1],#
+					# only include plants that are listed as having been added to Plant.Info on or after Date#
+					as.Date(PlotPlantID.First.Survey.Date.Alive) <= #
+					(as.Date(Z[[i]]$Date[j]) + date.window),#
+					# exclude dead plants (including date plant was first recorded as dead)#
+					FirstDeadMissingObservation > #
+						as.Date(Z[[i]]$Date[j]) + date.window | #
+						is.na(FirstDeadMissingObservation)==T#
+				)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+N = Plant.Info %>%#
+				filter( #
+					PlantID==L$PlantID[1],#
+					# only include plants that are listed as having been added to Plant.Info on or after Date#
+					as.Date(PlotPlantID.First.Survey.Date.Alive) <= #
+					(as.Date(Z[[i]]$Date[j]) + date.window),#
+					# exclude dead plants (including date plant was first recorded as dead)#
+					FirstDeadMissingObservation > #
+						as.Date(Z[[i]]$Date[j]) + date.window | #
+						is.na(FirstDeadMissingObservation)==T#
+				)	#
+			# pull all surveys where plant was marked dead#
+			O <- K %>% filter(Dead == 1 | Missing == 1)
+M
+N
+O
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+dim(M)[1] > 0 & all(M$PlotPlantID %in% N$PlotPlantID)
+j=2
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+K <- eval(parse(text=paste(#
+				"L.list$", #
+				'"', #
+				names(L.list)[j], #
+				'"', #
+				sep=""#
+			)))#
+			# save range of dates used to create whole plant survey#
+			if (length(unique(K$Date)) > 1) {#
+				Z[[i]][j, "RangeofDates"] <- paste(#
+					K$Date[1], #
+					" - ", #
+					tail(K$Date, n=1),#
+					sep=""#
+				)#
+				Z[[i]][j, "SizeofDateRange"] <- max(K$Date) - min(K$Date)#
+				Z[[i]][j, "maxDate"] <- as.character(max(K$Date))#
+			} else {#
+				Z[[i]][j, "RangeofDates"] <- as.character(K$Date[1])#
+				Z[[i]][j, "SizeofDateRange"] <- 0#
+				Z[[i]][j, "maxDate"] <- as.character(max(K$Date))#
+			}#
+			# pull all plant survey records for this date from plant surveys within the window of dates, excluding dead/missing#
+			M <- K %>% filter(Dead != 1, Missing != 1)#
+			# --------------------------------------------------------- WARNINGS#
+			# throw error if a plotplantID is surveyed multiple times within this window and multiple records have size measurements#
+			temp <- M %>% filter(SegmentsMeasured > 0) %>%#
+				dplyr::add_count(PlotPlantID) %>%				#
+				filter(n > 1)#
+			if (dim(temp)[1] > 0) {#
+				warning(paste(#
+					"Multiple records of segment counts for PlotPlantID", #
+					M$PlotPlantID[1], #
+					"around date", #
+					paste(M$Date, collapse=",")#
+				))#
+			}#
+			temp <- M %>% filter(FruitMeasured > 0) %>%#
+				dplyr::add_count(PlotPlantID) %>%				#
+				filter(n > 1)#
+			if (dim(temp)[1] > 0) {#
+				warning(paste(#
+					"Multiple size records of fruit counts for PlotPlantID", #
+					M$PlotPlantID[1], #
+					"around date", #
+					paste(M$Date, collapse=",")#
+				))#
+			}#
+			temp <- M %>% filter(SizeMeasured > 0) %>%#
+				dplyr::add_count(PlotPlantID) %>%				#
+				filter(n > 1)#
+			if (dim(temp)[1] > 0) {#
+				warning(paste(#
+					"Multiple records of size measurements for PlotPlantID", #
+					M$PlotPlantID[1], #
+					"around date", #
+					paste(M$Date, collapse=",")#
+				))#
+			}#
+			# ---------------------------------------------------------------- ##
+			# get list of PlotPlantIDs alive at this time#
+			# plant would be dead if no PlantID records showed up in N#
+			N = Plant.Info %>%#
+				filter( #
+					PlantID==L$PlantID[1],#
+					# only include plants that are listed as having been added to Plant.Info on or after Date#
+					as.Date(PlotPlantID.First.Survey.Date.Alive) <= #
+					(as.Date(Z[[i]]$Date[j]) + date.window),#
+					# exclude dead plants (including date plant was first recorded as dead)#
+					FirstDeadMissingObservation > #
+						as.Date(Z[[i]]$Date[j]) + date.window | #
+						is.na(FirstDeadMissingObservation)==T#
+				)	#
+			# pull all surveys where plant was marked dead#
+			O <- K %>% filter(Dead == 1 | Missing == 1)
+M
+N
+O
+j=3
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+eval(parse(text=paste(#
+				"L.list$", #
+				'"', #
+				names(L.list)[j], #
+				'"', #
+				sep=""#
+			)))
+j=2
+eval(parse(text=paste(#
+				"L.list$", #
+				'"', #
+				names(L.list)[j], #
+				'"', #
+				sep=""#
+			)))
+j=2
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+K <- eval(parse(text=paste(#
+				"L.list$", #
+				'"', #
+				names(L.list)[j], #
+				'"', #
+				sep=""#
+			)))#
+			# save range of dates used to create whole plant survey#
+			if (length(unique(K$Date)) > 1) {#
+				Z[[i]][j, "RangeofDates"] <- paste(#
+					K$Date[1], #
+					" - ", #
+					tail(K$Date, n=1),#
+					sep=""#
+				)#
+				Z[[i]][j, "SizeofDateRange"] <- max(K$Date) - min(K$Date)#
+				Z[[i]][j, "maxDate"] <- as.character(max(K$Date))#
+			} else {#
+				Z[[i]][j, "RangeofDates"] <- as.character(K$Date[1])#
+				Z[[i]][j, "SizeofDateRange"] <- 0#
+				Z[[i]][j, "maxDate"] <- as.character(max(K$Date))#
+			}
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+Z[[i]]
+K
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+K %>% filter(Dead != 1, Missing != 1)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+M <- K %>% filter(Dead != 1, Missing != 1)
+M
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+K %>% filter(Dead != 1 | is.na(Dead), Missing != 1 | is.naMissing)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+K %>% filter(Dead != 1 | is.na(Dead), Missing != 1 | is.na(Missing)
+)_
+K %>% filter(Dead != 1 | is.na(Dead), Missing != 1 | is.na(Missing)
 )
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/transition_matrices')
-Plant_Surveys_TM_stricta$Year <- Plant_Surveys_TM_stricta$FecundityYear#
-#
-# transition matrix#
-TM <- prepDataTransitionMatrix(#
-	Dat=Plant_Surveys_TM_stricta,#
-	SizeClass=sizeclass,#
-	TransitionYear=2014,#
-	SeedSurvival=seed.survival,#
-	SeedBankSize=seed.bank.size,#
-	SeedsPerFruit=seeds.per.fruit#
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+M <- K %>% filter(#
+				Dead != 1 | is.na(Dead), #
+				Missing != 1 | is.na(Missing)#
+			)#
+			# --------------------------------------------------------- WARNINGS#
+			# throw error if a plotplantID is surveyed multiple times within this window and multiple records have size measurements#
+			temp <- M %>% filter(SegmentsMeasured > 0) %>%#
+				dplyr::add_count(PlotPlantID) %>%				#
+				filter(n > 1)#
+			if (dim(temp)[1] > 0) {#
+				warning(paste(#
+					"Multiple records of segment counts for PlotPlantID", #
+					M$PlotPlantID[1], #
+					"around date", #
+					paste(M$Date, collapse=",")#
+				))#
+			}#
+			temp <- M %>% filter(FruitMeasured > 0) %>%#
+				dplyr::add_count(PlotPlantID) %>%				#
+				filter(n > 1)#
+			if (dim(temp)[1] > 0) {#
+				warning(paste(#
+					"Multiple size records of fruit counts for PlotPlantID", #
+					M$PlotPlantID[1], #
+					"around date", #
+					paste(M$Date, collapse=",")#
+				))#
+			}#
+			temp <- M %>% filter(SizeMeasured > 0) %>%#
+				dplyr::add_count(PlotPlantID) %>%				#
+				filter(n > 1)#
+			if (dim(temp)[1] > 0) {#
+				warning(paste(#
+					"Multiple records of size measurements for PlotPlantID", #
+					M$PlotPlantID[1], #
+					"around date", #
+					paste(M$Date, collapse=",")#
+				))#
+			}#
+			# ---------------------------------------------------------------- ##
+			# get list of PlotPlantIDs alive at this time#
+			# plant would be dead if no PlantID records showed up in N#
+			N = Plant.Info %>%#
+				filter( #
+					PlantID==L$PlantID[1],#
+					# only include plants that are listed as having been added to Plant.Info on or after Date#
+					as.Date(PlotPlantID.First.Survey.Date.Alive) <= #
+					(as.Date(Z[[i]]$Date[j]) + date.window),#
+					# exclude dead plants (including date plant was first recorded as dead)#
+					FirstDeadMissingObservation > #
+						as.Date(Z[[i]]$Date[j]) + date.window | #
+						is.na(FirstDeadMissingObservation)==T#
+				)	#
+			# pull all surveys where plant was marked dead#
+			O <- K %>% filter(Dead == 1 | Missing == 1)#
+			# the plant can only be marked dead if no live part was surveyed and no parts remained unsurveyed#
+			if (dim(M)[1] == 0 & dim(N)[1] == 0 & dim(O)[1] > 0) {#
+				Z[[i]][j, "Dead"]	 <- Maximum(O$Dead)#
+				Z[[i]][j, "Missing"] <- Maximum(O$Missing)#
+				Z[[i]][j, "AllSurveyed"] 			<- "TRUE"#
+				Z[[i]][j, "PlantsSurveyed"] <- paste(#
+					O$PlotPlantID, collapse=","#
+				)#
+				Z[[i]][j, "DeadDuetoMothDamage"] <- paste(#
+					O$DeadDuetoMothDamage,#
+					collapse=","#
+				)#
+			} else#
+			# if all PlotPlantIDs were surveyed for a given date:#
+			if (dim(M)[1] > 0 & all(M$PlotPlantID %in% N$PlotPlantID)) {#
+				Z[[i]][j, "CA_t"] 					<- mysum2(M$CA_t)#
+				Z[[i]][j, "ME_t"] 					<- mysum2(M$ME_t)#
+				Z[[i]][j, "CH_t"] 					<- mysum2(M$CH_t)#
+				Z[[i]][j, "DA_t"] 					<- mysum2(M$DA_t)#
+				Z[[i]][j, "Unknown_Moth_t"] 		<- mysum2(M$Unknown_Moth_t)#
+				Z[[i]][j, "Gerstaeckeria_t"] 		<- mysum2(M$Gerstaeckeria_t)#
+				Z[[i]][j, "Old_Moth_Evidence_t"]<- mysum2(M$Old_Moth_Evidence_t)#
+				Z[[i]][j, "AllSurveyed"] 			<- "TRUE"#
+				Z[[i]][j, "Dead"] <- 0#
+				Z[[i]][j, "Missing"] <- 0#
+				Z[[i]][j, "PlantsSurveyed"] <- paste(#
+					M$PlotPlantID, collapse=","#
+				)#
+			} else {#
+				# if all PlotPlantIDs were NOT surveyed on this date consider the insect to be detected if the sum is greater than zero#
+				Z[[i]][j, "CA_t"] 					<- mysum1(M$CA_t)#
+				Z[[i]][j, "ME_t"] 					<- mysum1(M$ME_t)#
+				Z[[i]][j, "CH_t"] 					<- mysum1(M$CH_t)#
+				Z[[i]][j, "DA_t"] 					<- mysum1(M$DA_t)#
+				Z[[i]][j, "Unknown_Moth_t"] 		<- mysum1(M$Unknown_Moth_t)#
+				Z[[i]][j, "Gerstaeckeria_t"] 		<- mysum1(M$Gerstaeckeria_t)#
+				Z[[i]][j, "Old_Moth_Evidence_t"]<- mysum1(M$Old_Moth_Evidence_t)#
+				Z[[i]][j, "AllSurveyed"] 			<- "FALSE"#
+				Z[[i]][j, "Dead"] <- 0#
+				Z[[i]][j, "Missing"] <- 0#
+				Z[[i]][j, "PlantsSurveyed"] <- paste(#
+					M$PlotPlantID, collapse=","#
+				)#
+			}#
+			# Number of segments#
+			Z[[i]][j, "Size_t"] 					<- mysum(M$Size_t)#
+			Z[[i]][j, "SizeInPlots_t"] <- #
+				mysum(M$Size_t[which(M$OutsideOfPlot!="Yes")])#
+			Z[[i]][j, "Plant_Segments_w_leaves"] <- #
+				mysum(M$Plant_Segments_w_leaves)#
+			Z[[i]][j, "Plant_Segments_wo_leaves"] <-#
+			 	mysum(M$Plant_Segments_wo_leaves)#
+			Z[[i]][j, "Plant_Segments_woody"] <- mysum(M$Plant_Segments_woody)#
+			# Size#
+			Z[[i]][j, "Height_t"] 			<- Maximum(M$Height_t)#
+			Z[[i]][j, "Width_t"] 			<- Maximum(M$Width_t)#
+			Z[[i]][j, "Perpen_Width"] 		<- Maximum(M$Perpen_Width)#
+			# Fruit	and Flowers#
+			Z[[i]][j, "Num_FlowerBuds"] 			<- mysum(M$Num_FlowerBuds)#
+			Z[[i]][j, "Num_Fruit_red"] 				<- mysum(M$Num_Fruit_red)#
+			Z[[i]][j, "Num_Fruit_green"] 			<- mysum(M$Num_Fruit_green)#
+			Z[[i]][j, "Num_Flowers"] 				<- mysum(M$Num_Flowers)#
+			Z[[i]][j, "Fruit_t"] 					<- mysum(M$Fruit_t)#
+			Z[[i]][j, "Fruit_Flowers_t"] 			<- mysum(M$Fruit_Flowers_t)#
+			Z[[i]][j, "DemographicSurvey"] 			<- K$DemographicSurvey[1]#
+			Z[[i]][j, "FecundityYear"] 				<- K$FecundityYear[1]#
+			Z[[i]][j, "OutsideOfPlot"] 				<- ""#
+			Z[[i]][j, "DeadDuetoMothDamage"] 		<- ""#
+			Z[[i]][j, "PlantPictures"]			 	<- paste(#
+				K$PlantPictures[which(!is.na(K$PlantPictures))],#
+				collapse=","#
+			)
+Z
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+dim(M)[1] > 0 & all(M$PlotPlantID %in% N$PlotPlantID)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+N
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+Plant.Info %>%#
+				filter( #
+					PlantID==L$PlantID[1],#
+					# only include plants that are listed as having been added to Plant.Info on or after Date#
+					as.Date(PlotPlantID.First.Survey.Date.Alive) <= #
+					(as.Date(Z[[i]]$Date[j]) + date.window)
 )
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/transition_matrices')
-Dat=Plant_Surveys_TM_stricta
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/transition_matrices')
-SizeClass=sizeclass
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/transition_matrices')
-TransitionYear=2014
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/transition_matrices')
-SeedSurvival=seed.survival
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/transition_matrices')
-SeedBankSize=seed.bank.size
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/transition_matrices')
-SeedsPerFruit=seeds.per.fruit
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/transition_matrices')
-#####################################
-# stage-structured projection model#
-#####################################
-SizeClass <- c(0:3,5,11,140)#
-Dat <- dataset <- Plant_Surveys_TM_stricta# %>% setnames("SamplingYear", "Year")#
-Dat$allYears <- 2014#
-SeedSurvival <- 0.126#
-SeedBankSize <- 1000#
-SeedsPerFruit <- 60#
-Plant_Surveys_TM_stricta$Year <- Plant_Surveys_TM_stricta$FecundityYear
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/transition_matrices')
-TransitionYear=2014
 setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-size.class <- cut(Dat$Size_t, SizeClass, include.lowest=T, labels=FALSE)#
-	Dat <- cbind(Dat, size.class)
-head(Dat)
-Dat %>% arrange(Size_t) %>% .[100:150,]
-Dat %>% arrange(Size_t) %>% .[500:550,]
-Dat %>% arrange(Size_t) %>% .[4000:4050,]
-dim(Dat)
-tail(Dat)
-head(Plant.Surveys.by.Year)
-unique(Plant.Surveys.by.Year$Size_t)
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
-# --------------------------------------------------------------------------- ##
-# --------------------------------------------------------------------------- ##
-# -------- CREATE TRANSITION MATRIX DATASETS -------------------------------- ##
-Plant_Surveys_TM <- Plant.Surveys.by.Year %>% 	#
-	as.data.frame %>%#
- 	droplevels %>% #
- 	dplyr::select(#
- 		Species,#
-		PlantID,#
-		Stage,#
-		FecundityYear,#
- 		Network,#
- 		Island,#
-		Size_t,#
-		Fruit_Flowers_t,#
- 		CA_t,#
-		ME_t,#
-		Old_Moth_Evidence_t,#
-		DeadMissingbyEndofYear#
- 	) %>%#
-	filter(FecundityYear > 2012) %>%#
-	.[complete.cases(.$"Stage"),]#
-# stricta only#
-Plant_Surveys_TM_stricta <- Plant_Surveys_TM %>% #
-	filter(Species=="Opuntia stricta")#
-Plant_Surveys_TM_stricta %>% write.csv("../data/Plant_Surveys_TM_stricta.csv")
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-size.class <- cut(Dat$Size_t, SizeClass, include.lowest=T, labels=FALSE)#
-	Dat <- cbind(Dat, size.class)
-tail(Dat)
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/transition_matrices')
-#####################################
-# stage-structured projection model#
-#####################################
-SizeClass <- c(0:3,5,11,140)#
-Dat <- dataset <- Plant_Surveys_TM_stricta# %>% setnames("SamplingYear", "Year")#
-Dat$allYears <- 2014#
-SeedSurvival <- 0.126#
-SeedBankSize <- 1000#
-SeedsPerFruit <- 60#
-Plant_Surveys_TM_stricta$Year <- Plant_Surveys_TM_stricta$FecundityYear#
-TransitionYear=2014
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-size.class <- cut(Dat$Size_t, SizeClass, include.lowest=T, labels=FALSE)#
-	Dat <- cbind(Dat, size.class)
-tail(Dat)
-Dat %>% arrange(Size_t) %>% tail
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
-# --------------------------------------------------------------------------- ##
-# --------------------------------------------------------------------------- ##
-# -------- CREATE TRANSITION MATRIX DATASETS -------------------------------- ##
-Plant_Surveys_TM <- Plant.Surveys.by.Year %>% 	#
-	as.data.frame %>%#
- 	droplevels %>% #
- 	dplyr::select(#
- 		Species,#
-		PlantID,#
-		Stage,#
-		FecundityYear,#
- 		Network,#
- 		Island,#
-		Size_t,#
-		Fruit_Flowers_t,#
- 		CA_t,#
-		ME_t,#
-		Old_Moth_Evidence_t,#
-		DeadMissingbyEndofYear#
- 	) %>%#
-	filter(FecundityYear > 2012) %>%#
-	.[complete.cases(.$"Size_t"),]
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
-# stricta only#
-Plant_Surveys_TM_stricta <- Plant_Surveys_TM %>% #
-	filter(Species=="Opuntia stricta")#
-Plant_Surveys_TM_stricta %>% write.csv("../data/Plant_Surveys_TM_stricta.csv")
-dim(Plant_Surveys_TM_stricta)
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/transition_matrices')
-#####################################
-# stage-structured projection model#
-#####################################
-SizeClass <- c(0:3,5,11,140)#
-Dat <- dataset <- Plant_Surveys_TM_stricta# %>% setnames("SamplingYear", "Year")#
-Dat$allYears <- 2014#
-SeedSurvival <- 0.126#
-SeedBankSize <- 1000#
-SeedsPerFruit <- 60#
-Plant_Surveys_TM_stricta$Year <- Plant_Surveys_TM_stricta$FecundityYear#
-TransitionYear=2014
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-size.class <- cut(Dat$Size_t, SizeClass, include.lowest=T, labels=FALSE)#
-	Dat <- cbind(Dat, size.class)
-tail(Dat)
-Dat %>% arrange(Size_t) %>% tail
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/transition_matrices')
-SizeClass
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/transition_matrices')
-SizeClass <- c(0:3,6,11,140)
-SizeClass
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/transition_matrices')
-SizeClass <- c(1:3,6,11,140)
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-size.class <- cut(Dat$Size_t, SizeClass, include.lowest=T, labels=FALSE)
-size.class
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-Dat <- cbind(Dat, size.class)
-head(Dat)
-Dat %>% dplyr::select(Size_t, size.class) %>% .[1:1000,]
-head(Dat)
-Dat %>% dplyr::select(Size_t, size.class) %>% .[1:100,]
-Dat %>% dplyr::select(Size_t, size.class)
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/transition_matrices')
-SizeClass <- c(1:3,6,11,140)#
-Dat <- dataset <- Plant_Surveys_TM_stricta# %>% setnames("SamplingYear", "Year")
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-size.class <- cut(Dat$Size_t, SizeClass, include.lowest=T, labels=FALSE)#
-	Dat <- cbind(Dat, size.class)
-Dat %>% dplyr::select(Size_t, size.class) %>% .[1:1000,]
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/transition_matrices')
-SizeClass <- c(0:3,6,11,140)#
-Dat <- dataset <- Plant_Surveys_TM_stricta# %>% se
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-size.class <- cut(Dat$Size_t, SizeClass, include.lowest=T, labels=FALSE)#
-	Dat <- cbind(Dat, size.class)
-Dat %>% dplyr::select(Size_t, size.class) %>% .[1:1000,]
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/transition_matrices')
-SizeClass <- c(0:2,6,11,140)#
-Dat <- dataset <- Plant_Surveys_TM_stricta# %>% setnames("Sampli
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-size.class <- cut(Dat$Size_t, SizeClass, include.lowest=T, labels=FALSE)#
-	Dat <- cbind(Dat, size.class)
-Dat %>% dplyr::select(Size_t, size.class) %>% .[1:100,]
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/transition_matrices')
-SizeClass <- c(0:2,6,11,140)#
-Dat <- dataset <- Plant_Surveys_TM_stricta# %>% setnames("SamplingYear", "Year")#
-Dat$allYears <- 2014#
-SeedSurvival <- 0.126#
-SeedBankSize <- 1000#
-SeedsPerFruit <- 60#
-Plant_Surveys_TM_stricta$Year <- Plant_Surveys_TM_stricta$FecundityYear#
-TransitionYear=2014
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-size.class <- cut(Dat$Size_t, SizeClass, include.lowest=T, labels=FALSE)#
-	Dat <- cbind(Dat, size.class)#
-	Dat_census <- Dat %>% #
-		dplyr::select(#
-			Year, #
-			PlantID, #
-			Stage, #
-			size.class, #
-			Fruit_Flowers_t,#
-			Size_t,#
-			Island#
-		) %>%#
-		setnames("Stage", "stage")# %>%#
-		#setnames("size.class", "Size_t")
-head(Dat)
-cut(5, SizeClass, include.lowest=T, labels=FALSE)
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-Dat_census <- Dat %>% #
-	mutate(#
-		Stage=replace(#
-			Stage, #
-			which(Stage=="Adult"),#
-			cut(Size_t, SizeClass, include.lowest=T, labels=FALSE)#
-		)#
-	)
+Plant.Info %>%#
+				filter( #
+					PlantID==L$PlantID[1],#
+					# only include plants that are listed as having been added to Plant.Info on or after Date#
+					as.Date(PlotPlantID.First.Survey.Date.Alive) <= #
+					(as.Date(Z[[i]]$Date[j]) + date.window),#
+					# exclude dead plants (including date plant was first recorded as dead)#
+					FirstDeadMissingObservation > #
+						as.Date(Z[[i]]$Date[j]) + date.window | #
+						is.na(FirstDeadMissingObservation)==T#
+				)
+M
