@@ -109,16 +109,8 @@ mergePlantRecordsfromMultiplePlots <- function(Plant.Surveys, Plant.Info, date.w
 				filter( 
 					PlantID==L$PlantID[1],
 					# only include plants that are listed as having been added to Plant.Info on or after Date
-					as.POSIXct(
-						strptime(
-							PlotPlantID.First.Survey.Date.Alive, format = "%Y-%m-%d"
-						)
-					) <= 
-					(as.POSIXct(
-						strptime(
-							Z[[i]]$Date[j], format = "%Y-%m-%d"
-						)
-					) + date.window),
+					as.Date(PlotPlantID.First.Survey.Date.Alive) <= 
+					(as.Date(Z[[i]]$Date[j]) + date.window),
 					# exclude dead plants (including date plant was first recorded as dead)
 					FirstDeadMissingObservation > 
 						as.Date(Z[[i]]$Date[j]) + date.window | 
