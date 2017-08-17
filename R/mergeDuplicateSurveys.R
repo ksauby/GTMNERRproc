@@ -8,7 +8,7 @@ mergeDuplicateSurveys <- function(E) {
 	# for each tag number
 	for (i in 1:length(unique(E$Tag_Number))) {
 		# pull all records for this Tag Number from temp.plant.surveys
-		L = filter(E, Tag_Number==unique(E$Tag_Number)[i])
+		L = E %>% dplyr::filter(Tag_Number==unique(E$Tag_Number)[i])
 		Z[[i]] 			<- as.data.frame(matrix(NA,length(unique(L$Date)),1))
 		Z[[i]][, 1] 	<- L$Tag_Number[1]
 		Z[[i]][, "Date"] <- unique(L$Date)

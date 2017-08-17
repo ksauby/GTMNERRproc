@@ -10,7 +10,7 @@
 #' @param D_Plot_Surveys
 #' @export
 
-createPlotSurveysfromPlantSurveys <- function(Plant_Surveys, Plot_Surveys, D_Plot_Surveys) {
+createPlotSurveysfromPlantSurveys <- function(Plant_Surveys, Plant_Info, Plot_Surveys, D_Plot_Surveys) {
 	# create Tag/Date Combo Field
 	Plant_Surveys 	%<>% mutate(Tag_Date=paste(Tag_Number, Date))
 	Plot_Surveys 	%<>% mutate(Tag_Date=paste(Tag_Number, Date))
@@ -54,9 +54,9 @@ createPlotSurveysfromPlantSurveys <- function(Plant_Surveys, Plot_Surveys, D_Plo
 				Plant_Info, 
 				Tag_Number==L$Tag_Number[1], 
 				# only include plants that are listed as having been added to Plant.Info on or after Date
-				First.Survey.Date.Alive <= unique(L$Date)[j],
+				PlotPlantID.First.Survey.Date.Alive <= unique(L$Date)[j],
 				# exclude dead plants (including date plant was first recorded as dead)
-				FirstDeadMissingObservation > unique(L$Date)[j] | 
+				PlotPlantID.Last.Survey.Date.Alive >= unique(L$Date)[j] | 
 					is.na(FirstDeadMissingObservation)==T
 			)
 			# if all PlotPlantIDs were surveyed for a given date:

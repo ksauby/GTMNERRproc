@@ -96,7 +96,7 @@
 #'
 #' @export
 
-processPlantSurveys <- function(Plant.Surveys, Plant_Info) {
+processPlantSurveys <- function(Plant.Surveys, Plant.Info) {
 	# ----------------------------------------------------------------- WARNINGS
 	# check first duplicate data entries
 	dups <- Plant.Surveys %>% 
@@ -108,9 +108,9 @@ processPlantSurveys <- function(Plant.Surveys, Plant_Info) {
 	dups <- Plant.Surveys %>% filter(is.na(PlantID))
 	if (dim(dups)[1] > 0) {stop("NA values for PlantID.")}
 	# are all Plant IDs from the Plant Surveys data in Plant Info?
-	dups <- filter(Plant.Surveys, !(PlantID %in% Plant_Info$PlantID))[, 4:5]
+	dups <- filter(Plant.Surveys, !(PlantID %in% Plant.Info$PlantID))[, 4:5]
 	if (dim(
-		filter(Plant.Surveys, !(PlantID %in% Plant_Info$PlantID))[, 4:5]
+		filter(Plant.Surveys, !(PlantID %in% Plant.Info$PlantID))[, 4:5]
 	)[1] > 0) {
 		warning(paste(
 			"These Plant IDs from Plant Surveys are not in Plant Info:",

@@ -8,14 +8,13 @@
 #'  \item limit to plot surveys after Dec. 2, 2012 (I wasn't surveying individual plants before this)
 #'  \item limit to Tag_Numbers that have marked plants
 #' }
-#' @param Plot_Surveys
-#' @param Plant_Surveys
+#' @param Plot.Surveys
+#' @param Plant.Surveys
 #' @export
 
-mergePlantSurveysPlotSurveys <- function(Plot_Surveys, Plant_Surveys) {
-	temp_A = filter(
-		Plot_Surveys, 
-		Date > "2012-12-01", Tag_Number %in% Plant_Surveys$Tag_Number
+mergePlantSurveysPlotSurveys <- function(Plot.Surveys, Plant.Surveys, date.window=48) {
+	temp_A = Plot.Surveys %>% filter(
+		Date > "2012-12-01", Tag_Number %in% Plant.Surveys$Tag_Number
 	)
 	Z = list()
 	# for each tag number in the plot surveys data
@@ -50,9 +49,13 @@ mergePlantSurveysPlotSurveys <- function(Plot_Surveys, Plant_Surveys) {
 			Z[[i]][j, "S_PC"] 			<- L$S_PC[j]
 			Z[[i]][j, "S_H"] 			<- L$S_H[j]
 			# pull all plant survey records for this Tag Number and date from plant surveys
-			M = filter(Plant_Surveys, 
-				Tag_Number==L$Tag_Number[1], 
-				Date==unique(L$Date)[j],
+			
+			# WINDOW OF DATES?
+			
+			M = filter(Plant.Surveys, 
+				Tag_Number==L$Tag_Number[1],
+				Date > (as.Date(unique(L$Date)[j]) - date.window),
+				Date <= unique(L$Date)[j],
 				# remove plants marked as dead
 				Dead!=1)
 			# remove plants marked as missing	

@@ -4,17 +4,17 @@
 #' \itemize{
 #'  \item for these dates I am not certain that I surveyed all plants in the plots therefore either something is present or an NA
 #' }
-#' @param Original_Plant_Data
+#' @param Original.Plant.Data
 #' @export
 
-createPlotSurveysfromOrigPlantSurveys <- function(Original_Plant_Data) {
+createPlotSurveysfromOrigPlantSurveys <- function(Original.Plant.Data) {
 	Z = list()
 	# for each tag number in the demography plot survey data
-	for (i in 1:length(unique(Original_Plant_Data$Tag_Number))) {
+	for (i in 1:length(unique(Original.Plant.Data$Tag_Number))) {
 		# pull all records for this Tag Number from temp.plant.surveys
 		L = filter(
-			Original_Plant_Data, 
-			Tag_Number==unique(Original_Plant_Data$Tag_Number)[i]
+			Original.Plant.Data, 
+			Tag_Number==unique(Original.Plant.Data$Tag_Number)[i]
 		)
 		Z[[i]] 			<- as.data.frame(matrix(NA,length(unique(L$Date)),1))	
 		Z[[i]][, 1] 	<- L$Tag_Number[1]
@@ -44,5 +44,6 @@ createPlotSurveysfromOrigPlantSurveys <- function(Original_Plant_Data) {
 	#  FIX DATA FORMAT
 	D[, column_list] %<>% apply(., 2, as.numeric)
 	D[, column_list] %<>% apply(., 2, NA_Function)
+	D$Date %<>% Format_Date_Function
 	return(D)	
 }
