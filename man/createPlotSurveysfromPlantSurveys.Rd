@@ -4,7 +4,8 @@
 \alias{createPlotSurveysfromPlantSurveys}
 \title{Create occupancy plot survey data from plant surveys}
 \usage{
-createPlotSurveysfromPlantSurveys(Plant_Surveys, Plot_Surveys, D_Plot_Surveys)
+createPlotSurveysfromPlantSurveys(Plant_Surveys, Plant_Info, Plot_Surveys,
+  D_Plot_Surveys)
 }
 \description{
 This data is from when I was surveying plants only, not also doing plot surveys.

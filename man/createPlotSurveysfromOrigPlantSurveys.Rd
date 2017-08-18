@@ -4,7 +4,7 @@
 \alias{createPlotSurveysfromOrigPlantSurveys}
 \title{Create occupancy plot survey data from original plant survey data}
 \usage{
-createPlotSurveysfromOrigPlantSurveys(Original_Plant_Data)
+createPlotSurveysfromOrigPlantSurveys(Original.Plant.Data)
 }
 \description{
 This data is from when I was surveying plants only, not also doing occupancy plot surveys. After IDing and surveying these plants, I deleted these IDs and renamed the plants so the IDs here DO NOT match the surveys and IDs in the demography study data.

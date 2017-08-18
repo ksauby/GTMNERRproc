@@ -4,7 +4,7 @@
 \alias{mergePlantSurveysPlotSurveys}
 \title{fill occupancy plot surveys with info from plant surveys}
 \usage{
-mergePlantSurveysPlotSurveys(Plot_Surveys, Plant_Surveys)
+mergePlantSurveysPlotSurveys(Plot.Surveys, Plant.Surveys, date.window = 48)
 }
 \description{
 This data is from when I was specifically doing occupancy plot surveys.
