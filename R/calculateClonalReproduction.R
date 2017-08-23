@@ -14,34 +14,79 @@
 #' @param Plant.Surveys.by.Year
 #' @param Plant.Surveys.by.Plant
 #' @param Plant.Info.Analysis
+#' @param Parent.Choice
 #'
 #' @export
 
 calculateClonalReproduction <- function(
 	Plant.Surveys.by.Year, 
 	Plant.Surveys.by.Plant, 
-	Plant.Info.Analysis
+	Plant.Info.Analysis,
+	Parent.Choice
 ) {
 	# FIRST, ASSIGN PARENTS FOR PARENT-LESS PLANTS
-	
-	
 	Plants.wo.parents <- Plant.Info.Analysis %>% filter(Parent=="Unknown")
 	Plant.Surveys.by.Plant$DemographicSurvey %<>% as.numeric
 	Plants.wo.parents$First.DemographicSurvey %<>% as.numeric
-	# PARENT SURVEY DATA
-	# use this dataset to use parent size that is consistent for all offpsring
+	if (ParentChoice == "largest") {
+		for (i in 1:length(Plants.wo.parents$PlantID)) {
+			#	1) find surveys of plants in that plot from survey preceeding that when plant was discovered
+			A <- Plant.Surveys.by.Year %>% 
+				filter(
+					# cannot be its own parent
+					PlantID != Plants.wo.parents$PlantID[i],
+					# parent must be of same species
+					Species == Plants.wo.parents$Species[i],
+					# parent must have been surveyed in previous fecundity year
+					FecundityYear == 
+						Plants.wo.parents$minFecundityYear[i] - 1,
+					# parent must be in same plot as offspring
+					grepl(
+						Plants.wo.parents$Tag_Number[i], 
+						Tag_Numbers_Surveyed
+					)==T,
+					# parent cannot be a seedling
+					!(FecundityYear == minFecundityYear &
+					RecruitmentMode == "Seedling")
+				) %>%
+				arrange(desc(Size_t))
+			Plants.wo.parents[i, "Parent"] <- A[1, "PlantID"]
+		}
+	} else if (ParentChoice == "random") {
+		for (i in 1:length(Plants.wo.parents$PlantID)) {
+			#	1) find surveys of plants in that plot from survey preceeding that when plant was discovered
+			A <- Plant.Surveys.by.Year %>% 
+				filter(
+					# cannot be its own parent
+					PlantID != Plants.wo.parents$PlantID[i],
+					# parent must be of same species
+					Species == Plants.wo.parents$Species[i],
+					# parent must have been surveyed in previous fecundity year
+					FecundityYear == 
+						Plants.wo.parents$minFecundityYear[i] - 1,
+					# parent must be in same plot as offspring
+					grepl(Plants.wo.parents$Tag_Number[i], Tag_Numbers_Surveyed)==T,
+					# parent cannot be a seedling
+					!(FecundityYear == minFecundityYear &
+					RecruitmentMode == "Seedling")
+				)
+			Plants.wo.parents[i, "Parent"] <- A[sample(dim(A)[1], 1), "PlantID"]
+		}
+	}
 	for (i in 1:length(Plants.wo.parents$PlantID)) {
 		#	1) find surveys of plants in that plot from survey preceeding that when plant was discovered
-		A <- Plant.Surveys.by.Plant %>% 
+		A <- Plant.Surveys.by.Year %>% 
 			filter(
-				PlantID!=Plants.wo.parents$PlantID[i],
+				# cannot be its own parent
+				PlantID != Plants.wo.parents$PlantID[i],
+				# parent must be of same species
 				Species == Plants.wo.parents$Species[i],
-				DemographicSurvey == 
-					Plants.wo.parents$First.DemographicSurvey[i] - 1,
-				Dead == 0,
-				grepl(Plants.wo.parents$Tag_Number[i], Tag_Numbers_Surveyed)==T
-			) %>%
-			filter(
+				# parent must have been surveyed in previous fecundity year
+				FecundityYear == 
+					Plants.wo.parents$minFecundityYear[i] - 1,
+				# parent must be in same plot as offspring
+				grepl(Plants.wo.parents$Tag_Number[i], Tag_Numbers_Surveyed)==T,
+				# parent cannot be a seedling
 				!(FecundityYear == minFecundityYear &
 				RecruitmentMode == "Seedling")
 			)
