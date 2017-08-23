@@ -129,6 +129,9 @@ mergePlantRecordsfromMultiplePlots <- function(Plant.Surveys, Plant.Info, date.w
 				Z[[i]][j, "PlantsSurveyed"] <- paste(
 					O$PlotPlantID, collapse=","
 				)
+				Z[[i]][j, "Tag_Numbers_Surveyed"] <- paste(
+					O$Tag_Number, collapse=","
+				)
 				Z[[i]][j, "DeadDuetoMothDamage"] <- paste(
 					O$DeadDuetoMothDamage,
 					collapse=","
@@ -149,6 +152,9 @@ mergePlantRecordsfromMultiplePlots <- function(Plant.Surveys, Plant.Info, date.w
 				Z[[i]][j, "PlantsSurveyed"] <- paste(
 					M$PlotPlantID, collapse=","
 				)
+				Z[[i]][j, "Tag_Numbers_Surveyed"] <- paste(
+					M$Tag_Number, collapse=","
+				)
 			} else {
 				# if all PlotPlantIDs were NOT surveyed on this date consider the insect to be detected if the sum is greater than zero
 				Z[[i]][j, "CA_t"] 					<- mysum1(M$CA_t)
@@ -164,6 +170,9 @@ mergePlantRecordsfromMultiplePlots <- function(Plant.Surveys, Plant.Info, date.w
 				Z[[i]][j, "PlantsSurveyed"] <- paste(
 					M$PlotPlantID, collapse=","
 				)
+				Z[[i]][j, "Tag_Numbers_Surveyed"] <- paste(
+					M$Tag_Number, collapse=","
+				)			
 			}
 			# Number of segments
 			Z[[i]][j, "Size_t"] 					<- mysum(M$Size_t)
@@ -223,9 +232,10 @@ mergePlantRecordsfromMultiplePlots <- function(Plant.Surveys, Plant.Info, date.w
 		as.data.frame
 	# - Merge plant survey data into one file -------------------------------- #
 	# create new file with those plants in only one plot
-	
+	temp.C$Tag_Numbers_Surveyed <- temp.C$Tag_Number
 	temp.C %<>% dplyr::select( 
 		PlantID, 
+		Tag_Numbers_Surveyed,
 		Date, 
 		# insects
 		CA_t, 

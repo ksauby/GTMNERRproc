@@ -32,7 +32,8 @@ createPlantSurveysbyYear <- function(Plant_Surveys_by_Plant) {
 			MissingbyEndofYear 			= Maximum(Missing),
 			DeadMissingbyEndofYear = mysum3(
 				c(DeadbyEndofYear, MissingbyEndofYear)
-			)
+			),
+			Tag_Numbers_Surveyed = paste(Tag_Number, collapse=",")			
 		) %>%
 		ungroup() %>%
 		rowwise() %>%
