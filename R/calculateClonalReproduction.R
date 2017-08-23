@@ -22,6 +22,43 @@ calculateClonalReproduction <- function(
 	Plant.Surveys.by.Plant, 
 	Plant.Info.Analysis
 ) {
+	# FIRST, ASSIGN PARENTS FOR PARENT-LESS PLANTS
+	
+	
+	Plants.wo.parents <- Plant.Info.Analysis %>% filter(Parent=="Unknown")
+	Plant.Surveys.by.Plant$DemographicSurvey %<>% as.numeric
+	Plants.wo.parents$First.DemographicSurvey %<>% as.numeric
+	# PARENT SURVEY DATA
+	# use this dataset to use parent size that is consistent for all offpsring
+	for (i in 1:length(Plants.wo.parents$PlantID)) {
+		#	1) find surveys of plants in that plot from survey preceeding that when plant was discovered
+		A <- Plant.Surveys.by.Plant %>% 
+			filter(
+				PlantID!=Plants.wo.parents$PlantID[i],
+				Species == Plants.wo.parents$Species[i],
+				DemographicSurvey == 
+					Plants.wo.parents$First.DemographicSurvey[i] - 1,
+				Dead == 0,
+				grepl(Plants.wo.parents$Tag_Number[i], Tag_Numbers_Surveyed)==T
+			) %>%
+			filter(
+				!(FecundityYear == minFecundityYear &
+				RecruitmentMode == "Seedling")
+			)
+			
+	}
+
+	
+	
+	# for each plant without parent
+	#	2) find biggest plant
+	#	3) assign that plant as the parent
+	
+	
+	
+	
+	
+	
 	# PARENT SURVEY DATA
 	# use this dataset to use parent size that is consistent for all offpsring
 	A <- Plant.Surveys.by.Year %>% 

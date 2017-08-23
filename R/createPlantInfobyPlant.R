@@ -31,7 +31,8 @@ createPlantInfobyPlant <- function(Plant.Info, Plant.Surveys.by.Year, Plant.Surv
 			RecruitmentMode 	= paste(Unique(RecruitmentMode), collapse=","),
 			Parent 				= paste(Unique(Parent), collapse=","),
 			First.Survey.Date.Alive = PlantID.First.Alive[1],
-			AliveatEndofStudy	= Maximum(AliveatEndofStudy)
+			AliveatEndofStudy	= Maximum(AliveatEndofStudy),
+			Tag_Number			= Tag_Number[1]
 		) %>%
 		filter(!is.na(Network)) %>%
 		mutate(
