@@ -136,7 +136,10 @@ calculateClonalReproduction <- function(
 					!(FecundityYear == minFecundityYear &
 					RecruitmentMode == "Seedling")
 				)
-			Plants.wo.parents[i, "Parent"] <- A[sample(dim(A)[1], 1), "PlantID"]
+			if (dim(A)[1] > 0) {
+				Plants.wo.parents[i, "Parent"] <- 
+					A[sample(dim(A)[1], 1), "PlantID"]
+			}
 			cat(paste(i,",",sep=""))
 		}
 		Plants.w.parents <- Plant.Info.Analysis %>% filter(Parent!="Unknown")
