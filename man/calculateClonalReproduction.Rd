@@ -5,10 +5,10 @@
 \title{Calculate Clonal Reproduction}
 \usage{
 calculateClonalReproduction(Plant.Surveys.by.Year, Plant.Surveys.by.Plant,
-  Plant.Info.Analysis)
+  Plant.Info.Analysis, ParentChoice)
 }
 \arguments{
-\item{Plant.Info.Analysis}{}
+\item{Parent.Choice}{}
 }
 \value{
 Returns the following variables:

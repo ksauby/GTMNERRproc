@@ -22,7 +22,7 @@ calculateClonalReproduction <- function(
 	Plant.Surveys.by.Year, 
 	Plant.Surveys.by.Plant, 
 	Plant.Info.Analysis,
-	Parent.Choice
+	ParentChoice
 ) {
 	# FIRST, ASSIGN PARENTS FOR PARENT-LESS PLANTS
 	Plants.wo.parents <- Plant.Info.Analysis %>% filter(Parent=="Unknown")
@@ -51,8 +51,74 @@ calculateClonalReproduction <- function(
 				) %>%
 				arrange(desc(Size_t))
 			Plants.wo.parents[i, "Parent"] <- A[1, "PlantID"]
+			cat(paste(i,",",sep=""))
 		}
-	} else if (ParentChoice == "random") {
+		Plants.w.parents <- Plant.Info.Analysis %>% filter(Parent!="Unknown")
+		Plant.Info.Analysis <- rbind.fill(Plants.wo.parents, Plants.w.parents)
+		Plant.Surveys.by.Year %<>% 
+			dplyr::select(-c(
+				Island,
+				Network,
+				Species,                
+				RecruitmentMode,
+				Parent,
+				First.Survey.Date.Alive,
+				AliveatEndofStudy,
+				Tag_Number,
+				OldMothPlantPres,
+				MEPlantPres,
+				CAPlantPres,
+				MothPlantPres,
+				First.Survey.Date,
+				First.DemographicSurvey,
+				minFecundityYear,
+				First_Size,
+				First.Measurement.Date,
+				min.Size,
+				max.Size,
+				LastDateAlive,
+				FirstDeadObservation,
+				FirstMissingObservation,
+				FirstDeadMissingObservation,
+				minDaysAlive,
+				maxDaysAlive,
+				IslandFullNames,
+				HabitatType
+			))
+		Plant.Surveys.by.Plant %<>% 
+			dplyr::select(-c(
+				Island,
+				Network,
+				Species,                
+				RecruitmentMode,
+				Parent,
+				First.Survey.Date.Alive,
+				AliveatEndofStudy,
+				Tag_Number,
+				OldMothPlantPres,
+				MEPlantPres,
+				CAPlantPres,
+				MothPlantPres,
+				First.Survey.Date,
+				First.DemographicSurvey,
+				minFecundityYear,
+				First_Size,
+				First.Measurement.Date,
+				min.Size,
+				max.Size,
+				LastDateAlive,
+				FirstDeadObservation,
+				FirstMissingObservation,
+				FirstDeadMissingObservation,
+				minDaysAlive,
+				maxDaysAlive,
+				IslandFullNames,
+				HabitatType
+			))
+		Plant.Surveys.by.Year %<>% merge(Plant.Info.Analysis, by="PlantID")
+		Plant.Surveys.by.Plant %<>% merge(Plant.Info.Analysis, by="PlantID")
+	}
+	if (ParentChoice == "random") {
 		for (i in 1:length(Plants.wo.parents$PlantID)) {
 			#	1) find surveys of plants in that plot from survey preceeding that when plant was discovered
 			A <- Plant.Surveys.by.Year %>% 
@@ -71,38 +137,74 @@ calculateClonalReproduction <- function(
 					RecruitmentMode == "Seedling")
 				)
 			Plants.wo.parents[i, "Parent"] <- A[sample(dim(A)[1], 1), "PlantID"]
+			cat(paste(i,",",sep=""))
 		}
-	}
-	for (i in 1:length(Plants.wo.parents$PlantID)) {
-		#	1) find surveys of plants in that plot from survey preceeding that when plant was discovered
-		A <- Plant.Surveys.by.Year %>% 
-			filter(
-				# cannot be its own parent
-				PlantID != Plants.wo.parents$PlantID[i],
-				# parent must be of same species
-				Species == Plants.wo.parents$Species[i],
-				# parent must have been surveyed in previous fecundity year
-				FecundityYear == 
-					Plants.wo.parents$minFecundityYear[i] - 1,
-				# parent must be in same plot as offspring
-				grepl(Plants.wo.parents$Tag_Number[i], Tag_Numbers_Surveyed)==T,
-				# parent cannot be a seedling
-				!(FecundityYear == minFecundityYear &
-				RecruitmentMode == "Seedling")
-			)
-			
+		Plants.w.parents <- Plant.Info.Analysis %>% filter(Parent!="Unknown")
+		Plant.Info.Analysis <- rbind.fill(Plants.wo.parents, Plants.w.parents)
+		Plant.Surveys.by.Year %<>% 
+			dplyr::select(-c(
+				Island,
+				Network,
+				Species,                
+				RecruitmentMode,
+				Parent,
+				First.Survey.Date.Alive,
+				AliveatEndofStudy,
+				Tag_Number,
+				OldMothPlantPres,
+				MEPlantPres,
+				CAPlantPres,
+				MothPlantPres,
+				First.Survey.Date,
+				First.DemographicSurvey,
+				minFecundityYear,
+				First_Size,
+				First.Measurement.Date,
+				min.Size,
+				max.Size,
+				LastDateAlive,
+				FirstDeadObservation,
+				FirstMissingObservation,
+				FirstDeadMissingObservation,
+				minDaysAlive,
+				maxDaysAlive,
+				IslandFullNames,
+				HabitatType
+			))
+		Plant.Surveys.by.Plant %<>% 
+			dplyr::select(-c(
+				Island,
+				Network,
+				Species,                
+				RecruitmentMode,
+				Parent,
+				First.Survey.Date.Alive,
+				AliveatEndofStudy,
+				Tag_Number,
+				OldMothPlantPres,
+				MEPlantPres,
+				CAPlantPres,
+				MothPlantPres,
+				First.Survey.Date,
+				First.DemographicSurvey,
+				minFecundityYear,
+				First_Size,
+				First.Measurement.Date,
+				min.Size,
+				max.Size,
+				LastDateAlive,
+				FirstDeadObservation,
+				FirstMissingObservation,
+				FirstDeadMissingObservation,
+				minDaysAlive,
+				maxDaysAlive,
+				IslandFullNames,
+				HabitatType
+			))
+		Plant.Surveys.by.Year %<>% merge(Plant.Info.Analysis, by="PlantID")
+		Plant.Surveys.by.Plant %<>% merge(Plant.Info.Analysis, by="PlantID")
 	}
 
-	
-	
-	# for each plant without parent
-	#	2) find biggest plant
-	#	3) assign that plant as the parent
-	
-	
-	
-	
-	
 	
 	# PARENT SURVEY DATA
 	# use this dataset to use parent size that is consistent for all offpsring
