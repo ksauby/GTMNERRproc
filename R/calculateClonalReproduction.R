@@ -103,7 +103,6 @@ calculateClonalReproduction <- function(
 				}
 			}
 			cat(paste(i,",",sep=""))
-			}
 		}
 		Plants.w.parents <- Plant.Info.Analysis %>% filter(Parent!="Unknown")
 		Plant.Info.Analysis <- rbind.fill(Plants.wo.parents, Plants.w.parents)
