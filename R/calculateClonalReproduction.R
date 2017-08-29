@@ -332,5 +332,25 @@ calculateClonalReproduction <- function(
 		warning("Some parents for which offspring were observed have no records of having clones after processing of the data.")
 	}		
 	# --------------------------------------------------------------------------
+	# create dataset for building the clonal reproduction transition matrix
+	clonal_reproduction_info_for_transition_matrix <- merge(
+		E %>% 
+			dplyr::select(
+				Parent.ID, 
+				Parent.FecundityYear, 
+				Offspring.ID, 
+				Offspring.First_Size
+			),
+		parent_size %>% 
+			dplyr::select(
+				Parent.ID, 
+				Parent.FecundityYear, 
+				SizewClones_t
+			),
+		by=c("Parent.ID", "Parent.FecundityYear")
+	)
+	
+	
+	# --------------------------------------------------------------------------
 	return(Plant.Surveys.by.Yearw_clones)
 }

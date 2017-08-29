@@ -26,7 +26,7 @@ prepDataTransitionMatrix <- function(
 		stage=replace(
 			stage, 
 			which(stage=="Adult"),
-			cut(Size_t, SizeClass, include.lowest=T, labels=FALSE)
+			cut(SizewClones_t, SizeClass, include.lowest=T, labels=FALSE)
 		),
 	)
 	Dat_census %<>%
@@ -34,12 +34,9 @@ prepDataTransitionMatrix <- function(
 			FecundityYear, 
 			PlantID, 
 			stage, 
-			Size_t, 
-			Fruit_Flowers_t,
-			Size_t
-		) %>%
-		dplyr::select(-Size_t)
-		colnames(Dat_census)[which(names(Dat_census) == "FecundityYear")] <- 
+			Fruit_Flowers_t
+		)
+	colnames(Dat_census)[which(names(Dat_census) == "FecundityYear")] <- 
 			"Year"
 	# merge year with year - 1
 	trans <- subset(
@@ -68,7 +65,9 @@ prepDataTransitionMatrix <- function(
 
 
 	# year-specific transition matrix
-	trans01 <- subset(trans, Year == TransitionYear, c(PlantID, stage, Repro, fate, Repro2))
+	trans01 <- trans %>%
+		filter(Year == TransitionYear) %>%
+		dplyr::select(PlantID, stage, Repro, fate, Repro2)
 	seedlings <- nrow(subset(
 		Dat_census, 
 		Year == TransitionYear & stage =="Seedling"
@@ -78,9 +77,9 @@ prepDataTransitionMatrix <- function(
 	trans01$Seedling <- trans01$Repro/sum(trans01$Repro, na.rm=T) * seedlings
 	# estimate seed to seedling transition
 	Seedlings <- nrow(subset(trans, Year == TransitionYear & stage =="Seedling"))
-	seeds.from.plants <- sum(trans01$Repro) * SeedsPerFruit
+	seeds.from.plants <- sum(trans01$Repro, na.rm=T) * SeedsPerFruit
 	recruitment.rate <- Seedlings/(SeedBankSize + seeds.from.plants)
-	trans01$Seedling <- trans01$Repro/sum(trans01$Repro) * 
+	trans01$Seedling <- trans01$Repro/sum(trans01$Repro, na.rm=T) * 
 		seeds.from.plants * recruitment.rate
 	trans01$Seed <- trans01$Repro * SeedsPerFruit * SeedSurvival
 	# Create ordered list of stages
