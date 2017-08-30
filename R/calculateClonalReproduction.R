@@ -352,5 +352,10 @@ calculateClonalReproduction <- function(
 	
 	
 	# --------------------------------------------------------------------------
-	return(Plant.Surveys.by.Yearw_clones)
+	return(
+		list(
+			Plant.Surveys.by.Yearw_clones,
+			clonal_reproduction_info_for_transition_matrix
+		)
+	)
 }
