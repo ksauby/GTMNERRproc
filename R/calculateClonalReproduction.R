@@ -24,7 +24,7 @@ calculateClonalReproduction <- function(
 	Plant.Info.Analysis,
 	ParentChoice
 ) {
-	if (ParentChoice == "largest" | ParentChoice == "random") {
+	if (ParentChoice == "largest" | ParentChoice == "random" | ParentChoice == "random.largest") {
 		# FIRST, ASSIGN PARENTS FOR PARENT-LESS PLANTS
 		Plants.wo.parents <- Plant.Info.Analysis %>% filter(Parent=="Unknown")
 		Plant.Surveys.by.Plant$DemographicSurvey %<>% as.numeric
@@ -54,6 +54,14 @@ calculateClonalReproduction <- function(
 				if (ParentChoice == "largest") {
 					A %<>% arrange(desc(Size_t))
 					Plants.wo.parents[i, "Parent"] <- A[1, "PlantID"]
+				}
+				if (ParentChoice == "random.largest") {
+					Plants.wo.parents[i, "Parent"] <- 
+						A[sample(
+							x=dim(A)[1], 
+							size=1, 
+							prob=A$Size_t/sum(A$Size_t)
+						), "PlantID"]
 				}
 			}
 			# expand to a plant in the same network
@@ -100,6 +108,14 @@ calculateClonalReproduction <- function(
 				if (ParentChoice == "largest") {
 					A %<>% arrange(desc(Size_t))
 					Plants.wo.parents[i, "Parent"] <- A[1, "PlantID"]
+				}
+				if (ParentChoice == "random.largest") {
+					Plants.wo.parents[i, "Parent"] <- 
+						A[sample(
+							x=dim(A)[1], 
+							size=1, 
+							prob=A$Size_t/sum(A$Size_t)
+						), "PlantID"]
 				}
 			}
 			cat(paste(i,",",sep=""))
