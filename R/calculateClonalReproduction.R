@@ -44,7 +44,8 @@ calculateClonalReproduction <- function(
 					grepl(Plants.wo.parents$Tag_Number[i], Tag_Numbers_Surveyed)==T,
 					# parent cannot be a seedling
 					!(FecundityYear == minFecundityYear &
-					RecruitmentMode == "Seedling")
+					RecruitmentMode == "Seedling"),
+					!(is.na(Size_t))
 				)
 			if (dim(A)[1] > 0) {
 				if (ParentChoice == "random") {
@@ -79,7 +80,8 @@ calculateClonalReproduction <- function(
 						Network == Plants.wo.parents$Network[i],
 						# parent cannot be a seedling
 						!(FecundityYear == minFecundityYear &
-						RecruitmentMode == "Seedling")
+						RecruitmentMode == "Seedling"),
+						!(is.na(Size_t))
 					)
 			}
 			# expand to a plant in the same patch
@@ -97,7 +99,8 @@ calculateClonalReproduction <- function(
 						Island == Plants.wo.parents$Island[i],
 						# parent cannot be a seedling
 						!(FecundityYear == minFecundityYear &
-						RecruitmentMode == "Seedling")
+						RecruitmentMode == "Seedling"),
+						!(is.na(Size_t))
 					)
 			}
 			if (dim(A)[1] > 0) {
