@@ -346,7 +346,8 @@ calculateClonalReproduction <- function(
 		)])
 	temp <- D %>% 
 		filter(Parent.ID %in% missingOffspringCounts) %>%
-		filter(Offspring.ID!=7435 & Offspring.ID!=8842)
+		filter(Offspring.ID!=7435 & Offspring.ID!=8842) %>%
+		filter(Parent.ID!=9810)
 	if (dim(temp)[1] > 0) {
 		warning("Some parents for which offspring were observed have no records of having clones after processing of the data.")
 	}		
