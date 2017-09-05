@@ -12,25 +12,6 @@
 #' @export
 
 
-
-
-
-# create Tag/Date Combo Field
-Plant_Surveys 	%<>% mutate(Tag_Date=paste(Tag_Number, Date))
-Plot.Surveys 	%<>% mutate(Tag_Date=paste(Tag_Number, Date))
-D.Plot.Surveys 	%<>% mutate(Tag_Date=paste(Tag_Number, Date))
-# keep records of Tag Numbers not surveyed within A date windows
-temp.plant.surveys <- filter(
-	Plant_Surveys, 
-	!(Tag_Date %in% Plot.Surveys$Tag_Date),
-	!(Tag_Date %in% D.Plot.Surveys$Tag_Date)
-)
-
-
-
-
-
-
 createPlotSurveysfromPlantSurveys <- function(Plant.Surveys, Plant.Info, Plot.Surveys, D.Plot.Surveys, A) {
 	
 	Z = list()
