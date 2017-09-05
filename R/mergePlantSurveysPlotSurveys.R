@@ -49,9 +49,6 @@ mergePlantSurveysPlotSurveys <- function(Plot.Surveys, Plant.Surveys, date.windo
 			Z[[i]][j, "S_PC"] 			<- L$S_PC[j]
 			Z[[i]][j, "S_H"] 			<- L$S_H[j]
 			# pull all plant survey records for this Tag Number and date from plant surveys
-			
-			# WINDOW OF DATES?
-			
 			M = filter(Plant.Surveys, 
 				Tag_Number==L$Tag_Number[1],
 				Date > (as.Date(unique(L$Date)[j]) - date.window),
@@ -105,6 +102,12 @@ mergePlantSurveysPlotSurveys <- function(Plot.Surveys, Plant.Surveys, date.windo
 					Maximum(S$Height_t), 
 					L$S_H[j]
 				)
+				
+				# keep date window information
+				Z[[i]][j, "After_Date"] <- 
+					as.Date(unique(L$Date)[j]) - date.window
+				Z[[i]][j, "End_Date"] <- unique(L$Date)[j]
+				
 			}
 		}	
 	}
@@ -129,5 +132,7 @@ mergePlantSurveysPlotSurveys <- function(Plot.Surveys, Plant.Surveys, date.windo
 		"S_H")] %<>%
 		apply(., 2, NA_Function
 	)
+	A$After_Date %<>% as.Date(origin = "1970-01-01")
+	A$End_Date %<>% as.Date(origin = "1970-01-01")
 	return(A)
 }

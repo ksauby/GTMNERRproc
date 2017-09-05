@@ -8,19 +8,41 @@
 #' @param Plant_Surveys
 #' @param Plot_Surveys
 #' @param D_Plot_Surveys
+#' @param A Output from mergePlantSurveysPlotSurveys function.
 #' @export
 
-createPlotSurveysfromPlantSurveys <- function(Plant_Surveys, Plant_Info, Plot_Surveys, D_Plot_Surveys) {
+createPlotSurveysfromPlantSurveys <- function(Plant_Surveys, Plant_Info, Plot_Surveys, D_Plot_Surveys, A) {
 	# create Tag/Date Combo Field
 	Plant_Surveys 	%<>% mutate(Tag_Date=paste(Tag_Number, Date))
 	Plot_Surveys 	%<>% mutate(Tag_Date=paste(Tag_Number, Date))
 	D_Plot_Surveys 	%<>% mutate(Tag_Date=paste(Tag_Number, Date))
-	# keep records of Tag Numbers not surveyed on particular dates
+	# keep records of Tag Numbers not surveyed within A date windows
 	temp.plant.surveys <- filter(
 		Plant_Surveys, 
 		!(Tag_Date %in% Plot_Surveys$Tag_Date),
 		!(Tag_Date %in% D_Plot_Surveys$Tag_Date)
 	)
+	temp <- Plant_Surveys
+	# for each tag number
+	for (i in 1:length(unique(Plant_Surveys$Tag_Number))) {
+		temp2 <- temp %>% 
+			filter(Tag_Number==unique(Plant_Surveys$Tag_Number)[i])
+		A.temp <- A %>%
+			filter(Tag_Number==unique(Plant_Surveys$Tag_Number)[i])
+		# filter out dates based on each row in A.temp
+		for (j in 1:dim(A.temp)[1]) {
+			temp2 %<>%
+				filter(Date <= A.temp$After_Date[j], Date > A.temp$End_Date[j])
+		}
+		if (dim(temp2)[1] > 0) {
+			then do stuff
+		}	
+	}
+	
+	
+	
+	
+	
 	# print plants with Tag_Number==NA as warning
 	TagNumbNA <- temp.plant.surveys %>% 
 		filter(is.na(temp.plant.surveys$Tag_Number)) %$%
