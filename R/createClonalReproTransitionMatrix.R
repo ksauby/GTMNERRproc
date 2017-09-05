@@ -4,6 +4,8 @@
 #' @param clonal_repro_dataset This dataset is created by the calculateClonalReproduction function.
 #' @param TMdata Survey data used to create transition matrix.
 
+#' @return Returns a list in which the first element is the count of the number of individuals in each stage-stage transition and the second element contains the rates at which individuals transition among stages.
+
 #' @export
 
 createClonalReproTransitionMatrix <- function(clonal_repro_dataset, TMdata) {
@@ -56,7 +58,7 @@ createClonalReproTransitionMatrix <- function(clonal_repro_dataset, TMdata) {
 		as.matrix(rownames="Row.names")
 	# clone transition matrix = number of clones per parent
 	clone_transition_rates = clone_table / n_per_stage
-	clone_transition_counts = clone_table / n_per_stage
-	return(list(clone_transition_rates, clone_transition_counts))	
+	clone_transition_counts = clone_table
+	return(list(clone_transition_counts, clone_transition_rates))	
 }
 	
