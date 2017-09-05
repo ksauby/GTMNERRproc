@@ -54,7 +54,6 @@ prepDataTransitionMatrix <- function(
 	colnames(trans)[which(names(trans) == "stage.y")] <- "fate"
 	colnames(trans)[which(names(trans) == "Fruit_Flowers_t.y")] <- "Repro2"
 
-
 	# year-specific transition matrix
 	trans01 <- trans %>%
 		filter(Year == TransitionYear) %>%

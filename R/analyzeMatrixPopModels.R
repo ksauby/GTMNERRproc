@@ -73,9 +73,7 @@ analyzeMatrixPopModels <- function(
 					# starting numbers
 					# ------------------------------------------------------- #
 					n_per_stage <- NULL
-					n_per_stage <- TMdata[[1]] %>%
-						group_by(stage) %>%
-						summarise(n = length(PlantID))
+					n_per_stage <- calculateNumberIndivperStage(TMdata[[1]])
 					# remove NA class
 					n_per_stage <- n_per_stage[1:length(stages),]
 					n_per_stage <- n_per_stage$n

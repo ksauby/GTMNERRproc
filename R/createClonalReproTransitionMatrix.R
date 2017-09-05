@@ -2,10 +2,11 @@
 #'
 
 #' @param clonal_repro_dataset This dataset is created by the calculateClonalReproduction function.
+#' @param TMdata Survey data used to create transition matrix.
 
 #' @export
 
-createClonalReproTransitionMatrix <- function(clonal_repro_dataset) {
+createClonalReproTransitionMatrix <- function(clonal_repro_dataset, TMdata) {
 	clonal_repro_dataset_mod <- clonal_repro_dataset %>% 
 		rowwise() %>%
 		mutate(
@@ -29,12 +30,12 @@ createClonalReproTransitionMatrix <- function(clonal_repro_dataset) {
 		as.data.frame.matrix %>% 
 		data.matrix
 	# number of parents per stage
-	n_per_stage <- TMdata[[1]] %>%
-		group_by(stage) %>%
-		summarise(n = length(PlantID)) %>% 
+	n_per_stage <- calculateNumberIndivperStage(TMdata) %>% 
 		as.data.frame %>%
-		filter(stage %in% colnames(clone_table))
-	n_per_stage <- n_per_stage[,2]
+   		filter(stage %in% colnames(clone_table))
+   	n_per_stage <- n_per_stage[,2]
+		
+		
 	# make the clone transition matrix the same dimensions as growth/retrogression/survival/fecundity transition matrix
 	fill = matrix(
 		0, length(stages), 3, 
