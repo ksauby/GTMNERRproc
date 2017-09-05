@@ -1,7 +1,7 @@
 #' Create Clonal Reproduction Transition Matrix
 #'
 
-#' @param clonal_repro_dataset This dataset is created by the calculateClonalReproduction function.
+#' @param clonal_repro_dataset This dataset is created by the calculateClonalReproduction function. Each row represents information for a unique offspring. Each row contains the identity of the parent, the year, the size of the offspring, and the size of the parent.
 #' @param TMdata Survey data used to create transition matrix.
 
 #' @return Returns a list in which the first element is the count of the number of individuals in each stage-stage transition and the second element contains the rates at which individuals transition among stages.

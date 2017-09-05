@@ -4,12 +4,11 @@
 \alias{analyzeMatrixPopModels}
 \title{Analyze Matrix Population Models}
 \usage{
-analyzeMatrixPopModels(Dat, SizeClass, TransitionYear, SeedSurvival,
-  SeedBankSize, SeedsPerFruit, clonal_repro_dataset, n.iter = 1000,
-  analyze = TRUE)
+analyzeMatrixPopModels(trans_data, SizeClass, TransitionYear, SeedSurvival,
+  SeedBankSize, SeedsPerFruit, clone_transition, n.iter = 1000)
 }
 \arguments{
-\item{Dat}{dataset from which to create growth/retrogression/survival/fecundity transition matrix}
+\item{trans_data}{dataset from which to create growth/retrogression/survival/fecundity transition matrix}
 
 \item{SizeClass}{A vector containing the size breaks with which to create stages based on size.}
 
@@ -19,7 +18,7 @@ analyzeMatrixPopModels(Dat, SizeClass, TransitionYear, SeedSurvival,
 
 \item{SeedsPerFruit}{Average number of seeds produced per fruit (can be a single value or vector of values).}
 
-\item{clonal_repro_dataset}{dataset from which to create clonal reproduction transition matrix. Each row represents information for a unique offspring. Each row contains the identity of the parent, the year, the size of the offspring, and the size of the parent.}
+\item{clone_transition}{clonal reproduction transition matrix}
 
 \item{n.iter}{Number of iterations for pop.projection function. Default value is 1000.}
 }

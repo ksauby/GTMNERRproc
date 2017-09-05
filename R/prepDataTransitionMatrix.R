@@ -3,9 +3,6 @@
 #' @param Dat Dataset
 #' @param SizeClass Classes into which to divide individuals based on size
 #' @param TransitionYear Year
-#' @param SeedSurvival Seed survival rate
-#' @param SeedBankSize Number of seeds in the seed bank
-#' @param SeedsPerFruit Number of seeds produced per fruit
 
 #' @description Prepare Data For Transition Matrix Function
 #'
@@ -13,6 +10,7 @@
 
 prepDataTransitionMatrix <- function(
 	Dat,
+	clonal_repro_dataset,
 	SizeClass,
 	TransitionYear
 ) {
@@ -75,7 +73,29 @@ prepDataTransitionMatrix <- function(
 	stages <- c("Seed", "Seedling", stages, "dead")
 	trans01$stage <- factor(trans01$stage, levels=stages, ordered=T)
 	trans01$fate <- factor(trans01$fate, levels=stages, ordered=T)
-	return(list(trans01, stages))
+	
+	
+	# remove last stage
+	stages %<>% .[-length(.)]
+	proj_matrix <- projection.matrix(
+		trans01, 
+		sort = stages
+	)
+	# create matrix of transition counts
+	transition.counts <- table(trans01$fate, trans01$stage)
+	# create clonal matrices
+	clonal.matrices <- createClonalReproTransitionMatrix(
+		clonal_repro_dataset, 
+		trans01
+	)
+	return(list(
+		transition_counts 			= transition.counts, 
+		proj_matrix 				= proj_matrix, 
+		clone_transition_counts 	= clonal.matrices[[1]], 
+		clone_transition_rates 		= clonal.matrices[[2]], 
+		transition_data 			= trans01, 
+		stages 						= stages
+	))
 }
 
 

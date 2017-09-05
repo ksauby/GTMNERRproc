@@ -7,7 +7,7 @@
 createClonalReproTransitionMatrix(clonal_repro_dataset, TMdata)
 }
 \arguments{
-\item{clonal_repro_dataset}{This dataset is created by the calculateClonalReproduction function.}
+\item{clonal_repro_dataset}{This dataset is created by the calculateClonalReproduction function. Each row represents information for a unique offspring. Each row contains the identity of the parent, the year, the size of the offspring, and the size of the parent.}
 
 \item{TMdata}{Survey data used to create transition matrix.}
 }

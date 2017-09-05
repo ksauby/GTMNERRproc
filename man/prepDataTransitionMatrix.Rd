@@ -4,7 +4,7 @@
 \alias{prepDataTransitionMatrix}
 \title{Prepare Data For Transition Matrix Function}
 \usage{
-prepDataTransitionMatrix(Dat, SizeClass, TransitionYear)
+prepDataTransitionMatrix(Dat, clonal_repro_dataset, SizeClass, TransitionYear)
 }
 \arguments{
 \item{Dat}{Dataset}
@@ -12,12 +12,6 @@ prepDataTransitionMatrix(Dat, SizeClass, TransitionYear)
 \item{SizeClass}{Classes into which to divide individuals based on size}
 
 \item{TransitionYear}{Year}
-
-\item{SeedSurvival}{Seed survival rate}
-
-\item{SeedBankSize}{Number of seeds in the seed bank}
-
-\item{SeedsPerFruit}{Number of seeds produced per fruit}
 }
 \description{
 Prepare Data For Transition Matrix Function
