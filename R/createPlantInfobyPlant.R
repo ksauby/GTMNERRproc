@@ -111,25 +111,8 @@ createPlantInfobyPlant <- function(Plant.Info, Plant.Surveys.by.Year, Plant.Surv
 		merge(First_Size, by=c("PlantID")) %>%
 	   	renameSpecies %>%
 		renamePatches %>%
-		mutate(
-			HabitatType = NA,
-			HabitatType = replace(
-				HabitatType,
-				which(
-					Island=="Roadway1" |
-					Island=="Roadway2"
-				),
-				"Barrier Island Habitat"
-			),
-			HabitatType = replace(
-				HabitatType,
-				which(
-					Island!="Roadway1" &
-					Island!="Roadway2"
-				),
-				"Intracoastal Waterway Island"
-			)
-		)
+		createHabitatType
+		
 	# Alternative Plant IDs
 	# Plant_Info_Analysis %<>% mutate(
 	# 	PlantIDb = paste(

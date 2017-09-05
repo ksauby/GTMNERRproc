@@ -79,27 +79,7 @@ processPlantSurveysbyYear <- function(Plant.Surveys.by.Year) {
 		"Fruit_Flowers_t"
 	)] %<>% apply(., 2, NA_Function)
 	# ------------------------------------------------------------------------ #
-	Plant.Surveys.by.Year %<>%
-		mutate(
-			HabitatType = NA,
-			HabitatType = replace(
-				HabitatType,
-				which(
-					Island=="Roadway1" |
-					Island=="Roadway2"
-				),
-				"Barrier Island Habitat"
-			),
-			HabitatType = replace(
-				HabitatType,
-				which(
-					Island!="Roadway1" &
-					Island!="Roadway2"
-				),
-				"Intracoastal Waterway Island"
-			)
-		) %>%
-		as.data.frame
+	Plant.Surveys.by.Year %<>% createHabitatType
 	# ------------------------------------------------------------------------ #
 	Plant.Surveys.by.Year %<>% classifybyStage
 	return(Plant.Surveys.by.Year)
