@@ -5,7 +5,8 @@
 \title{Analyze Matrix Population Models}
 \usage{
 analyzeMatrixPopModels(Dat, SizeClass, TransitionYear, SeedSurvival,
-  SeedBankSize, SeedsPerFruit, clonal_repro_dataset, n.iter = 1000)
+  SeedBankSize, SeedsPerFruit, clonal_repro_dataset, n.iter = 1000,
+  analyze = TRUE)
 }
 \arguments{
 \item{Dat}{dataset from which to create growth/retrogression/survival/fecundity transition matrix}

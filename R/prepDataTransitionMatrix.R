@@ -14,10 +14,7 @@
 prepDataTransitionMatrix <- function(
 	Dat,
 	SizeClass,
-	TransitionYear,
-	SeedSurvival,
-	SeedBankSize,
-	SeedsPerFruit
+	TransitionYear
 ) {
 	# Dat$stage <- Dat$Stage
 	Dat_census <- Dat %>% 
@@ -50,18 +47,12 @@ prepDataTransitionMatrix <- function(
 	)
 	# rename rows and columns
 	rownames(trans) <- 1:nrow(trans)
-	colnames(trans)[which(names(trans) == "Year.x")] <- 
-		"Year"
-	colnames(trans)[which(names(trans) == "stage.x")] <- 
-		"stage"
-	colnames(trans)[which(names(trans) == "Fruit_Flowers_t.x")] <- 
-		"Repro"
-	colnames(trans)[which(names(trans) == "Year.y")] <- 
-		"Year2"
-	colnames(trans)[which(names(trans) == "stage.y")] <- 
-		"fate"
-	colnames(trans)[which(names(trans) == "Fruit_Flowers_t.y")] <- 
-		"Repro2"
+	colnames(trans)[which(names(trans) == "Year.x")] <- "Year"
+	colnames(trans)[which(names(trans) == "stage.x")] <- "stage"
+	colnames(trans)[which(names(trans) == "Fruit_Flowers_t.x")] <- "Repro"
+	colnames(trans)[which(names(trans) == "Year.y")] <- "Year2"
+	colnames(trans)[which(names(trans) == "stage.y")] <- "fate"
+	colnames(trans)[which(names(trans) == "Fruit_Flowers_t.y")] <- "Repro2"
 
 
 	# year-specific transition matrix
@@ -72,17 +63,11 @@ prepDataTransitionMatrix <- function(
 		Dat_census, 
 		Year == TransitionYear & stage =="Seedling"
 	))
-	# trans01 %<>% filter(stage != "Dead")
 	# number of seedlings estimated to have been produced by each stage class
 	trans01$Seedling <- trans01$Repro/sum(trans01$Repro, na.rm=T) * seedlings
 	# estimate seed to seedling transition
-	Seedlings <- nrow(subset(trans, Year == TransitionYear & stage =="Seedling"))
-	seeds.from.plants <- sum(trans01$Repro, na.rm=T) * SeedsPerFruit
-	recruitment.rate <- Seedlings/(SeedBankSize + seeds.from.plants)
-	trans01$Seedling <- trans01$Repro/sum(trans01$Repro, na.rm=T) * 
-		seeds.from.plants * recruitment.rate
-	trans01$Seed <- trans01$Repro * SeedsPerFruit * SeedSurvival
-	# Create ordered list of stages
+	Seedlings <- nrow(subset(trans, Year == TransitionYear & stage=="Seedling"))
+	# create full set of stages
 	stages <- c(unique(c(trans01$stage, trans01$fate))) %>% 
 		as.numeric %>%
 		na.omit %>% 
@@ -91,5 +76,7 @@ prepDataTransitionMatrix <- function(
 	stages <- c("Seed", "Seedling", stages, "dead")
 	trans01$stage <- factor(trans01$stage, levels=stages, ordered=T)
 	trans01$fate <- factor(trans01$fate, levels=stages, ordered=T)
-	return(list(trans01, recruitment.rate, stages))
+	return(list(trans01, stages))
 }
+
+

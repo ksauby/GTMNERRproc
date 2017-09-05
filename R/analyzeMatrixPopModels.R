@@ -29,7 +29,8 @@ analyzeMatrixPopModels <- function(
 	SeedBankSize,
 	SeedsPerFruit,
 	clonal_repro_dataset,
-	n.iter=1000
+	n.iter=1000,
+	analyze=TRUE
 ) {
 	A <- vector("list", length(SeedBankSize))	
 	B <- vector("list", length(SeedBankSize))	
@@ -39,7 +40,11 @@ analyzeMatrixPopModels <- function(
 				# ----------------------------------------------------------- #
 				# Create growth/retrogression/survival/fecundity transition matrix
 				# ----------------------------------------------------------- #
-				TMdata <- prepDataTransitionMatrix(
+			
+				# FIGURE OUT HOW TO DO MOST OF THIS OUT OF THE FOR LOOP
+				# THEN JUST ADD SEED SURVIVAL, SEED BANK SIZE, SEEDS PER FRUIT INSIDE FOR LOOP
+				
+				TMdata.ijk <- prepDataTransitionMatrix(
 					Dat,
 					SizeClass,
 					TransitionYear,
@@ -47,141 +52,105 @@ analyzeMatrixPopModels <- function(
 					SeedBankSize[i],
 					SeedsPerFruit[j]
 				)
-				stages = TMdata[[3]][-length(TMdata[[3]])]
+				stages = TMdata.ijk[[3]][-length(TMdata.ijk[[3]])]
 				proj_matrix <- projection.matrix(
-					TMdata[[1]], 
+					TMdata.ijk[[1]], 
 					add = c(
 						# transition from seed to seedling
-						2, 1, TMdata[[2]]
+						2, 1, TMdata.ijk[[2]]
 					),
 					sort = stages
 				)
-				# ----------------------------------------------------------- #
-				# Create clonal reproduction transition matrix
-				# ----------------------------------------------------------- #
-				# get from calculateClonalReproduction function
-				clonal_repro_dataset_mod <- clonal_repro_dataset %>% 
-					rowwise() %>%
-					mutate(
-						parent_stage=cut(
-							SizewClones_t, 
-							SizeClass, 
-							include.lowest=T, 
-							labels=FALSE
-						),
-						offspring_stage=cut(
-							Offspring.First_Size, 
-							SizeClass, 
-							include.lowest=T, 
-							labels=FALSE
-						)
-					)
-				clone_table <- table(
-					clonal_repro_dataset_mod$offspring_stage, 
-					clonal_repro_dataset_mod$parent_stage
-				) %>% 
-					as.data.frame.matrix %>% 
-					data.matrix
-				# number of parents per stage
-				n_per_stage <- TMdata[[1]] %>%
-					group_by(stage) %>%
-					summarise(n = length(PlantID)) %>% 
-					as.data.frame %>%
-					filter(stage %in% colnames(clone_table))
-				n_per_stage <- n_per_stage[,2]
-				# clone transition matrix = number of clones per parent
-				clone_transition = clone_table / n_per_stage
-				# make the clone transition matrix the same dimensions as growth/retrogression/survival/fecundity transition matrix
-				fill = matrix(
-					0, length(stages), 3, 
-					dimnames=list(
-						rownames(proj_matrix), 
-						colnames(proj_matrix)[1:3])
-				)
-				clone_transition <- merge(
-					fill, 
-					clone_transition, 
-					by="row.names", 
-					all=T)
-				rownames(clone_transition) <- clone_transition$Row.names
-				clone_transition[is.na(clone_transition)] <- 0
-				# reorder rows
-				clone_transition <- 
-					clone_transition[match(stages,clone_transition$Row.names), ] %>%
-					.[, -1] %>% 
-					as.matrix(rownames="Row.names")
+				
+				# call clonal repro transition matrix
 
-				# ----------------------------------------------------------- #
-				# add transition matrices together
-				# ----------------------------------------------------------- #
-				all_proj_matrix <- proj_matrix + clone_transition
-				# ----------------------------------------------------------- #
-				# starting numbers
-				# ----------------------------------------------------------- #
-				n_per_stage <- NULL
-				n_per_stage <- TMdata[[1]] %>%
-					group_by(stage) %>%
-					summarise(n = length(PlantID))
-				# remove NA class
-				n_per_stage <- n_per_stage[1:length(stages),]
-				n_per_stage <- n_per_stage$n
-				n_per_stage <- n_per_stage[1:(length(n_per_stage) - 1)]
-				# ----------------------------------------------------------- #
-				# dynamics
-				# ----------------------------------------------------------- #
-				# growth/retrogression/survival/fecundity transition matrix
-				B[[i]][[j]]$projection_matrix <- proj_matrix
-				# clonal reproduction transition matrix
-				B[[i]][[j]]$clone_transition <- clone_transition
+				if (analyze==TRUE) {
+					# ------------------------------------------------------- #
+					# add transition matrices together
+					# ------------------------------------------------------- #
+					all_proj_matrix <- proj_matrix + clone_transition
+					# ------------------------------------------------------- #
+					# starting numbers
+					# ------------------------------------------------------- #
+					n_per_stage <- NULL
+					n_per_stage <- TMdata[[1]] %>%
+						group_by(stage) %>%
+						summarise(n = length(PlantID))
+					# remove NA class
+					n_per_stage <- n_per_stage[1:length(stages),]
+					n_per_stage <- n_per_stage$n
+					n_per_stage <- n_per_stage[1:(length(n_per_stage) - 1)]
+					# ------------------------------------------------------- #
+					# dynamics
+					# ------------------------------------------------------- #
+					# growth/retrogression/survival/fecundity transition matrix
+					B[[i]][[j]]$projection_matrix <- proj_matrix
+					# clonal reproduction transition matrix
+					B[[i]][[j]]$clone_transition <- clone_transition
 				
 				
-				all_proj_matrix[1, 1] <- SeedSurvival[k]
-				n <- c(SeedBankSize[i], n_per_stage)
-				pr <- pop.projection(all_proj_matrix, n, iterations=n.iter)
-				analysis.results <- eigen.analysis(all_proj_matrix)
+					all_proj_matrix[1, 1] <- SeedSurvival[k]
+					n <- c(SeedBankSize[i], n_per_stage)
+					pr <- pop.projection(all_proj_matrix, n, iterations=n.iter)
+					analysis.results <- eigen.analysis(all_proj_matrix)
 				
-				# create table of results				
-				#		repro.values
-				repro.value.dat <- analysis.results$repro.value
-				names(repro.value.dat) <- 
-					paste("repro.value",names(repro.value.dat),sep=".")
-				repro.value.dat %<>% t %>% as.data.frame
-				#		stable stage distribution
-				stable.stage.dat <- analysis.results$stable.stage
-				names(stable.stage.dat) <- 
-					paste("stable.stage",names(stable.stage.dat),sep=".")
-				stable.stage.dat %<>% t %>% as.data.frame
-				#		elasticities
-				elasticities <- analysis.results$elasticities %>% 
-					as.data.frame %>%
-					mutate(
-						Name = paste("elasticities.", Var2, "-", Var1, sep="")
-					) %>%
-					as.data.frame(row.names=.$Name) %>%
-					dplyr::select(Freq) %>%
-					t %>%
-					as.data.frame()
-				#		sensitivities
-				sensitivities <- analysis.results$sensitivities %>% 
-					as.table %>% as.data.frame %>%
-					mutate(
-						Name = paste("sensitivities.", Var2, "-", Var1, sep="")
-					) %>%
-					as.data.frame(row.names=.$Name) %>%
-					dplyr::select(Freq) %>%
-					t %>%
-					as.data.frame()
-				A[[i]][[j]][[k]] <- data.frame(
-					repro.value.dat,
-					stable.stage.dat,
-					sensitivities,
-					elasticities,
-					lambda1 		= analysis.results$lambda1,
-					damping.ratio 	= analysis.results$damping.ratio,
-					SeedBankSize 	= SeedBankSize[i],
-					SeedsPerFruit 	= SeedsPerFruit[j],
-					SeedSurvival 	= SeedSurvival[k]
-				)				
+					# create table of results				
+					#		repro.values
+					repro.value.dat <- analysis.results$repro.value
+					names(repro.value.dat) <- 
+						paste("repro.value",names(repro.value.dat),sep=".")
+					repro.value.dat %<>% t %>% as.data.frame
+					#		stable stage distribution
+					stable.stage.dat <- analysis.results$stable.stage
+					names(stable.stage.dat) <- 
+						paste("stable.stage",names(stable.stage.dat),sep=".")
+					stable.stage.dat %<>% t %>% as.data.frame
+					#		elasticities
+					elasticities <- analysis.results$elasticities %>% 
+						as.data.frame %>%
+						mutate(
+							Name = paste(
+								"elasticities.", 
+								Var2, "-", 
+								Var1, 
+								sep=""
+							)
+						) %>%
+						as.data.frame(row.names=.$Name) %>%
+						dplyr::select(Freq) %>%
+						t %>%
+						as.data.frame()
+					#		sensitivities
+					sensitivities <- analysis.results$sensitivities %>% 
+						as.table %>% as.data.frame %>%
+						mutate(
+							Name = paste(
+								"sensitivities.", 
+								Var2, "-",
+								Var1, 
+								sep=""
+							)
+						) %>%
+						as.data.frame(row.names=.$Name) %>%
+						dplyr::select(Freq) %>%
+						t %>%
+						as.data.frame()
+					A[[i]][[j]][[k]] <- data.frame(
+						repro.value.dat,
+						stable.stage.dat,
+						sensitivities,
+						elasticities,
+						lambda1 		= analysis.results$lambda1,
+						damping.ratio 	= analysis.results$damping.ratio,
+						SeedBankSize 	= SeedBankSize[i],
+						SeedsPerFruit 	= SeedsPerFruit[j],
+						SeedSurvival 	= SeedSurvival[k]
+					)				
+				}
+				if (analyze==FALSE) {
+					
+				}
+				
 			}
 			A[[i]][[j]] <- do.call(rbind.data.frame, A[[i]][[j]])
 		}

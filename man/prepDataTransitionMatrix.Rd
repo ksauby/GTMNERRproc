@@ -4,8 +4,7 @@
 \alias{prepDataTransitionMatrix}
 \title{Prepare Data For Transition Matrix Function}
 \usage{
-prepDataTransitionMatrix(Dat, SizeClass, TransitionYear, SeedSurvival,
-  SeedBankSize, SeedsPerFruit)
+prepDataTransitionMatrix(Dat, SizeClass, TransitionYear)
 }
 \arguments{
 \item{Dat}{Dataset}
