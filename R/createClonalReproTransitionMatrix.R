@@ -11,7 +11,6 @@
 createClonalReproTransitionMatrix <- function(
 	clonal_repro_dataset, 
 	TMdata, 
-	proj_matrix,
 	stages
 ) {
 	clonal_repro_dataset_mod <- clonal_repro_dataset %>% 
@@ -37,26 +36,13 @@ createClonalReproTransitionMatrix <- function(
 		as.data.frame.matrix %>% 
 		data.matrix
 	# number of parents per stage
-	n_per_stage <- calculateNumberIndivperStage(TMdata) %>% 
-		as.data.frame %>%
-		# remove NAs
-   		filter(stage %in% colnames(proj_matrix)) %>%
-		# add missing stages
-		rbind.fill(
-			.,
-			data.frame(
-				stage = stages[!(stages %in% .$stage)],
-				n = rep(0, length(stages[!(stages %in% .$stage)]))
-			)
-		)
-	n_per_stage$stage %<>% factor(., levels=stages, ordered=T)
-	n_per_stage %<>% arrange(stage)
+	n_per_stage <- calculateNumberIndivperStage(TMdata, stages)
 	# make the clone transition matrix the same dimensions as growth/retrogression/survival/fecundity transition matrix
 	fill = matrix(
 		0, length(stages), 3, 
 		dimnames=list(
-			rownames(proj_matrix), 
-			colnames(proj_matrix)[1:3])
+			stages, 
+			stages[1:3])
 	)
 	clone_table <- merge(
 		fill, 

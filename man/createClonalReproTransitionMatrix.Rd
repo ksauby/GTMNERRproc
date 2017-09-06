@@ -4,8 +4,7 @@
 \alias{createClonalReproTransitionMatrix}
 \title{Create Clonal Reproduction Transition Matrix}
 \usage{
-createClonalReproTransitionMatrix(clonal_repro_dataset, TMdata, proj_matrix,
-  stages)
+createClonalReproTransitionMatrix(clonal_repro_dataset, TMdata, stages)
 }
 \arguments{
 \item{clonal_repro_dataset}{This dataset is created by the calculateClonalReproduction function. Each row represents information for a unique offspring. Each row contains the identity of the parent, the year, the size of the offspring, and the size of the parent.}

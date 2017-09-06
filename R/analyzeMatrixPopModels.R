@@ -28,6 +28,7 @@ analyzeMatrixPopModels <- function(
 	SeedSurvival,
 	SeedBankSize,
 	SeedsPerFruit,
+	stages,
 	n.iter=1000
 ) {
 	A <- vector("list", length(SeedBankSize))	
@@ -51,20 +52,27 @@ analyzeMatrixPopModels <- function(
 				# starting numbers
 				# ------------------------------------------------------- #
 				n_per_stage <- NULL
-				n_per_stage <- calculateNumberIndivperStage(trans_data$trans01)
-				# remove NA class
-				n_per_stage <- n_per_stage[1:length(stages),]
-				n_per_stage <- n_per_stage$n
-				n_per_stage <- n_per_stage[1:(length(n_per_stage) - 1)]
+				n_per_stage <- calculateNumberIndivperStage(
+					trans_data$trans01, 
+					stages
+				)
 				# ------------------------------------------------------- #
 				# dynamics
 				# ------------------------------------------------------- #
-			
-			
-			
 				all_proj_matrix[1, 1] <- SeedSurvival[k]
-				n <- c(SeedBankSize[i], n_per_stage)
-				pr <- pop.projection(all_proj_matrix, n, iterations=n.iter)
+				n_per_stage %<>% 
+					mutate(
+						n = replace(
+							n, 
+							which(stage=="Seed"),
+							SeedBankSize[i]
+						)
+					)
+				pr <- pop.projection(
+					all_proj_matrix, 
+					n_per_stage$n, 
+					iterations=n.iter
+				)
 				analysis.results <- eigen.analysis(all_proj_matrix)
 			
 				# create table of results				

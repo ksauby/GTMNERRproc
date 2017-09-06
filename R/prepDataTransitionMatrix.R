@@ -85,7 +85,6 @@ prepDataTransitionMatrix <- function(
 	clonal.matrices <- createClonalReproTransitionMatrix(
 		clonal_repro_dataset, 
 		trans01,
-		proj_matrix,
 		stages
 	)
 	return(list(

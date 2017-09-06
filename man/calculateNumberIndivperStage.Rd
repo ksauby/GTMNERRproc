@@ -4,10 +4,12 @@
 \alias{calculateNumberIndivperStage}
 \title{Create Vector of the Number of Individuals per Stage}
 \usage{
-calculateNumberIndivperStage(TMdata)
+calculateNumberIndivperStage(TMdata, stages)
 }
 \arguments{
 \item{TMdata}{Data used to create the transition matrix.}
+
+\item{stages}{vector of stage classes.}
 }
 \description{
 Create Vector of the Number of Individuals per Stage
