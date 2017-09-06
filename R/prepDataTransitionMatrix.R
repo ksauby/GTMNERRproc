@@ -22,7 +22,7 @@ prepDataTransitionMatrix <- function(
 			stage, 
 			which(stage=="Adult"),
 			cut(SizewClones_t, SizeClass, include.lowest=T, labels=FALSE)
-		),
+		)
 	)
 	Dat_census %<>%
 		dplyr::select(
@@ -86,15 +86,18 @@ prepDataTransitionMatrix <- function(
 	# create clonal matrices
 	clonal.matrices <- createClonalReproTransitionMatrix(
 		clonal_repro_dataset, 
-		trans01
+		trans01,
+		proj_matrix,
+		stages
 	)
+	
 	return(list(
-		transition_counts 			= transition.counts, 
-		proj_matrix 				= proj_matrix, 
-		clone_transition_counts 	= clonal.matrices[[1]], 
-		clone_transition_rates 		= clonal.matrices[[2]], 
-		transition_data 			= trans01, 
-		stages 						= stages
+		clone_transition_counts = clonal.matrices[[1]],
+		clone_transition_rates = clonal.matrices[[2]], 
+		transition.counts = transition.counts, 
+		proj_matrix = proj_matrix, 
+		trans01 = trans01, 
+		stages = stages
 	))
 }
 

@@ -8,7 +8,12 @@
 
 #' @export
 
-createClonalReproTransitionMatrix <- function(clonal_repro_dataset, TMdata) {
+createClonalReproTransitionMatrix <- function(
+	clonal_repro_dataset, 
+	TMdata, 
+	proj_matrix,
+	stages
+) {
 	clonal_repro_dataset_mod <- clonal_repro_dataset %>% 
 		rowwise() %>%
 		mutate(
@@ -59,6 +64,9 @@ createClonalReproTransitionMatrix <- function(clonal_repro_dataset, TMdata) {
 	# clone transition matrix = number of clones per parent
 	clone_transition_rates = clone_table / n_per_stage
 	clone_transition_counts = clone_table
-	return(list(clone_transition_counts, clone_transition_rates))	
+	return(list(
+		clone_transition_counts = clone_transition_counts, 
+		clone_transition_rates = clone_transition_rates
+	))	
 }
 	
