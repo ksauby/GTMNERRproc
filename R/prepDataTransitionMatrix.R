@@ -93,7 +93,8 @@ prepDataTransitionMatrix <- function(
 		transition.counts = transition.counts, 
 		proj_matrix = proj_matrix, 
 		trans01 = trans01, 
-		stages = stages
+		stages = stages,
+		n_per_stage = clonal.matrices[[3]]
 	))
 }
 

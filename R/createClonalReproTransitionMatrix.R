@@ -63,7 +63,8 @@ createClonalReproTransitionMatrix <- function(
 	clone_transition_counts = clone_table
 	return(list(
 		clone_transition_counts = clone_transition_counts, 
-		clone_transition_rates = clone_transition_rates
+		clone_transition_rates = clone_transition_rates,
+		n_per_stage = n_per_stage
 	))	
 }
 	
