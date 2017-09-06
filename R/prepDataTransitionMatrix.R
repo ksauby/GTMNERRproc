@@ -31,8 +31,7 @@ prepDataTransitionMatrix <- function(
 			stage, 
 			Fruit_Flowers_t
 		)
-	colnames(Dat_census)[which(names(Dat_census) == "FecundityYear")] <- 
-			"Year"
+	colnames(Dat_census)[which(names(Dat_census) == "FecundityYear")] <- "Year"
 	# merge year with year - 1
 	trans <- subset(
 		merge(
@@ -45,11 +44,11 @@ prepDataTransitionMatrix <- function(
 	)
 	# rename rows and columns
 	rownames(trans) <- 1:nrow(trans)
-	colnames(trans)[which(names(trans) == "Year.x")] <- "Year"
-	colnames(trans)[which(names(trans) == "stage.x")] <- "stage"
+	colnames(trans)[which(names(trans) == "Year.x")] 			<- "Year"
+	colnames(trans)[which(names(trans) == "stage.x")] 			<- "stage"
 	colnames(trans)[which(names(trans) == "Fruit_Flowers_t.x")] <- "Repro"
-	colnames(trans)[which(names(trans) == "Year.y")] <- "Year2"
-	colnames(trans)[which(names(trans) == "stage.y")] <- "fate"
+	colnames(trans)[which(names(trans) == "Year.y")] 			<- "Year2"
+	colnames(trans)[which(names(trans) == "stage.y")] 			<- "fate"
 	colnames(trans)[which(names(trans) == "Fruit_Flowers_t.y")] <- "Repro2"
 
 	# year-specific transition matrix
@@ -61,7 +60,7 @@ prepDataTransitionMatrix <- function(
 		Year == TransitionYear & stage =="Seedling"
 	))
 	# number of seedlings estimated to have been produced by each stage class
-	trans01$Seedling <- trans01$Repro/sum(trans01$Repro, na.rm=T) * seedlings
+	trans01 %<>% mutate(Seedling = Repro/sum(Repro, na.rm=T) * seedlings)
 	# estimate seed to seedling transition
 	Seedlings <- nrow(subset(trans, Year == TransitionYear & stage=="Seedling"))
 	# create full set of stages
@@ -71,17 +70,8 @@ prepDataTransitionMatrix <- function(
 		as.vector %>%
 		sort
 	stages <- c("Seed", "Seedling", stages, "dead")
-	trans01$stage <- factor(
-		trans01$stage, 
-		levels=stages[-length(stages)], 
-		ordered=T
-	)
-	trans01$fate <- factor(
-		trans01$fate, 
-		levels=stages, 
-		ordered=T
-	)
-	
+	trans01$stage %<>% factor(., levels=stages[-length(stages)], ordered=T)
+	trans01$fate %<>% factor(., levels=stages, ordered=T)
 	
 	# remove last stage
 	stages %<>% .[-length(.)]
@@ -98,7 +88,6 @@ prepDataTransitionMatrix <- function(
 		proj_matrix,
 		stages
 	)
-	
 	return(list(
 		clone_transition_counts = clonal.matrices[[1]],
 		clone_transition_rates = clonal.matrices[[2]], 

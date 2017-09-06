@@ -1,615 +1,885 @@
-8176-8029
-8176-8092
-250*.75
-250*.25
-42*2 + 17*2
-118/19
-21/6.2
-59.5*.75
-59.5*.5 + 59.5
-71/12
-597/80
-597/8
-432/8
-15*8 + 9*3
-?seq_len
-7.25/3
-7.25/4
-for(i in 0:9){x=cos(2*pi/10*i);y=x+1;z=(y-2)*22;pie(c(y,8-y),col=c(0,7),init.angl=135-z,bo=F,la=NA)}
-install.packages("ProjectTemplate")
-install.packages("dplyr")
-install.packages("ggplot2")
-install.packages("data.table")
-install.packages("corrgram")
-install.packages("survival")
-install.packages("shapefiles")
-install.packages("rgdal")
-install.packages("PBSmapping")
-install.packages("sp")
-install.packages("gdistance")
-install.packages("chron")
-install.packages("unmarked")
-install.packages("lme4")
-install.packages("rgeos", repos="http://R-Forge.R-project.org", type="source")#
-require(rgeos)
-install.packages('rgdal',repos="http://www.stats.ox.ac.uk/pub/RWin")
-library(rgdal)
-install.packages("http://cran.r-project.org/src/contrib/rgdal_0.9-1.tar.gz", repos = NULL, type="source", configure.args = "--with-gdal-config=/Library/Frameworks/GDAL.framework/Versions/1.10/unix/bin/gdal-config --with-proj-include=/Library/Frameworks/PROJ.framework/unix/include --with-proj-lib=/Library/Frameworks/PROJ.framework/unix/lib")
-18/1.618
-189+114
-library(lubridate)
-library(magrittr)
-seasons <- data.frame(#
-	   SE = as.POSIXct(c("2009-3-20", "2010-3-20", "2011-3-20", "2012-3-20", #
-            "2013-3-20", "2014-3-20"), format="%Y-%m-%d"),#
-	   SS = as.POSIXct(c("2009-6-21", "2010-6-21", "2011-6-21", "2012-6-20",#
-            "2013-6-20", "2014-6-20"), format="%Y-%m-%d"),#
-	   FE = as.POSIXct(c("2009-9-22", "2010-9-23", "2011-9-23", "2012-9-22",#
-            "2013-9-22", "2014-9-22"), format="%Y-%m-%d"),#
-	   WS = as.POSIXct(c("2009-12-21", "2010-12-21", "2011-12-22", "2012-12-21", #
-            "2013-12-21", "2014-12-21"), format="%Y-%m-%d")#
-    )#
-#
-    assignSeason <- function(dat, SeasonStarts=seasons) {#
-	    dat %<>% mutate(#
-		    Season = lapply(Date,#
-				function(x) {#
-					findInterval(#
-						x, #
-						SeasonStarts[which(year(x)==year(SeasonStarts$WS)), ]#
-					)#
-				}#
-			) %>% unlist	#
-		)#
-	    dat[which(dat$Season==0 | dat$Season==4), ]$Season 	<- "Winter"#
-	    dat[which(dat$Season==1), ]$Season 					<- "Spring"#
-	    dat[which(dat$Season==2), ]$Season 					<- "Summer"#
-	    dat[which(dat$Season==3), ]$Season 					<- "Fall"#
-	    return(dat)#
-    }
-dat = data.frame(#
-	    Date = as.POSIXct(strptime(as.Date("2011-12-01", format = "%Y-%m-%d") + #
-            (0:10)*30, format="%Y-%m-%d" ))#
-    )#
-    dat %>% assignSeason
-library(dplyr)
-dat = data.frame(#
-	    Date = as.POSIXct(strptime(as.Date("2011-12-01", format = "%Y-%m-%d") + #
-            (0:10)*30, format="%Y-%m-%d" ))#
-    )#
-    dat %>% assignSeason
-library(devtoolks)
-library(devtools)
-?install_github
-devtools::install_github("ksauby/ACSampling", auth_token="2ab30a602e52fae481f4249cc25e892c0a9ccfc7", subdir="/code/Restricted_ACS_Simulations/ACSampling", repos=NULL)
-devtools::install_github("ksauby/ACSampling", auth_token="2794c3f10db92f525181a0b1f6c19064fe3a2ef3", subdir="/code/Restricted_ACS_Simulations/ACSampling", repos=NULL)
-devtools::install("~/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
-devtools::install(pkg="~/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
-devtools::install(pkg="Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
-devtools::install(pkg="~/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
-devtools::install(pkg="/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
-devtools::install_local(path="/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
-library(devtools)
-devtools::install_local(path="/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
-devtools::install(pkg="/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
-install.packages("~/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
-??limit
-37-13
-24/37
-37-13
-26/37
-25/37
-23/37
-29/37
-30/37
-22/37
-30/37
-29/37
-28/37
-27/37
-35/37
-30/37
-29/37
-26/37
-26/37 - .6757
-28/37
-30/37
-29/37
-37-12
-25/37
-219*.8
-219*.8 - 17
-26/3
-17/900
-42/900
-49/900
-29/40
-1/25
-8/25
-10/25
-(7.5 + 3.75)/15
-12*0.75
-11 * 0.75
-11/15
-11*0.25
-11/15 * 6
-32/41 +0.03.5
-32/41 + 0.035
-(32/41 + 0.035)*100
-100/41
-23/40 * 100
-(23/40 * 100)+5
-(164 + 13.5 + 6)
-(164 + 13.5 + 6)/365
-(164 + 13.5 + 6 + (50))/365
-(164 + 13.5 + 6 + (60))/365
-(164 + 13.5 + 6 + (70))/365
-(164 + 13.5 + 6 + (75))/365
-102/40
-102/41
-?table
-9.49/2
-12.75+8.25
-(10.5 + 6.5)/(12.75+8.25)
-.25^2 * 2
-(.25^2 * 2)^0.5
-(.25^2 * 2)^0.5 * 2
-3/8
-5/8
-6/8
-30*1.5
-40*15
-40*1.5
-13.25 - 4.5
-(276.29+8.75)/365
-16*3
-16*4
-84/12
-9/12
-9/12*14
-22+60+78+80+88+98
-22+38+18+2+8+10
-239/785
-(239+53)/785
-.492+.139
-.412+.166+.002
-.412/.58
-.166/.58
-.412*.58
-.71*.58
-98-54
-22+49+43+33+36+44
-60-11
-78-26
-80-35
-88-47
-98-52
-22+49+52+45+41+46
-library(RMark)
-?test_ddl
-data(dipper)    dipper.processed=process.data(dipper,groups=("sex"))    release.gof(dipper.processed)
-4+19+7+12
-4+17.83+7+12
-40.83/42
-40.83/42*14
-14
-(11.25+5)/(25.5 + 10.25 - 14)
-365*0.6666
-365*0.6666 - 75.89
-5/6 * 2
-5/6 * 2 + 75.89
-365*0.6666 -77.55667
-365*0.6666 -77.55667 - 6 - 13 - 1
-145.7523/2
-15*3
-11*5
-8/12*14
-4+15.33+5.5+12
-(4+15.33+5.5+12)
-(4+15.33+5.5+12)/(4+19+7+12)
-(4+19+7+12)
-(4+15.33+5.5+12)/(4+19+7+12)*14
-2.5+17.5+12
-32/42
-32/42 * 14
-4+12+6.5+12
-(4+12+6.5+12)/42 * 14
-5/6*2
-5/6*2 + 0.25
-5/6*2 + 0.5
-2577.77/12
-15/20
-15/20*6
-300 - 4*50
-300 - 4*40
-4.5/12*14
-9+9+7+9
-33.5/34 * 14
-32/34 * 14
-32/34*14
-7+8.5+7+7
-(7+8.5+7+7)/34 * 14
-(7+5.5+5.5+8.5)/34 * 14
-(7+5.5+5.5+8.5)/(9+7+9+9) * 14
-9+7+9+9
-(14.25+7.25)/(24.75+10.25-9)
-(16.5+7.75)/(24.75+10.25)
-(16.5+7.75)/(24.75+10.25)*6
-(5.25+5.5)/(22.5+10.5)
-(5.25+5.5)/(22.5+10.5)*6
-(9.75+5.5)/(24.7+10.25-5)*6
-(9.75+5.5)/(24.7+10.25-5)
-3.98/6
-(9.75+5.5)/(24.7+10.25-10)
-(9.75+5.5)/(24.7+10.25-10)*6
-5/6*2
-1.83-5/6*2
-1.83-4/6*2
-5/6*2 + 0.5
-4/6*2 + 0.5
-4/6*2
-4/6 + 0.5
-4/6*2 + 0.5
-33/34 * 14
-17.5*4
-24*4 + 1.75*4
-library(dplyr)
-library(plyr)
-600*.22
-library(Mage)
-??prepDataTransitionMatrix
-??projection.matrix
-1/0.167
-0.167*3
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis')
-library(ProjectTemplate)#
-#
-# when working on a Windows computer#
-# setwd("C:/Users/KSauby/Dropbox/gradschool/Research/Projects/sampling")#
-#
-# load project#
-load.project()
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
-# ---------------------------------------------------------------------------- ##
-Plant.Surveys.by.Year.random.parent <- calculateClonalReproduction(#
-	Plant.Surveys.by.Year, #
-	Plant.Surveys.by.Plant, #
-	Plant.Info.Analysis,#
-	ParentChoice="random"#
+n_per_stage <- calculateNumberIndivperStage(TMdata) %>% #
+		as.data.frame %>%#
+   		filter(stage %in% colnames(proj_matrix))
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+n_per_stage
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+data.frame(#
+		stage = stages,#
+		n = rep(0, length(stages))#
+	) %>%#
+	merge(n_per_stage, by="stage", all.x=T)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+calculateNumberIndivperStage(TMdata)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+n_per_stage <- calculateNumberIndivperStage(TMdata) %>% #
+		as.data.frame
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+n_per_stage
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+calculateNumberIndivperStage(TMdata) %>% #
+		as.data.frame %>%#
+   		filter(stage %in% colnames(proj_matrix))
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+n_per_stage <- calculateNumberIndivperStage(TMdata) %>% #
+		as.data.frame %>%#
+   		filter(stage %in% colnames(proj_matrix))
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+n_per_stage$stage %in% stages
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+stages[stages %in% n_per_stage$stage]
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+stages[!(stages %in% n_per_stage$stage)]
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+c(#
+				stages[!(stages %in% n_per_stage$stage)],#
+				rep(0, length(stages[!(stages %in% n_per_stage$stage)]))
 )
 setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-ParentChoice
+n_per_stage
 setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-ParentChoice == "random"
-ParentChoice = "random"
+data.frame(#
+				stage = stages[!(stages %in% n_per_stage$stage)],#
+				n = rep(0, length(stages[!(stages %in% n_per_stage$stage)]))#
+			)
 setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-if (ParentChoice == "largest" | ParentChoice == "random" | ParentChoice == "random.largest") {#
-		# FIRST, ASSIGN PARENTS FOR PARENT-LESS PLANTS#
-		Plants.wo.parents <- Plant.Info.Analysis %>% filter(Parent=="Unknown")#
-		Plant.Surveys.by.Plant$DemographicSurvey %<>% as.numeric#
-		Plants.wo.parents$First.DemographicSurvey %<>% as.numeric#
-		for (i in 1:length(Plants.wo.parents$PlantID)) {#
-			#	1) find surveys of plants in that plot from survey preceeding that when plant was discovered#
-			A <- Plant.Surveys.by.Year %>% #
-				filter(#
-					# cannot be its own parent#
-					PlantID != Plants.wo.parents$PlantID[i],#
-					# parent must be of same species#
-					Species == Plants.wo.parents$Species[i],#
-					# parent must have been surveyed in previous fecundity year#
-					FecundityYear == #
-						Plants.wo.parents$minFecundityYear[i] - 1,#
-					# parent must be in same plot as offspring#
-					grepl(Plants.wo.parents$Tag_Number[i], Tag_Numbers_Surveyed)==T,#
-					# parent cannot be a seedling#
-					!(FecundityYear == minFecundityYear &#
-					RecruitmentMode == "Seedling"),#
-					!(is.na(Size_t))#
-				)#
-			if (dim(A)[1] > 0) {#
-				if (ParentChoice == "random") {#
-					Plants.wo.parents[i, "Parent"] <- #
-						A[sample(dim(A)[1], 1), "PlantID"]#
-				}#
-				if (ParentChoice == "largest") {#
-					A %<>% arrange(desc(Size_t))#
-					Plants.wo.parents[i, "Parent"] <- A[1, "PlantID"]#
-				}#
-				if (ParentChoice == "random.largest") {#
-					Plants.wo.parents[i, "Parent"] <- #
-						A[sample(#
-							x=dim(A)[1], #
-							size=1, #
-							prob=A$Size_t/sum(A$Size_t)#
-						), "PlantID"]#
-				}#
-			}#
-			# expand to a plant in the same network#
-			if (dim(A)[1] == 0) {#
-				A <- Plant.Surveys.by.Year %>% #
-					filter(#
-						# cannot be its own parent#
-						PlantID != Plants.wo.parents$PlantID[i],#
-						# parent must be of same species#
-						Species == Plants.wo.parents$Species[i],#
-						# parent must have been surveyed in previous fecundity year#
-						FecundityYear == #
-							Plants.wo.parents$minFecundityYear[i] - 1,#
-						# parent must be in same plot as offspring#
-						Network == Plants.wo.parents$Network[i],#
-						# parent cannot be a seedling#
-						!(FecundityYear == minFecundityYear &#
-						RecruitmentMode == "Seedling"),#
-						!(is.na(Size_t))#
-					)#
-			}#
-			# expand to a plant in the same patch#
-			if (dim(A)[1] == 0) {#
-				A <- Plant.Surveys.by.Year %>% #
-					filter(#
-						# cannot be its own parent#
-						PlantID != Plants.wo.parents$PlantID[i],#
-						# parent must be of same species#
-						Species == Plants.wo.parents$Species[i],#
-						# parent must have been surveyed in previous fecundity year#
-						FecundityYear == #
-							Plants.wo.parents$minFecundityYear[i] - 1,#
-						# parent must be in same plot as offspring#
-						Island == Plants.wo.parents$Island[i],#
-						# parent cannot be a seedling#
-						!(FecundityYear == minFecundityYear &#
-						RecruitmentMode == "Seedling"),#
-						!(is.na(Size_t))#
-					)#
-			}#
-			if (dim(A)[1] > 0) {#
-				if (ParentChoice == "random") {#
-					Plants.wo.parents[i, "Parent"] <- #
-						A[sample(dim(A)[1], 1), "PlantID"]#
-				}#
-				if (ParentChoice == "largest") {#
-					A %<>% arrange(desc(Size_t))#
-					Plants.wo.parents[i, "Parent"] <- A[1, "PlantID"]#
-				}#
-				if (ParentChoice == "random.largest") {#
-					Plants.wo.parents[i, "Parent"] <- #
-						A[sample(#
-							x=dim(A)[1], #
-							size=1, #
-							prob=A$Size_t/sum(A$Size_t)#
-						), "PlantID"]#
-				}#
-			}#
-			cat(paste(i,",",sep=""))#
-		}#
-		Plants.w.parents <- Plant.Info.Analysis %>% filter(Parent!="Unknown")#
-		Plant.Info.Analysis <- rbind.fill(Plants.wo.parents, Plants.w.parents)#
-		Plant.Surveys.by.Year %<>% #
-			dplyr::select(-c(#
-				Island,#
-				Network,#
-				Species,                #
-				RecruitmentMode,#
-				Parent,#
-				First.Survey.Date.Alive,#
-				AliveatEndofStudy,#
-				Tag_Number,#
-				OldMothPlantPres,#
-				MEPlantPres,#
-				CAPlantPres,#
-				MothPlantPres,#
-				First.Survey.Date,#
-				First.DemographicSurvey,#
-				minFecundityYear,#
-				First_Size,#
-				First.Measurement.Date,#
-				min.Size,#
-				max.Size,#
-				LastDateAlive,#
-				FirstDeadObservation,#
-				FirstMissingObservation,#
-				FirstDeadMissingObservation,#
-				minDaysAlive,#
-				maxDaysAlive,#
-				IslandFullNames,#
-				HabitatType#
-			))#
-		Plant.Surveys.by.Plant %<>% #
-			dplyr::select(-c(#
-				Island,#
-				Network,#
-				Species,                #
-				RecruitmentMode,#
-				Parent,#
-				First.Survey.Date.Alive,#
-				AliveatEndofStudy,#
-				Tag_Number,#
-				OldMothPlantPres,#
-				MEPlantPres,#
-				CAPlantPres,#
-				MothPlantPres,#
-				First.Survey.Date,#
-				First.DemographicSurvey,#
-				minFecundityYear,#
-				First_Size,#
-				First.Measurement.Date,#
-				min.Size,#
-				max.Size,#
-				LastDateAlive,#
-				FirstDeadObservation,#
-				FirstMissingObservation,#
-				FirstDeadMissingObservation,#
-				minDaysAlive,#
-				maxDaysAlive,#
-				IslandFullNames,#
-				HabitatType#
-			))#
-		Plant.Surveys.by.Year %<>% merge(Plant.Info.Analysis, by="PlantID")#
-		Plant.Surveys.by.Plant %<>% merge(Plant.Info.Analysis, by="PlantID")#
-	}#
-	# PARENT SURVEY DATA#
-	# use this dataset to use parent size that is consistent for all offpsring#
-	A <- Plant.Surveys.by.Year %>% #
-		group_by(PlantID) %>%#
-		mutate(#
-			Parent.SpringSummer.Obs.Date_t_1 = lag(SurveyDate_SpringSummer)#
-		) %>%#
-		dplyr::select(#
-			PlantID, #
-			FecundityYear, #
-			SurveyDate_SpringSummer, #
-			Parent.SpringSummer.Obs.Date_t_1,#
-			Size_t#
-		)#
-	colnames(A)[which(names(A) == "SurveyDate_SpringSummer")] <- #
-		"Parent.SpringSummer.Obs.Date_t"#
-	colnames(A)[which(names(A) == "Size_t")] <- "Parent.Size_t"#
-	colnames(A)[which(names(A) == "FecundityYear")] <- "Parent.FecundityYear"#
-	colnames(A)[which(names(A) == "PlantID")] <- "Parent.ID"#
-	# OFFSPRING SURVEY DATA#
-	# use this dataset to figure out first size of offspring#
-	B <- Plant.Surveys.by.Plant %>% #
-		dplyr::select(PlantID, Date, Size_t)#
-	colnames(B)[which(names(B) == "Date")] <- "Offspring.Obs.Date"#
-	colnames(B)[which(names(B) == "Size_t")] <- "Offspring.Size_t"#
-	colnames(B)[which(names(B) == "PlantID")] <- "Offspring.ID"#
-	# merge parent data (from A) with offspring info (from Plant.Info.Analysis)#
-	C <- Plant.Info.Analysis #
-	C %<>%#
-		mutate(Parent = substr(x=Parent,start=1,stop=4))#
-	colnames(C)[which(names(C) == "PlantID")] <- "Offspring.ID"#
-	colnames(C)[which(names(C) == "Parent")] <- "Parent.ID"#
-	colnames(C)[which(names(C) == "First_Size")] <- "Offspring.First_Size"#
-	colnames(C)[which(names(C) == "First.Survey.Date.Alive")] <- #
-		"Offspring.First.Survey.Date.Alive"#
-	colnames(C)[which(names(C) == "minFecundityYear")] <- #
-		"Offspring.minFecundityYear"#
-	C %<>%#
-		dplyr::select(#
-			Parent.ID, #
-			Offspring.ID, #
-			Offspring.First_Size,#
-			Offspring.First.Survey.Date.Alive,#
-			Offspring.minFecundityYear#
-		) %>%#
-		# join all plant records with each offspring record#
-		merge(#
-			A, #
-			by = "Parent.ID",#
-			all=T#
-		) %>%#
-		# remove plants that had no offspring#
-		filter(!is.na(Offspring.ID)) %>%#
-		# remove plants without identified parents#
-		filter(Parent.ID!="Unkn" & Parent.ID!="unkn")#
-	# keep only offspring records where first survey occurred after the previous parent spring/summer survey but before or on the same day as the current spring/summer survey#
-	D <- C %>% filter(#
-		(#
-			Offspring.First.Survey.Date.Alive>Parent.SpringSummer.Obs.Date_t_1 &#
-			Offspring.First.Survey.Date.Alive <= Parent.SpringSummer.Obs.Date_t#
-		) |#
-		# for plants surveyed during the first year, which do not have a previous parent size#
-		(#
-			is.na(Parent.SpringSummer.Obs.Date_t_1) &#
-			Offspring.First.Survey.Date.Alive <= Parent.SpringSummer.Obs.Date_t#
-		)#
-	)#
-#
-	# ------------------------------------------------------------- WARNINGS ---#
-	# for which parents are there not size measurements?#
-	temp <- D %>% filter(is.na(Parent.Size_t))#
-	if (dim(temp)[1] > 0) {#
-		warning("Some parents have no recorded size.")#
-	}#
-	# for which offspring are there no first size measurements?#
-	temp <- D %>% #
-		filter(is.na(Offspring.First_Size)) %>%#
-		# records for these plants were checked#
-		filter(!(#
-			Offspring.ID %in% c(8653, 8842, 7548)))#
-	if (dim(temp)[1] > 0) {#
-		warning("Some offspring have no recorded first size.")#
-	}	#
-	# for which parents are there no spring/summer observation dates?#
-	temp <- D %>% filter(is.na(Parent.SpringSummer.Obs.Date_t))#
-	if (dim(temp)[1] > 0) {#
-		warning("Some parents have no spring/summer observation dates.")#
-	}#
-	# --------------------------------------------------------------------------#
-	E <- D %>%#
-		filter(!is.na(Parent.Size_t)) %>%#
-		filter(!is.na(Offspring.First_Size)) %>%#
-		filter(!is.na(Parent.SpringSummer.Obs.Date_t))#
-	# figure out parent size by adding observed size + offspring segments#
-	parent_size <- E %>% #
+rbind.fill(#
+			n_per_stage,#
+			data.frame(#
+				stage = stages[!(stages %in% n_per_stage$stage)],#
+				n = rep(0, length(stages[!(stages %in% n_per_stage$stage)]))#
+			)#
+		)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+calculateNumberIndivperStage(TMdata) %>% #
 		as.data.frame %>%#
-		group_by(Parent.ID, Parent.FecundityYear) %>%#
-		# calculate Parent size as observed parent size plus all offspring; this ensures that a parent cannot have size equal to or less than offspring#
-		dplyr::summarise(#
-			SizewClones_t = Parent.Size_t[1] + sum(Offspring.First_Size),#
-			NClones_t = length(unique(Offspring.ID)),#
-			NSegLosttoClones_t = sum(Offspring.First_Size)#
-		)#
-	# merge parent size with clones with plant surveys#
-	Plant.Surveys.by.Yearw_clones <- Plant.Surveys.by.Year %>%#
-		merge(#
-			parent_size, #
-			by.x=c("PlantID", "FecundityYear"), #
-			by.y=c("Parent.ID", "Parent.FecundityYear"),#
-			all=T#
-		) %>% #
-		as.data.frame#
-	Plant.Surveys.by.Yearw_clones %<>%#
-		rowwise %>%#
-		# replace values for plants that did not produce clones that year#
-		mutate(#
-			NClones_t = replace(#
-				NClones_t,#
-				which(is.na(NClones_t)),#
-				0#
-			),#
-			SizewClones_t = replace(#
-				SizewClones_t,#
-				which(is.na(SizewClones_t)),#
-				Size_t#
-			),#
-			NSegLosttoClones_t = replace(#
-				NSegLosttoClones_t,#
-				which(is.na(NSegLosttoClones_t)),#
-				0#
+		# remove NAs#
+   		filter(stage %in% colnames(proj_matrix)) %>%#
+		# add missing stages#
+		rbind.fill(#
+			n_per_stage,#
+			data.frame(#
+				stage = stages[!(stages %in% n_per_stage$stage)],#
+				n = rep(0, length(stages[!(stages %in% n_per_stage$stage)]))#
+			)#
+		)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+calculateNumberIndivperStage(TMdata) %>% #
+		as.data.frame %>%#
+		# remove NAs#
+   		filter(stage %in% colnames(proj_matrix)) %>%#
+		# add missing stages#
+		rbind.fill(#
+			.,#
+			data.frame(#
+				stage = stages[!(stages %in% n_per_stage$stage)],#
+				n = rep(0, length(stages[!(stages %in% n_per_stage$stage)]))#
+			)#
+		)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+calculateNumberIndivperStage(TMdata) %>% #
+		as.data.frame %>%#
+		# remove NAs#
+   		filter(stage %in% colnames(proj_matrix)) %>%#
+		# add missing stages#
+		rbind.fill(#
+			.,#
+			data.frame(#
+				stage = stages[!(stages %in% n_per_stage$stage)],#
+				n = rep(0, length(stages[!(stages %in% n_per_stage$stage)]))#
+			)#
+		) %>%#
+		arrange(stage)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+stages
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+n_per_stage <- calculateNumberIndivperStage(TMdata) %>% #
+		as.data.frame %>%#
+		# remove NAs#
+   		filter(stage %in% colnames(proj_matrix)) %>%#
+		# add missing stages#
+		rbind.fill(#
+			.,#
+			data.frame(#
+				stage = stages[!(stages %in% n_per_stage$stage)],#
+				n = rep(0, length(stages[!(stages %in% n_per_stage$stage)]))#
 			)#
 		)#
-	Plant.Surveys.by.Yearw_clones %<>% as.data.frame#
-	Plant.Surveys.by.Yearw_clones$SizewClones_t %<>% as.numeric#
-	# presence of clonal reproduction#
-	Plant.Surveys.by.Yearw_clones$ClonePres_t <- ifelse(#
-		Plant.Surveys.by.Yearw_clones$NSegLosttoClones_t > 0,#
-		1,#
-		0#
+		n_per_stage$fate <- factor(#
+			trans01$stage, #
+			levels=stages, #
+			ordered=T#
+		)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+n_per_stage <- calculateNumberIndivperStage(TMdata) %>% #
+		as.data.frame %>%#
+		# remove NAs#
+   		filter(stage %in% colnames(proj_matrix)) %>%#
+		# add missing stages#
+		rbind.fill(#
+			.,#
+			data.frame(#
+				stage = stages[!(stages %in% n_per_stage$stage)],#
+				n = rep(0, length(stages[!(stages %in% n_per_stage$stage)]))#
+			)#
+		)#
+	n_per_stage$stage %<>% factor(., levels=stages, ordered=T)#
+	n_per_stage %<>% arrange(stage)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+n_per_stage
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+stages
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+n_per_stage <- calculateNumberIndivperStage(TMdata) %>% #
+		as.data.frame %>%#
+		# remove NAs#
+   		filter(stage %in% colnames(proj_matrix)) %>%#
+		# add missing stages#
+		rbind.fill(#
+			.,#
+			data.frame(#
+				stage = stages[!(stages %in% n_per_stage$stage)],#
+				n = rep(0, length(stages[!(stages %in% n_per_stage$stage)]))#
+			)#
+		)#
+	n_per_stage$stage %<>% factor(., levels=stages, ordered=T)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+n_per_stage
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+n_per_stage %<>% arrange(stages)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+n_per_stage
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+stages
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+n_per_stage <- calculateNumberIndivperStage(TMdata) %>% #
+		as.data.frame %>%#
+		# remove NAs#
+   		filter(stage %in% colnames(proj_matrix)) %>%#
+		# add missing stages#
+		rbind.fill(#
+			.,#
+			data.frame(#
+				stage = stages[!(stages %in% n_per_stage$stage)],#
+				n = rep(0, length(stages[!(stages %in% n_per_stage$stage)]))#
+			)#
+		)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+n_per_stage$stage
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+calculateNumberIndivperStage(TMdata) %>% #
+		as.data.frame %>%#
+		# remove NAs#
+   		filter(stage %in% colnames(proj_matrix)) %>%#
+		# add missing stages#
+		rbind.fill(#
+			.,#
+			data.frame(#
+				stage = stages[!(stages %in% n_per_stage$stage)],#
+				n = rep(0, length(stages[!(stages %in% n_per_stage$stage)]))#
+			)#
+		)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+n_per_stage <- calculateNumberIndivperStage(TMdata) %>% #
+		as.data.frame %>%#
+		# remove NAs#
+   		filter(stage %in% colnames(proj_matrix)) %>%#
+		# add missing stages#
+		rbind.fill(#
+			.,#
+			data.frame(#
+				stage = stages[!(stages %in% n_per_stage$stage)],#
+				n = rep(0, length(stages[!(stages %in% n_per_stage$stage)]))#
+			)#
+		)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+n_per_stage
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+n_per_stage$stage
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+stages
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+n_per_stage$stage %<>% factor(., levels=stages, ordered=T)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+n_per_stage$stage
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+n_per_stage %<>% arrange(stage)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+n_per_stage
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+# number of parents per stage#
+	n_per_stage <- calculateNumberIndivperStage(TMdata) %>% #
+		as.data.frame %>%#
+		# remove NAs#
+   		filter(stage %in% colnames(proj_matrix)) %>%#
+		# add missing stages#
+		rbind.fill(#
+			.,#
+			data.frame(#
+				stage = stages[!(stages %in% n_per_stage$stage)],#
+				n = rep(0, length(stages[!(stages %in% n_per_stage$stage)]))#
+			)#
+		)#
+	n_per_stage$stage %<>% factor(., levels=stages, ordered=T)#
+	n_per_stage %<>% arrange(stage)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+n_per_stage
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+n_per_stage <- calculateNumberIndivperStage(TMdata) %>% #
+		as.data.frame %>%#
+		# remove NAs#
+   		filter(stage %in% colnames(proj_matrix)) %>%#
+		# add missing stages#
+		rbind.fill(#
+			.,#
+			data.frame(#
+				stage = stages[!(stages %in% n_per_stage$stage)],#
+				n = rep(0, length(stages[!(stages %in% n_per_stage$stage)]))#
+			)#
+		)#
+	n_per_stage$stage %<>% factor(., levels=stages, ordered=T)#
+	n_per_stage %<>% arrange(stage)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+n_per_stage
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+n_per_stage <- calculateNumberIndivperStage(TMdata) %>% #
+		as.data.frame %>%#
+		# remove NAs#
+   		filter(stage %in% colnames(proj_matrix)) %>%#
+		# add missing stages#
+		rbind.fill(#
+			.,#
+			data.frame(#
+				stage = stages[!(stages %in% n_per_stage$stage)],#
+				n = rep(0, length(stages[!(stages %in% n_per_stage$stage)]))#
+			)#
+		)#
+	n_per_stage$stage %<>% factor(., levels=stages, ordered=T)#
+	n_per_stage %<>% arrange(stage)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+n_per_stage
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+n_per_stage <- calculateNumberIndivperStage(TMdata) %>% #
+		as.data.frame %>%#
+		# remove NAs#
+   		filter(stage %in% colnames(proj_matrix)) %>%#
+		# add missing stages#
+		rbind.fill(#
+			.,#
+			data.frame(#
+				stage = stages[!(stages %in% n_per_stage$stage)],#
+				n = rep(0, length(stages[!(stages %in% n_per_stage$stage)]))#
+			)#
+		)#
+	n_per_stage$stage %<>% factor(., levels=stages, ordered=T)#
+	n_per_stage %<>% arrange(stage)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+n_per_stage
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+n_per_stage <- calculateNumberIndivperStage(TMdata) %>% #
+		as.data.frame %>%#
+		# remove NAs#
+   		filter(stage %in% colnames(proj_matrix)) %>%#
+		# add missing stages#
+		rbind.fill(#
+			.,#
+			data.frame(#
+				stage = stages[!(stages %in% n_per_stage$stage)],#
+				n = rep(0, length(stages[!(stages %in% n_per_stage$stage)]))#
+			)#
+		)#
+	n_per_stage$stage %<>% factor(., levels=stages, ordered=T)#
+	n_per_stage %<>% arrange(stage)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+n_per_stage
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+n_per_stage <- calculateNumberIndivperStage(TMdata) %>% #
+		as.data.frame %>%#
+		# remove NAs#
+   		filter(stage %in% colnames(proj_matrix))
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+n_per_stage
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+n_per_stage <- calculateNumberIndivperStage(TMdata) %>% #
+		as.data.frame %>%#
+		# remove NAs#
+   		filter(stage %in% colnames(proj_matrix)) %>%#
+		# add missing stages#
+		rbind.fill(#
+			.,#
+			data.frame(#
+				stage = stages[!(stages %in% stage)],#
+				n = rep(0, length(stages[!(stages %in% stage)]))#
+			)#
+		)#
+	n_per_stage$stage %<>% factor(., levels=stages, ordered=T)#
+	n_per_stage %<>% arrange(stage)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+n_per_stage <- calculateNumberIndivperStage(TMdata) %>% #
+		as.data.frame %>%#
+		# remove NAs#
+   		filter(stage %in% colnames(proj_matrix)) %>%#
+		# add missing stages#
+		rbind.fill(#
+			.,#
+			data.frame(#
+				stage = stages[!(stages %in% .$stage)],#
+				n = rep(0, length(stages[!(stages %in% .$stage)]))#
+			)#
+		)#
+	n_per_stage$stage %<>% factor(., levels=stages, ordered=T)#
+	n_per_stage %<>% arrange(stage)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+n_per_stage
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+n_per_stage <- calculateNumberIndivperStage(TMdata) %>% #
+		as.data.frame %>%#
+		# remove NAs#
+   		filter(stage %in% colnames(proj_matrix)) %>%#
+		# add missing stages#
+		rbind.fill(#
+			.,#
+			data.frame(#
+				stage = stages[!(stages %in% .$stage)],#
+				n = rep(0, length(stages[!(stages %in% .$stage)]))#
+			)#
+		)#
+	n_per_stage$stage %<>% factor(., levels=stages, ordered=T)#
+	n_per_stage %<>% arrange(stage)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+n_per_stage
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+n_per_stage <- calculateNumberIndivperStage(TMdata) %>% #
+		as.data.frame %>%#
+		# remove NAs#
+   		filter(stage %in% colnames(proj_matrix)) %>%#
+		# add missing stages#
+		rbind.fill(#
+			.,#
+			data.frame(#
+				stage = stages[!(stages %in% .$stage)],#
+				n = rep(0, length(stages[!(stages %in% .$stage)]))#
+			)#
+		)#
+	n_per_stage$stage %<>% factor(., levels=stages, ordered=T)#
+	n_per_stage %<>% arrange(stage)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+n_per_stage
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+clonal_repro_dataset_mod <- clonal_repro_dataset %>% #
+		rowwise() %>%#
+		mutate(#
+			parent_stage=cut(#
+				SizewClones_t, #
+				SizeClass, #
+				include.lowest=T, #
+				labels=FALSE#
+			),#
+			offspring_stage=cut(#
+				Offspring.First_Size, #
+				SizeClass, #
+				include.lowest=T, #
+				labels=FALSE#
+			)#
+		)#
+	clone_table <- table(#
+		clonal_repro_dataset_mod$offspring_stage, #
+		clonal_repro_dataset_mod$parent_stage#
+	) %>% #
+		as.data.frame.matrix %>% #
+		data.matrix#
+	# number of parents per stage#
+	n_per_stage <- calculateNumberIndivperStage(TMdata) %>% #
+		as.data.frame %>%#
+		# remove NAs#
+   		filter(stage %in% colnames(proj_matrix)) %>%#
+		# add missing stages#
+		rbind.fill(#
+			.,#
+			data.frame(#
+				stage = stages[!(stages %in% .$stage)],#
+				n = rep(0, length(stages[!(stages %in% .$stage)]))#
+			)#
+		)#
+	n_per_stage$stage %<>% factor(., levels=stages, ordered=T)#
+	n_per_stage %<>% arrange(stage)#
+	# make the clone transition matrix the same dimensions as growth/retrogression/survival/fecundity transition matrix#
+	fill = matrix(#
+		0, length(stages), 3, #
+		dimnames=list(#
+			rownames(proj_matrix), #
+			colnames(proj_matrix)[1:3])#
+	)#
+	clone_table <- merge(#
+		fill, #
+		clone_table, #
+		by="row.names", #
+		all=T)#
+	rownames(clone_table) <- clone_table$Row.names#
+	clone_table[is.na(clone_table)] <- 0#
+	# reorder rows#
+	clone_table %<>% .[match(stages, .$Row.names), ] %>%#
+		.[, -1] %>% #
+		as.matrix(rownames="Row.names")
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+clone_table
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+n_per_stage
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+clone_table / n_per_stage$n
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+clone_table / vector(n_per_stage$n)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+vector(n_per_stage$n)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+as.vector(n_per_stage$n)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+clone_table / as.vector(n_per_stage$n)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+clone_table
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+clone_table / as.vector(n_per_stage$n)
+12/(443+162+84+12)
+0.1463415/12
+12/0.1463415
+12/82
+84/82
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+t(t(clone_table) / as.vector(n_per_stage$n))
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+n_per_stage$n
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+clone_table
+12/82
+84/82
+162/82
+443/82
+as.vector(clone_table)
+matrix(as.vector(clone_table),nrow=6,ncol=6)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+test_clone_table <- c(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,13,0,0,0,0,0,#
+	122,32,14,0,0,0,443,162,84,12)#
+matrix(test_clone_table,nrow=6,ncol=6)
+stages()
+stages
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+test_clone_table <- c(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,13,0,0,0,0,0,#
+	122,32,14,0,0,0,443,162,84,12)#
+matrix(#
+	test_clone_table,#
+	nrow=6,#
+	ncol=6,#
+	dimnames=list(#
+		c("Seed","Seedling","1","2","3","4"), #
+		c("Seed","Seedling","1","2","3","4")#
+	)#
+)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+clone_table
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+n_per_stage$n
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+calculateTransitionRates <- function(transition_counts, n_per_stage) {#
+	t(t(clone_table) / n_per_stage)#
+}
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+calculateTransitionRates(#
+		clone_table, #
+		as.vector(n_per_stage$n)
+)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+x[which(x==NaN)]
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+x <- t(t(clone_table) / n_per_stage)
+x <- t(t(clone_table) / as.vector(n_per_stage$n))
+x
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+x[which(x==NaN)]
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+x[which(x=="NaN")]
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+x[which(x=="NaN")] <- 0
+x
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+calculateTransitionRates <- function(transition_counts, n_per_stage) {#
+	x <- t(t(clone_table) / n_per_stage)#
+	x[which(x=="NaN")] <- 0#
+	return(x)#
+}
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+calculateTransitionRates(#
+		clone_table, #
+		as.vector(n_per_stage$n)#
 	)
 setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-PlanIntoParents <- Plant.Info.Analysis %>% #
-		filter(Parent!="Unknown") %$% #
-		unique(Parent)#
-	PlantSurveyswClones <- Plant.Surveys.by.Yearw_clones %>% #
-		filter(ClonePres_t==1) %$% #
-		unique(PlantID)#
-	missingOffspringCounts <- (PlanIntoParents[which(#
-		!(PlanIntoParents %in% PlantSurveyswClones) &#
-		# the offspring were surveyed before the parents#
-		PlanIntoParents != 8692 & PlanIntoParents != 9076#
-		)])#
-	temp <- D %>% #
-		filter(Parent.ID %in% missingOffspringCounts) %>%#
-		filter(Offspring.ID!=7435 & Offspring.ID!=8842)
-temp
-str(Plant.Surveys.by.Year)
-str(Plant.Info.Analysis)
-Plant.Info.Analysis %>% filter(Parent==9810)
-Plant.Surveys.by.Year %>% filter(PlantID==7548)
-Plant.Surveys.by.Plant %>% filter(PlantID==7548)
+as.vector(n_per_stage$n)
 setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-temp
+clone_table
+clone_table[,6]/82
+clone_table[,5]/280
+clone_table[,4]/174
+calculateTransitionRates(#
+		clone_table, #
+		as.vector(n_per_stage$n)#
+	) %>% as.vector
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+c(#
+	rep(0, 20),#
+	0.07471264,#
+	rep(0, 5),#
+	0.43571429, 0.11428571, 0.05000000,#
+	rep(0, 3),#
+	5.40243902, 1.97560976, 1.02439024, 0.14634146#
+)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+test_transition_rates <- c(#
+	rep(0, 20),#
+	0.07471264,#
+	rep(0, 5),#
+	0.43571429, 0.11428571, 0.05000000,#
+	rep(0, 3),#
+	5.40243902, 1.97560976, 1.02439024, 0.14634146#
+)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+matrix(#
+	test_transition_rates,#
+	nrow=6,#
+	ncol=6,#
+	dimnames=list(#
+		c("Seed","Seedling","1","2","3","4"), #
+		c("Seed","Seedling","1","2","3","4")#
+	)#
+)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+calculateTransitionRates(#
+		clone_table, #
+		as.vector(n_per_stage$n)#
+	)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+c(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,13,0,0,0,0,0,#
+	122,32,14,0,0,0,443,162,84,12) %>%#
+	matrix(#
+		.,#
+		nrow=6,#
+		ncol=6,#
+		dimnames=list(#
+			c("Seed","Seedling","1","2","3","4"), #
+			c("Seed","Seedling","1","2","3","4")#
+		)#
+	)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+c(#
+	rep(0, 20),#
+	0.07471264,#
+	rep(0, 5),#
+	0.43571429, 0.11428571, 0.05000000,#
+	rep(0, 3),#
+	5.40243902, 1.97560976, 1.02439024, 0.14634146#
+) %>%#
+	matrix(#
+		.,#
+		nrow=6,#
+		ncol=6,#
+		dimnames=list(#
+			c("Seed","Seedling","1","2","3","4"), #
+			c("Seed","Seedling","1","2","3","4")#
+		)#
+	)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+calculateTransitionRates <- function(transition_counts, n_per_stage) {#
+	x <- t(t(clone_table) / n_per_stage)#
+	x[which(x=="NaN")] <- 0#
+	return(x)#
+}#
+test_that("calculatePopulationSummaryStatistics", {#
+	test_clone_table <- c(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,13,0,0,0,0,0,#
+		122,32,14,0,0,0,443,162,84,12) %>%#
+		matrix(#
+			.,#
+			nrow=6,#
+			ncol=6,#
+			dimnames=list(#
+				c("Seed","Seedling","1","2","3","4"), #
+				c("Seed","Seedling","1","2","3","4")#
+			)#
+		)#
+	test_n_per_stage <- c(0,2,202,174,280,82)#
+	test_transition_rate_table <- c(#
+		rep(0, 20),#
+		0.07471264,#
+		rep(0, 5),#
+		0.43571429, 0.11428571, 0.05000000,#
+		rep(0, 3),#
+		5.40243902, 1.97560976, 1.02439024, 0.14634146#
+	) %>%#
+		matrix(#
+			.,#
+			nrow=6,#
+			ncol=6,#
+			dimnames=list(#
+				c("Seed","Seedling","1","2","3","4"), #
+				c("Seed","Seedling","1","2","3","4")#
+			)#
+		)	#
+	expect_that(#
+		calculateTransitionRates(test_clone_table, test_n_per_stage),#
+		equals(test_transition_rate_table)#
+	)#
+})
+library(testthat)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+calculateTransitionRates <- function(transition_counts, n_per_stage) {#
+	x <- t(t(clone_table) / n_per_stage)#
+	x[which(x=="NaN")] <- 0#
+	return(x)#
+}#
+test_that("calculatePopulationSummaryStatistics", {#
+	test_clone_table <- c(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,13,0,0,0,0,0,#
+		122,32,14,0,0,0,443,162,84,12) %>%#
+		matrix(#
+			.,#
+			nrow=6,#
+			ncol=6,#
+			dimnames=list(#
+				c("Seed","Seedling","1","2","3","4"), #
+				c("Seed","Seedling","1","2","3","4")#
+			)#
+		)#
+	test_n_per_stage <- c(0,2,202,174,280,82)#
+	test_transition_rate_table <- c(#
+		rep(0, 20),#
+		0.07471264,#
+		rep(0, 5),#
+		0.43571429, 0.11428571, 0.05000000,#
+		rep(0, 3),#
+		5.40243902, 1.97560976, 1.02439024, 0.14634146#
+	) %>%#
+		matrix(#
+			.,#
+			nrow=6,#
+			ncol=6,#
+			dimnames=list(#
+				c("Seed","Seedling","1","2","3","4"), #
+				c("Seed","Seedling","1","2","3","4")#
+			)#
+		)	#
+	expect_that(#
+		calculateTransitionRates(test_clone_table, test_n_per_stage),#
+		equals(test_transition_rate_table)#
+	)#
+})
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/tests/testthat')
+test_transition_rate_table
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/tests/testthat')
+test_that("calculateTransitionRates", {#
+	test_clone_table <- c(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,13,0,0,0,0,0,#
+		122,32,14,0,0,0,443,162,84,12) %>%#
+		matrix(#
+			.,#
+			nrow=6,#
+			ncol=6,#
+			dimnames=list(#
+				c("Seed","Seedling","1","2","3","4"), #
+				c("Seed","Seedling","1","2","3","4")#
+			)#
+		)#
+	test_n_per_stage <- c(0,2,202,174,280,82)#
+	test_transition_rate_table <- c(#
+		rep(0, 20),#
+		0.07471264,#
+		rep(0, 5),#
+		0.43571429, 0.11428571, 0.05000000,#
+		rep(0, 3),#
+		5.40243902, 1.97560976, 1.02439024, 0.14634146#
+	) %>%#
+		matrix(#
+			.,#
+			nrow=6,#
+			ncol=6,#
+			dimnames=list(#
+				c("Seed","Seedling","1","2","3","4"), #
+				c("Seed","Seedling","1","2","3","4")#
+			)#
+		)	#
+	# check that transition rates are calculated correctly#
+	expect_that(#
+		calculateTransitionRates(test_clone_table, test_n_per_stage),#
+		equals(test_transition_rate_table)#
+	)#
+	# Stages should give rise to 0 seeds and 0 seedlings#
+	# seeds should give rise to 0 clones#
+	# seedlings should give rise to 0 clones#
+})
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/tests/testthat')
+test_clone_table <- c(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,13,0,0,0,0,0,#
+		122,32,14,0,0,0,443,162,84,12) %>%#
+		matrix(#
+			.,#
+			nrow=6,#
+			ncol=6,#
+			dimnames=list(#
+				c("Seed","Seedling","1","2","3","4"), #
+				c("Seed","Seedling","1","2","3","4")#
+			)#
+		)#
+	test_n_per_stage <- c(0,2,202,174,280,82)#
+	test_transition_rate_table <- c(#
+		rep(0, 20),#
+		0.07471264,#
+		rep(0, 5),#
+		0.43571429, 0.11428571, 0.05000000,#
+		rep(0, 3),#
+		5.40243902, 1.97560976, 1.02439024, 0.14634146#
+	) %>%#
+		matrix(#
+			.,#
+			nrow=6,#
+			ncol=6,#
+			dimnames=list(#
+				c("Seed","Seedling","1","2","3","4"), #
+				c("Seed","Seedling","1","2","3","4")#
+			)#
+		)	#
+	# check that transition rates are calculated correctly
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/tests/testthat')
+test_transition_rate_table
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/tests/testthat')
+test_that("calculateTransitionRates", {#
+	test_clone_table <- c(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,13,0,0,0,0,0,#
+		122,32,14,0,0,0,443,162,84,12) %>%#
+		matrix(#
+			.,#
+			nrow=6,#
+			ncol=6,#
+			dimnames=list(#
+				c("Seed","Seedling","1","2","3","4"), #
+				c("Seed","Seedling","1","2","3","4")#
+			)#
+		)#
+	test_n_per_stage <- c(0,2,202,174,280,82)#
+	expected_transition_rate_table <- c(#
+		rep(0, 20),#
+		0.07471264,#
+		rep(0, 5),#
+		0.43571429, 0.11428571, 0.05000000,#
+		rep(0, 3),#
+		5.40243902, 1.97560976, 1.02439024, 0.14634146#
+	) %>%#
+		matrix(#
+			.,#
+			nrow=6,#
+			ncol=6,#
+			dimnames=list(#
+				c("Seed","Seedling","1","2","3","4"), #
+				c("Seed","Seedling","1","2","3","4")#
+			)#
+		)	#
+	# check that transition rates are calculated correctly#
+	test_transition_rate_table <- calculateTransitionRates(#
+		test_clone_table, #
+		test_n_per_stage#
+	)#
+	expect_that(#
+		test_transition_rate_table,#
+		equals(expected_transition_rate_table)#
+	)#
+	# Stages should give rise to 0 seeds and 0 seedlings#
+	# seeds should give rise to 0 clones#
+	# seedlings should give rise to 0 clones#
+})
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/tests/testthat')
+test_transition_rate_table["Seed", ]
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/tests/testthat')
+expect_that(#
+		test_transition_rate_table["Seed", ],#
+		equals(0)#
+	)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/tests/testthat')
+expect_that(#
+		test_transition_rate_table["Seed", ],#
+		equals(rep(0, length(test_transition_rate_table["Seed", ]))#
+	)
+)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/tests/testthat')
+expect_that(#
+		as.vector(test_transition_rate_table["Seed", ]),#
+		equals(rep(0, length(test_transition_rate_table["Seed", ]))#
+	)
+)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/tests/testthat')
+test_transition_rate_table
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/tests/testthat')
+expect_that(#
+		as.vector(test_transition_rate_table["Seedling", ]),#
+		equals(rep(0, length(test_transition_rate_table["Seedling", ])))#
+	)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/tests/testthat')
+as.vector(test_transition_rate_table[, "Seed"])
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/tests/testthat')
+expect_that(#
+		as.vector(test_transition_rate_table[, "Seed"]),#
+		equals(rep(0, length(test_transition_rate_table[, "Seed"])))#
+	)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/tests/testthat')
+test_that("calculateTransitionRates", {#
+	test_clone_table <- c(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,13,0,0,0,0,0,#
+		122,32,14,0,0,0,443,162,84,12) %>%#
+		matrix(#
+			.,#
+			nrow=6,#
+			ncol=6,#
+			dimnames=list(#
+				c("Seed","Seedling","1","2","3","4"), #
+				c("Seed","Seedling","1","2","3","4")#
+			)#
+		)#
+	test_n_per_stage <- c(0,2,202,174,280,82)#
+	expected_transition_rate_table <- c(#
+		rep(0, 20),#
+		0.07471264,#
+		rep(0, 5),#
+		0.43571429, 0.11428571, 0.05000000,#
+		rep(0, 3),#
+		5.40243902, 1.97560976, 1.02439024, 0.14634146#
+	) %>%#
+		matrix(#
+			.,#
+			nrow=6,#
+			ncol=6,#
+			dimnames=list(#
+				c("Seed","Seedling","1","2","3","4"), #
+				c("Seed","Seedling","1","2","3","4")#
+			)#
+		)	#
+	# check that transition rates are calculated correctly#
+	test_transition_rate_table <- calculateTransitionRates(#
+		test_clone_table, #
+		test_n_per_stage#
+	)#
+	expect_that(#
+		test_transition_rate_table,#
+		equals(expected_transition_rate_table)#
+	)#
+	# Stages should give rise to 0 seeds and 0 seedlings#
+	expect_that(#
+		as.vector(test_transition_rate_table[, "Seed"]),#
+		equals(rep(0, length(test_transition_rate_table[, "Seed"])))#
+	)#
+	expect_that(#
+		as.vector(test_transition_rate_table[, "Seedling"]),#
+		equals(rep(0, length(test_transition_rate_table[, "Seedling"])))#
+	)#
+	# seeds should give rise to 0 clones#
+	expect_that(#
+		as.vector(test_transition_rate_table["Seed", ]),#
+		equals(rep(0, length(test_transition_rate_table["Seed", ])))#
+	)#
+	# seedlings should give rise to 0 clones#
+	expect_that(#
+		as.vector(test_transition_rate_table["Seedling", ]),#
+		equals(rep(0, length(test_transition_rate_table["Seedling", ])))#
+	)#
+})
 setwd('/Users/KSauby/Documents/Projects')
 setwd("./GTMNERRproc")#
 #setwd("./dataproc")#
@@ -619,3 +889,27 @@ setwd("./GTMNERRproc")#
 #devtools::test()#
 devtools::document()#
 devtools::install()
+setwd('/Users/KSauby/Documents/Projects')
+setwd("./GTMNERRproc")#
+#setwd("./dataproc")#
+#setwd("./modresproc")#
+#setwd("./unmarked")#
+#setwd("./RPresence")#
+devtools::test()
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/tests')
+library(testthat)#
+library(GTMNERRproc)#
+#
+testthat::test_check("GTMNERRproc")
+setwd('/Users/KSauby/Documents/Projects/ACS/tests')
+library(testthat)#
+library(ACSampling)#
+#
+testthat::test_check("ACSampling")
+setwd('/Users/KSauby/Documents/Projects')
+setwd("./GTMNERRproc")#
+#setwd("./dataproc")#
+#setwd("./modresproc")#
+#setwd("./unmarked")#
+#setwd("./RPresence")#
+devtools::test()
