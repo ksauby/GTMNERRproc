@@ -28,19 +28,17 @@ analyzeMatrixPopModels <- function(
 	SeedSurvival,
 	SeedBankSize,
 	SeedsPerFruit,
-	clone_transition,
 	n.iter=1000
 ) {
 	A <- vector("list", length(SeedBankSize))	
-	B <- vector("list", length(SeedBankSize))	
 	for (i in 1:length(SeedBankSize)) {
 		for (j in 1:length(SeedsPerFruit)) {
 			for (k in 1:length(SeedSurvival)) {
 				# ----------------------------------------------------------- #
 				# Create growth/retrogression/survival/fecundity transition matrix
 				# ----------------------------------------------------------- #
-				proj_matrix <- createProjectionMatrix(
-					trans_data,
+				proj_mat <- createProjectionMatrix(
+					trans_data$trans01,
 					SeedBankSize[i],
 					SeedsPerFruit[j],
 					SeedSurvival[k]
@@ -48,12 +46,12 @@ analyzeMatrixPopModels <- function(
 				# ------------------------------------------------------- #
 				# add transition matrices together
 				# ------------------------------------------------------- #
-				all_proj_matrix <- proj_matrix + clone_transition
+				all_proj_matrix <- proj_mat + trans_data$clone_transition_rates
 				# ------------------------------------------------------- #
 				# starting numbers
 				# ------------------------------------------------------- #
 				n_per_stage <- NULL
-				n_per_stage <- calculateNumberIndivperStage(trans_data)
+				n_per_stage <- calculateNumberIndivperStage(trans_data$trans01)
 				# remove NA class
 				n_per_stage <- n_per_stage[1:length(stages),]
 				n_per_stage <- n_per_stage$n
@@ -61,10 +59,7 @@ analyzeMatrixPopModels <- function(
 				# ------------------------------------------------------- #
 				# dynamics
 				# ------------------------------------------------------- #
-				# growth/retrogression/survival/fecundity transition matrix
-				B[[i]][[j]]$projection_matrix <- proj_matrix
-				# clonal reproduction transition matrix
-				B[[i]][[j]]$clone_transition <- clone_transition
+			
 			
 			
 				all_proj_matrix[1, 1] <- SeedSurvival[k]
@@ -130,5 +125,5 @@ analyzeMatrixPopModels <- function(
 		A[[i]] <- do.call(rbind.data.frame, A[[i]])
 	}
 	A <- do.call(rbind.data.frame, A)
-	return(list(transitionmatrices=B,resultstables=A))
+	return(list(resultstables=A))
 }

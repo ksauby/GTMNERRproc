@@ -71,8 +71,16 @@ prepDataTransitionMatrix <- function(
 		as.vector %>%
 		sort
 	stages <- c("Seed", "Seedling", stages, "dead")
-	trans01$stage <- factor(trans01$stage, levels=stages, ordered=T)
-	trans01$fate <- factor(trans01$fate, levels=stages, ordered=T)
+	trans01$stage <- factor(
+		trans01$stage, 
+		levels=stages[-length(stages)], 
+		ordered=T
+	)
+	trans01$fate <- factor(
+		trans01$fate, 
+		levels=stages, 
+		ordered=T
+	)
 	
 	
 	# remove last stage
