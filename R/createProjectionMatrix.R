@@ -1,6 +1,6 @@
 #' Create Projection Matrix
 
-#' Create projection matrix with growth, stasis, retrogression, survival, and sexual reproduction rates.
+#' @description Create projection matrix with growth, stasis, retrogression, survival, and sexual reproduction rates. Assumptions about the recruitment rate, seed bank, and fertilities follow Stubben (2007).
 
 #' @param trans_data transition data
 #' @param SeedSurvival seed survival estimate
@@ -9,7 +9,7 @@
 
 
 #' @return Return a projection matrix
-
+#' @reference Stubben, C., & Milligan, B. (2007). Estimating and analyzing demographic models using the popbio package in R. Journal of Statistical Software.
 #' @export
 
 createProjectionMatrix <- function(
@@ -21,7 +21,7 @@ createProjectionMatrix <- function(
 	seeds.from.plants 		<- sum(trans_data$Repro, na.rm=T) * SeedsPerFruit
 	# so the recruitment rate declines as the seed bank size increases?
 	recruitment.rate 		<- Seedlings/(SeedBankSize + seeds.from.plants)
-	trans_data$Seedling 	<- trans_data$Repro/sum(trans01$Repro, na.rm=T) * 
+	trans_data$Seedling 	<- trans_data$Repro/sum(trans_data$Repro, na.rm=T)* 
 									seeds.from.plants * recruitment.rate
 	trans_data$Seed 		<- trans_data$Repro * SeedsPerFruit * SeedSurvival
 	# return projection matrix
