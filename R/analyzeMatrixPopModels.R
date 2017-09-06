@@ -28,7 +28,6 @@ analyzeMatrixPopModels <- function(
 	SeedSurvival,
 	SeedBankSize,
 	SeedsPerFruit,
-	stages,
 	n.iter=1000
 ) {
 	A <- vector("list", length(SeedBankSize))	
@@ -54,7 +53,7 @@ analyzeMatrixPopModels <- function(
 				n_per_stage <- NULL
 				n_per_stage <- calculateNumberIndivperStage(
 					trans_data$trans01, 
-					stages
+					trans_data$stages
 				)
 				# ------------------------------------------------------- #
 				# dynamics
