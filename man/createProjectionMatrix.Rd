@@ -2,8 +2,7 @@
 % Please edit documentation in R/createProjectionMatrix.R
 \name{createProjectionMatrix}
 \alias{createProjectionMatrix}
-\title{Create Projection Matrix
-Create projection matrix with growth, stasis, retrogression, survival, and sexual reproduction rates.}
+\title{Create Projection Matrix}
 \usage{
 createProjectionMatrix(trans_data, SeedBankSize, SeedsPerFruit, SeedSurvival)
 }
@@ -20,7 +19,6 @@ createProjectionMatrix(trans_data, SeedBankSize, SeedsPerFruit, SeedSurvival)
 Return a projection matrix
 }
 \description{
-Create Projection Matrix
-Create projection matrix with growth, stasis, retrogression, survival, and sexual reproduction rates.
+Create projection matrix with growth, stasis, retrogression, survival, and sexual reproduction rates. Assumptions about the recruitment rate, seed bank, and fertilities follow Stubben (2007).
 }
 

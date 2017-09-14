@@ -1,885 +1,1342 @@
-n_per_stage <- calculateNumberIndivperStage(TMdata) %>% #
-		as.data.frame %>%#
-   		filter(stage %in% colnames(proj_matrix))
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-n_per_stage
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-data.frame(#
-		stage = stages,#
-		n = rep(0, length(stages))#
+30/37
+29/37
+37-12
+25/37
+219*.8
+219*.8 - 17
+26/3
+17/900
+42/900
+49/900
+29/40
+1/25
+8/25
+10/25
+(7.5 + 3.75)/15
+12*0.75
+11 * 0.75
+11/15
+11*0.25
+11/15 * 6
+32/41 +0.03.5
+32/41 + 0.035
+(32/41 + 0.035)*100
+100/41
+23/40 * 100
+(23/40 * 100)+5
+(164 + 13.5 + 6)
+(164 + 13.5 + 6)/365
+(164 + 13.5 + 6 + (50))/365
+(164 + 13.5 + 6 + (60))/365
+(164 + 13.5 + 6 + (70))/365
+(164 + 13.5 + 6 + (75))/365
+102/40
+102/41
+?table
+9.49/2
+12.75+8.25
+(10.5 + 6.5)/(12.75+8.25)
+.25^2 * 2
+(.25^2 * 2)^0.5
+(.25^2 * 2)^0.5 * 2
+3/8
+5/8
+6/8
+30*1.5
+40*15
+40*1.5
+13.25 - 4.5
+(276.29+8.75)/365
+16*3
+16*4
+84/12
+9/12
+9/12*14
+22+60+78+80+88+98
+22+38+18+2+8+10
+239/785
+(239+53)/785
+.492+.139
+.412+.166+.002
+.412/.58
+.166/.58
+.412*.58
+.71*.58
+98-54
+22+49+43+33+36+44
+60-11
+78-26
+80-35
+88-47
+98-52
+22+49+52+45+41+46
+library(RMark)
+?test_ddl
+data(dipper)    dipper.processed=process.data(dipper,groups=("sex"))    release.gof(dipper.processed)
+4+19+7+12
+4+17.83+7+12
+40.83/42
+40.83/42*14
+14
+(11.25+5)/(25.5 + 10.25 - 14)
+365*0.6666
+365*0.6666 - 75.89
+5/6 * 2
+5/6 * 2 + 75.89
+365*0.6666 -77.55667
+365*0.6666 -77.55667 - 6 - 13 - 1
+145.7523/2
+15*3
+11*5
+8/12*14
+4+15.33+5.5+12
+(4+15.33+5.5+12)
+(4+15.33+5.5+12)/(4+19+7+12)
+(4+19+7+12)
+(4+15.33+5.5+12)/(4+19+7+12)*14
+2.5+17.5+12
+32/42
+32/42 * 14
+4+12+6.5+12
+(4+12+6.5+12)/42 * 14
+5/6*2
+5/6*2 + 0.25
+5/6*2 + 0.5
+2577.77/12
+15/20
+15/20*6
+300 - 4*50
+300 - 4*40
+4.5/12*14
+9+9+7+9
+33.5/34 * 14
+32/34 * 14
+32/34*14
+7+8.5+7+7
+(7+8.5+7+7)/34 * 14
+(7+5.5+5.5+8.5)/34 * 14
+(7+5.5+5.5+8.5)/(9+7+9+9) * 14
+9+7+9+9
+(14.25+7.25)/(24.75+10.25-9)
+(16.5+7.75)/(24.75+10.25)
+(16.5+7.75)/(24.75+10.25)*6
+(5.25+5.5)/(22.5+10.5)
+(5.25+5.5)/(22.5+10.5)*6
+(9.75+5.5)/(24.7+10.25-5)*6
+(9.75+5.5)/(24.7+10.25-5)
+3.98/6
+(9.75+5.5)/(24.7+10.25-10)
+(9.75+5.5)/(24.7+10.25-10)*6
+5/6*2
+1.83-5/6*2
+1.83-4/6*2
+5/6*2 + 0.5
+4/6*2 + 0.5
+4/6*2
+4/6 + 0.5
+4/6*2 + 0.5
+33/34 * 14
+17.5*4
+24*4 + 1.75*4
+library(dplyr)
+library(plyr)
+600*.22
+library(Mage)
+??prepDataTransitionMatrix
+??projection.matrix
+1/0.167
+0.167*3
+setwd('/Users/KSauby/Documents/Projects/Dissertation/code')
+# load ACSampling#
+#
+setwd('/Users/KSauby/Documents/Projects/ACSampling_project')#
+library(ProjectTemplate)#
+load.project()#
+#
+# load GTMNERR#
+#
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis')#
+load.project()#
+source("/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge/01load_other_shapefiles.R", chdir = TRUE)#
+#
+# load marsico project#
+#
+setwd('/Users/KSauby/Documents/Projects/marsico-time-series')#
+load.project()
+setwd('/Users/KSauby/Documents/Projects/Dissertation/code')
+rmarkdown::render('1_Dissertation.Rmd')
+setwd('/Users/KSauby/Documents/Projects/Dissertation/code')
+rmarkdown::render('1_Dissertation.Rmd')
+setwd('/Users/KSauby/Documents/Projects/Dissertation/code')
+rmarkdown::render('1_Dissertation.Rmd')
+setwd('/Users/KSauby/Documents/Projects/Dissertation/code')
+rmarkdown::render('1_Dissertation.Rmd')
+setwd('/Users/KSauby/Documents/Projects/Dissertation/code')
+rmarkdown::render('1_Dissertation.Rmd')
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography')
+demog.plots.w.cacti
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography')
+demog.plots.w.cacti <- Plot.Info %>% #
+	filter(#
+		InDemographicStudy=="yes",#
+		Stricta_presence==1#
+	) %$% #
+	dim(.)[1]#
+demog.plots <- Plot.Info %>% filter(InDemographicStudy=="yes") %$% #
+	dim(.)[1]
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
+GIS.data.upd <- GIS.data.updated
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
+# ---------------------------------------------------------- Shorten names#
+Plot.Info <- OccupancySRSWOR.Plot.Surveys.Info#
+Plot.Surveys <- OccupancySRSWOR.Plot.Surveys#
+Plant.Surveys <- Demographic.Plant.Surveys#
+# Plant.Surveys <- Plant.Surveys.processed.26jun17#
+Plant.Info <- Demographic.Plant.Info#
+# Plant.Info <- Plant.Info.processed.26jun17#
+Plant.Surveys.All <- Demographic.Plant.Surveys#
+Plant.Info.All <- Demographic.Plant.Info#
+D.Plot.Surveys <- Demographic.Plot.Surveys#
+Original.Plant.Data <- Original.Demographic.Plant.Data#
+Seed.Abund <- Seed.Abundance#
+Seed.Abund.Surveys <- Seed.Abundance.Surveys#
+GIS.data.upd <- GIS.data.updated
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
+D.Plot.Surveys$Date %<>% as.Date("%m/%d/%Y") # Demographic Plot Surveys#
+Plant.Surveys %<>% processPlantSurveys(Plant.Info) # Plant Surveys#
+Plant.Surveys %<>% fixInconsistentDeadMissingRecords#
+#
+Plant.Info %<>% processPlantInfo(Plot.Info, Plant.Surveys)#
+#
+# edit 9164 - recorded missing three consecutive records#
+Plant.Surveys %<>%#
+mutate(#
+	Missing = replace(#
+		Missing,#
+		which(PlantID==9164 & Date=="2013-07-18"),#
+		NA#
+	),#
+	Missing = replace(#
+		Missing,#
+		which(PlantID==9164 & Date=="2014-01-10"),#
+		NA#
+	),#
+	Dead = replace(#
+		Dead,#
+		which(PlantID==9164 & Date=="2014-01-10"),#
+		NA#
+	),#
+	Missing = replace(#
+		Missing,#
+		which(PlantID==9164 & Date=="2014-06-09"),#
+		NA#
+	)#
+)#
+# measured two days in a row; remove second measurement#
+Plant.Surveys %<>% filter(!(PlantID==9282 & Date=="2014-06-15"))#
+Plant.Surveys %<>% filter(!(PlotPlantID=="9352" & Date=="2015-05-26"))#
+#
+# saved here#
+# write.csv(Plant.Surveys, "../data/Plant_Surveys_processed_26jun17.csv")#
+# write.csv(Plant.Info, "../data/Plant_Info_processed_26jun17.csv")#
+Plant.Surveys$Date %<>% as.Date#
+#
+Plant.Surveys <- Plant.Info %>%#
+	group_by(PlantID) %>%#
+	dplyr::summarise(#
+		N.PlotPlantIDs = length(unique(PlotPlantID))#
 	) %>%#
-	merge(n_per_stage, by="stage", all.x=T)
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-calculateNumberIndivperStage(TMdata)
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-n_per_stage <- calculateNumberIndivperStage(TMdata) %>% #
-		as.data.frame
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-n_per_stage
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-calculateNumberIndivperStage(TMdata) %>% #
-		as.data.frame %>%#
-   		filter(stage %in% colnames(proj_matrix))
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-n_per_stage <- calculateNumberIndivperStage(TMdata) %>% #
-		as.data.frame %>%#
-   		filter(stage %in% colnames(proj_matrix))
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-n_per_stage$stage %in% stages
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-stages[stages %in% n_per_stage$stage]
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-stages[!(stages %in% n_per_stage$stage)]
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-c(#
-				stages[!(stages %in% n_per_stage$stage)],#
-				rep(0, length(stages[!(stages %in% n_per_stage$stage)]))
-)
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-n_per_stage
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-data.frame(#
-				stage = stages[!(stages %in% n_per_stage$stage)],#
-				n = rep(0, length(stages[!(stages %in% n_per_stage$stage)]))#
-			)
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-rbind.fill(#
-			n_per_stage,#
-			data.frame(#
-				stage = stages[!(stages %in% n_per_stage$stage)],#
-				n = rep(0, length(stages[!(stages %in% n_per_stage$stage)]))#
-			)#
-		)
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-calculateNumberIndivperStage(TMdata) %>% #
-		as.data.frame %>%#
-		# remove NAs#
-   		filter(stage %in% colnames(proj_matrix)) %>%#
-		# add missing stages#
-		rbind.fill(#
-			n_per_stage,#
-			data.frame(#
-				stage = stages[!(stages %in% n_per_stage$stage)],#
-				n = rep(0, length(stages[!(stages %in% n_per_stage$stage)]))#
-			)#
-		)
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-calculateNumberIndivperStage(TMdata) %>% #
-		as.data.frame %>%#
-		# remove NAs#
-   		filter(stage %in% colnames(proj_matrix)) %>%#
-		# add missing stages#
-		rbind.fill(#
-			.,#
-			data.frame(#
-				stage = stages[!(stages %in% n_per_stage$stage)],#
-				n = rep(0, length(stages[!(stages %in% n_per_stage$stage)]))#
-			)#
-		)
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-calculateNumberIndivperStage(TMdata) %>% #
-		as.data.frame %>%#
-		# remove NAs#
-   		filter(stage %in% colnames(proj_matrix)) %>%#
-		# add missing stages#
-		rbind.fill(#
-			.,#
-			data.frame(#
-				stage = stages[!(stages %in% n_per_stage$stage)],#
-				n = rep(0, length(stages[!(stages %in% n_per_stage$stage)]))#
-			)#
-		) %>%#
-		arrange(stage)
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-stages
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-n_per_stage <- calculateNumberIndivperStage(TMdata) %>% #
-		as.data.frame %>%#
-		# remove NAs#
-   		filter(stage %in% colnames(proj_matrix)) %>%#
-		# add missing stages#
-		rbind.fill(#
-			.,#
-			data.frame(#
-				stage = stages[!(stages %in% n_per_stage$stage)],#
-				n = rep(0, length(stages[!(stages %in% n_per_stage$stage)]))#
-			)#
-		)#
-		n_per_stage$fate <- factor(#
-			trans01$stage, #
-			levels=stages, #
-			ordered=T#
-		)
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-n_per_stage <- calculateNumberIndivperStage(TMdata) %>% #
-		as.data.frame %>%#
-		# remove NAs#
-   		filter(stage %in% colnames(proj_matrix)) %>%#
-		# add missing stages#
-		rbind.fill(#
-			.,#
-			data.frame(#
-				stage = stages[!(stages %in% n_per_stage$stage)],#
-				n = rep(0, length(stages[!(stages %in% n_per_stage$stage)]))#
-			)#
-		)#
-	n_per_stage$stage %<>% factor(., levels=stages, ordered=T)#
-	n_per_stage %<>% arrange(stage)
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-n_per_stage
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-stages
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-n_per_stage <- calculateNumberIndivperStage(TMdata) %>% #
-		as.data.frame %>%#
-		# remove NAs#
-   		filter(stage %in% colnames(proj_matrix)) %>%#
-		# add missing stages#
-		rbind.fill(#
-			.,#
-			data.frame(#
-				stage = stages[!(stages %in% n_per_stage$stage)],#
-				n = rep(0, length(stages[!(stages %in% n_per_stage$stage)]))#
-			)#
-		)#
-	n_per_stage$stage %<>% factor(., levels=stages, ordered=T)
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-n_per_stage
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-n_per_stage %<>% arrange(stages)
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-n_per_stage
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-stages
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-n_per_stage <- calculateNumberIndivperStage(TMdata) %>% #
-		as.data.frame %>%#
-		# remove NAs#
-   		filter(stage %in% colnames(proj_matrix)) %>%#
-		# add missing stages#
-		rbind.fill(#
-			.,#
-			data.frame(#
-				stage = stages[!(stages %in% n_per_stage$stage)],#
-				n = rep(0, length(stages[!(stages %in% n_per_stage$stage)]))#
-			)#
-		)
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-n_per_stage$stage
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-calculateNumberIndivperStage(TMdata) %>% #
-		as.data.frame %>%#
-		# remove NAs#
-   		filter(stage %in% colnames(proj_matrix)) %>%#
-		# add missing stages#
-		rbind.fill(#
-			.,#
-			data.frame(#
-				stage = stages[!(stages %in% n_per_stage$stage)],#
-				n = rep(0, length(stages[!(stages %in% n_per_stage$stage)]))#
-			)#
-		)
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-n_per_stage <- calculateNumberIndivperStage(TMdata) %>% #
-		as.data.frame %>%#
-		# remove NAs#
-   		filter(stage %in% colnames(proj_matrix)) %>%#
-		# add missing stages#
-		rbind.fill(#
-			.,#
-			data.frame(#
-				stage = stages[!(stages %in% n_per_stage$stage)],#
-				n = rep(0, length(stages[!(stages %in% n_per_stage$stage)]))#
-			)#
-		)
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-n_per_stage
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-n_per_stage$stage
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-stages
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-n_per_stage$stage %<>% factor(., levels=stages, ordered=T)
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-n_per_stage$stage
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-n_per_stage %<>% arrange(stage)
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-n_per_stage
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-# number of parents per stage#
-	n_per_stage <- calculateNumberIndivperStage(TMdata) %>% #
-		as.data.frame %>%#
-		# remove NAs#
-   		filter(stage %in% colnames(proj_matrix)) %>%#
-		# add missing stages#
-		rbind.fill(#
-			.,#
-			data.frame(#
-				stage = stages[!(stages %in% n_per_stage$stage)],#
-				n = rep(0, length(stages[!(stages %in% n_per_stage$stage)]))#
-			)#
-		)#
-	n_per_stage$stage %<>% factor(., levels=stages, ordered=T)#
-	n_per_stage %<>% arrange(stage)
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-n_per_stage
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-n_per_stage <- calculateNumberIndivperStage(TMdata) %>% #
-		as.data.frame %>%#
-		# remove NAs#
-   		filter(stage %in% colnames(proj_matrix)) %>%#
-		# add missing stages#
-		rbind.fill(#
-			.,#
-			data.frame(#
-				stage = stages[!(stages %in% n_per_stage$stage)],#
-				n = rep(0, length(stages[!(stages %in% n_per_stage$stage)]))#
-			)#
-		)#
-	n_per_stage$stage %<>% factor(., levels=stages, ordered=T)#
-	n_per_stage %<>% arrange(stage)
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-n_per_stage
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-n_per_stage <- calculateNumberIndivperStage(TMdata) %>% #
-		as.data.frame %>%#
-		# remove NAs#
-   		filter(stage %in% colnames(proj_matrix)) %>%#
-		# add missing stages#
-		rbind.fill(#
-			.,#
-			data.frame(#
-				stage = stages[!(stages %in% n_per_stage$stage)],#
-				n = rep(0, length(stages[!(stages %in% n_per_stage$stage)]))#
-			)#
-		)#
-	n_per_stage$stage %<>% factor(., levels=stages, ordered=T)#
-	n_per_stage %<>% arrange(stage)
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-n_per_stage
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-n_per_stage <- calculateNumberIndivperStage(TMdata) %>% #
-		as.data.frame %>%#
-		# remove NAs#
-   		filter(stage %in% colnames(proj_matrix)) %>%#
-		# add missing stages#
-		rbind.fill(#
-			.,#
-			data.frame(#
-				stage = stages[!(stages %in% n_per_stage$stage)],#
-				n = rep(0, length(stages[!(stages %in% n_per_stage$stage)]))#
-			)#
-		)#
-	n_per_stage$stage %<>% factor(., levels=stages, ordered=T)#
-	n_per_stage %<>% arrange(stage)
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-n_per_stage
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-n_per_stage <- calculateNumberIndivperStage(TMdata) %>% #
-		as.data.frame %>%#
-		# remove NAs#
-   		filter(stage %in% colnames(proj_matrix)) %>%#
-		# add missing stages#
-		rbind.fill(#
-			.,#
-			data.frame(#
-				stage = stages[!(stages %in% n_per_stage$stage)],#
-				n = rep(0, length(stages[!(stages %in% n_per_stage$stage)]))#
-			)#
-		)#
-	n_per_stage$stage %<>% factor(., levels=stages, ordered=T)#
-	n_per_stage %<>% arrange(stage)
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-n_per_stage
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-n_per_stage <- calculateNumberIndivperStage(TMdata) %>% #
-		as.data.frame %>%#
-		# remove NAs#
-   		filter(stage %in% colnames(proj_matrix))
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-n_per_stage
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-n_per_stage <- calculateNumberIndivperStage(TMdata) %>% #
-		as.data.frame %>%#
-		# remove NAs#
-   		filter(stage %in% colnames(proj_matrix)) %>%#
-		# add missing stages#
-		rbind.fill(#
-			.,#
-			data.frame(#
-				stage = stages[!(stages %in% stage)],#
-				n = rep(0, length(stages[!(stages %in% stage)]))#
-			)#
-		)#
-	n_per_stage$stage %<>% factor(., levels=stages, ordered=T)#
-	n_per_stage %<>% arrange(stage)
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-n_per_stage <- calculateNumberIndivperStage(TMdata) %>% #
-		as.data.frame %>%#
-		# remove NAs#
-   		filter(stage %in% colnames(proj_matrix)) %>%#
-		# add missing stages#
-		rbind.fill(#
-			.,#
-			data.frame(#
-				stage = stages[!(stages %in% .$stage)],#
-				n = rep(0, length(stages[!(stages %in% .$stage)]))#
-			)#
-		)#
-	n_per_stage$stage %<>% factor(., levels=stages, ordered=T)#
-	n_per_stage %<>% arrange(stage)
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-n_per_stage
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-n_per_stage <- calculateNumberIndivperStage(TMdata) %>% #
-		as.data.frame %>%#
-		# remove NAs#
-   		filter(stage %in% colnames(proj_matrix)) %>%#
-		# add missing stages#
-		rbind.fill(#
-			.,#
-			data.frame(#
-				stage = stages[!(stages %in% .$stage)],#
-				n = rep(0, length(stages[!(stages %in% .$stage)]))#
-			)#
-		)#
-	n_per_stage$stage %<>% factor(., levels=stages, ordered=T)#
-	n_per_stage %<>% arrange(stage)
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-n_per_stage
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-n_per_stage <- calculateNumberIndivperStage(TMdata) %>% #
-		as.data.frame %>%#
-		# remove NAs#
-   		filter(stage %in% colnames(proj_matrix)) %>%#
-		# add missing stages#
-		rbind.fill(#
-			.,#
-			data.frame(#
-				stage = stages[!(stages %in% .$stage)],#
-				n = rep(0, length(stages[!(stages %in% .$stage)]))#
-			)#
-		)#
-	n_per_stage$stage %<>% factor(., levels=stages, ordered=T)#
-	n_per_stage %<>% arrange(stage)
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-n_per_stage
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-clonal_repro_dataset_mod <- clonal_repro_dataset %>% #
-		rowwise() %>%#
-		mutate(#
-			parent_stage=cut(#
-				SizewClones_t, #
-				SizeClass, #
-				include.lowest=T, #
-				labels=FALSE#
-			),#
-			offspring_stage=cut(#
-				Offspring.First_Size, #
-				SizeClass, #
-				include.lowest=T, #
-				labels=FALSE#
-			)#
-		)#
-	clone_table <- table(#
-		clonal_repro_dataset_mod$offspring_stage, #
-		clonal_repro_dataset_mod$parent_stage#
+	merge(Plant.Surveys, by="PlantID")#
+Plant.Surveys <- Plant.Info %>%#
+	dplyr::select(PlotPlantID, Tag_Number, Species) %>%#
+	merge(Plant.Surveys, by="PlotPlantID")#
+#
+Plant.Surveys.by.Plant <- Plant.Surveys %>% #
+	processSurveysMergedbyPlant(Plant.Info)#
+Plant.Surveys.by.Plant %>% filter(AllSurveyed==F) %>% write.csv("incompletesurveys.csv")#
+#
+Plant.Surveys %>% filter(N.PlotPlantIDs > 1) %>% filter(Dead==1 | Missing == 1) %>% write.csv("deadmissing.csv")#
+#
+h <- function(w) if( any( grepl( "no non-missing arguments to max", w) ) ) invokeRestart( "muffleWarning" )#
+Plant.Surveys.by.Plant <- withCallingHandlers(#
+	createPlantInsectPresence(Plant.Surveys.by.Plant),#
+	warning = h#
+)#
+#
+# find and keep only first dead/missing observation#
+temp <- Plant.Surveys.by.Plant %>% findFirstDeadMissingObservation#
+# create Fecundity and RGR dataset#
+Plant.Surveys.by.Year <- createPlantSurveysbyYear(Plant.Surveys.by.Plant)#
+#
+# --------------------------------------------------------------------------- ##
+# which plants are missing size surveys in the spring/summer that were NOT dead/missing, and that have a photo?#
+# which plants are missing fruit/flowers surveys in the spring/summer that were NOT dead/missing, and that have a photo?#
+#
+# these plantID and fecundity year combos are missing spring/summer surveys#
+temp1 <- Plant.Surveys.by.Year %>% #
+	filter(#
+		is.na(SurveyDate_SpringSummer),#
+		DeadMissingbyEndofYear != 1#
+	) %>%#
+	dplyr::select(PlantID, FecundityYear)#
+temp1 <- Plant.Surveys.by.Plant %>%#
+	filter(#
+		Dead != 1 & Missing != 1,#
+		month(Date) == 5 |#
+		month(Date) == 6 |#
+		month(Date) == 7 |#
+		month(Date) == 8 |#
+		month(Date) == 9,#
+		is.na(Size_t)#
+	) %>%#
+	merge(#
+		temp1,#
+		by = c("PlantID", "FecundityYear")#
+	) %>%#
+	filter(!(#
+			PlantID == 7548 & Date == "2014-09-05" |#
+			PlantID == 7773 & Date == "2014-09-21" |#
+			PlantID == 7774 & Date == "2014-09-21" |#
+			PlantID == 7778 & Date == "2014-09-21" |#
+			PlantID == 7791 & Date == "2014-09-21" |#
+			PlantID == 7792 & Date == "2014-09-21" |#
+			PlantID == 7793 & Date == "2014-09-21" |#
+			PlantID == 7794 & Date == "2014-09-21" |#
+			PlantID == 7795 & Date == "2014-09-21" |#
+			PlantID == 7807 & Date == "2014-09-21" |#
+			PlantID == 7810 & Date == "2014-09-21" |#
+			PlantID == 8088 & Date == "2014-09-21" |#
+			PlantID == 8088 & Date == "2014-06-28" |#
+			PlantID == 8088 & Date == "2014-06-04" |#
+			PlantID == 8647 & Date == "2013-07-18" |#
+			PlantID == 8652 & Date == "2013-07-23" |#
+			PlantID == 8653 & Date == "2013-07-23" |#
+			PlantID == 9156 & Date == "2014-06-10" |#
+			PlantID == 9156 & Date == "2014-09-11" |#
+			PlantID == 9561 & Date == "2014-06-24" |#
+			PlantID == 9561 & Date == "2014-05-12" |#
+			PlantID == 9682 & Date == "2014-06-02" |#
+			PlantID == 9024 & Date == "2014-06-25" |#
+			PlantID == 9220 & Date == "2013-07-18" |#
+			PlantID == 9220 & Date == "2013-05-21" |#
+			PlantID == 9371 & Date == "2015-05-26"#
+	)) %>%#
+	dplyr::select(PlantID, Date)#
+if (dim(temp)[1] > 0) {#
+	write.csv(temp1, "SpringSummerSurveyswoSizeFruit.csv")#
+	warning("Some plants are missing size/fruit records for spring/summer surveys. Data written to csv file.")#
+}#
+# --------------------------------------------------------------------------- ##
+#
+Plant.Info.Analysis <- createPlantInfobyPlant(Plant.Info, Plant.Surveys.by.Year, Plant.Surveys.by.Plant)#
+#
+Plant.Surveys.by.Year <- Plant.Info.Analysis %>%#
+	merge(Plant.Surveys.by.Year, by="PlantID")#
+#
+Plant.Surveys.by.Year[which(is.na(Plant.Surveys.by.Year$OutsideOfPlot)),]$OutsideOfPlot <- ""#
+#
+Plant.Surveys.by.Year %<>% filter(OutsideOfPlot!="Yes")#
+#
+Plant.Surveys.by.Plant <- Plant.Info.Analysis %>%#
+	merge(Plant.Surveys.by.Plant, by="PlantID")
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
+Plant.Info.Analysis %<>% #
+	rowwise() %>%#
+	mutate(#
+		DaysBetweenFirstLastSurvey = (as.Date(LastDateAlive) + 1) - (as.Date(First.Survey.Date.Alive) - 1)#
+	)#
+	# createMothOccupancyVariable#
+Plant.Info.stricta <- Plant.Info.Analysis %>% filter(Species=="Opuntia stricta")#
+Plant.Info.pusilla <- Plant.Info.Analysis %>% filter(Species=="Opuntia pusilla")#
+write.csv(Plant.Info.Analysis, "../data/Plant_Info_Analysis.csv")#
+write.csv(Plant.Info.stricta, "../data/Plant_Info_Analysis_stricta.csv")#
+write.csv(Plant.Info.pusilla, "../data/Plant_Info_Analysis_pusilla.csv")#
+# --------------------------------------------------------------------------- ##
+# Survival#
+# --------------------------------------------------------------------------- ##
+#
+Plant.Info.Survival.stricta <- Plant.Info.Analysis %>% #
+	filter(Species=="Opuntia stricta") %>%#
+	arrange(desc(maxDaysAlive)) %>%#
+	as.data.frame %>%#
+	dplyr::select(#
+		maxDaysAlive,#
+		HabitatType,#
+		Island,#
+		Network,#
+		MEPlantPres,#
+		CAPlantPres,#
+		OldMothPlantPres,#
+		RecruitmentMode,#
+		minDaysAlive,#
+		AliveatEndofStudy#
 	) %>% #
-		as.data.frame.matrix %>% #
-		data.matrix#
-	# number of parents per stage#
-	n_per_stage <- calculateNumberIndivperStage(TMdata) %>% #
-		as.data.frame %>%#
-		# remove NAs#
-   		filter(stage %in% colnames(proj_matrix)) %>%#
-		# add missing stages#
-		rbind.fill(#
-			.,#
-			data.frame(#
-				stage = stages[!(stages %in% .$stage)],#
-				n = rep(0, length(stages[!(stages %in% .$stage)]))#
-			)#
-		)#
-	n_per_stage$stage %<>% factor(., levels=stages, ordered=T)#
-	n_per_stage %<>% arrange(stage)#
-	# make the clone transition matrix the same dimensions as growth/retrogression/survival/fecundity transition matrix#
-	fill = matrix(#
-		0, length(stages), 3, #
-		dimnames=list(#
-			rownames(proj_matrix), #
-			colnames(proj_matrix)[1:3])#
+	.[complete.cases(.),]#
+# Plant.Info.Survival %<>% #
+	#renamePatches %>%#
+	#createDeadFactorVariable#
+write.csv(Plant.Info.Survival.stricta, "../data/Plant_Info_Survival_stricta.csv", row.names = F)
+getwd()
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
+setwd("/Users/KSauby/Documents/Projects/GTMNERR_analysis")#
+cache("Plant.Info.Survival")#
+cache("Plant.Info.Survival.stricta")
+setwd("/Users/KSauby/Documents/Projects/GTMNERR_analysis/data")#
+cache("Plant.Info.Survival")#
+cache("Plant.Info.Survival.stricta")
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
+# make sure all clones have parents before this#
+#
+# plant info needs to have first survey for each plant#
+#
+# ---------------------------------------------------------------------------- ##
+Plant.Surveys.by.Year.largest.parent <- calculateClonalReproduction(#
+	Plant.Surveys.by.Year, #
+	Plant.Surveys.by.Plant, #
+	Plant.Info.Analysis,#
+	ParentChoice="largest"#
+)#
+#
+clonal_reproduction_info_for_transition_matrix.largest.parent <- #
+									Plant.Surveys.by.Year.largest.parent[[2]]#
+Plant.Surveys.by.Year.largest.parent <- #
+									Plant.Surveys.by.Year.largest.parent[[1]]#
+# ---------------------------------------------------------------------------- ##
+Plant.Surveys.by.Year.random.parent <- calculateClonalReproduction(#
+	Plant.Surveys.by.Year, #
+	Plant.Surveys.by.Plant, #
+	Plant.Info.Analysis,#
+	ParentChoice="random"#
+)#
+#
+clonal_reproduction_info_for_transition_matrix.random.parent <- #
+									Plant.Surveys.by.Year.random.parent[[2]]#
+Plant.Surveys.by.Year.random.parent <- #
+									Plant.Surveys.by.Year.random.parent[[1]]#
+#
+# ---------------------------------------------------------------------------- ##
+Plant.Surveys.by.Year.random.largest.parent <- calculateClonalReproduction(#
+	Plant.Surveys.by.Year, #
+	Plant.Surveys.by.Plant, #
+	Plant.Info.Analysis,#
+	ParentChoice="random.largest"#
+)#
+#
+clonal_reproduction_info_for_transition_matrix.random.largest.parent <- #
+								Plant.Surveys.by.Year.random.largest.parent[[2]]#
+Plant.Surveys.by.Year.random.largest.parent <- #
+								Plant.Surveys.by.Year.random.largest.parent[[1]]#
+# ---------------------------------------------------------------------------- ##
+Plant.Surveys.by.Year.no.parent.assignment <- calculateClonalReproduction(#
+	Plant.Surveys.by.Year, #
+	Plant.Surveys.by.Plant, #
+	Plant.Info.Analysis,#
+	ParentChoice="none"#
+)#
+#
+Plant.Surveys.by.Year.no.parent.assignment <- #
+								Plant.Surveys.by.Year.no.parent.assignment[[1]]#
+setwd("/Users/KSauby/Documents/Projects/GTMNERR_analysis")#
+cache("Plant.Surveys.by.Year.largest.parent")#
+cache("Plant.Surveys.by.Year.random.parent")#
+cache("Plant.Surveys.by.Year.no.parent.assignment")#
+cache("Plant.Surveys.by.Year.random.largest.parent")#
+cache("clonal_reproduction_info_for_transition_matrix.largest.parent")#
+cache("clonal_reproduction_info_for_transition_matrix.random.parent")#
+cache("clonal_reproduction_info_for_transition_matrix.random.largest.parent")
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
+Plant.Surveys.by.Year.largest.parent %<>% processPlantSurveysbyYear#
+Plant.Surveys.by.Year.random.parent %<>% processPlantSurveysbyYear#
+Plant.Surveys.by.Year.random.largest.parent %<>% processPlantSurveysbyYear#
+Plant.Surveys.by.Year.no.parent.assignment %<>% processPlantSurveysbyYear#
+# process original plant data (before new PlantIDs were given) for occupancy surveys#
+Original.Plant.Data %<>% processOriginalPlantData#
+#
+# --------------------------------------------------------------------------- ##
+Plant.Surveys.by.Year.largest.parent %>% write.csv("../data/Plant_Surveys_by_Year_largest_parent.csv")#
+Plant.Surveys.by.Year.random.parent %>% write.csv("../data/Plant_Surveys_by_Year_random_parent.csv")#
+Plant.Surveys.by.Year.random.largest.parent %>% write.csv("../data/Plant_Surveys_by_Year_random_largest_parent.csv")#
+Plant.Surveys.by.Year.no.parent.assignment %>% write.csv("../data/Plant_Surveys_by_Year_no_uncertain_parent_assignment.csv")#
+# ---------------------------------------------------------------------------
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
+# ---------------------------------------------------- DATA CHECKING#
+# compare these numbers to the numbers after data is further processed#
+#
+# number of CACA observations#
+length(Plot.Surveys[which(Plot.Surveys$CACA_on_Stricta=="Yes"), ]$CACA_on_Stricta)#
+# number of MEPR observations#
+length(Plot.Surveys[which(Plot.Surveys$MEPR_on_Stricta=="Yes"), ]$MEPR_on_Stricta)#
+# don't exclude all plots for the demography study#
+#
+# --------------------------------------------------------------------------- ##
+# --------------- Occupancy Plot Info --------------------------------------- ##
+# --------------------------------------------------------------------------- ##
+#
+Plot.Info %<>% processOccupancyPlotInfo(Plot.Vegetation, GIS.data.upd)#
+#
+# check errors by keeping track of dataframe size#
+Plot.Info.Size = as.data.frame(matrix(NA, 1, 1))#
+Plot.Info.Size[, 1] = dim(Plot.Info)[1]#
+#
+Plot.Surveys %<>% processOccupancyPlotSurveys(Plot.Info)#
+#
+write.csv(Plot.Info, "../data/Plot_Info.csv")#
+write.csv(Plot.Surveys, "../data/Plot_Surveys.csv")
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
+Plant.Surveys.by.Year.largest.parent %<>% estimateCactusDensityperPlot(Plot.Info)
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
+Plant.Surveys.by.Year.random.parent %<>% estimateCactusDensityperPlot(Plot.Info)#
+Plant.Surveys.by.Year.random.largest.parent %<>% estimateCactusDensityperPlot(Plot.Info)#
+Plant.Surveys.by.Year.no.parent.assignment %<>% estimateCactusDensityperPlot(Plot.Info)
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
+# --------------------------------------------------------------------------- ##
+# (5) Merge datasets together#
+# --------------------------------------------------------------------------- ##
+Plot.Surveys %<>% changeVariableNames#
+#
+column_list <- c(#
+	"P_plant_survey", #
+	"P_Ca", #
+	"P_Me", #
+	"P_Ch", #
+	"P_Umoth", #
+	"P_Omoth", #
+	"S_plant_survey", #
+	"S_Ca", #
+	"S_Me", #
+	"S_Ch", #
+	"S_Umoth", #
+	"S_Omoth"#
+)#
+#
+A <- mergePlantSurveysPlotSurveys(Plot.Surveys, Plant.Surveys)#
+B <- mergePlotSurveysDemoPlotSurveys(D.Plot.Surveys, Plant.Surveys)#
+C <- createPlotSurveysfromPlantSurveys(Plant.Surveys, Plant.Info, Plot.Surveys, #
+	D.Plot.Surveys)#
+D <- createPlotSurveysfromOrigPlantSurveys(Original.Plant.Data)#
+E <- rbind.fill(A, B, C, D)				#
+E.check <- merge(Plot.Info, E, by="Tag_Number")#
+# FIX DATA FORMAT#
+E[,c(column_list,#
+	"P_plot_survey", #
+	"P_PC", #
+	"P_H", #
+	"S_plot_survey", #
+	"S_PC", #
+	"S_H"#
+)] %<>% apply(., 2, as.numeric)#
+E[,c(column_list,#
+	"P_plot_survey", #
+	"P_PC", #
+	"P_H", #
+	"S_plot_survey", #
+	"S_PC", #
+	"S_H"#
+)] %<>% apply(., 2, NA_Function)#
+Z <- mergeDuplicateSurveys(E)#
+G <- do.call(rbind.data.frame, Z)#
+names(G)[1] <- "Tag_Number"#
+G[,c(#
+	"P_plot_survey", #
+	"P_plant_survey", #
+	"P_Ca", #
+	"P_Me", #
+	"P_Ch", #
+	"P_Umoth", #
+	"P_Omoth", #
+	"P_PC", #
+	"P_H", #
+	"S_plot_survey", #
+	"S_plant_survey", #
+	"S_Ca", #
+	"S_Me", #
+	"S_Ch", #
+	"S_Umoth", #
+	"S_Omoth", #
+	"S_PC", #
+	"S_H"#
+)] %<>% apply(., 2, as.numeric)#
+G[,c(#
+	"P_plot_survey", #
+	"P_plant_survey", #
+	"P_Ca", #
+	"P_Me", #
+	"P_Ch", #
+	"P_Umoth", #
+	"P_Omoth", #
+	"P_PC", #
+	"P_H", #
+	"S_plot_survey", #
+	"S_plant_survey", #
+	"S_Ca", #
+	"S_Me", #
+	"S_Ch", #
+	"S_Umoth", #
+	"S_Omoth", #
+	"S_PC", #
+	"S_H"#
+)] %<>% apply(., 2, NA_Function)#
+#
+# --------------------------------------------------------------------------- ##
+# (6)  Merge with other plot surveys#
+# --------------------------------------------------------------------------- ##
+#
+# ------------------------------------------------------- PREP OLD PLOT SURVEYS#
+# remove extra columns#
+# Plot_Surveys.mod <-  Plot_Surveys %>% dplyr::select(-c(First_Observer_Initials, Second_Observer_Initials, DACT_on_Pusilla, DACT_on_Stricta))#
+#
+Plot_Surveys_mod <- Plot.Surveys %>%#
+	dplyr::select(#
+		Tag_Number,#
+		Date, #
+		Pictures, #
+		PictureDirection, #
+		Notes, #
+		Pusilla, #
+		P_Ca, #
+		P_Me, #
+		P_Ch, #
+		P_Umoth, #
+		P_Omoth, #
+		Old_Moth_Evidence_recent_Pusilla, #
+		P_PC, #
+		P_H, #
+		Stricta, #
+		S_Ca, #
+		S_Me, #
+		S_Ch, #
+		S_Umoth, #
+		S_Omoth, #
+		Old_Moth_Evidence_recent_Stricta,#
+		S_PC, #
+		S_H#
 	)#
-	clone_table <- merge(#
-		fill, #
-		clone_table, #
-		by="row.names", #
-		all=T)#
-	rownames(clone_table) <- clone_table$Row.names#
-	clone_table[is.na(clone_table)] <- 0#
-	# reorder rows#
-	clone_table %<>% .[match(stages, .$Row.names), ] %>%#
-		.[, -1] %>% #
-		as.matrix(rownames="Row.names")
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-clone_table
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-n_per_stage
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-clone_table / n_per_stage$n
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-clone_table / vector(n_per_stage$n)
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-vector(n_per_stage$n)
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-as.vector(n_per_stage$n)
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-clone_table / as.vector(n_per_stage$n)
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-clone_table
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-clone_table / as.vector(n_per_stage$n)
-12/(443+162+84+12)
-0.1463415/12
-12/0.1463415
-12/82
-84/82
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-t(t(clone_table) / as.vector(n_per_stage$n))
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-n_per_stage$n
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-clone_table
-12/82
-84/82
-162/82
-443/82
-as.vector(clone_table)
-matrix(as.vector(clone_table),nrow=6,ncol=6)
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-test_clone_table <- c(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,13,0,0,0,0,0,#
-	122,32,14,0,0,0,443,162,84,12)#
-matrix(test_clone_table,nrow=6,ncol=6)
-stages()
-stages
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-test_clone_table <- c(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,13,0,0,0,0,0,#
-	122,32,14,0,0,0,443,162,84,12)#
-matrix(#
-	test_clone_table,#
-	nrow=6,#
-	ncol=6,#
-	dimnames=list(#
-		c("Seed","Seedling","1","2","3","4"), #
-		c("Seed","Seedling","1","2","3","4")#
+#
+# add extra columns to match removed.duplicates#
+Plot_Surveys_mod$S_plant_survey <- NA#
+Plot_Surveys_mod$P_plant_survey <- NA#
+names(Plot_Surveys_mod)[c(6, 15)] <- c("P_plot_survey", "S_plot_survey")#
+#
+# create file with plot surveys from before demography study#
+H = filter(Plot_Surveys_mod, Date < "2012-12-02")#
+# create file with plot surveys after demography study started, but tags not included in the demography study#
+#	this is because filtered only surveys for plots included IN the demography study#
+I = Plot_Surveys_mod %>% #
+	filter(Date > "2012-12-01", !(Tag_Number %in% Plant.Surveys$Tag_Number))#
+#
+# add CACA and MEPR presence columns#
+#
+# ---------------------- MERGE OLD PLOT SURVEYS WITH NEWLY CREATED PLOT SURVEYS#
+##################
+################# This is the problem, I don't think it is merging right#
+dim(OccupancySRSWOR.Plot.Surveys)#
+#
+Plot_Surveys <- rbind.fill(#
+	G, # 3412#
+	H, # 2072#
+	I  # 5439#
+)#
+#
+# create stricta and pusilla variables#
+Plot_Surveys %<>%#
+	mutate(#
+		Stricta = apply(cbind(S_plot_survey, S_plant_survey), 1, Maximum),#
+		Pusilla = apply(cbind(P_plot_survey, P_plant_survey), 1, Maximum)#
 	)#
-)
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-clone_table
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-n_per_stage$n
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-calculateTransitionRates <- function(transition_counts, n_per_stage) {#
-	t(t(clone_table) / n_per_stage)#
-}
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-calculateTransitionRates(#
-		clone_table, #
-		as.vector(n_per_stage$n)
-)
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-x[which(x==NaN)]
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-x <- t(t(clone_table) / n_per_stage)
-x <- t(t(clone_table) / as.vector(n_per_stage$n))
-x
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-x[which(x==NaN)]
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-x[which(x=="NaN")]
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-x[which(x=="NaN")] <- 0
-x
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-calculateTransitionRates <- function(transition_counts, n_per_stage) {#
-	x <- t(t(clone_table) / n_per_stage)#
-	x[which(x=="NaN")] <- 0#
-	return(x)#
-}
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-calculateTransitionRates(#
-		clone_table, #
-		as.vector(n_per_stage$n)#
-	)
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-as.vector(n_per_stage$n)
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-clone_table
-clone_table[,6]/82
-clone_table[,5]/280
-clone_table[,4]/174
-calculateTransitionRates(#
-		clone_table, #
-		as.vector(n_per_stage$n)#
-	) %>% as.vector
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-c(#
-	rep(0, 20),#
-	0.07471264,#
-	rep(0, 5),#
-	0.43571429, 0.11428571, 0.05000000,#
-	rep(0, 3),#
-	5.40243902, 1.97560976, 1.02439024, 0.14634146#
-)
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-test_transition_rates <- c(#
-	rep(0, 20),#
-	0.07471264,#
-	rep(0, 5),#
-	0.43571429, 0.11428571, 0.05000000,#
-	rep(0, 3),#
-	5.40243902, 1.97560976, 1.02439024, 0.14634146#
-)
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-matrix(#
-	test_transition_rates,#
-	nrow=6,#
-	ncol=6,#
-	dimnames=list(#
-		c("Seed","Seedling","1","2","3","4"), #
-		c("Seed","Seedling","1","2","3","4")#
+#
+# --------------------------------------------------------------------------- ##
+# ERROR MESSAGE#
+# --------------------------------------------------------------------------- ##
+# for which records do plot and plant surveys not match?#
+Plot_Surveys %>% #
+	filter(P_plot_survey==1 & P_plant_survey!=1) %>% #
+	write.csv("/Users/KSauby/Documents/Projects/GTMNERR_analysis/data/pusilla_mismatch_plot_plant_surveys_A.csv")#
+Plot_Surveys %>% #
+	filter(is.na(P_plot_survey) & P_plant_survey==1) %>% #
+	write.csv("/Users/KSauby/Documents/Projects/GTMNERR_analysis/data/pusilla_mismatch_plot_plant_surveys_B.csv")#
+Plot_Surveys %>% #
+	filter(S_plot_survey==1 & S_plant_survey!=1) %>% #
+	write.csv("/Users/KSauby/Documents/Projects/GTMNERR_analysis/data/stricta_mismatch_plot_plant_surveys_A.csv")#
+Plot_Surveys %>% #
+	filter(is.na(S_plot_survey) & S_plant_survey==1) %>% #
+	write.csv("/Users/KSauby/Documents/Projects/GTMNERR_analysis/data/stricta_mismatch_plot_plant_surveys_B.csv")#
+#
+# --------------------------------------------------------------------------- ##
+# (6)  remove temp files from workspace#
+# --------------------------------------------------------------------------- ##
+#
+rm(A,B,C,D,E,Z,G)#
+# --------------------------------------------------------------------------- ##
+# CHECK THIS FILE TO SEE THAT CACTUS PRESENCE FROM PLOT SURVEYS MATCHES CACTUS PRESENCE FROM PLANT SURVEYS#
+# --------------------------------------------------------------------------- ##
+# WHY IS THERE A TAG NUMBER = NA?#
+# STILL NOT CORRECT#
+# LOTS OF NAS FOR STRICTA AND PUSILLA FOR THEIR PRESENCE/ABSENCE#
+#
+Plot.Info <- Plot.Surveys %>% #
+	group_by(Tag_Number) %>%#
+	summarise(#
+		Pusilla_presence = mysum2(Pusilla),#
+		Stricta_presence = mysum2(Stricta),#
+		Cactus_presence = mysum2(c(Pusilla,Stricta))#
+	) %>%#
+	merge(Plot.Info, by="Tag_Number")
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
+# -------- CREATE RGR DATASETS ---------------------------------------------- ##
+# dim(Plant.Surveys.by.Year) 			7731 - 4812 (missing RGR) = 2919#
+#
+# 2919#
+Plant.Surveys.RGR <- Plant.Surveys.by.Year %>% 	#
+	as.data.frame %>%#
+ 	droplevels %>% #
+ 	dplyr::select(#
+ 		Species,#
+		PlantID,#
+		RecruitmentMode,#
+ 		Network,#
+ 		Island,#
+		HabitatType,#
+		cactus_density_per_plot,#
+		RGR_Size365,#
+		max_RGR_Size365,#
+		# insects#
+		CA_t_1,#
+		ME_t_1,#
+		Moth_Evidence_t_1,#
+		# size#
+		Size_t_1,#
+		SizewClones_t_1#
+ 	) %>%#
+	.[complete.cases(.),]#
+Plant.Surveys.RGR.stricta <- Plant.Surveys.RGR %>% #
+	filter(Species=="Opuntia stricta")#
+Plant.Surveys.RGR.stricta %<>% #
+	mutate(#
+		Ln_Size_t_1_st = arm::rescale(log(Size_t_1)),	#
+		Ln_SizewClones_t_1_st = arm::rescale(log(SizewClones_t_1)),	#
+		cactus_density_per_plot_st = arm::rescale(cactus_density_per_plot)		#
 	)#
-)
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-calculateTransitionRates(#
-		clone_table, #
-		as.vector(n_per_stage$n)#
-	)
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-c(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,13,0,0,0,0,0,#
-	122,32,14,0,0,0,443,162,84,12) %>%#
-	matrix(#
-		.,#
-		nrow=6,#
-		ncol=6,#
-		dimnames=list(#
-			c("Seed","Seedling","1","2","3","4"), #
-			c("Seed","Seedling","1","2","3","4")#
-		)#
-	)
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-c(#
-	rep(0, 20),#
-	0.07471264,#
-	rep(0, 5),#
-	0.43571429, 0.11428571, 0.05000000,#
-	rep(0, 3),#
-	5.40243902, 1.97560976, 1.02439024, 0.14634146#
-) %>%#
-	matrix(#
-		.,#
-		nrow=6,#
-		ncol=6,#
-		dimnames=list(#
-			c("Seed","Seedling","1","2","3","4"), #
-			c("Seed","Seedling","1","2","3","4")#
-		)#
-	)
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-calculateTransitionRates <- function(transition_counts, n_per_stage) {#
-	x <- t(t(clone_table) / n_per_stage)#
-	x[which(x=="NaN")] <- 0#
-	return(x)#
+# --------------------------------------------------------------------------- ##
+Plant.Surveys.RGR.stricta %>% write.csv("../data/Plant_Surveys_RGR_stricta.csv")#
+#
+setwd("/Users/KSauby/Documents/Projects/GTMNERR_analysis")#
+cache("Plant.Surveys.RGR")#
+cache("Plant_Surveys_RGR_stricta")
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
+Plant.Surveys.by.Year %<>% estimateCactusDensityperPlot(Plot.Info)
+head(Plot.Info)
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
+Plant_Info_Big_Plants
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
+Plant_Info_Big_Plants <- filter(Plant_Info_All, InBigPlantStudy=="Yes")#
+# merge with Plant_Surveys#
+Plant_Info_Big_Plants %<>%#
+	dplyr::select(PlantID, HostSpecies, Plant_Notes) %>%#
+	merge(., Plant_Surveys_All, by = "PlantID") %>%#
+	processPlantSurveys
+ls()
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
+Plant_Info_Big_Plants <- filter(Demographic.Plant.Info, InBigPlantStudy=="Yes")
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
+Plant_Info_Big_Plants %<>%#
+	dplyr::select(PlantID, HostSpecies, Plant_Notes) %>%#
+	merge(., Plant_Surveys_All, by = "PlantID") %>%#
+	processPlantSurveys
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
+Plant_Info_Big_Plants <- filter(Demographic.Plant.Info, InBigPlantStudy=="Yes")#
+# merge with Plant_Surveys#
+Plant_Info_Big_Plants %<>%#
+	dplyr::select(PlantID, HostSpecies, Plant_Notes) %>%#
+	merge(., Demographic.Plant.Surveys, by = "PlantID") %>%#
+	processPlantSurveys
+?processPlantSurveys
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
+# save only info from Big Plant Study#
+Plant_Info_Big_Plants <- filter(Demographic.Plant.Info, InBigPlantStudy=="Yes")#
+# merge with Plant_Surveys#
+Plant_Surveys_Big_Plants <- Plant_Info_Big_Plants %>%#
+	dplyr::select(PlantID, HostSpecies, Plant_Notes) %>%#
+	merge(., Demographic.Plant.Surveys, by = "PlantID") %>%	#
+	processPlantSurveys(., Plant_Info_Big_Plants)
+head(Plant_Surveys_Big_Plants)
+dim(Plant_Surveys_Big_Plants)
+Plant_Surveys_Big_Plants$Size_t
+Plant_Surveys_Big_Plants %>% filter(!(is.na(Size_t)))
+Plant_Surveys_Big_Plants %>% filter(!(is.na(Size_t))) %>% arrange(Size_t)
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
+# --------------------------------------------------------------------------- ##
+# --------------- BIG PLANT STUDY ------------------------------------------- ##
+# --------------------------------------------------------------------------- ##
+#
+# FOR MOST I MEASURED SIZE IN CM INSTEAD OF SEGMENTS#
+#
+# save only info from Big Plant Study#
+Plant_Info_Big_Plants <- filter(Demographic.Plant.Info, InBigPlantStudy=="Yes")#
+# merge with Plant_Surveys#
+Plant_Surveys_Big_Plants <- Plant_Info_Big_Plants %>%#
+	dplyr::select(PlantID, HostSpecies, Plant_Notes) %>%#
+	merge(., Demographic.Plant.Surveys, by = "PlantID") %>%	#
+	processPlantSurveys(., Plant_Info_Big_Plants)#
+# --------------------------------------------------------------------------- ##
+setwd("/Users/KSauby/Documents/Projects/GTMNERR_analysis")#
+cache("Plant.Info.Big.Plants")
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
+# --------------------------------------------------------------------------- ##
+# --------------- BIG PLANT STUDY ------------------------------------------- ##
+# --------------------------------------------------------------------------- ##
+#
+# FOR MOST I MEASURED SIZE IN CM INSTEAD OF SEGMENTS#
+#
+# save only info from Big Plant Study#
+Plant.Info.Big.Plants <- filter(Demographic.Plant.Info, InBigPlantStudy=="Yes")#
+# merge with Plant_Surveys#
+Plant.Surveys.Big.Plants <- Plant.Info.Big.Plants %>%#
+	dplyr::select(PlantID, HostSpecies, Plant_Notes) %>%#
+	merge(., Demographic.Plant.Surveys, by = "PlantID") %>%	#
+	processPlantSurveys(., Plant.Info.Big.Plants)#
+# --------------------------------------------------------------------------- ##
+setwd("/Users/KSauby/Documents/Projects/GTMNERR_analysis")#
+cache("Plant.Info.Big.Plants")#
+cache("Plant.Surveys.Big.Plants")
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
+Plant.Info.Big.Plants
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
+# ---------------------------------------------------------- Shorten names#
+Plot.Info <- OccupancySRSWOR.Plot.Surveys.Info#
+Plot.Surveys <- OccupancySRSWOR.Plot.Surveys#
+Plant.Surveys <- Demographic.Plant.Surveys#
+# Plant.Surveys <- Plant.Surveys.processed.26jun17#
+Plant.Info <- Demographic.Plant.Info#
+# Plant.Info <- Plant.Info.processed.26jun17#
+Plant.Surveys.All <- Demographic.Plant.Surveys#
+Plant.Info.All <- Demographic.Plant.Info#
+D.Plot.Surveys <- Demographic.Plot.Surveys#
+Original.Plant.Data <- Original.Demographic.Plant.Data#
+Seed.Abund <- Seed.Abundance#
+Seed.Abund.Surveys <- Seed.Abundance.Surveys#
+GIS.data.upd <- GIS.data.updated
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
+# --------------------------------------------------------------------------- ##
+# --------------- Load Shapefiles ------------------------------------------- ##
+# --------------------------------------------------------------------------- ##
+#
+# polygons denoting island boundaries#
+flagler.1m.evel.islands.polygons <- readOGR(dsn="/Users/KSauby/Documents/Projects/GTMNERR_analysis/data/shapefiles/", "flagler_1m_evel_islands_polygons")#
+#
+# polygon denoting Roadway1 boundary#
+SJC.Roadway.1 <- readOGR(dsn="/Users/KSauby/Documents/Projects/GTMNERR_analysis/data/shapefiles/", "SJC_roadway_island_1_utm")#
+#
+# polygon denoting Roadway2 boundary#
+SJC.Roadway.2 <- readOGR(dsn="/Users/KSauby/Documents/Projects/GTMNERR_analysis/data/shapefiles/", "SJC_Roadway_island_2_utm")#
+# --------------------------------------------------------------------------- ##
+cache("flagler.1m.evel.islands.polygons")#
+cache("SJC.Roadway.1")#
+cache("SJC.Roadway.2")
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
+# --------------------------------------------------------------------------- ##
+setwd("/Users/KSauby/Documents/Projects/GTMNERR_analysis")#
+cache("flagler.1m.evel.islands.polygons")#
+cache("SJC.Roadway.1")#
+cache("SJC.Roadway.2")
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
+D.Plot.Surveys$Date %<>% as.Date("%m/%d/%Y") # Demographic Plot Surveys#
+Plant.Surveys %<>% processPlantSurveys(Plant.Info) # Plant Surveys#
+Plant.Surveys %<>% fixInconsistentDeadMissingRecords#
+#
+Plant.Info %<>% processPlantInfo(Plot.Info, Plant.Surveys)#
+#
+# edit 9164 - recorded missing three consecutive records#
+Plant.Surveys %<>%#
+mutate(#
+	Missing = replace(#
+		Missing,#
+		which(PlantID==9164 & Date=="2013-07-18"),#
+		NA#
+	),#
+	Missing = replace(#
+		Missing,#
+		which(PlantID==9164 & Date=="2014-01-10"),#
+		NA#
+	),#
+	Dead = replace(#
+		Dead,#
+		which(PlantID==9164 & Date=="2014-01-10"),#
+		NA#
+	),#
+	Missing = replace(#
+		Missing,#
+		which(PlantID==9164 & Date=="2014-06-09"),#
+		NA#
+	)#
+)#
+# measured two days in a row; remove second measurement#
+Plant.Surveys %<>% filter(!(PlantID==9282 & Date=="2014-06-15"))#
+Plant.Surveys %<>% filter(!(PlotPlantID=="9352" & Date=="2015-05-26"))#
+#
+# saved here#
+# write.csv(Plant.Surveys, "../data/Plant_Surveys_processed_26jun17.csv")#
+# write.csv(Plant.Info, "../data/Plant_Info_processed_26jun17.csv")#
+Plant.Surveys$Date %<>% as.Date#
+#
+Plant.Surveys <- Plant.Info %>%#
+	group_by(PlantID) %>%#
+	dplyr::summarise(#
+		N.PlotPlantIDs = length(unique(PlotPlantID))#
+	) %>%#
+	merge(Plant.Surveys, by="PlantID")#
+Plant.Surveys <- Plant.Info %>%#
+	dplyr::select(PlotPlantID, Tag_Number, Species) %>%#
+	merge(Plant.Surveys, by="PlotPlantID")#
+#
+Plant.Surveys.by.Plant <- Plant.Surveys %>% #
+	processSurveysMergedbyPlant(Plant.Info)#
+Plant.Surveys.by.Plant %>% filter(AllSurveyed==F) %>% write.csv("incompletesurveys.csv")#
+#
+Plant.Surveys %>% filter(N.PlotPlantIDs > 1) %>% filter(Dead==1 | Missing == 1) %>% write.csv("deadmissing.csv")#
+#
+h <- function(w) if( any( grepl( "no non-missing arguments to max", w) ) ) invokeRestart( "muffleWarning" )#
+Plant.Surveys.by.Plant <- withCallingHandlers(#
+	createPlantInsectPresence(Plant.Surveys.by.Plant),#
+	warning = h#
+)#
+#
+# find and keep only first dead/missing observation#
+temp <- Plant.Surveys.by.Plant %>% findFirstDeadMissingObservation#
+# create Fecundity and RGR dataset#
+Plant.Surveys.by.Year <- createPlantSurveysbyYear(Plant.Surveys.by.Plant)#
+#
+# --------------------------------------------------------------------------- ##
+# which plants are missing size surveys in the spring/summer that were NOT dead/missing, and that have a photo?#
+# which plants are missing fruit/flowers surveys in the spring/summer that were NOT dead/missing, and that have a photo?#
+#
+# these plantID and fecundity year combos are missing spring/summer surveys#
+temp1 <- Plant.Surveys.by.Year %>% #
+	filter(#
+		is.na(SurveyDate_SpringSummer),#
+		DeadMissingbyEndofYear != 1#
+	) %>%#
+	dplyr::select(PlantID, FecundityYear)#
+temp1 <- Plant.Surveys.by.Plant %>%#
+	filter(#
+		Dead != 1 & Missing != 1,#
+		month(Date) == 5 |#
+		month(Date) == 6 |#
+		month(Date) == 7 |#
+		month(Date) == 8 |#
+		month(Date) == 9,#
+		is.na(Size_t)#
+	) %>%#
+	merge(#
+		temp1,#
+		by = c("PlantID", "FecundityYear")#
+	) %>%#
+	filter(!(#
+			PlantID == 7548 & Date == "2014-09-05" |#
+			PlantID == 7773 & Date == "2014-09-21" |#
+			PlantID == 7774 & Date == "2014-09-21" |#
+			PlantID == 7778 & Date == "2014-09-21" |#
+			PlantID == 7791 & Date == "2014-09-21" |#
+			PlantID == 7792 & Date == "2014-09-21" |#
+			PlantID == 7793 & Date == "2014-09-21" |#
+			PlantID == 7794 & Date == "2014-09-21" |#
+			PlantID == 7795 & Date == "2014-09-21" |#
+			PlantID == 7807 & Date == "2014-09-21" |#
+			PlantID == 7810 & Date == "2014-09-21" |#
+			PlantID == 8088 & Date == "2014-09-21" |#
+			PlantID == 8088 & Date == "2014-06-28" |#
+			PlantID == 8088 & Date == "2014-06-04" |#
+			PlantID == 8647 & Date == "2013-07-18" |#
+			PlantID == 8652 & Date == "2013-07-23" |#
+			PlantID == 8653 & Date == "2013-07-23" |#
+			PlantID == 9156 & Date == "2014-06-10" |#
+			PlantID == 9156 & Date == "2014-09-11" |#
+			PlantID == 9561 & Date == "2014-06-24" |#
+			PlantID == 9561 & Date == "2014-05-12" |#
+			PlantID == 9682 & Date == "2014-06-02" |#
+			PlantID == 9024 & Date == "2014-06-25" |#
+			PlantID == 9220 & Date == "2013-07-18" |#
+			PlantID == 9220 & Date == "2013-05-21" |#
+			PlantID == 9371 & Date == "2015-05-26"#
+	)) %>%#
+	dplyr::select(PlantID, Date)#
+if (dim(temp)[1] > 0) {#
+	write.csv(temp1, "SpringSummerSurveyswoSizeFruit.csv")#
+	warning("Some plants are missing size/fruit records for spring/summer surveys. Data written to csv file.")#
 }#
-test_that("calculatePopulationSummaryStatistics", {#
-	test_clone_table <- c(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,13,0,0,0,0,0,#
-		122,32,14,0,0,0,443,162,84,12) %>%#
-		matrix(#
-			.,#
-			nrow=6,#
-			ncol=6,#
-			dimnames=list(#
-				c("Seed","Seedling","1","2","3","4"), #
-				c("Seed","Seedling","1","2","3","4")#
-			)#
-		)#
-	test_n_per_stage <- c(0,2,202,174,280,82)#
-	test_transition_rate_table <- c(#
-		rep(0, 20),#
-		0.07471264,#
-		rep(0, 5),#
-		0.43571429, 0.11428571, 0.05000000,#
-		rep(0, 3),#
-		5.40243902, 1.97560976, 1.02439024, 0.14634146#
-	) %>%#
-		matrix(#
-			.,#
-			nrow=6,#
-			ncol=6,#
-			dimnames=list(#
-				c("Seed","Seedling","1","2","3","4"), #
-				c("Seed","Seedling","1","2","3","4")#
-			)#
-		)	#
-	expect_that(#
-		calculateTransitionRates(test_clone_table, test_n_per_stage),#
-		equals(test_transition_rate_table)#
+# --------------------------------------------------------------------------- ##
+#
+Plant.Info.Analysis <- createPlantInfobyPlant(Plant.Info, Plant.Surveys.by.Year, Plant.Surveys.by.Plant)#
+#
+Plant.Surveys.by.Year <- Plant.Info.Analysis %>%#
+	merge(Plant.Surveys.by.Year, by="PlantID")#
+#
+Plant.Surveys.by.Year[which(is.na(Plant.Surveys.by.Year$OutsideOfPlot)),]$OutsideOfPlot <- ""#
+#
+Plant.Surveys.by.Year %<>% filter(OutsideOfPlot!="Yes")#
+#
+Plant.Surveys.by.Plant <- Plant.Info.Analysis %>%#
+	merge(Plant.Surveys.by.Plant, by="PlantID")#
+# --------------------------------------------------------------------------- ##
+setwd("/Users/KSauby/Documents/Projects/GTMNERR_analysis")#
+cache("Plant.Surveys")#
+cache("Plant.Surveys.by.Year")#
+cache("Plant.Surveys.by.Plant")
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
+Plant.Info.Analysis %<>% #
+	rowwise() %>%#
+	mutate(#
+		DaysBetweenFirstLastSurvey = (as.Date(LastDateAlive) + 1) - (as.Date(First.Survey.Date.Alive) - 1)#
 	)#
-})
-library(testthat)
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-calculateTransitionRates <- function(transition_counts, n_per_stage) {#
-	x <- t(t(clone_table) / n_per_stage)#
-	x[which(x=="NaN")] <- 0#
-	return(x)#
-}#
-test_that("calculatePopulationSummaryStatistics", {#
-	test_clone_table <- c(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,13,0,0,0,0,0,#
-		122,32,14,0,0,0,443,162,84,12) %>%#
-		matrix(#
-			.,#
-			nrow=6,#
-			ncol=6,#
-			dimnames=list(#
-				c("Seed","Seedling","1","2","3","4"), #
-				c("Seed","Seedling","1","2","3","4")#
-			)#
-		)#
-	test_n_per_stage <- c(0,2,202,174,280,82)#
-	test_transition_rate_table <- c(#
-		rep(0, 20),#
-		0.07471264,#
-		rep(0, 5),#
-		0.43571429, 0.11428571, 0.05000000,#
-		rep(0, 3),#
-		5.40243902, 1.97560976, 1.02439024, 0.14634146#
-	) %>%#
-		matrix(#
-			.,#
-			nrow=6,#
-			ncol=6,#
-			dimnames=list(#
-				c("Seed","Seedling","1","2","3","4"), #
-				c("Seed","Seedling","1","2","3","4")#
-			)#
-		)	#
-	expect_that(#
-		calculateTransitionRates(test_clone_table, test_n_per_stage),#
-		equals(test_transition_rate_table)#
+	# createMothOccupancyVariable#
+Plant.Info.stricta <- Plant.Info.Analysis %>% filter(Species=="Opuntia stricta")#
+Plant.Info.pusilla <- Plant.Info.Analysis %>% filter(Species=="Opuntia pusilla")#
+write.csv(Plant.Info.Analysis, "../data/Plant_Info_Analysis.csv")#
+write.csv(Plant.Info.stricta, "../data/Plant_Info_Analysis_stricta.csv")#
+write.csv(Plant.Info.pusilla, "../data/Plant_Info_Analysis_pusilla.csv")#
+# --------------------------------------------------------------------------- ##
+# Survival#
+# --------------------------------------------------------------------------- ##
+#
+Plant.Info.Survival.stricta <- Plant.Info.Analysis %>% #
+	filter(Species=="Opuntia stricta") %>%#
+	arrange(desc(maxDaysAlive)) %>%#
+	as.data.frame %>%#
+	dplyr::select(#
+		maxDaysAlive,#
+		HabitatType,#
+		Island,#
+		Network,#
+		MEPlantPres,#
+		CAPlantPres,#
+		OldMothPlantPres,#
+		RecruitmentMode,#
+		minDaysAlive,#
+		AliveatEndofStudy#
+	) %>% #
+	.[complete.cases(.),]#
+# Plant.Info.Survival %<>% #
+	#renamePatches %>%#
+	#createDeadFactorVariable#
+write.csv(Plant.Info.Survival.stricta, "../data/Plant_Info_Survival_stricta.csv", row.names = F)#
+# --------------------------------------------------------------------------- ##
+setwd("/Users/KSauby/Documents/Projects/GTMNERR_analysis")#
+cache("Plant.Info.Survival")#
+cache("Plant.Info.Survival.stricta")#
+cache("Plant.Info.Analysis")#
+cache("Plant.Info")
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
+# make sure all clones have parents before this#
+#
+# plant info needs to have first survey for each plant#
+#
+# ---------------------------------------------------------------------------- ##
+Plant.Surveys.by.Year.largest.parent <- calculateClonalReproduction(#
+	Plant.Surveys.by.Year, #
+	Plant.Surveys.by.Plant, #
+	Plant.Info.Analysis,#
+	ParentChoice="largest"#
+)#
+#
+clonal_reproduction_info_for_transition_matrix.largest.parent <- #
+									Plant.Surveys.by.Year.largest.parent[[2]]#
+Plant.Surveys.by.Year.largest.parent <- #
+									Plant.Surveys.by.Year.largest.parent[[1]]#
+# ---------------------------------------------------------------------------- ##
+Plant.Surveys.by.Year.random.parent <- calculateClonalReproduction(#
+	Plant.Surveys.by.Year, #
+	Plant.Surveys.by.Plant, #
+	Plant.Info.Analysis,#
+	ParentChoice="random"#
+)#
+#
+clonal_reproduction_info_for_transition_matrix.random.parent <- #
+									Plant.Surveys.by.Year.random.parent[[2]]#
+Plant.Surveys.by.Year.random.parent <- #
+									Plant.Surveys.by.Year.random.parent[[1]]#
+#
+# ---------------------------------------------------------------------------- ##
+Plant.Surveys.by.Year.random.largest.parent <- calculateClonalReproduction(#
+	Plant.Surveys.by.Year, #
+	Plant.Surveys.by.Plant, #
+	Plant.Info.Analysis,#
+	ParentChoice="random.largest"#
+)#
+#
+clonal_reproduction_info_for_transition_matrix.random.largest.parent <- #
+								Plant.Surveys.by.Year.random.largest.parent[[2]]#
+Plant.Surveys.by.Year.random.largest.parent <- #
+								Plant.Surveys.by.Year.random.largest.parent[[1]]#
+# ---------------------------------------------------------------------------- ##
+Plant.Surveys.by.Year.no.parent.assignment <- calculateClonalReproduction(#
+	Plant.Surveys.by.Year, #
+	Plant.Surveys.by.Plant, #
+	Plant.Info.Analysis,#
+	ParentChoice="none"#
+)#
+#
+Plant.Surveys.by.Year.no.parent.assignment <- #
+								Plant.Surveys.by.Year.no.parent.assignment[[1]]#
+# --------------------------------------------------------------------------- ##
+setwd("/Users/KSauby/Documents/Projects/GTMNERR_analysis")#
+cache("Plant.Surveys.by.Year.largest.parent")#
+cache("Plant.Surveys.by.Year.random.parent")#
+cache("Plant.Surveys.by.Year.no.parent.assignment")#
+cache("Plant.Surveys.by.Year.random.largest.parent")#
+cache("clonal_reproduction_info_for_transition_matrix.largest.parent")#
+cache("clonal_reproduction_info_for_transition_matrix.random.parent")#
+cache("clonal_reproduction_info_for_transition_matrix.random.largest.parent")
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
+Plant.Surveys.by.Year.largest.parent %<>% processPlantSurveysbyYear#
+Plant.Surveys.by.Year.random.parent %<>% processPlantSurveysbyYear#
+Plant.Surveys.by.Year.random.largest.parent %<>% processPlantSurveysbyYear#
+Plant.Surveys.by.Year.no.parent.assignment %<>% processPlantSurveysbyYear#
+# process original plant data (before new PlantIDs were given) for occupancy surveys#
+Original.Plant.Data %<>% processOriginalPlantData#
+#
+# --------------------------------------------------------------------------- ##
+Plant.Surveys.by.Year.largest.parent %>% write.csv("../data/Plant_Surveys_by_Year_largest_parent.csv")#
+Plant.Surveys.by.Year.random.parent %>% write.csv("../data/Plant_Surveys_by_Year_random_parent.csv")#
+Plant.Surveys.by.Year.random.largest.parent %>% write.csv("../data/Plant_Surveys_by_Year_random_largest_parent.csv")#
+Plant.Surveys.by.Year.no.parent.assignment %>% write.csv("../data/Plant_Surveys_by_Year_no_uncertain_parent_assignment.csv")#
+# --------------------------------------------------------------------------- ##
+#
+cache("Original.Plant.Data")
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
+setwd("/Users/KSauby/Documents/Projects/GTMNERR_analysis")#
+cache("Original.Plant.Data")
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
+# ---------------------------------------------------- DATA CHECKING#
+# compare these numbers to the numbers after data is further processed#
+#
+# number of CACA observations#
+length(Plot.Surveys[which(Plot.Surveys$CACA_on_Stricta=="Yes"), ]$CACA_on_Stricta)#
+# number of MEPR observations#
+length(Plot.Surveys[which(Plot.Surveys$MEPR_on_Stricta=="Yes"), ]$MEPR_on_Stricta)#
+# don't exclude all plots for the demography study#
+#
+# --------------------------------------------------------------------------- ##
+# --------------- Occupancy Plot Info --------------------------------------- ##
+# --------------------------------------------------------------------------- ##
+#
+Plot.Info %<>% processOccupancyPlotInfo(Plot.Vegetation, GIS.data.upd)#
+#
+# check errors by keeping track of dataframe size#
+Plot.Info.Size = as.data.frame(matrix(NA, 1, 1))#
+Plot.Info.Size[, 1] = dim(Plot.Info)[1]#
+#
+Plot.Surveys %<>% processOccupancyPlotSurveys(Plot.Info)#
+#
+write.csv(Plot.Info, "../data/Plot_Info.csv")#
+write.csv(Plot.Surveys, "../data/Plot_Surveys.csv")#
+#
+# --------------------------------------------------------------------------- ##
+setwd("/Users/KSauby/Documents/Projects/GTMNERR_analysis")#
+cache("Plot.Info")#
+cache("Plot.Surveys")
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
+Plant.Surveys.by.Year %<>% estimateCactusDensityperPlot(Plot.Info)#
+Plant.Surveys.by.Year.largest.parent %<>% estimateCactusDensityperPlot(Plot.Info)#
+Plant.Surveys.by.Year.random.parent %<>% estimateCactusDensityperPlot(Plot.Info)#
+Plant.Surveys.by.Year.random.largest.parent %<>% estimateCactusDensityperPlot(Plot.Info)#
+Plant.Surveys.by.Year.no.parent.assignment %<>% estimateCactusDensityperPlot(Plot.Info)
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
+# (5) Merge datasets together#
+# --------------------------------------------------------------------------- ##
+Plot.Surveys %<>% changeVariableNames#
+#
+column_list <- c(#
+	"P_plant_survey", #
+	"P_Ca", #
+	"P_Me", #
+	"P_Ch", #
+	"P_Umoth", #
+	"P_Omoth", #
+	"S_plant_survey", #
+	"S_Ca", #
+	"S_Me", #
+	"S_Ch", #
+	"S_Umoth", #
+	"S_Omoth"#
+)#
+#
+A <- mergePlantSurveysPlotSurveys(Plot.Surveys, Plant.Surveys)#
+B <- mergePlotSurveysDemoPlotSurveys(D.Plot.Surveys, Plant.Surveys)#
+C <- createPlotSurveysfromPlantSurveys(Plant.Surveys, Plant.Info, Plot.Surveys, #
+	D.Plot.Surveys)#
+D <- createPlotSurveysfromOrigPlantSurveys(Original.Plant.Data)#
+E <- rbind.fill(A, B, C, D)				#
+E.check <- merge(Plot.Info, E, by="Tag_Number")#
+# FIX DATA FORMAT#
+E[,c(column_list,#
+	"P_plot_survey", #
+	"P_PC", #
+	"P_H", #
+	"S_plot_survey", #
+	"S_PC", #
+	"S_H"#
+)] %<>% apply(., 2, as.numeric)#
+E[,c(column_list,#
+	"P_plot_survey", #
+	"P_PC", #
+	"P_H", #
+	"S_plot_survey", #
+	"S_PC", #
+	"S_H"#
+)] %<>% apply(., 2, NA_Function)#
+Z <- mergeDuplicateSurveys(E)#
+G <- do.call(rbind.data.frame, Z)#
+names(G)[1] <- "Tag_Number"#
+G[,c(#
+	"P_plot_survey", #
+	"P_plant_survey", #
+	"P_Ca", #
+	"P_Me", #
+	"P_Ch", #
+	"P_Umoth", #
+	"P_Omoth", #
+	"P_PC", #
+	"P_H", #
+	"S_plot_survey", #
+	"S_plant_survey", #
+	"S_Ca", #
+	"S_Me", #
+	"S_Ch", #
+	"S_Umoth", #
+	"S_Omoth", #
+	"S_PC", #
+	"S_H"#
+)] %<>% apply(., 2, as.numeric)#
+G[,c(#
+	"P_plot_survey", #
+	"P_plant_survey", #
+	"P_Ca", #
+	"P_Me", #
+	"P_Ch", #
+	"P_Umoth", #
+	"P_Omoth", #
+	"P_PC", #
+	"P_H", #
+	"S_plot_survey", #
+	"S_plant_survey", #
+	"S_Ca", #
+	"S_Me", #
+	"S_Ch", #
+	"S_Umoth", #
+	"S_Omoth", #
+	"S_PC", #
+	"S_H"#
+)] %<>% apply(., 2, NA_Function)#
+#
+# --------------------------------------------------------------------------- ##
+# (6)  Merge with other plot surveys#
+# --------------------------------------------------------------------------- ##
+#
+# ------------------------------------------------------- PREP OLD PLOT SURVEYS#
+# remove extra columns#
+# Plot_Surveys.mod <-  Plot_Surveys %>% dplyr::select(-c(First_Observer_Initials, Second_Observer_Initials, DACT_on_Pusilla, DACT_on_Stricta))#
+#
+Plot_Surveys_mod <- Plot.Surveys %>%#
+	dplyr::select(#
+		Tag_Number,#
+		Date, #
+		Pictures, #
+		PictureDirection, #
+		Notes, #
+		Pusilla, #
+		P_Ca, #
+		P_Me, #
+		P_Ch, #
+		P_Umoth, #
+		P_Omoth, #
+		Old_Moth_Evidence_recent_Pusilla, #
+		P_PC, #
+		P_H, #
+		Stricta, #
+		S_Ca, #
+		S_Me, #
+		S_Ch, #
+		S_Umoth, #
+		S_Omoth, #
+		Old_Moth_Evidence_recent_Stricta,#
+		S_PC, #
+		S_H#
 	)#
-})
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/tests/testthat')
-test_transition_rate_table
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/tests/testthat')
-test_that("calculateTransitionRates", {#
-	test_clone_table <- c(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,13,0,0,0,0,0,#
-		122,32,14,0,0,0,443,162,84,12) %>%#
-		matrix(#
-			.,#
-			nrow=6,#
-			ncol=6,#
-			dimnames=list(#
-				c("Seed","Seedling","1","2","3","4"), #
-				c("Seed","Seedling","1","2","3","4")#
-			)#
-		)#
-	test_n_per_stage <- c(0,2,202,174,280,82)#
-	test_transition_rate_table <- c(#
-		rep(0, 20),#
-		0.07471264,#
-		rep(0, 5),#
-		0.43571429, 0.11428571, 0.05000000,#
-		rep(0, 3),#
-		5.40243902, 1.97560976, 1.02439024, 0.14634146#
-	) %>%#
-		matrix(#
-			.,#
-			nrow=6,#
-			ncol=6,#
-			dimnames=list(#
-				c("Seed","Seedling","1","2","3","4"), #
-				c("Seed","Seedling","1","2","3","4")#
-			)#
-		)	#
-	# check that transition rates are calculated correctly#
-	expect_that(#
-		calculateTransitionRates(test_clone_table, test_n_per_stage),#
-		equals(test_transition_rate_table)#
+#
+# add extra columns to match removed.duplicates#
+Plot_Surveys_mod$S_plant_survey <- NA#
+Plot_Surveys_mod$P_plant_survey <- NA#
+names(Plot_Surveys_mod)[c(6, 15)] <- c("P_plot_survey", "S_plot_survey")#
+#
+# create file with plot surveys from before demography study#
+H = filter(Plot_Surveys_mod, Date < "2012-12-02")#
+# create file with plot surveys after demography study started, but tags not included in the demography study#
+#	this is because filtered only surveys for plots included IN the demography study#
+I = Plot_Surveys_mod %>% #
+	filter(Date > "2012-12-01", !(Tag_Number %in% Plant.Surveys$Tag_Number))
+?createPlotSurveysfromPlantSurveys
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
+C <- createPlotSurveysfromPlantSurveys(Plant.Surveys, Plant.Info, Plot.Surveys, #
+	D.Plot.Surveys, A)#
+D <- createPlotSurveysfromOrigPlantSurveys(Original.Plant.Data)
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
+# -------- CREATE RGR DATASETS ---------------------------------------------- ##
+# dim(Plant.Surveys.by.Year) 			7731 - 4812 (missing RGR) = 2919#
+#
+# 2919#
+Plant.Surveys.RGR <- Plant.Surveys.by.Year %>% 	#
+	as.data.frame %>%#
+ 	droplevels %>% #
+ 	dplyr::select(#
+ 		Species,#
+		PlantID,#
+		RecruitmentMode,#
+ 		Network,#
+ 		Island,#
+		HabitatType,#
+		cactus_density_per_plot,#
+		RGR_Size365,#
+		max_RGR_Size365,#
+		# insects#
+		CA_t_1,#
+		ME_t_1,#
+		Moth_Evidence_t_1,#
+		# size#
+		Size_t_1,#
+		SizewClones_t_1#
+ 	) %>%#
+	.[complete.cases(.),]#
+Plant.Surveys.RGR.stricta <- Plant.Surveys.RGR %>% #
+	filter(Species=="Opuntia stricta")#
+Plant.Surveys.RGR.stricta %<>% #
+	mutate(#
+		Ln_Size_t_1_st = arm::rescale(log(Size_t_1)),	#
+		Ln_SizewClones_t_1_st = arm::rescale(log(SizewClones_t_1)),	#
+		cactus_density_per_plot_st = arm::rescale(cactus_density_per_plot)		#
 	)#
-	# Stages should give rise to 0 seeds and 0 seedlings#
-	# seeds should give rise to 0 clones#
-	# seedlings should give rise to 0 clones#
-})
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/tests/testthat')
-test_clone_table <- c(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,13,0,0,0,0,0,#
-		122,32,14,0,0,0,443,162,84,12) %>%#
-		matrix(#
-			.,#
-			nrow=6,#
-			ncol=6,#
-			dimnames=list(#
-				c("Seed","Seedling","1","2","3","4"), #
-				c("Seed","Seedling","1","2","3","4")#
-			)#
-		)#
-	test_n_per_stage <- c(0,2,202,174,280,82)#
-	test_transition_rate_table <- c(#
-		rep(0, 20),#
-		0.07471264,#
-		rep(0, 5),#
-		0.43571429, 0.11428571, 0.05000000,#
-		rep(0, 3),#
-		5.40243902, 1.97560976, 1.02439024, 0.14634146#
-	) %>%#
-		matrix(#
-			.,#
-			nrow=6,#
-			ncol=6,#
-			dimnames=list(#
-				c("Seed","Seedling","1","2","3","4"), #
-				c("Seed","Seedling","1","2","3","4")#
-			)#
-		)	#
-	# check that transition rates are calculated correctly
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/tests/testthat')
-test_transition_rate_table
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/tests/testthat')
-test_that("calculateTransitionRates", {#
-	test_clone_table <- c(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,13,0,0,0,0,0,#
-		122,32,14,0,0,0,443,162,84,12) %>%#
-		matrix(#
-			.,#
-			nrow=6,#
-			ncol=6,#
-			dimnames=list(#
-				c("Seed","Seedling","1","2","3","4"), #
-				c("Seed","Seedling","1","2","3","4")#
-			)#
-		)#
-	test_n_per_stage <- c(0,2,202,174,280,82)#
-	expected_transition_rate_table <- c(#
-		rep(0, 20),#
-		0.07471264,#
-		rep(0, 5),#
-		0.43571429, 0.11428571, 0.05000000,#
-		rep(0, 3),#
-		5.40243902, 1.97560976, 1.02439024, 0.14634146#
-	) %>%#
-		matrix(#
-			.,#
-			nrow=6,#
-			ncol=6,#
-			dimnames=list(#
-				c("Seed","Seedling","1","2","3","4"), #
-				c("Seed","Seedling","1","2","3","4")#
-			)#
-		)	#
-	# check that transition rates are calculated correctly#
-	test_transition_rate_table <- calculateTransitionRates(#
-		test_clone_table, #
-		test_n_per_stage#
-	)#
-	expect_that(#
-		test_transition_rate_table,#
-		equals(expected_transition_rate_table)#
-	)#
-	# Stages should give rise to 0 seeds and 0 seedlings#
-	# seeds should give rise to 0 clones#
-	# seedlings should give rise to 0 clones#
-})
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/tests/testthat')
-test_transition_rate_table["Seed", ]
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/tests/testthat')
-expect_that(#
-		test_transition_rate_table["Seed", ],#
-		equals(0)#
-	)
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/tests/testthat')
-expect_that(#
-		test_transition_rate_table["Seed", ],#
-		equals(rep(0, length(test_transition_rate_table["Seed", ]))#
-	)
-)
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/tests/testthat')
-expect_that(#
-		as.vector(test_transition_rate_table["Seed", ]),#
-		equals(rep(0, length(test_transition_rate_table["Seed", ]))#
-	)
-)
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/tests/testthat')
-test_transition_rate_table
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/tests/testthat')
-expect_that(#
-		as.vector(test_transition_rate_table["Seedling", ]),#
-		equals(rep(0, length(test_transition_rate_table["Seedling", ])))#
-	)
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/tests/testthat')
-as.vector(test_transition_rate_table[, "Seed"])
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/tests/testthat')
-expect_that(#
-		as.vector(test_transition_rate_table[, "Seed"]),#
-		equals(rep(0, length(test_transition_rate_table[, "Seed"])))#
-	)
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/tests/testthat')
-test_that("calculateTransitionRates", {#
-	test_clone_table <- c(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,13,0,0,0,0,0,#
-		122,32,14,0,0,0,443,162,84,12) %>%#
-		matrix(#
-			.,#
-			nrow=6,#
-			ncol=6,#
-			dimnames=list(#
-				c("Seed","Seedling","1","2","3","4"), #
-				c("Seed","Seedling","1","2","3","4")#
-			)#
-		)#
-	test_n_per_stage <- c(0,2,202,174,280,82)#
-	expected_transition_rate_table <- c(#
-		rep(0, 20),#
-		0.07471264,#
-		rep(0, 5),#
-		0.43571429, 0.11428571, 0.05000000,#
-		rep(0, 3),#
-		5.40243902, 1.97560976, 1.02439024, 0.14634146#
-	) %>%#
-		matrix(#
-			.,#
-			nrow=6,#
-			ncol=6,#
-			dimnames=list(#
-				c("Seed","Seedling","1","2","3","4"), #
-				c("Seed","Seedling","1","2","3","4")#
-			)#
-		)	#
-	# check that transition rates are calculated correctly#
-	test_transition_rate_table <- calculateTransitionRates(#
-		test_clone_table, #
-		test_n_per_stage#
-	)#
-	expect_that(#
-		test_transition_rate_table,#
-		equals(expected_transition_rate_table)#
-	)#
-	# Stages should give rise to 0 seeds and 0 seedlings#
-	expect_that(#
-		as.vector(test_transition_rate_table[, "Seed"]),#
-		equals(rep(0, length(test_transition_rate_table[, "Seed"])))#
-	)#
-	expect_that(#
-		as.vector(test_transition_rate_table[, "Seedling"]),#
-		equals(rep(0, length(test_transition_rate_table[, "Seedling"])))#
-	)#
-	# seeds should give rise to 0 clones#
-	expect_that(#
-		as.vector(test_transition_rate_table["Seed", ]),#
-		equals(rep(0, length(test_transition_rate_table["Seed", ])))#
-	)#
-	# seedlings should give rise to 0 clones#
-	expect_that(#
-		as.vector(test_transition_rate_table["Seedling", ]),#
-		equals(rep(0, length(test_transition_rate_table["Seedling", ])))#
-	)#
-})
+# --------------------------------------------------------------------------- ##
+Plant.Surveys.RGR.stricta %>% write.csv("../data/Plant_Surveys_RGR_stricta.csv")#
+#
+setwd("/Users/KSauby/Documents/Projects/GTMNERR_analysis")#
+cache("Plant.Surveys.RGR")#
+cache("Plant_Surveys_RGR_stricta")
+str(Plant.Surveys.by.Year)
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
+Plant.Surveys.by.Year %<>% processPlantSurveysbyYear#
+Plant.Surveys.by.Year.largest.parent %<>% processPlantSurveysbyYear#
+Plant.Surveys.by.Year.random.parent %<>% processPlantSurveysbyYear#
+Plant.Surveys.by.Year.random.largest.parent %<>% processPlantSurveysbyYear#
+Plant.Surveys.by.Year.no.parent.assignment %<>% processPlantSurveysbyYear#
+# process original plant data (before new PlantIDs were given) for occupancy surveys#
+Original.Plant.Data %<>% processOriginalPlantData#
+#
+# --------------------------------------------------------------------------- ##
+Plant.Surveys.by.Year.largest.parent %>% write.csv("../data/Plant_Surveys_by_Year_largest_parent.csv")#
+Plant.Surveys.by.Year.random.parent %>% write.csv("../data/Plant_Surveys_by_Year_random_parent.csv")#
+Plant.Surveys.by.Year.random.largest.parent %>% write.csv("../data/Plant_Surveys_by_Year_random_largest_parent.csv")#
+Plant.Surveys.by.Year.no.parent.assignment %>% write.csv("../data/Plant_Surveys_by_Year_no_uncertain_parent_assignment.csv")#
+# --------------------------------------------------------------------------- ##
+setwd("/Users/KSauby/Documents/Projects/GTMNERR_analysis")#
+cache("Original.Plant.Data")
 setwd('/Users/KSauby/Documents/Projects')
 setwd("./GTMNERRproc")#
 #setwd("./dataproc")#
@@ -889,27 +1346,3 @@ setwd("./GTMNERRproc")#
 #devtools::test()#
 devtools::document()#
 devtools::install()
-setwd('/Users/KSauby/Documents/Projects')
-setwd("./GTMNERRproc")#
-#setwd("./dataproc")#
-#setwd("./modresproc")#
-#setwd("./unmarked")#
-#setwd("./RPresence")#
-devtools::test()
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/tests')
-library(testthat)#
-library(GTMNERRproc)#
-#
-testthat::test_check("GTMNERRproc")
-setwd('/Users/KSauby/Documents/Projects/ACS/tests')
-library(testthat)#
-library(ACSampling)#
-#
-testthat::test_check("ACSampling")
-setwd('/Users/KSauby/Documents/Projects')
-setwd("./GTMNERRproc")#
-#setwd("./dataproc")#
-#setwd("./modresproc")#
-#setwd("./unmarked")#
-#setwd("./RPresence")#
-devtools::test()

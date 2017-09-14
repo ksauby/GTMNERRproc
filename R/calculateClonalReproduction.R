@@ -22,7 +22,7 @@ calculateClonalReproduction <- function(
 	Plant.Surveys.by.Year, 
 	Plant.Surveys.by.Plant, 
 	Plant.Info.Analysis,
-	ParentChoice
+	ParentChoice = "None"
 ) {
 	if (ParentChoice == "largest" | ParentChoice == "random" | ParentChoice == "random.largest") {
 		# FIRST, ASSIGN PARENTS FOR PARENT-LESS PLANTS

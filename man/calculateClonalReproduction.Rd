@@ -5,7 +5,7 @@
 \title{Calculate Clonal Reproduction}
 \usage{
 calculateClonalReproduction(Plant.Surveys.by.Year, Plant.Surveys.by.Plant,
-  Plant.Info.Analysis, ParentChoice)
+  Plant.Info.Analysis, ParentChoice = "None")
 }
 \arguments{
 \item{Parent.Choice}{}
