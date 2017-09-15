@@ -1,19 +1,3 @@
-1.25*240
-7*12
-7849-7527
-322/1353
-8028-7527
-501/1353
-8028-7957
-1353-501
-852/71
-7956-7878
-8176-8029
-8176-8092
-250*.75
-250*.25
-42*2 + 17*2
-118/19
 21/6.2
 59.5*.75
 59.5*.5 + 59.5
@@ -271,25 +255,20 @@ library(Mage)
 ??projection.matrix
 1/0.167
 0.167*3
-setwd('/Users/KSauby/Documents/Projects')
-setwd("./GTMNERRproc")#
-#setwd("./dataproc")#
-#setwd("./modresproc")#
-#setwd("./unmarked")#
-#setwd("./RPresence")#
-#devtools::test()#
-devtools::document()#
-devtools::install()
-setwd('/Users/KSauby/Documents/Projects/Dissertation/code')
-# load ACSampling#
-#
-setwd('/Users/KSauby/Documents/Projects/ACSampling_project')#
+library(purrr)
+?map
+setwd('/Users/KSauby/Documents/Projects/Dissertation')
 library(ProjectTemplate)#
 load.project()#
 #
 # load GTMNERR#
 #
 setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis')#
+load.project()#
+#
+# load ACSampling#
+#
+setwd('/Users/KSauby/Documents/Projects/ACSampling_project')#
 load.project()#
 #
 # load marsico project#
@@ -309,6 +288,86 @@ Plot.Info <- Plot.Surveys %>% #
 setwd("/Users/KSauby/Documents/Projects/GTMNERR_analysis")#
 cache("Plot.Info")#
 cache("Plot.Surveys")
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files/2014_2015')
+# stages:#
+# 	size 1#
+# 	size 2#
+# 	size 3:6#
+#	size 7+#
+SizeClass 		= c(0:2,6,140)#
+TransitionYear 	= 2014#
+#
+cut(1:20, SizeClass)#
+# ---------------------------------------------------------------------------- ##
+# create lists of data#
+ldf <- list(#
+	Plant.Surveys.TM.largest.parent,#
+	Plant.Surveys.TM.random.parent,#
+	Plant.Surveys.TM.random.largest.parent#
+)#
+cldf <- list(#
+	clonal_reproduction_info_for_transition_matrix.largest.parent,#
+	clonal_reproduction_info_for_transition_matrix.random.parent,#
+	clonal_reproduction_info_for_transition_matrix.random.largest.parent#
+)#
+# ---------------------------------------------------------------------------- ##
+# ALL PLANT DATA: add new columns, filter out mothpresence = 1#
+ldf %<>%#
+	map(#
+		~ mutate(#
+			., #
+			allYears 	= TransitionYear, #
+			Year 		= FecundityYear#
+		)#
+	) %>%#
+	map(#
+		~ filter(#
+			.,#
+			MothPlantPres == 1#
+		)#
+	)#
+# CLONE DATA: add plant info, filter out mothpresence = 1#
+cldf %<>%#
+	map(#
+		~ merge(#
+			., #
+			Plant.Info.Analysis, #
+			by.x="Parent.ID",#
+			by.y="PlantID"#
+		)#
+	) %>%#
+	map(#
+		~ filter(#
+			.,#
+			MothPlantPres == 1#
+		)#
+	)#
+#
+if (length(ldf) != length(cldf)) {#
+	stop(paste("ldf and cldf are of different lengths"))#
+}#
+# ---------------------------------------------------------------------------- ##
+A <- list()#
+for (i in 1:length(ldf)) {#
+	A[[i]] <- prepDataTransitionMatrix(#
+		ldf[[i]], #
+		cldf[[i]], #
+		SizeClass, #
+		TransitionYear#
+	)#
+}#
+B <- list()#
+for (i in 1:length(ldf)) {#
+	B[[i]] <- analyzeMatrixPopModels(#
+		trans_data = A[[i]],#
+		SizeClass = SizeClass,#
+		TransitionYear = TransitionYear,#
+		SeedSurvival = SeedSurvival,#
+		SeedBankSize = SeedBankSize,#
+		SeedsPerFruit = SeedsPerFruit,#
+		n.iter = n.iter#
+	)#
+}
 setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files')
 SeedSurvival 	= c(0.001, 0.005, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, #
 					0.9, 0.95, 0.99)#
@@ -326,48 +385,480 @@ TransitionYear 	= 2014#
 #
 cut(1:20, SizeClass)#
 # ---------------------------------------------------------------------------- ##
-# largest parent#
+# create lists of data#
+ldf <- list(#
+	Plant.Surveys.TM.largest.parent,#
+	Plant.Surveys.TM.random.parent,#
+	Plant.Surveys.TM.random.largest.parent#
+)#
+cldf <- list(#
+	clonal_reproduction_info_for_transition_matrix.largest.parent,#
+	clonal_reproduction_info_for_transition_matrix.random.parent,#
+	clonal_reproduction_info_for_transition_matrix.random.largest.parent#
+)#
 # ---------------------------------------------------------------------------- ##
-Dat <- clonal_repro_dataset <- stages <- proj_matrix <- clonalTMdata <- NULL#
-#
-# DATA#
-#
-Dat = Plant.Surveys.TM.largest.parent %>% #
-	mutate(#
-		allYears = TransitionYear, #
-		Year = FecundityYear#
+# ALL PLANT DATA: add new columns, filter out mothpresence = 1#
+ldf %<>%#
+	map(#
+		~ mutate(#
+			., #
+			allYears 	= TransitionYear, #
+			Year 		= FecundityYear#
+		)#
 	) %>%#
-	filter(MothPlantPres == 1)#
-clonal_repro_dataset <- 	#
-	clonal_reproduction_info_for_transition_matrix.largest.parent %>%#
-	merge(Plant.Info.Analysis, by.x="Parent.ID", by.y="PlantID") %>%#
-	filter(MothPlantPres == 1)#
-# ANALYZE#
+	map(#
+		~ filter(#
+			.,#
+			MothPlantPres == 1#
+		)#
+	)#
+# CLONE DATA: add plant info, filter out mothpresence = 1#
+cldf %<>%#
+	map(#
+		~ merge(#
+			., #
+			Plant.Info.Analysis, #
+			by.x="Parent.ID",#
+			by.y="PlantID"#
+		)#
+	) %>%#
+	map(#
+		~ filter(#
+			.,#
+			MothPlantPres == 1#
+		)#
+	)#
 #
-TMdata.largest.parent.w.moth.14 <- prepDataTransitionMatrix(#
-	Dat, #
-	clonal_repro_dataset, #
-	SizeClass, #
-	TransitionYear#
+if (length(ldf) != length(cldf)) {#
+	stop(paste("ldf and cldf are of different lengths"))#
+}#
+# ---------------------------------------------------------------------------- ##
+A <- list()#
+for (i in 1:length(ldf)) {#
+	A[[i]] <- prepDataTransitionMatrix(#
+		ldf[[i]], #
+		cldf[[i]], #
+		SizeClass, #
+		TransitionYear#
+	)#
+}#
+B <- list()#
+for (i in 1:length(ldf)) {#
+	B[[i]] <- analyzeMatrixPopModels(#
+		trans_data = A[[i]],#
+		SizeClass = SizeClass,#
+		TransitionYear = TransitionYear,#
+		SeedSurvival = SeedSurvival,#
+		SeedBankSize = SeedBankSize,#
+		SeedsPerFruit = SeedsPerFruit,#
+		n.iter = n.iter#
+	)#
+}
+str(B)
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files/2014_2015')
+# stages:#
+# 	size 1#
+# 	size 2#
+# 	size 3:6#
+#	size 7+#
+SizeClass 		= c(0:2,6,140)#
+TransitionYear 	= 2014#
+#
+cut(1:20, SizeClass)#
+# ---------------------------------------------------------------------------- ##
+# create lists of data#
+ldf <- list(#
+	Plant.Surveys.TM.largest.parent,#
+	Plant.Surveys.TM.random.parent,#
+	Plant.Surveys.TM.random.largest.parent#
+)#
+cldf <- list(#
+	clonal_reproduction_info_for_transition_matrix.largest.parent,#
+	clonal_reproduction_info_for_transition_matrix.random.parent,#
+	clonal_reproduction_info_for_transition_matrix.random.largest.parent#
+)#
+# ---------------------------------------------------------------------------- ##
+# ALL PLANT DATA: add new columns, filter out mothpresence = 1#
+ldf %<>%#
+	map(#
+		~ mutate(#
+			., #
+			allYears 	= TransitionYear, #
+			Year 		= FecundityYear#
+		)#
+	) %>%#
+	map(#
+		~ filter(#
+			.,#
+			MothPlantPres == 1#
+		)#
+	)#
+# CLONE DATA: add plant info, filter out mothpresence = 1#
+cldf %<>%#
+	map(#
+		~ merge(#
+			., #
+			Plant.Info.Analysis, #
+			by.x="Parent.ID",#
+			by.y="PlantID"#
+		)#
+	) %>%#
+	map(#
+		~ filter(#
+			.,#
+			MothPlantPres == 1#
+		)#
+	)#
+#
+if (length(ldf) != length(cldf)) {#
+	stop(paste("ldf and cldf are of different lengths"))#
+}#
+# ---------------------------------------------------------------------------- ##
+# prep data transition matrices, then analyze#
+A <- list()#
+for (i in 1:length(ldf)) {#
+	A[[i]] <- prepDataTransitionMatrix(#
+		ldf[[i]], #
+		cldf[[i]], #
+		SizeClass, #
+		TransitionYear#
+	)#
+}#
+B <- list()#
+for (i in 1:length(ldf)) {#
+	B[[i]] <- analyzeMatrixPopModels(#
+		trans_data = A[[i]],#
+		SizeClass = SizeClass,#
+		TransitionYear = TransitionYear,#
+		SeedSurvival = SeedSurvival,#
+		SeedBankSize = SeedBankSize,#
+		SeedsPerFruit = SeedsPerFruit,#
+		n.iter = n.iter#
+	)#
+}#
+# ---------------------------------------------------------------------------- ##
+B %<>% map(#
+	~ mutate(#
+		., #
+	 	N.Stages = "4 Size Classes =\n1,2,3-6,7+",#
+	 	`Moth Evidence` = "Moth Evidence Present"#
+	)#
+)#
+# ---------------------------------------------------------------------------- ##
+mod.4.w.moth.2014.largest.parent.res <- B[[1]] %>% mutate(#
+	`Parent Assignment` = "largest plant\nchosen as parent"#
+)#
+mod.4.w.moth.2014.random.parent.res <- B[[2]] %>% mutate(#
+	`Parent Assignment` = "random plant\nchosen as parent"#
+)#
+mod.4.w.moth.2014.rand.large.parent.res <- B[[3]] %>% mutate(#
+	`Parent Assignment` = "random plant (weighted by size)\nchosen as parent"#
+)
+str(mod.4.w.moth.2014.rand.large.parent.res)
+is.list(Plant.Surveys.TM.largest.parent)
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files/2014_2015/LTRE')
+# stages:#
+# 	size 1#
+# 	size 2#
+# 	size 3:6#
+#	size 7+#
+SizeClass 		= c(0:2,6,140)#
+TransitionYear 	= 2014#
+#
+cut(1:20, SizeClass)
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files/2014_2015')
+# create lists of data#
+ldf <- list(#
+	Plant.Surveys.TM.largest.parent,#
+	Plant.Surveys.TM.random.parent,#
+	Plant.Surveys.TM.random.largest.parent#
+)#
+cldf <- list(#
+	clonal_reproduction_info_for_transition_matrix.largest.parent,#
+	clonal_reproduction_info_for_transition_matrix.random.parent,#
+	clonal_reproduction_info_for_transition_matrix.random.largest.parent#
+)#
+# ---------------------------------------------------------------------------- ##
+# ALL PLANT DATA: add new columns#
+ldf %<>%#
+	map(#
+		~ mutate(#
+			., #
+			allYears 	= TransitionYear, #
+			Year 		= FecundityYear#
+		)#
+	)#
+# CLONE DATA: add plant info#
+cldf %<>%#
+	map(#
+		~ merge(#
+			., #
+			Plant.Info.Analysis, #
+			by.x="Parent.ID",#
+			by.y="PlantID"#
+		)#
+	)#
+if (length(ldf) != length(cldf)) {#
+	stop(paste("ldf and cldf are of different lengths"))#
+}
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files/2014_2015/LTRE')
+# ---------------------------------------------------------------------------- ##
+# create lists of data#
+ldf <- list(#
+	Plant.Surveys.TM.largest.parent,#
+	Plant.Surveys.TM.random.parent,#
+	Plant.Surveys.TM.random.largest.parent#
+)#
+cldf <- list(#
+	clonal_reproduction_info_for_transition_matrix.largest.parent,#
+	clonal_reproduction_info_for_transition_matrix.random.parent,#
+	clonal_reproduction_info_for_transition_matrix.random.largest.parent#
+)#
+# ---------------------------------------------------------------------------- ##
+# ALL PLANT DATA: add new columns, filter out mothpresence = 1#
+ldf %<>%#
+	map(#
+		~ mutate(#
+			., #
+			allYears 	= TransitionYear, #
+			Year 		= FecundityYear#
+		)#
+	) %>%#
+	map(#
+		~ filter(#
+			.,#
+			MothPlantPres == 1#
+		)#
+	)#
+# CLONE DATA: add plant info, filter out mothpresence = 1#
+cldf %<>%#
+	map(#
+		~ merge(#
+			., #
+			Plant.Info.Analysis, #
+			by.x="Parent.ID",#
+			by.y="PlantID"#
+		)#
+	) %>%#
+	map(#
+		~ filter(#
+			.,#
+			MothPlantPres == 1#
+		)#
+	)#
+#
+if (length(ldf) != length(cldf)) {#
+	stop(paste("ldf and cldf are of different lengths"))#
+}#
+# ---------------------------------------------------------------------------- ##
+# prep data transition matrices, then analyze#
+A <- list()#
+for (i in 1:length(ldf)) {#
+	A[[i]] <- prepDataTransitionMatrix(#
+		ldf[[i]], #
+		cldf[[i]], #
+		SizeClass, #
+		TransitionYear#
+	)#
+}#
+B <- list()#
+for (i in 1:length(ldf)) {#
+	B[[i]] <- analyzeMatrixPopModels(#
+		trans_data = A[[i]],#
+		SizeClass = SizeClass,#
+		TransitionYear = TransitionYear,#
+		SeedSurvival = SeedSurvival,#
+		SeedBankSize = SeedBankSize,#
+		SeedsPerFruit = SeedsPerFruit,#
+		n.iter = n.iter#
+	)#
+}#
+# ---------------------------------------------------------------------------- ##
+B %<>% map(#
+	~ mutate(#
+		., #
+	 	N.Stages = "4 Size Classes =\n1,2,3-6,7+",#
+	 	`Moth Evidence` = "Moth Evidence Present"#
+	)#
+)#
+# ---------------------------------------------------------------------------- ##
+mod.4.w.moth.2014.largest.parent.res <- B[[1]] %>% mutate(#
+	`Parent Assignment` = "largest plant\nchosen as parent"#
+)#
+mod.4.w.moth.2014.random.parent.res <- B[[2]] %>% mutate(#
+	`Parent Assignment` = "random plant\nchosen as parent"#
+)#
+mod.4.w.moth.2014.rand.large.parent.res <- B[[3]] %>% mutate(#
+	`Parent Assignment` = "random plant (weighted by size)\nchosen as parent"#
+)
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files/2014_2015/LTRE')
+# ---------------------------------------------------------------------------- ##
+# create lists of data#
+ldf <- list(#
+	Plant.Surveys.TM.largest.parent,#
+	Plant.Surveys.TM.random.parent,#
+	Plant.Surveys.TM.random.largest.parent#
+)#
+cldf <- list(#
+	clonal_reproduction_info_for_transition_matrix.largest.parent,#
+	clonal_reproduction_info_for_transition_matrix.random.parent,#
+	clonal_reproduction_info_for_transition_matrix.random.largest.parent#
+)#
+# ---------------------------------------------------------------------------- ##
+# ALL PLANT DATA: add new columns, filter out mothpresence = 0#
+ldf %<>%#
+	map(#
+		~ mutate(#
+			., #
+			allYears 	= TransitionYear, #
+			Year 		= FecundityYear#
+		)#
+	) %>%#
+	map(#
+		~ filter(#
+			.,#
+			MothPlantPres == 0#
+		)#
+	)#
+# CLONE DATA: add plant info, filter out mothpresence = 0#
+cldf %<>%#
+	map(#
+		~ merge(#
+			., #
+			Plant.Info.Analysis, #
+			by.x="Parent.ID",#
+			by.y="PlantID"#
+		)#
+	) %>%#
+	map(#
+		~ filter(#
+			.,#
+			MothPlantPres == 0#
+		)#
+	)#
+#
+if (length(ldf) != length(cldf)) {#
+	stop(paste("ldf and cldf are of different lengths"))#
+}#
+# ---------------------------------------------------------------------------- ##
+# prep data transition matrices, then analyze#
+A <- list()#
+for (i in 1:length(ldf)) {#
+	A[[i]] <- prepDataTransitionMatrix(#
+		ldf[[i]], #
+		cldf[[i]], #
+		SizeClass, #
+		TransitionYear#
+	)#
+}#
+B <- list()#
+for (i in 1:length(ldf)) {#
+	B[[i]] <- analyzeMatrixPopModels(#
+		trans_data = A[[i]],#
+		SizeClass = SizeClass,#
+		TransitionYear = TransitionYear,#
+		SeedSurvival = SeedSurvival,#
+		SeedBankSize = SeedBankSize,#
+		SeedsPerFruit = SeedsPerFruit,#
+		n.iter = n.iter#
+	)#
+}#
+# ---------------------------------------------------------------------------- ##
+B %<>% map(#
+	~ mutate(#
+		., #
+	 	N.Stages = "4 Size Classes =\n1,2,3-6,7+",#
+	 	`Moth Evidence` = "Moth Evidence Absent"#
+	)#
+)#
+# ---------------------------------------------------------------------------- ##
+mod.4.wo.moth.2014.largest.parent.res 		<- B[[1]] %>% mutate(#
+	`Parent Assignment` = "largest plant\nchosen as parent"#
+)#
+mod.4.wo.moth.2014.random.parent.res 		<- B[[2]] %>% mutate(#
+	`Parent Assignment` = "random plant\nchosen as parent"#
+)#
+mod.4.wo.moth.2014.rand.large.parent.res 	<- B[[3]] %>% mutate(#
+	`Parent Assignment` = "random plant (weighted by size)\nchosen as parent"#
+)
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files/processing')
+MPMresults.moth <- rbind.fill(#
+	mod.4.w.moth.2014.largest.parent.res,#
+	mod.4.w.moth.2014.random.parent.res,#
+	mod.4.w.moth.2014.rand.large.parent.res,#
+	mod.4.wo.moth.2014.largest.parent.res,#
+	mod.4.wo.moth.2014.random.parent.res,#
+	mod.4.wo.moth.2014.rand.large.parent.res#
 )#
 #
-largest.parent.mod.4.w.moth.14 <- analyzeMatrixPopModels(#
-	trans_data = TMdata.largest.parent.w.moth.2014,#
-	SizeClass = SizeClass,#
-	TransitionYear = TransitionYear,#
-	SeedSurvival = SeedSurvival,#
-	SeedBankSize = SeedBankSize,#
-	SeedsPerFruit = SeedsPerFruit,#
-	n.iter = n.iter#
-)
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files/2014_2015')
-largest.parent.mod.4.w.moth.14.res <- largest.parent.mod.4.w.moth.14[[2]] %>% #
+sensitivities.results.moth <- MPMresults.moth %>% dplyr::select(#
+	SeedBankSize,#
+	SeedsPerFruit,#
+	SeedSurvival,#
+	`Parent Assignment`,#
+	N.Stages,#
+	`Moth Evidence`,#
+	starts_with("sensitivities")#
+) %>% #
+	reshape2::melt(id.vars=c(#
+		"SeedBankSize",#
+		"SeedsPerFruit",#
+		"SeedSurvival",#
+		"Parent Assignment",	#
+		"N.Stages",#
+		"Moth Evidence"#
+	)) %>%#
+	rowwise() %>%#
+	mutate(variable = gsub(pattern="sensitivities.?","",variable))
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files/processing')
+elasticities.results.moth <- MPMresults.moth %>% dplyr::select(#
+	SeedBankSize,#
+	SeedsPerFruit,#
+	SeedSurvival,#
+	`Parent Assignment`,#
+	N.Stages,#
+	`Moth Evidence`,#
+	starts_with("elasticities")#
+) %>% #
+	reshape2::melt(id.vars=c(#
+		"SeedBankSize",#
+		"SeedsPerFruit",#
+		"SeedSurvival",#
+		"Parent Assignment",	#
+		"N.Stages",#
+		"Moth Evidence"#
+	)) %>%#
+	rowwise() %>%#
 	mutate(#
-		`Parent Assignment` = "largest plant\nchosen as parent",#
-		N.Stages = "4 Size Classes =\n1,2,3-6,7+",#
-		`Moth Evidence` = "Moth Evidence Present"#
-	)
-str(largest.parent.mod.4.w.moth.14)
+		variable = gsub(pattern="elasticities.?","",variable),#
+		variable = gsub(pattern="[.]","->",variable)#
+	)#
+##### elasticities#
+#
+elasticities.results.moth$variable %<>% factor(levels=c(#
+"Seed->Seed","Seed->Seedling","Seed->1","Seed->2",  #
+"Seed->3","Seed->4","Seedling->Seed","Seedling->Seedling",#
+"Seedling->1","Seedling->2","Seedling->3","Seedling->4",  #
+"1->Seed","1->Seedling","1->1","1->2",  #
+"1->4","2->Seed","2->Seedling",  #
+"2->1","2->4",  #
+"3->Seed","3->Seedling","3->1",#
+"3->4","4->Seed","4->Seedling",  #
+"4->1","4->2","4->3",#
+"2->2",#
+"1->3",#
+"3->3",#
+"2->3",#
+"3->2",#
+"4->4"#
+))#
+levels(elasticities.results.moth$variable) <- c(#
+rep("Other Transitions", 32),#
+"3->3",#
+"2->3",#
+"3->2",#
+"4->4"#
+)
 setwd('/Users/KSauby/Documents/Projects')
 setwd("./GTMNERRproc")#
 #setwd("./dataproc")#
