@@ -18,12 +18,13 @@ createProjectionMatrix <- function(
 	SeedsPerFruit,
 	SeedSurvival
 ) {
-	seeds.from.plants 		<- sum(trans_data$Repro, na.rm=T) * SeedsPerFruit
+	Seedlings 			<- trans_data %>% filter(stage =="Seedling") %>% nrow
+	seeds.from.plants 	<- sum(trans_data$Repro, na.rm=T) * SeedsPerFruit
 	# so the recruitment rate declines as the seed bank size increases?
-	recruitment.rate 		<- Seedlings/(SeedBankSize + seeds.from.plants)
-	trans_data$Seedling 	<- trans_data$Repro/sum(trans_data$Repro, na.rm=T)* 
+	recruitment.rate 	<- Seedlings/(SeedBankSize + seeds.from.plants)
+	trans_data$Seedling <- trans_data$Repro/sum(trans_data$Repro, na.rm=T)* 
 									seeds.from.plants * recruitment.rate
-	trans_data$Seed 		<- trans_data$Repro * SeedsPerFruit * SeedSurvival
+	trans_data$Seed 	<- trans_data$Repro * SeedsPerFruit * SeedSurvival
 	# return projection matrix
 	projection.matrix(
 		trans_data, 

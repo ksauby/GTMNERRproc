@@ -1,3 +1,128 @@
+1.25*240
+7*12
+7849-7527
+322/1353
+8028-7527
+501/1353
+8028-7957
+1353-501
+852/71
+7956-7878
+8176-8029
+8176-8092
+250*.75
+250*.25
+42*2 + 17*2
+118/19
+21/6.2
+59.5*.75
+59.5*.5 + 59.5
+71/12
+597/80
+597/8
+432/8
+15*8 + 9*3
+?seq_len
+7.25/3
+7.25/4
+for(i in 0:9){x=cos(2*pi/10*i);y=x+1;z=(y-2)*22;pie(c(y,8-y),col=c(0,7),init.angl=135-z,bo=F,la=NA)}
+install.packages("ProjectTemplate")
+install.packages("dplyr")
+install.packages("ggplot2")
+install.packages("data.table")
+install.packages("corrgram")
+install.packages("survival")
+install.packages("shapefiles")
+install.packages("rgdal")
+install.packages("PBSmapping")
+install.packages("sp")
+install.packages("gdistance")
+install.packages("chron")
+install.packages("unmarked")
+install.packages("lme4")
+install.packages("rgeos", repos="http://R-Forge.R-project.org", type="source")#
+require(rgeos)
+install.packages('rgdal',repos="http://www.stats.ox.ac.uk/pub/RWin")
+library(rgdal)
+install.packages("http://cran.r-project.org/src/contrib/rgdal_0.9-1.tar.gz", repos = NULL, type="source", configure.args = "--with-gdal-config=/Library/Frameworks/GDAL.framework/Versions/1.10/unix/bin/gdal-config --with-proj-include=/Library/Frameworks/PROJ.framework/unix/include --with-proj-lib=/Library/Frameworks/PROJ.framework/unix/lib")
+18/1.618
+189+114
+library(lubridate)
+library(magrittr)
+seasons <- data.frame(#
+	   SE = as.POSIXct(c("2009-3-20", "2010-3-20", "2011-3-20", "2012-3-20", #
+            "2013-3-20", "2014-3-20"), format="%Y-%m-%d"),#
+	   SS = as.POSIXct(c("2009-6-21", "2010-6-21", "2011-6-21", "2012-6-20",#
+            "2013-6-20", "2014-6-20"), format="%Y-%m-%d"),#
+	   FE = as.POSIXct(c("2009-9-22", "2010-9-23", "2011-9-23", "2012-9-22",#
+            "2013-9-22", "2014-9-22"), format="%Y-%m-%d"),#
+	   WS = as.POSIXct(c("2009-12-21", "2010-12-21", "2011-12-22", "2012-12-21", #
+            "2013-12-21", "2014-12-21"), format="%Y-%m-%d")#
+    )#
+#
+    assignSeason <- function(dat, SeasonStarts=seasons) {#
+	    dat %<>% mutate(#
+		    Season = lapply(Date,#
+				function(x) {#
+					findInterval(#
+						x, #
+						SeasonStarts[which(year(x)==year(SeasonStarts$WS)), ]#
+					)#
+				}#
+			) %>% unlist	#
+		)#
+	    dat[which(dat$Season==0 | dat$Season==4), ]$Season 	<- "Winter"#
+	    dat[which(dat$Season==1), ]$Season 					<- "Spring"#
+	    dat[which(dat$Season==2), ]$Season 					<- "Summer"#
+	    dat[which(dat$Season==3), ]$Season 					<- "Fall"#
+	    return(dat)#
+    }
+dat = data.frame(#
+	    Date = as.POSIXct(strptime(as.Date("2011-12-01", format = "%Y-%m-%d") + #
+            (0:10)*30, format="%Y-%m-%d" ))#
+    )#
+    dat %>% assignSeason
+library(dplyr)
+dat = data.frame(#
+	    Date = as.POSIXct(strptime(as.Date("2011-12-01", format = "%Y-%m-%d") + #
+            (0:10)*30, format="%Y-%m-%d" ))#
+    )#
+    dat %>% assignSeason
+library(devtoolks)
+library(devtools)
+?install_github
+devtools::install_github("ksauby/ACSampling", auth_token="2ab30a602e52fae481f4249cc25e892c0a9ccfc7", subdir="/code/Restricted_ACS_Simulations/ACSampling", repos=NULL)
+devtools::install_github("ksauby/ACSampling", auth_token="2794c3f10db92f525181a0b1f6c19064fe3a2ef3", subdir="/code/Restricted_ACS_Simulations/ACSampling", repos=NULL)
+devtools::install("~/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
+devtools::install(pkg="~/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
+devtools::install(pkg="Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
+devtools::install(pkg="~/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
+devtools::install(pkg="/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
+devtools::install_local(path="/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
+library(devtools)
+devtools::install_local(path="/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
+devtools::install(pkg="/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
+install.packages("~/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
+??limit
+37-13
+24/37
+37-13
+26/37
+25/37
+23/37
+29/37
+30/37
+22/37
+30/37
+29/37
+28/37
+27/37
+35/37
+30/37
+29/37
+26/37
+26/37 - .6757
+28/37
 30/37
 29/37
 37-12
@@ -146,6 +271,15 @@ library(Mage)
 ??projection.matrix
 1/0.167
 0.167*3
+setwd('/Users/KSauby/Documents/Projects')
+setwd("./GTMNERRproc")#
+#setwd("./dataproc")#
+#setwd("./modresproc")#
+#setwd("./unmarked")#
+#setwd("./RPresence")#
+#devtools::test()#
+devtools::document()#
+devtools::install()
 setwd('/Users/KSauby/Documents/Projects/Dissertation/code')
 # load ACSampling#
 #
@@ -157,522 +291,11 @@ load.project()#
 #
 setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis')#
 load.project()#
-source("/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge/01load_other_shapefiles.R", chdir = TRUE)#
 #
 # load marsico project#
 #
 setwd('/Users/KSauby/Documents/Projects/marsico-time-series')#
-load.project()
-setwd('/Users/KSauby/Documents/Projects/Dissertation/code')
-rmarkdown::render('1_Dissertation.Rmd')
-setwd('/Users/KSauby/Documents/Projects/Dissertation/code')
-rmarkdown::render('1_Dissertation.Rmd')
-setwd('/Users/KSauby/Documents/Projects/Dissertation/code')
-rmarkdown::render('1_Dissertation.Rmd')
-setwd('/Users/KSauby/Documents/Projects/Dissertation/code')
-rmarkdown::render('1_Dissertation.Rmd')
-setwd('/Users/KSauby/Documents/Projects/Dissertation/code')
-rmarkdown::render('1_Dissertation.Rmd')
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography')
-demog.plots.w.cacti
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography')
-demog.plots.w.cacti <- Plot.Info %>% #
-	filter(#
-		InDemographicStudy=="yes",#
-		Stricta_presence==1#
-	) %$% #
-	dim(.)[1]#
-demog.plots <- Plot.Info %>% filter(InDemographicStudy=="yes") %$% #
-	dim(.)[1]
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
-GIS.data.upd <- GIS.data.updated
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
-# ---------------------------------------------------------- Shorten names#
-Plot.Info <- OccupancySRSWOR.Plot.Surveys.Info#
-Plot.Surveys <- OccupancySRSWOR.Plot.Surveys#
-Plant.Surveys <- Demographic.Plant.Surveys#
-# Plant.Surveys <- Plant.Surveys.processed.26jun17#
-Plant.Info <- Demographic.Plant.Info#
-# Plant.Info <- Plant.Info.processed.26jun17#
-Plant.Surveys.All <- Demographic.Plant.Surveys#
-Plant.Info.All <- Demographic.Plant.Info#
-D.Plot.Surveys <- Demographic.Plot.Surveys#
-Original.Plant.Data <- Original.Demographic.Plant.Data#
-Seed.Abund <- Seed.Abundance#
-Seed.Abund.Surveys <- Seed.Abundance.Surveys#
-GIS.data.upd <- GIS.data.updated
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
-D.Plot.Surveys$Date %<>% as.Date("%m/%d/%Y") # Demographic Plot Surveys#
-Plant.Surveys %<>% processPlantSurveys(Plant.Info) # Plant Surveys#
-Plant.Surveys %<>% fixInconsistentDeadMissingRecords#
-#
-Plant.Info %<>% processPlantInfo(Plot.Info, Plant.Surveys)#
-#
-# edit 9164 - recorded missing three consecutive records#
-Plant.Surveys %<>%#
-mutate(#
-	Missing = replace(#
-		Missing,#
-		which(PlantID==9164 & Date=="2013-07-18"),#
-		NA#
-	),#
-	Missing = replace(#
-		Missing,#
-		which(PlantID==9164 & Date=="2014-01-10"),#
-		NA#
-	),#
-	Dead = replace(#
-		Dead,#
-		which(PlantID==9164 & Date=="2014-01-10"),#
-		NA#
-	),#
-	Missing = replace(#
-		Missing,#
-		which(PlantID==9164 & Date=="2014-06-09"),#
-		NA#
-	)#
-)#
-# measured two days in a row; remove second measurement#
-Plant.Surveys %<>% filter(!(PlantID==9282 & Date=="2014-06-15"))#
-Plant.Surveys %<>% filter(!(PlotPlantID=="9352" & Date=="2015-05-26"))#
-#
-# saved here#
-# write.csv(Plant.Surveys, "../data/Plant_Surveys_processed_26jun17.csv")#
-# write.csv(Plant.Info, "../data/Plant_Info_processed_26jun17.csv")#
-Plant.Surveys$Date %<>% as.Date#
-#
-Plant.Surveys <- Plant.Info %>%#
-	group_by(PlantID) %>%#
-	dplyr::summarise(#
-		N.PlotPlantIDs = length(unique(PlotPlantID))#
-	) %>%#
-	merge(Plant.Surveys, by="PlantID")#
-Plant.Surveys <- Plant.Info %>%#
-	dplyr::select(PlotPlantID, Tag_Number, Species) %>%#
-	merge(Plant.Surveys, by="PlotPlantID")#
-#
-Plant.Surveys.by.Plant <- Plant.Surveys %>% #
-	processSurveysMergedbyPlant(Plant.Info)#
-Plant.Surveys.by.Plant %>% filter(AllSurveyed==F) %>% write.csv("incompletesurveys.csv")#
-#
-Plant.Surveys %>% filter(N.PlotPlantIDs > 1) %>% filter(Dead==1 | Missing == 1) %>% write.csv("deadmissing.csv")#
-#
-h <- function(w) if( any( grepl( "no non-missing arguments to max", w) ) ) invokeRestart( "muffleWarning" )#
-Plant.Surveys.by.Plant <- withCallingHandlers(#
-	createPlantInsectPresence(Plant.Surveys.by.Plant),#
-	warning = h#
-)#
-#
-# find and keep only first dead/missing observation#
-temp <- Plant.Surveys.by.Plant %>% findFirstDeadMissingObservation#
-# create Fecundity and RGR dataset#
-Plant.Surveys.by.Year <- createPlantSurveysbyYear(Plant.Surveys.by.Plant)#
-#
-# --------------------------------------------------------------------------- ##
-# which plants are missing size surveys in the spring/summer that were NOT dead/missing, and that have a photo?#
-# which plants are missing fruit/flowers surveys in the spring/summer that were NOT dead/missing, and that have a photo?#
-#
-# these plantID and fecundity year combos are missing spring/summer surveys#
-temp1 <- Plant.Surveys.by.Year %>% #
-	filter(#
-		is.na(SurveyDate_SpringSummer),#
-		DeadMissingbyEndofYear != 1#
-	) %>%#
-	dplyr::select(PlantID, FecundityYear)#
-temp1 <- Plant.Surveys.by.Plant %>%#
-	filter(#
-		Dead != 1 & Missing != 1,#
-		month(Date) == 5 |#
-		month(Date) == 6 |#
-		month(Date) == 7 |#
-		month(Date) == 8 |#
-		month(Date) == 9,#
-		is.na(Size_t)#
-	) %>%#
-	merge(#
-		temp1,#
-		by = c("PlantID", "FecundityYear")#
-	) %>%#
-	filter(!(#
-			PlantID == 7548 & Date == "2014-09-05" |#
-			PlantID == 7773 & Date == "2014-09-21" |#
-			PlantID == 7774 & Date == "2014-09-21" |#
-			PlantID == 7778 & Date == "2014-09-21" |#
-			PlantID == 7791 & Date == "2014-09-21" |#
-			PlantID == 7792 & Date == "2014-09-21" |#
-			PlantID == 7793 & Date == "2014-09-21" |#
-			PlantID == 7794 & Date == "2014-09-21" |#
-			PlantID == 7795 & Date == "2014-09-21" |#
-			PlantID == 7807 & Date == "2014-09-21" |#
-			PlantID == 7810 & Date == "2014-09-21" |#
-			PlantID == 8088 & Date == "2014-09-21" |#
-			PlantID == 8088 & Date == "2014-06-28" |#
-			PlantID == 8088 & Date == "2014-06-04" |#
-			PlantID == 8647 & Date == "2013-07-18" |#
-			PlantID == 8652 & Date == "2013-07-23" |#
-			PlantID == 8653 & Date == "2013-07-23" |#
-			PlantID == 9156 & Date == "2014-06-10" |#
-			PlantID == 9156 & Date == "2014-09-11" |#
-			PlantID == 9561 & Date == "2014-06-24" |#
-			PlantID == 9561 & Date == "2014-05-12" |#
-			PlantID == 9682 & Date == "2014-06-02" |#
-			PlantID == 9024 & Date == "2014-06-25" |#
-			PlantID == 9220 & Date == "2013-07-18" |#
-			PlantID == 9220 & Date == "2013-05-21" |#
-			PlantID == 9371 & Date == "2015-05-26"#
-	)) %>%#
-	dplyr::select(PlantID, Date)#
-if (dim(temp)[1] > 0) {#
-	write.csv(temp1, "SpringSummerSurveyswoSizeFruit.csv")#
-	warning("Some plants are missing size/fruit records for spring/summer surveys. Data written to csv file.")#
-}#
-# --------------------------------------------------------------------------- ##
-#
-Plant.Info.Analysis <- createPlantInfobyPlant(Plant.Info, Plant.Surveys.by.Year, Plant.Surveys.by.Plant)#
-#
-Plant.Surveys.by.Year <- Plant.Info.Analysis %>%#
-	merge(Plant.Surveys.by.Year, by="PlantID")#
-#
-Plant.Surveys.by.Year[which(is.na(Plant.Surveys.by.Year$OutsideOfPlot)),]$OutsideOfPlot <- ""#
-#
-Plant.Surveys.by.Year %<>% filter(OutsideOfPlot!="Yes")#
-#
-Plant.Surveys.by.Plant <- Plant.Info.Analysis %>%#
-	merge(Plant.Surveys.by.Plant, by="PlantID")
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
-Plant.Info.Analysis %<>% #
-	rowwise() %>%#
-	mutate(#
-		DaysBetweenFirstLastSurvey = (as.Date(LastDateAlive) + 1) - (as.Date(First.Survey.Date.Alive) - 1)#
-	)#
-	# createMothOccupancyVariable#
-Plant.Info.stricta <- Plant.Info.Analysis %>% filter(Species=="Opuntia stricta")#
-Plant.Info.pusilla <- Plant.Info.Analysis %>% filter(Species=="Opuntia pusilla")#
-write.csv(Plant.Info.Analysis, "../data/Plant_Info_Analysis.csv")#
-write.csv(Plant.Info.stricta, "../data/Plant_Info_Analysis_stricta.csv")#
-write.csv(Plant.Info.pusilla, "../data/Plant_Info_Analysis_pusilla.csv")#
-# --------------------------------------------------------------------------- ##
-# Survival#
-# --------------------------------------------------------------------------- ##
-#
-Plant.Info.Survival.stricta <- Plant.Info.Analysis %>% #
-	filter(Species=="Opuntia stricta") %>%#
-	arrange(desc(maxDaysAlive)) %>%#
-	as.data.frame %>%#
-	dplyr::select(#
-		maxDaysAlive,#
-		HabitatType,#
-		Island,#
-		Network,#
-		MEPlantPres,#
-		CAPlantPres,#
-		OldMothPlantPres,#
-		RecruitmentMode,#
-		minDaysAlive,#
-		AliveatEndofStudy#
-	) %>% #
-	.[complete.cases(.),]#
-# Plant.Info.Survival %<>% #
-	#renamePatches %>%#
-	#createDeadFactorVariable#
-write.csv(Plant.Info.Survival.stricta, "../data/Plant_Info_Survival_stricta.csv", row.names = F)
-getwd()
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
-setwd("/Users/KSauby/Documents/Projects/GTMNERR_analysis")#
-cache("Plant.Info.Survival")#
-cache("Plant.Info.Survival.stricta")
-setwd("/Users/KSauby/Documents/Projects/GTMNERR_analysis/data")#
-cache("Plant.Info.Survival")#
-cache("Plant.Info.Survival.stricta")
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
-# make sure all clones have parents before this#
-#
-# plant info needs to have first survey for each plant#
-#
-# ---------------------------------------------------------------------------- ##
-Plant.Surveys.by.Year.largest.parent <- calculateClonalReproduction(#
-	Plant.Surveys.by.Year, #
-	Plant.Surveys.by.Plant, #
-	Plant.Info.Analysis,#
-	ParentChoice="largest"#
-)#
-#
-clonal_reproduction_info_for_transition_matrix.largest.parent <- #
-									Plant.Surveys.by.Year.largest.parent[[2]]#
-Plant.Surveys.by.Year.largest.parent <- #
-									Plant.Surveys.by.Year.largest.parent[[1]]#
-# ---------------------------------------------------------------------------- ##
-Plant.Surveys.by.Year.random.parent <- calculateClonalReproduction(#
-	Plant.Surveys.by.Year, #
-	Plant.Surveys.by.Plant, #
-	Plant.Info.Analysis,#
-	ParentChoice="random"#
-)#
-#
-clonal_reproduction_info_for_transition_matrix.random.parent <- #
-									Plant.Surveys.by.Year.random.parent[[2]]#
-Plant.Surveys.by.Year.random.parent <- #
-									Plant.Surveys.by.Year.random.parent[[1]]#
-#
-# ---------------------------------------------------------------------------- ##
-Plant.Surveys.by.Year.random.largest.parent <- calculateClonalReproduction(#
-	Plant.Surveys.by.Year, #
-	Plant.Surveys.by.Plant, #
-	Plant.Info.Analysis,#
-	ParentChoice="random.largest"#
-)#
-#
-clonal_reproduction_info_for_transition_matrix.random.largest.parent <- #
-								Plant.Surveys.by.Year.random.largest.parent[[2]]#
-Plant.Surveys.by.Year.random.largest.parent <- #
-								Plant.Surveys.by.Year.random.largest.parent[[1]]#
-# ---------------------------------------------------------------------------- ##
-Plant.Surveys.by.Year.no.parent.assignment <- calculateClonalReproduction(#
-	Plant.Surveys.by.Year, #
-	Plant.Surveys.by.Plant, #
-	Plant.Info.Analysis,#
-	ParentChoice="none"#
-)#
-#
-Plant.Surveys.by.Year.no.parent.assignment <- #
-								Plant.Surveys.by.Year.no.parent.assignment[[1]]#
-setwd("/Users/KSauby/Documents/Projects/GTMNERR_analysis")#
-cache("Plant.Surveys.by.Year.largest.parent")#
-cache("Plant.Surveys.by.Year.random.parent")#
-cache("Plant.Surveys.by.Year.no.parent.assignment")#
-cache("Plant.Surveys.by.Year.random.largest.parent")#
-cache("clonal_reproduction_info_for_transition_matrix.largest.parent")#
-cache("clonal_reproduction_info_for_transition_matrix.random.parent")#
-cache("clonal_reproduction_info_for_transition_matrix.random.largest.parent")
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
-Plant.Surveys.by.Year.largest.parent %<>% processPlantSurveysbyYear#
-Plant.Surveys.by.Year.random.parent %<>% processPlantSurveysbyYear#
-Plant.Surveys.by.Year.random.largest.parent %<>% processPlantSurveysbyYear#
-Plant.Surveys.by.Year.no.parent.assignment %<>% processPlantSurveysbyYear#
-# process original plant data (before new PlantIDs were given) for occupancy surveys#
-Original.Plant.Data %<>% processOriginalPlantData#
-#
-# --------------------------------------------------------------------------- ##
-Plant.Surveys.by.Year.largest.parent %>% write.csv("../data/Plant_Surveys_by_Year_largest_parent.csv")#
-Plant.Surveys.by.Year.random.parent %>% write.csv("../data/Plant_Surveys_by_Year_random_parent.csv")#
-Plant.Surveys.by.Year.random.largest.parent %>% write.csv("../data/Plant_Surveys_by_Year_random_largest_parent.csv")#
-Plant.Surveys.by.Year.no.parent.assignment %>% write.csv("../data/Plant_Surveys_by_Year_no_uncertain_parent_assignment.csv")#
-# ---------------------------------------------------------------------------
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
-# ---------------------------------------------------- DATA CHECKING#
-# compare these numbers to the numbers after data is further processed#
-#
-# number of CACA observations#
-length(Plot.Surveys[which(Plot.Surveys$CACA_on_Stricta=="Yes"), ]$CACA_on_Stricta)#
-# number of MEPR observations#
-length(Plot.Surveys[which(Plot.Surveys$MEPR_on_Stricta=="Yes"), ]$MEPR_on_Stricta)#
-# don't exclude all plots for the demography study#
-#
-# --------------------------------------------------------------------------- ##
-# --------------- Occupancy Plot Info --------------------------------------- ##
-# --------------------------------------------------------------------------- ##
-#
-Plot.Info %<>% processOccupancyPlotInfo(Plot.Vegetation, GIS.data.upd)#
-#
-# check errors by keeping track of dataframe size#
-Plot.Info.Size = as.data.frame(matrix(NA, 1, 1))#
-Plot.Info.Size[, 1] = dim(Plot.Info)[1]#
-#
-Plot.Surveys %<>% processOccupancyPlotSurveys(Plot.Info)#
-#
-write.csv(Plot.Info, "../data/Plot_Info.csv")#
-write.csv(Plot.Surveys, "../data/Plot_Surveys.csv")
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
-Plant.Surveys.by.Year.largest.parent %<>% estimateCactusDensityperPlot(Plot.Info)
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
-Plant.Surveys.by.Year.random.parent %<>% estimateCactusDensityperPlot(Plot.Info)#
-Plant.Surveys.by.Year.random.largest.parent %<>% estimateCactusDensityperPlot(Plot.Info)#
-Plant.Surveys.by.Year.no.parent.assignment %<>% estimateCactusDensityperPlot(Plot.Info)
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
-# --------------------------------------------------------------------------- ##
-# (5) Merge datasets together#
-# --------------------------------------------------------------------------- ##
-Plot.Surveys %<>% changeVariableNames#
-#
-column_list <- c(#
-	"P_plant_survey", #
-	"P_Ca", #
-	"P_Me", #
-	"P_Ch", #
-	"P_Umoth", #
-	"P_Omoth", #
-	"S_plant_survey", #
-	"S_Ca", #
-	"S_Me", #
-	"S_Ch", #
-	"S_Umoth", #
-	"S_Omoth"#
-)#
-#
-A <- mergePlantSurveysPlotSurveys(Plot.Surveys, Plant.Surveys)#
-B <- mergePlotSurveysDemoPlotSurveys(D.Plot.Surveys, Plant.Surveys)#
-C <- createPlotSurveysfromPlantSurveys(Plant.Surveys, Plant.Info, Plot.Surveys, #
-	D.Plot.Surveys)#
-D <- createPlotSurveysfromOrigPlantSurveys(Original.Plant.Data)#
-E <- rbind.fill(A, B, C, D)				#
-E.check <- merge(Plot.Info, E, by="Tag_Number")#
-# FIX DATA FORMAT#
-E[,c(column_list,#
-	"P_plot_survey", #
-	"P_PC", #
-	"P_H", #
-	"S_plot_survey", #
-	"S_PC", #
-	"S_H"#
-)] %<>% apply(., 2, as.numeric)#
-E[,c(column_list,#
-	"P_plot_survey", #
-	"P_PC", #
-	"P_H", #
-	"S_plot_survey", #
-	"S_PC", #
-	"S_H"#
-)] %<>% apply(., 2, NA_Function)#
-Z <- mergeDuplicateSurveys(E)#
-G <- do.call(rbind.data.frame, Z)#
-names(G)[1] <- "Tag_Number"#
-G[,c(#
-	"P_plot_survey", #
-	"P_plant_survey", #
-	"P_Ca", #
-	"P_Me", #
-	"P_Ch", #
-	"P_Umoth", #
-	"P_Omoth", #
-	"P_PC", #
-	"P_H", #
-	"S_plot_survey", #
-	"S_plant_survey", #
-	"S_Ca", #
-	"S_Me", #
-	"S_Ch", #
-	"S_Umoth", #
-	"S_Omoth", #
-	"S_PC", #
-	"S_H"#
-)] %<>% apply(., 2, as.numeric)#
-G[,c(#
-	"P_plot_survey", #
-	"P_plant_survey", #
-	"P_Ca", #
-	"P_Me", #
-	"P_Ch", #
-	"P_Umoth", #
-	"P_Omoth", #
-	"P_PC", #
-	"P_H", #
-	"S_plot_survey", #
-	"S_plant_survey", #
-	"S_Ca", #
-	"S_Me", #
-	"S_Ch", #
-	"S_Umoth", #
-	"S_Omoth", #
-	"S_PC", #
-	"S_H"#
-)] %<>% apply(., 2, NA_Function)#
-#
-# --------------------------------------------------------------------------- ##
-# (6)  Merge with other plot surveys#
-# --------------------------------------------------------------------------- ##
-#
-# ------------------------------------------------------- PREP OLD PLOT SURVEYS#
-# remove extra columns#
-# Plot_Surveys.mod <-  Plot_Surveys %>% dplyr::select(-c(First_Observer_Initials, Second_Observer_Initials, DACT_on_Pusilla, DACT_on_Stricta))#
-#
-Plot_Surveys_mod <- Plot.Surveys %>%#
-	dplyr::select(#
-		Tag_Number,#
-		Date, #
-		Pictures, #
-		PictureDirection, #
-		Notes, #
-		Pusilla, #
-		P_Ca, #
-		P_Me, #
-		P_Ch, #
-		P_Umoth, #
-		P_Omoth, #
-		Old_Moth_Evidence_recent_Pusilla, #
-		P_PC, #
-		P_H, #
-		Stricta, #
-		S_Ca, #
-		S_Me, #
-		S_Ch, #
-		S_Umoth, #
-		S_Omoth, #
-		Old_Moth_Evidence_recent_Stricta,#
-		S_PC, #
-		S_H#
-	)#
-#
-# add extra columns to match removed.duplicates#
-Plot_Surveys_mod$S_plant_survey <- NA#
-Plot_Surveys_mod$P_plant_survey <- NA#
-names(Plot_Surveys_mod)[c(6, 15)] <- c("P_plot_survey", "S_plot_survey")#
-#
-# create file with plot surveys from before demography study#
-H = filter(Plot_Surveys_mod, Date < "2012-12-02")#
-# create file with plot surveys after demography study started, but tags not included in the demography study#
-#	this is because filtered only surveys for plots included IN the demography study#
-I = Plot_Surveys_mod %>% #
-	filter(Date > "2012-12-01", !(Tag_Number %in% Plant.Surveys$Tag_Number))#
-#
-# add CACA and MEPR presence columns#
-#
-# ---------------------- MERGE OLD PLOT SURVEYS WITH NEWLY CREATED PLOT SURVEYS#
-##################
-################# This is the problem, I don't think it is merging right#
-dim(OccupancySRSWOR.Plot.Surveys)#
-#
-Plot_Surveys <- rbind.fill(#
-	G, # 3412#
-	H, # 2072#
-	I  # 5439#
-)#
-#
-# create stricta and pusilla variables#
-Plot_Surveys %<>%#
-	mutate(#
-		Stricta = apply(cbind(S_plot_survey, S_plant_survey), 1, Maximum),#
-		Pusilla = apply(cbind(P_plot_survey, P_plant_survey), 1, Maximum)#
-	)#
-#
-# --------------------------------------------------------------------------- ##
-# ERROR MESSAGE#
-# --------------------------------------------------------------------------- ##
-# for which records do plot and plant surveys not match?#
-Plot_Surveys %>% #
-	filter(P_plot_survey==1 & P_plant_survey!=1) %>% #
-	write.csv("/Users/KSauby/Documents/Projects/GTMNERR_analysis/data/pusilla_mismatch_plot_plant_surveys_A.csv")#
-Plot_Surveys %>% #
-	filter(is.na(P_plot_survey) & P_plant_survey==1) %>% #
-	write.csv("/Users/KSauby/Documents/Projects/GTMNERR_analysis/data/pusilla_mismatch_plot_plant_surveys_B.csv")#
-Plot_Surveys %>% #
-	filter(S_plot_survey==1 & S_plant_survey!=1) %>% #
-	write.csv("/Users/KSauby/Documents/Projects/GTMNERR_analysis/data/stricta_mismatch_plot_plant_surveys_A.csv")#
-Plot_Surveys %>% #
-	filter(is.na(S_plot_survey) & S_plant_survey==1) %>% #
-	write.csv("/Users/KSauby/Documents/Projects/GTMNERR_analysis/data/stricta_mismatch_plot_plant_surveys_B.csv")#
-#
-# --------------------------------------------------------------------------- ##
-# (6)  remove temp files from workspace#
-# --------------------------------------------------------------------------- ##
-#
-rm(A,B,C,D,E,Z,G)#
-# --------------------------------------------------------------------------- ##
-# CHECK THIS FILE TO SEE THAT CACTUS PRESENCE FROM PLOT SURVEYS MATCHES CACTUS PRESENCE FROM PLANT SURVEYS#
-# --------------------------------------------------------------------------- ##
-# WHY IS THERE A TAG NUMBER = NA?#
-# STILL NOT CORRECT#
-# LOTS OF NAS FOR STRICTA AND PUSILLA FOR THEIR PRESENCE/ABSENCE#
-#
+load.project()#
 Plot.Info <- Plot.Surveys %>% #
 	group_by(Tag_Number) %>%#
 	summarise(#
@@ -680,663 +303,71 @@ Plot.Info <- Plot.Surveys %>% #
 		Stricta_presence = mysum2(Stricta),#
 		Cactus_presence = mysum2(c(Pusilla,Stricta))#
 	) %>%#
-	merge(Plot.Info, by="Tag_Number")
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
-# -------- CREATE RGR DATASETS ---------------------------------------------- ##
-# dim(Plant.Surveys.by.Year) 			7731 - 4812 (missing RGR) = 2919#
-#
-# 2919#
-Plant.Surveys.RGR <- Plant.Surveys.by.Year %>% 	#
-	as.data.frame %>%#
- 	droplevels %>% #
- 	dplyr::select(#
- 		Species,#
-		PlantID,#
-		RecruitmentMode,#
- 		Network,#
- 		Island,#
-		HabitatType,#
-		cactus_density_per_plot,#
-		RGR_Size365,#
-		max_RGR_Size365,#
-		# insects#
-		CA_t_1,#
-		ME_t_1,#
-		Moth_Evidence_t_1,#
-		# size#
-		Size_t_1,#
-		SizewClones_t_1#
- 	) %>%#
-	.[complete.cases(.),]#
-Plant.Surveys.RGR.stricta <- Plant.Surveys.RGR %>% #
-	filter(Species=="Opuntia stricta")#
-Plant.Surveys.RGR.stricta %<>% #
-	mutate(#
-		Ln_Size_t_1_st = arm::rescale(log(Size_t_1)),	#
-		Ln_SizewClones_t_1_st = arm::rescale(log(SizewClones_t_1)),	#
-		cactus_density_per_plot_st = arm::rescale(cactus_density_per_plot)		#
-	)#
-# --------------------------------------------------------------------------- ##
-Plant.Surveys.RGR.stricta %>% write.csv("../data/Plant_Surveys_RGR_stricta.csv")#
-#
-setwd("/Users/KSauby/Documents/Projects/GTMNERR_analysis")#
-cache("Plant.Surveys.RGR")#
-cache("Plant_Surveys_RGR_stricta")
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
-Plant.Surveys.by.Year %<>% estimateCactusDensityperPlot(Plot.Info)
-head(Plot.Info)
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
-Plant_Info_Big_Plants
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
-Plant_Info_Big_Plants <- filter(Plant_Info_All, InBigPlantStudy=="Yes")#
-# merge with Plant_Surveys#
-Plant_Info_Big_Plants %<>%#
-	dplyr::select(PlantID, HostSpecies, Plant_Notes) %>%#
-	merge(., Plant_Surveys_All, by = "PlantID") %>%#
-	processPlantSurveys
-ls()
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
-Plant_Info_Big_Plants <- filter(Demographic.Plant.Info, InBigPlantStudy=="Yes")
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
-Plant_Info_Big_Plants %<>%#
-	dplyr::select(PlantID, HostSpecies, Plant_Notes) %>%#
-	merge(., Plant_Surveys_All, by = "PlantID") %>%#
-	processPlantSurveys
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
-Plant_Info_Big_Plants <- filter(Demographic.Plant.Info, InBigPlantStudy=="Yes")#
-# merge with Plant_Surveys#
-Plant_Info_Big_Plants %<>%#
-	dplyr::select(PlantID, HostSpecies, Plant_Notes) %>%#
-	merge(., Demographic.Plant.Surveys, by = "PlantID") %>%#
-	processPlantSurveys
-?processPlantSurveys
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
-# save only info from Big Plant Study#
-Plant_Info_Big_Plants <- filter(Demographic.Plant.Info, InBigPlantStudy=="Yes")#
-# merge with Plant_Surveys#
-Plant_Surveys_Big_Plants <- Plant_Info_Big_Plants %>%#
-	dplyr::select(PlantID, HostSpecies, Plant_Notes) %>%#
-	merge(., Demographic.Plant.Surveys, by = "PlantID") %>%	#
-	processPlantSurveys(., Plant_Info_Big_Plants)
-head(Plant_Surveys_Big_Plants)
-dim(Plant_Surveys_Big_Plants)
-Plant_Surveys_Big_Plants$Size_t
-Plant_Surveys_Big_Plants %>% filter(!(is.na(Size_t)))
-Plant_Surveys_Big_Plants %>% filter(!(is.na(Size_t))) %>% arrange(Size_t)
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
-# --------------------------------------------------------------------------- ##
-# --------------- BIG PLANT STUDY ------------------------------------------- ##
-# --------------------------------------------------------------------------- ##
-#
-# FOR MOST I MEASURED SIZE IN CM INSTEAD OF SEGMENTS#
-#
-# save only info from Big Plant Study#
-Plant_Info_Big_Plants <- filter(Demographic.Plant.Info, InBigPlantStudy=="Yes")#
-# merge with Plant_Surveys#
-Plant_Surveys_Big_Plants <- Plant_Info_Big_Plants %>%#
-	dplyr::select(PlantID, HostSpecies, Plant_Notes) %>%#
-	merge(., Demographic.Plant.Surveys, by = "PlantID") %>%	#
-	processPlantSurveys(., Plant_Info_Big_Plants)#
-# --------------------------------------------------------------------------- ##
-setwd("/Users/KSauby/Documents/Projects/GTMNERR_analysis")#
-cache("Plant.Info.Big.Plants")
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
-# --------------------------------------------------------------------------- ##
-# --------------- BIG PLANT STUDY ------------------------------------------- ##
-# --------------------------------------------------------------------------- ##
-#
-# FOR MOST I MEASURED SIZE IN CM INSTEAD OF SEGMENTS#
-#
-# save only info from Big Plant Study#
-Plant.Info.Big.Plants <- filter(Demographic.Plant.Info, InBigPlantStudy=="Yes")#
-# merge with Plant_Surveys#
-Plant.Surveys.Big.Plants <- Plant.Info.Big.Plants %>%#
-	dplyr::select(PlantID, HostSpecies, Plant_Notes) %>%#
-	merge(., Demographic.Plant.Surveys, by = "PlantID") %>%	#
-	processPlantSurveys(., Plant.Info.Big.Plants)#
-# --------------------------------------------------------------------------- ##
-setwd("/Users/KSauby/Documents/Projects/GTMNERR_analysis")#
-cache("Plant.Info.Big.Plants")#
-cache("Plant.Surveys.Big.Plants")
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
-Plant.Info.Big.Plants
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
-# ---------------------------------------------------------- Shorten names#
-Plot.Info <- OccupancySRSWOR.Plot.Surveys.Info#
-Plot.Surveys <- OccupancySRSWOR.Plot.Surveys#
-Plant.Surveys <- Demographic.Plant.Surveys#
-# Plant.Surveys <- Plant.Surveys.processed.26jun17#
-Plant.Info <- Demographic.Plant.Info#
-# Plant.Info <- Plant.Info.processed.26jun17#
-Plant.Surveys.All <- Demographic.Plant.Surveys#
-Plant.Info.All <- Demographic.Plant.Info#
-D.Plot.Surveys <- Demographic.Plot.Surveys#
-Original.Plant.Data <- Original.Demographic.Plant.Data#
-Seed.Abund <- Seed.Abundance#
-Seed.Abund.Surveys <- Seed.Abundance.Surveys#
-GIS.data.upd <- GIS.data.updated
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
-# --------------------------------------------------------------------------- ##
-# --------------- Load Shapefiles ------------------------------------------- ##
-# --------------------------------------------------------------------------- ##
-#
-# polygons denoting island boundaries#
-flagler.1m.evel.islands.polygons <- readOGR(dsn="/Users/KSauby/Documents/Projects/GTMNERR_analysis/data/shapefiles/", "flagler_1m_evel_islands_polygons")#
-#
-# polygon denoting Roadway1 boundary#
-SJC.Roadway.1 <- readOGR(dsn="/Users/KSauby/Documents/Projects/GTMNERR_analysis/data/shapefiles/", "SJC_roadway_island_1_utm")#
-#
-# polygon denoting Roadway2 boundary#
-SJC.Roadway.2 <- readOGR(dsn="/Users/KSauby/Documents/Projects/GTMNERR_analysis/data/shapefiles/", "SJC_Roadway_island_2_utm")#
-# --------------------------------------------------------------------------- ##
-cache("flagler.1m.evel.islands.polygons")#
-cache("SJC.Roadway.1")#
-cache("SJC.Roadway.2")
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
-# --------------------------------------------------------------------------- ##
-setwd("/Users/KSauby/Documents/Projects/GTMNERR_analysis")#
-cache("flagler.1m.evel.islands.polygons")#
-cache("SJC.Roadway.1")#
-cache("SJC.Roadway.2")
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
-D.Plot.Surveys$Date %<>% as.Date("%m/%d/%Y") # Demographic Plot Surveys#
-Plant.Surveys %<>% processPlantSurveys(Plant.Info) # Plant Surveys#
-Plant.Surveys %<>% fixInconsistentDeadMissingRecords#
-#
-Plant.Info %<>% processPlantInfo(Plot.Info, Plant.Surveys)#
-#
-# edit 9164 - recorded missing three consecutive records#
-Plant.Surveys %<>%#
-mutate(#
-	Missing = replace(#
-		Missing,#
-		which(PlantID==9164 & Date=="2013-07-18"),#
-		NA#
-	),#
-	Missing = replace(#
-		Missing,#
-		which(PlantID==9164 & Date=="2014-01-10"),#
-		NA#
-	),#
-	Dead = replace(#
-		Dead,#
-		which(PlantID==9164 & Date=="2014-01-10"),#
-		NA#
-	),#
-	Missing = replace(#
-		Missing,#
-		which(PlantID==9164 & Date=="2014-06-09"),#
-		NA#
-	)#
-)#
-# measured two days in a row; remove second measurement#
-Plant.Surveys %<>% filter(!(PlantID==9282 & Date=="2014-06-15"))#
-Plant.Surveys %<>% filter(!(PlotPlantID=="9352" & Date=="2015-05-26"))#
-#
-# saved here#
-# write.csv(Plant.Surveys, "../data/Plant_Surveys_processed_26jun17.csv")#
-# write.csv(Plant.Info, "../data/Plant_Info_processed_26jun17.csv")#
-Plant.Surveys$Date %<>% as.Date#
-#
-Plant.Surveys <- Plant.Info %>%#
-	group_by(PlantID) %>%#
-	dplyr::summarise(#
-		N.PlotPlantIDs = length(unique(PlotPlantID))#
-	) %>%#
-	merge(Plant.Surveys, by="PlantID")#
-Plant.Surveys <- Plant.Info %>%#
-	dplyr::select(PlotPlantID, Tag_Number, Species) %>%#
-	merge(Plant.Surveys, by="PlotPlantID")#
-#
-Plant.Surveys.by.Plant <- Plant.Surveys %>% #
-	processSurveysMergedbyPlant(Plant.Info)#
-Plant.Surveys.by.Plant %>% filter(AllSurveyed==F) %>% write.csv("incompletesurveys.csv")#
-#
-Plant.Surveys %>% filter(N.PlotPlantIDs > 1) %>% filter(Dead==1 | Missing == 1) %>% write.csv("deadmissing.csv")#
-#
-h <- function(w) if( any( grepl( "no non-missing arguments to max", w) ) ) invokeRestart( "muffleWarning" )#
-Plant.Surveys.by.Plant <- withCallingHandlers(#
-	createPlantInsectPresence(Plant.Surveys.by.Plant),#
-	warning = h#
-)#
-#
-# find and keep only first dead/missing observation#
-temp <- Plant.Surveys.by.Plant %>% findFirstDeadMissingObservation#
-# create Fecundity and RGR dataset#
-Plant.Surveys.by.Year <- createPlantSurveysbyYear(Plant.Surveys.by.Plant)#
-#
-# --------------------------------------------------------------------------- ##
-# which plants are missing size surveys in the spring/summer that were NOT dead/missing, and that have a photo?#
-# which plants are missing fruit/flowers surveys in the spring/summer that were NOT dead/missing, and that have a photo?#
-#
-# these plantID and fecundity year combos are missing spring/summer surveys#
-temp1 <- Plant.Surveys.by.Year %>% #
-	filter(#
-		is.na(SurveyDate_SpringSummer),#
-		DeadMissingbyEndofYear != 1#
-	) %>%#
-	dplyr::select(PlantID, FecundityYear)#
-temp1 <- Plant.Surveys.by.Plant %>%#
-	filter(#
-		Dead != 1 & Missing != 1,#
-		month(Date) == 5 |#
-		month(Date) == 6 |#
-		month(Date) == 7 |#
-		month(Date) == 8 |#
-		month(Date) == 9,#
-		is.na(Size_t)#
-	) %>%#
-	merge(#
-		temp1,#
-		by = c("PlantID", "FecundityYear")#
-	) %>%#
-	filter(!(#
-			PlantID == 7548 & Date == "2014-09-05" |#
-			PlantID == 7773 & Date == "2014-09-21" |#
-			PlantID == 7774 & Date == "2014-09-21" |#
-			PlantID == 7778 & Date == "2014-09-21" |#
-			PlantID == 7791 & Date == "2014-09-21" |#
-			PlantID == 7792 & Date == "2014-09-21" |#
-			PlantID == 7793 & Date == "2014-09-21" |#
-			PlantID == 7794 & Date == "2014-09-21" |#
-			PlantID == 7795 & Date == "2014-09-21" |#
-			PlantID == 7807 & Date == "2014-09-21" |#
-			PlantID == 7810 & Date == "2014-09-21" |#
-			PlantID == 8088 & Date == "2014-09-21" |#
-			PlantID == 8088 & Date == "2014-06-28" |#
-			PlantID == 8088 & Date == "2014-06-04" |#
-			PlantID == 8647 & Date == "2013-07-18" |#
-			PlantID == 8652 & Date == "2013-07-23" |#
-			PlantID == 8653 & Date == "2013-07-23" |#
-			PlantID == 9156 & Date == "2014-06-10" |#
-			PlantID == 9156 & Date == "2014-09-11" |#
-			PlantID == 9561 & Date == "2014-06-24" |#
-			PlantID == 9561 & Date == "2014-05-12" |#
-			PlantID == 9682 & Date == "2014-06-02" |#
-			PlantID == 9024 & Date == "2014-06-25" |#
-			PlantID == 9220 & Date == "2013-07-18" |#
-			PlantID == 9220 & Date == "2013-05-21" |#
-			PlantID == 9371 & Date == "2015-05-26"#
-	)) %>%#
-	dplyr::select(PlantID, Date)#
-if (dim(temp)[1] > 0) {#
-	write.csv(temp1, "SpringSummerSurveyswoSizeFruit.csv")#
-	warning("Some plants are missing size/fruit records for spring/summer surveys. Data written to csv file.")#
-}#
-# --------------------------------------------------------------------------- ##
-#
-Plant.Info.Analysis <- createPlantInfobyPlant(Plant.Info, Plant.Surveys.by.Year, Plant.Surveys.by.Plant)#
-#
-Plant.Surveys.by.Year <- Plant.Info.Analysis %>%#
-	merge(Plant.Surveys.by.Year, by="PlantID")#
-#
-Plant.Surveys.by.Year[which(is.na(Plant.Surveys.by.Year$OutsideOfPlot)),]$OutsideOfPlot <- ""#
-#
-Plant.Surveys.by.Year %<>% filter(OutsideOfPlot!="Yes")#
-#
-Plant.Surveys.by.Plant <- Plant.Info.Analysis %>%#
-	merge(Plant.Surveys.by.Plant, by="PlantID")#
-# --------------------------------------------------------------------------- ##
-setwd("/Users/KSauby/Documents/Projects/GTMNERR_analysis")#
-cache("Plant.Surveys")#
-cache("Plant.Surveys.by.Year")#
-cache("Plant.Surveys.by.Plant")
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
-Plant.Info.Analysis %<>% #
-	rowwise() %>%#
-	mutate(#
-		DaysBetweenFirstLastSurvey = (as.Date(LastDateAlive) + 1) - (as.Date(First.Survey.Date.Alive) - 1)#
-	)#
-	# createMothOccupancyVariable#
-Plant.Info.stricta <- Plant.Info.Analysis %>% filter(Species=="Opuntia stricta")#
-Plant.Info.pusilla <- Plant.Info.Analysis %>% filter(Species=="Opuntia pusilla")#
-write.csv(Plant.Info.Analysis, "../data/Plant_Info_Analysis.csv")#
-write.csv(Plant.Info.stricta, "../data/Plant_Info_Analysis_stricta.csv")#
-write.csv(Plant.Info.pusilla, "../data/Plant_Info_Analysis_pusilla.csv")#
-# --------------------------------------------------------------------------- ##
-# Survival#
-# --------------------------------------------------------------------------- ##
-#
-Plant.Info.Survival.stricta <- Plant.Info.Analysis %>% #
-	filter(Species=="Opuntia stricta") %>%#
-	arrange(desc(maxDaysAlive)) %>%#
-	as.data.frame %>%#
-	dplyr::select(#
-		maxDaysAlive,#
-		HabitatType,#
-		Island,#
-		Network,#
-		MEPlantPres,#
-		CAPlantPres,#
-		OldMothPlantPres,#
-		RecruitmentMode,#
-		minDaysAlive,#
-		AliveatEndofStudy#
-	) %>% #
-	.[complete.cases(.),]#
-# Plant.Info.Survival %<>% #
-	#renamePatches %>%#
-	#createDeadFactorVariable#
-write.csv(Plant.Info.Survival.stricta, "../data/Plant_Info_Survival_stricta.csv", row.names = F)#
-# --------------------------------------------------------------------------- ##
-setwd("/Users/KSauby/Documents/Projects/GTMNERR_analysis")#
-cache("Plant.Info.Survival")#
-cache("Plant.Info.Survival.stricta")#
-cache("Plant.Info.Analysis")#
-cache("Plant.Info")
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
-# make sure all clones have parents before this#
-#
-# plant info needs to have first survey for each plant#
-#
-# ---------------------------------------------------------------------------- ##
-Plant.Surveys.by.Year.largest.parent <- calculateClonalReproduction(#
-	Plant.Surveys.by.Year, #
-	Plant.Surveys.by.Plant, #
-	Plant.Info.Analysis,#
-	ParentChoice="largest"#
-)#
-#
-clonal_reproduction_info_for_transition_matrix.largest.parent <- #
-									Plant.Surveys.by.Year.largest.parent[[2]]#
-Plant.Surveys.by.Year.largest.parent <- #
-									Plant.Surveys.by.Year.largest.parent[[1]]#
-# ---------------------------------------------------------------------------- ##
-Plant.Surveys.by.Year.random.parent <- calculateClonalReproduction(#
-	Plant.Surveys.by.Year, #
-	Plant.Surveys.by.Plant, #
-	Plant.Info.Analysis,#
-	ParentChoice="random"#
-)#
-#
-clonal_reproduction_info_for_transition_matrix.random.parent <- #
-									Plant.Surveys.by.Year.random.parent[[2]]#
-Plant.Surveys.by.Year.random.parent <- #
-									Plant.Surveys.by.Year.random.parent[[1]]#
-#
-# ---------------------------------------------------------------------------- ##
-Plant.Surveys.by.Year.random.largest.parent <- calculateClonalReproduction(#
-	Plant.Surveys.by.Year, #
-	Plant.Surveys.by.Plant, #
-	Plant.Info.Analysis,#
-	ParentChoice="random.largest"#
-)#
-#
-clonal_reproduction_info_for_transition_matrix.random.largest.parent <- #
-								Plant.Surveys.by.Year.random.largest.parent[[2]]#
-Plant.Surveys.by.Year.random.largest.parent <- #
-								Plant.Surveys.by.Year.random.largest.parent[[1]]#
-# ---------------------------------------------------------------------------- ##
-Plant.Surveys.by.Year.no.parent.assignment <- calculateClonalReproduction(#
-	Plant.Surveys.by.Year, #
-	Plant.Surveys.by.Plant, #
-	Plant.Info.Analysis,#
-	ParentChoice="none"#
-)#
-#
-Plant.Surveys.by.Year.no.parent.assignment <- #
-								Plant.Surveys.by.Year.no.parent.assignment[[1]]#
-# --------------------------------------------------------------------------- ##
-setwd("/Users/KSauby/Documents/Projects/GTMNERR_analysis")#
-cache("Plant.Surveys.by.Year.largest.parent")#
-cache("Plant.Surveys.by.Year.random.parent")#
-cache("Plant.Surveys.by.Year.no.parent.assignment")#
-cache("Plant.Surveys.by.Year.random.largest.parent")#
-cache("clonal_reproduction_info_for_transition_matrix.largest.parent")#
-cache("clonal_reproduction_info_for_transition_matrix.random.parent")#
-cache("clonal_reproduction_info_for_transition_matrix.random.largest.parent")
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
-Plant.Surveys.by.Year.largest.parent %<>% processPlantSurveysbyYear#
-Plant.Surveys.by.Year.random.parent %<>% processPlantSurveysbyYear#
-Plant.Surveys.by.Year.random.largest.parent %<>% processPlantSurveysbyYear#
-Plant.Surveys.by.Year.no.parent.assignment %<>% processPlantSurveysbyYear#
-# process original plant data (before new PlantIDs were given) for occupancy surveys#
-Original.Plant.Data %<>% processOriginalPlantData#
-#
-# --------------------------------------------------------------------------- ##
-Plant.Surveys.by.Year.largest.parent %>% write.csv("../data/Plant_Surveys_by_Year_largest_parent.csv")#
-Plant.Surveys.by.Year.random.parent %>% write.csv("../data/Plant_Surveys_by_Year_random_parent.csv")#
-Plant.Surveys.by.Year.random.largest.parent %>% write.csv("../data/Plant_Surveys_by_Year_random_largest_parent.csv")#
-Plant.Surveys.by.Year.no.parent.assignment %>% write.csv("../data/Plant_Surveys_by_Year_no_uncertain_parent_assignment.csv")#
-# --------------------------------------------------------------------------- ##
-#
-cache("Original.Plant.Data")
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
-setwd("/Users/KSauby/Documents/Projects/GTMNERR_analysis")#
-cache("Original.Plant.Data")
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
-# ---------------------------------------------------- DATA CHECKING#
-# compare these numbers to the numbers after data is further processed#
-#
-# number of CACA observations#
-length(Plot.Surveys[which(Plot.Surveys$CACA_on_Stricta=="Yes"), ]$CACA_on_Stricta)#
-# number of MEPR observations#
-length(Plot.Surveys[which(Plot.Surveys$MEPR_on_Stricta=="Yes"), ]$MEPR_on_Stricta)#
-# don't exclude all plots for the demography study#
-#
-# --------------------------------------------------------------------------- ##
-# --------------- Occupancy Plot Info --------------------------------------- ##
-# --------------------------------------------------------------------------- ##
-#
-Plot.Info %<>% processOccupancyPlotInfo(Plot.Vegetation, GIS.data.upd)#
-#
-# check errors by keeping track of dataframe size#
-Plot.Info.Size = as.data.frame(matrix(NA, 1, 1))#
-Plot.Info.Size[, 1] = dim(Plot.Info)[1]#
-#
-Plot.Surveys %<>% processOccupancyPlotSurveys(Plot.Info)#
-#
-write.csv(Plot.Info, "../data/Plot_Info.csv")#
-write.csv(Plot.Surveys, "../data/Plot_Surveys.csv")#
+	merge(Plot.Info, by="Tag_Number")#
 #
 # --------------------------------------------------------------------------- ##
 setwd("/Users/KSauby/Documents/Projects/GTMNERR_analysis")#
 cache("Plot.Info")#
 cache("Plot.Surveys")
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
-Plant.Surveys.by.Year %<>% estimateCactusDensityperPlot(Plot.Info)#
-Plant.Surveys.by.Year.largest.parent %<>% estimateCactusDensityperPlot(Plot.Info)#
-Plant.Surveys.by.Year.random.parent %<>% estimateCactusDensityperPlot(Plot.Info)#
-Plant.Surveys.by.Year.random.largest.parent %<>% estimateCactusDensityperPlot(Plot.Info)#
-Plant.Surveys.by.Year.no.parent.assignment %<>% estimateCactusDensityperPlot(Plot.Info)
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
-# (5) Merge datasets together#
-# --------------------------------------------------------------------------- ##
-Plot.Surveys %<>% changeVariableNames#
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files')
+SeedSurvival 	= c(0.001, 0.005, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, #
+					0.9, 0.95, 0.99)#
+SeedBankSize	= c(10,100,1000,10000,100000,1000000)#
+SeedsPerFruit 	= 49.44#
+n.iter			= 1000
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files/2014_2015')
+# stages:#
+# 	size 1#
+# 	size 2#
+# 	size 3:6#
+#	size 7+#
+SizeClass 		= c(0:2,6,140)#
+TransitionYear 	= 2014#
 #
-column_list <- c(#
-	"P_plant_survey", #
-	"P_Ca", #
-	"P_Me", #
-	"P_Ch", #
-	"P_Umoth", #
-	"P_Omoth", #
-	"S_plant_survey", #
-	"S_Ca", #
-	"S_Me", #
-	"S_Ch", #
-	"S_Umoth", #
-	"S_Omoth"#
+cut(1:20, SizeClass)#
+# ---------------------------------------------------------------------------- ##
+# largest parent#
+# ---------------------------------------------------------------------------- ##
+Dat <- clonal_repro_dataset <- stages <- proj_matrix <- clonalTMdata <- NULL#
+#
+# DATA#
+#
+Dat = Plant.Surveys.TM.largest.parent %>% #
+	mutate(#
+		allYears = TransitionYear, #
+		Year = FecundityYear#
+	) %>%#
+	filter(MothPlantPres == 1)#
+clonal_repro_dataset <- 	#
+	clonal_reproduction_info_for_transition_matrix.largest.parent %>%#
+	merge(Plant.Info.Analysis, by.x="Parent.ID", by.y="PlantID") %>%#
+	filter(MothPlantPres == 1)#
+# ANALYZE#
+#
+TMdata.largest.parent.w.moth.14 <- prepDataTransitionMatrix(#
+	Dat, #
+	clonal_repro_dataset, #
+	SizeClass, #
+	TransitionYear#
 )#
 #
-A <- mergePlantSurveysPlotSurveys(Plot.Surveys, Plant.Surveys)#
-B <- mergePlotSurveysDemoPlotSurveys(D.Plot.Surveys, Plant.Surveys)#
-C <- createPlotSurveysfromPlantSurveys(Plant.Surveys, Plant.Info, Plot.Surveys, #
-	D.Plot.Surveys)#
-D <- createPlotSurveysfromOrigPlantSurveys(Original.Plant.Data)#
-E <- rbind.fill(A, B, C, D)				#
-E.check <- merge(Plot.Info, E, by="Tag_Number")#
-# FIX DATA FORMAT#
-E[,c(column_list,#
-	"P_plot_survey", #
-	"P_PC", #
-	"P_H", #
-	"S_plot_survey", #
-	"S_PC", #
-	"S_H"#
-)] %<>% apply(., 2, as.numeric)#
-E[,c(column_list,#
-	"P_plot_survey", #
-	"P_PC", #
-	"P_H", #
-	"S_plot_survey", #
-	"S_PC", #
-	"S_H"#
-)] %<>% apply(., 2, NA_Function)#
-Z <- mergeDuplicateSurveys(E)#
-G <- do.call(rbind.data.frame, Z)#
-names(G)[1] <- "Tag_Number"#
-G[,c(#
-	"P_plot_survey", #
-	"P_plant_survey", #
-	"P_Ca", #
-	"P_Me", #
-	"P_Ch", #
-	"P_Umoth", #
-	"P_Omoth", #
-	"P_PC", #
-	"P_H", #
-	"S_plot_survey", #
-	"S_plant_survey", #
-	"S_Ca", #
-	"S_Me", #
-	"S_Ch", #
-	"S_Umoth", #
-	"S_Omoth", #
-	"S_PC", #
-	"S_H"#
-)] %<>% apply(., 2, as.numeric)#
-G[,c(#
-	"P_plot_survey", #
-	"P_plant_survey", #
-	"P_Ca", #
-	"P_Me", #
-	"P_Ch", #
-	"P_Umoth", #
-	"P_Omoth", #
-	"P_PC", #
-	"P_H", #
-	"S_plot_survey", #
-	"S_plant_survey", #
-	"S_Ca", #
-	"S_Me", #
-	"S_Ch", #
-	"S_Umoth", #
-	"S_Omoth", #
-	"S_PC", #
-	"S_H"#
-)] %<>% apply(., 2, NA_Function)#
-#
-# --------------------------------------------------------------------------- ##
-# (6)  Merge with other plot surveys#
-# --------------------------------------------------------------------------- ##
-#
-# ------------------------------------------------------- PREP OLD PLOT SURVEYS#
-# remove extra columns#
-# Plot_Surveys.mod <-  Plot_Surveys %>% dplyr::select(-c(First_Observer_Initials, Second_Observer_Initials, DACT_on_Pusilla, DACT_on_Stricta))#
-#
-Plot_Surveys_mod <- Plot.Surveys %>%#
-	dplyr::select(#
-		Tag_Number,#
-		Date, #
-		Pictures, #
-		PictureDirection, #
-		Notes, #
-		Pusilla, #
-		P_Ca, #
-		P_Me, #
-		P_Ch, #
-		P_Umoth, #
-		P_Omoth, #
-		Old_Moth_Evidence_recent_Pusilla, #
-		P_PC, #
-		P_H, #
-		Stricta, #
-		S_Ca, #
-		S_Me, #
-		S_Ch, #
-		S_Umoth, #
-		S_Omoth, #
-		Old_Moth_Evidence_recent_Stricta,#
-		S_PC, #
-		S_H#
-	)#
-#
-# add extra columns to match removed.duplicates#
-Plot_Surveys_mod$S_plant_survey <- NA#
-Plot_Surveys_mod$P_plant_survey <- NA#
-names(Plot_Surveys_mod)[c(6, 15)] <- c("P_plot_survey", "S_plot_survey")#
-#
-# create file with plot surveys from before demography study#
-H = filter(Plot_Surveys_mod, Date < "2012-12-02")#
-# create file with plot surveys after demography study started, but tags not included in the demography study#
-#	this is because filtered only surveys for plots included IN the demography study#
-I = Plot_Surveys_mod %>% #
-	filter(Date > "2012-12-01", !(Tag_Number %in% Plant.Surveys$Tag_Number))
-?createPlotSurveysfromPlantSurveys
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
-C <- createPlotSurveysfromPlantSurveys(Plant.Surveys, Plant.Info, Plot.Surveys, #
-	D.Plot.Surveys, A)#
-D <- createPlotSurveysfromOrigPlantSurveys(Original.Plant.Data)
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
-# -------- CREATE RGR DATASETS ---------------------------------------------- ##
-# dim(Plant.Surveys.by.Year) 			7731 - 4812 (missing RGR) = 2919#
-#
-# 2919#
-Plant.Surveys.RGR <- Plant.Surveys.by.Year %>% 	#
-	as.data.frame %>%#
- 	droplevels %>% #
- 	dplyr::select(#
- 		Species,#
-		PlantID,#
-		RecruitmentMode,#
- 		Network,#
- 		Island,#
-		HabitatType,#
-		cactus_density_per_plot,#
-		RGR_Size365,#
-		max_RGR_Size365,#
-		# insects#
-		CA_t_1,#
-		ME_t_1,#
-		Moth_Evidence_t_1,#
-		# size#
-		Size_t_1,#
-		SizewClones_t_1#
- 	) %>%#
-	.[complete.cases(.),]#
-Plant.Surveys.RGR.stricta <- Plant.Surveys.RGR %>% #
-	filter(Species=="Opuntia stricta")#
-Plant.Surveys.RGR.stricta %<>% #
+largest.parent.mod.4.w.moth.14 <- analyzeMatrixPopModels(#
+	trans_data = TMdata.largest.parent.w.moth.2014,#
+	SizeClass = SizeClass,#
+	TransitionYear = TransitionYear,#
+	SeedSurvival = SeedSurvival,#
+	SeedBankSize = SeedBankSize,#
+	SeedsPerFruit = SeedsPerFruit,#
+	n.iter = n.iter#
+)
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files/2014_2015')
+largest.parent.mod.4.w.moth.14.res <- largest.parent.mod.4.w.moth.14[[2]] %>% #
 	mutate(#
-		Ln_Size_t_1_st = arm::rescale(log(Size_t_1)),	#
-		Ln_SizewClones_t_1_st = arm::rescale(log(SizewClones_t_1)),	#
-		cactus_density_per_plot_st = arm::rescale(cactus_density_per_plot)		#
-	)#
-# --------------------------------------------------------------------------- ##
-Plant.Surveys.RGR.stricta %>% write.csv("../data/Plant_Surveys_RGR_stricta.csv")#
-#
-setwd("/Users/KSauby/Documents/Projects/GTMNERR_analysis")#
-cache("Plant.Surveys.RGR")#
-cache("Plant_Surveys_RGR_stricta")
-str(Plant.Surveys.by.Year)
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
-Plant.Surveys.by.Year %<>% processPlantSurveysbyYear#
-Plant.Surveys.by.Year.largest.parent %<>% processPlantSurveysbyYear#
-Plant.Surveys.by.Year.random.parent %<>% processPlantSurveysbyYear#
-Plant.Surveys.by.Year.random.largest.parent %<>% processPlantSurveysbyYear#
-Plant.Surveys.by.Year.no.parent.assignment %<>% processPlantSurveysbyYear#
-# process original plant data (before new PlantIDs were given) for occupancy surveys#
-Original.Plant.Data %<>% processOriginalPlantData#
-#
-# --------------------------------------------------------------------------- ##
-Plant.Surveys.by.Year.largest.parent %>% write.csv("../data/Plant_Surveys_by_Year_largest_parent.csv")#
-Plant.Surveys.by.Year.random.parent %>% write.csv("../data/Plant_Surveys_by_Year_random_parent.csv")#
-Plant.Surveys.by.Year.random.largest.parent %>% write.csv("../data/Plant_Surveys_by_Year_random_largest_parent.csv")#
-Plant.Surveys.by.Year.no.parent.assignment %>% write.csv("../data/Plant_Surveys_by_Year_no_uncertain_parent_assignment.csv")#
-# --------------------------------------------------------------------------- ##
-setwd("/Users/KSauby/Documents/Projects/GTMNERR_analysis")#
-cache("Original.Plant.Data")
+		`Parent Assignment` = "largest plant\nchosen as parent",#
+		N.Stages = "4 Size Classes =\n1,2,3-6,7+",#
+		`Moth Evidence` = "Moth Evidence Present"#
+	)
+str(largest.parent.mod.4.w.moth.14)
 setwd('/Users/KSauby/Documents/Projects')
 setwd("./GTMNERRproc")#
 #setwd("./dataproc")#

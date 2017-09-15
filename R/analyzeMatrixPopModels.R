@@ -132,5 +132,5 @@ analyzeMatrixPopModels <- function(
 		A[[i]] <- do.call(rbind.data.frame, A[[i]])
 	}
 	A <- do.call(rbind.data.frame, A)
-	return(list(resultstables=A))
+	return(A)
 }
