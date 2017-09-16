@@ -36,5 +36,8 @@ runPopulationModels <- function(ldf, cldf, SizeClass, TransitionYear, SeedSurviv
 			n.iter = n.iter
 		)
 	}
-	return(B)
+	return(list(
+		transition_matrix_data = A,
+		population_modeling_results = B
+	))
 }
