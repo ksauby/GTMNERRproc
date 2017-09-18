@@ -12,7 +12,7 @@
 #' @export
 
 
-plotElasticitySensitivity <- function(dat, x_variable, y_variable, grouping_variable, facet_grid_var, xlab_label, ylab_label, n_transitions_per_stage) {
+plotElasticitySensitivity <- function(dat, x_variable, y_variable, grouping_variable, facet_grid_var, xlab_label, ylab_label, n_transitions_per_stage, strip.text.x.size, strip.text.y.size, legend.text.size, axis.text.x.size, axis.title.x.size, axis.title.y.size, axis.text.y.size, strip.text.y.angle=270) {
 	ggplot(
 		dat,
 		aes(
@@ -43,9 +43,13 @@ plotElasticitySensitivity <- function(dat, x_variable, y_variable, grouping_vari
 		) +
 		theme(
 			legend.position="bottom",
-			legend.text = element_text(size = 14),
-			axis.text.x=element_text(angle=45, hjust=1),
-			strip.text.y=element_text(size=10)
+			legend.text = element_text(size = legend.text.size),
+			axis.text.x = element_text(angle=45, hjust=1, size = axis.text.x.size),
+			axis.text.y = element_text(size = axis.text.y.size),
+			strip.text.y=element_text(size=strip.text.y.size, angle=strip.text.y.angle),
+			strip.text.x=element_text(size=strip.text.x.size),
+			axis.title.x=element_text(size=axis.title.x.size),
+			axis.title.y=element_text(size=axis.title.y.size)
 		) +
 		guides(
 			fill=guide_legend(
