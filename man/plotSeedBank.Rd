@@ -5,7 +5,8 @@
 \title{Plot Seed Bank Data}
 \usage{
 plotSeedBank(dat, x_variable, grouping_variable, facet_grid_var,
-  legend_title = "Parent Assignment\\nMethod", xlab_label)
+  legend_title = "Parent Assignment\\nMethod", xlab_label, strip.text.size,
+  y_breaks, y_limits, strip.text.y.angle)
 }
 \arguments{
 \item{dat}{Dataset}
@@ -14,7 +15,7 @@ plotSeedBank(dat, x_variable, grouping_variable, facet_grid_var,
 
 \item{legend_title}{Default value is "Parent Assignment\nMethod."}
 
-\item{xlab_label}{}
+\item{strip.text.size}{}
 }
 \description{
 Plot Seed Bank Data

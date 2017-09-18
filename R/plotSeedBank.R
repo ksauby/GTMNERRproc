@@ -6,10 +6,11 @@
 #' @param facet_grid_var
 #' @param legend_title Default value is "Parent Assignment\nMethod."
 #' @param xlab_label
+#' @param strip.text.size
 #'
 #' @export
 
-plotSeedBank <- function(dat, x_variable, grouping_variable, facet_grid_var, legend_title="Parent Assignment\nMethod", xlab_label) {
+plotSeedBank <- function(dat, x_variable, grouping_variable, facet_grid_var, legend_title="Parent Assignment\nMethod", xlab_label, strip.text.size, y_breaks, y_limits, strip.text.y.angle) {
 	ggplot(
 		dat,
 		aes(
@@ -27,7 +28,9 @@ plotSeedBank <- function(dat, x_variable, grouping_variable, facet_grid_var, leg
 		axis.text.x=element_text(angle=45, hjust=1),
 		panel.spacing = unit(0, "lines"), 
 	    strip.background = element_blank(),
-	    strip.placement = "outside"
+	    strip.placement = "outside",
+		strip.text = element_text(size=strip.text.size),
+		strip.text.y=element_text(angle=strip.text.y.angle)
 	) +
 	ylab(expression(lambda)) +
 	xlab(xlab_label) +
@@ -37,7 +40,7 @@ plotSeedBank <- function(dat, x_variable, grouping_variable, facet_grid_var, leg
 		) +
 	coord_trans(x="log10") +
 	scale_x_continuous(breaks=c(1,10,100,1000,10000,1000000)) +
-	scale_y_continuous(breaks=c(1:5), limits=c(1,5)) +
+	scale_y_continuous(breaks=y_breaks, limits=y_limits) +
 	scale_linetype_manual(values=c("solid","dotdash","dashed")) +
 	scale_colour_manual(values=c("black","purple","orange"))
 }
