@@ -15,6 +15,7 @@
 
 runPopulationModels <- function(ldf, cldf, SizeClass, TransitionYear, SeedSurvival, SeedBankSize, SeedsPerFruit, n.iter) {
 	# prep data transition matrices, then analyze
+	SizeClass <- SizeClass
 	A <- list()
 	for (i in 1:length(ldf)) {
 		A[[i]] <- prepDataTransitionMatrix(
@@ -28,12 +29,12 @@ runPopulationModels <- function(ldf, cldf, SizeClass, TransitionYear, SeedSurviv
 	for (i in 1:length(ldf)) {
 		B[[i]] <- analyzeMatrixPopModels(
 			trans_data = A[[i]],
-			SizeClass = SizeClass,
-			TransitionYear = TransitionYear,
-			SeedSurvival = SeedSurvival,
-			SeedBankSize = SeedBankSize,
-			SeedsPerFruit = SeedsPerFruit,
-			n.iter = n.iter
+			SizeClass,
+			TransitionYear,
+			SeedSurvival,
+			SeedBankSize,
+			SeedsPerFruit,
+			n.iter
 		)
 	}
 	return(list(
