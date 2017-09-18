@@ -10,7 +10,7 @@
 #'
 #' @export
 
-plotSeedBank <- function(dat, x_variable, grouping_variable, facet_grid_var, legend_title="Parent Assignment\nMethod", xlab_label, strip.text.size, y_breaks, y_limits, strip.text.y.angle) {
+plotSeedBankSeedSurvival <- function(dat, x_variable, grouping_variable, facet_grid_var, legend_title="Parent Assignment\nMethod", xlab_label, strip.text.size, x_breaks, x_limits, x_coord_trans, y_breaks, y_limits, strip.text.y.angle) {
 	ggplot(
 		dat,
 		aes(
@@ -38,8 +38,8 @@ plotSeedBank <- function(dat, x_variable, grouping_variable, facet_grid_var, leg
 		colour=guide_legend(title=legend_title),
 		linetype=guide_legend(title=legend_title)
 		) +
-	coord_trans(x="log10") +
-	scale_x_continuous(breaks=c(1,10,100,1000,10000,1000000)) +
+	coord_trans(x=x_coord_trans) +
+	scale_x_continuous(breaks=x_breaks, limits=x_limits) +
 	scale_y_continuous(breaks=y_breaks, limits=y_limits) +
 	scale_linetype_manual(values=c("solid","dotdash","dashed")) +
 	scale_colour_manual(values=c("black","purple","orange"))
