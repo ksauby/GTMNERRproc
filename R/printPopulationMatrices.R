@@ -79,7 +79,7 @@ printPopulationMatrices <- function(data.list, parent.method, years, first.year)
 printLTREPopulationMatrices <- function(data.list, parent.method, years, first.year, LTRE_variable) {
 	for (i in 1:length(data.list)) {
 		dat <- eval(parse(text=data.list[i]))
-		cat("\\subsubsection{", dat$N.Stages.wo.break, "}", sep="")
+		cat("\\subsubsection{", LTRE_variable, "}", sep="")
 		for (j in 1:length(parent.methods)){
 			cat('\n')  
 			print(
@@ -87,13 +87,13 @@ printLTREPopulationMatrices <- function(data.list, parent.method, years, first.y
 					dat[[4]][[j]]$clone_transition_counts, 
 					digits=0, 
 					caption=paste(
-						"Clone production counts (",
+						"Clone production counts using the \`\`", 
+						parent.methods[j],
+						"\'\' parent assignment method for the ",
 						years,
 						" data for plants ",
 						LTRE_variable,
-						") using the \`\`", 
-						parent.methods[j],
-						"\'\' parent assignment method.",
+						".",
 						sep=""
 					)
 				),
@@ -104,13 +104,13 @@ printLTREPopulationMatrices <- function(data.list, parent.method, years, first.y
 					dat[[4]][[j]]$transition.counts, 
 					digits=0,
 					caption=paste(
-						"Growth, stasis, retrogression, and survival counts (",
+						"Growth, stasis, retrogression, and survival counts using the \`\`", 
+						parent.methods[j],
+						"\'\' parent assignment method for the ",
 						years,
 						" data for plants ",
 						LTRE_variable,
-						") using the \`\`", 
-						parent.methods[j],
-						"\'\' parent assignment method.",
+						".",
 						sep=""
 					)
 				),
