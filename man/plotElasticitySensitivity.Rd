@@ -5,7 +5,10 @@
 \title{Plot Elasticity and Sensitivity Data}
 \usage{
 plotElasticitySensitivity(dat, x_variable, y_variable, grouping_variable,
-  facet_grid_var, xlab_label, ylab_label, n_transitions_per_stage)
+  facet_grid_var, xlab_label, ylab_label, n_transitions_per_stage,
+  strip.text.x.size, strip.text.y.size, legend.text.size, axis.text.x.size,
+  axis.title.x.size, axis.title.y.size, axis.text.y.size,
+  strip.text.y.angle = 270)
 }
 \arguments{
 \item{dat}{Dataset}
