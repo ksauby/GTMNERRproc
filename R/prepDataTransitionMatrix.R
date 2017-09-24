@@ -55,12 +55,6 @@ prepDataTransitionMatrix <- function(
 	trans01 <- trans %>%
 		filter(Year == TransitionYear) %>%
 		dplyr::select(PlantID, stage, Repro, fate, Repro2)
-	seedlings <- nrow(subset(
-		Dat_census, 
-		Year == TransitionYear & stage =="Seedling"
-	))
-	# number of seedlings estimated to have been produced by each individual
-	trans01 %<>% mutate(Seedling = Repro/sum(Repro, na.rm=T) * seedlings)
 	# create full set of stages
 	stages <- c(unique(c(trans01$stage, trans01$fate))) %>% 
 		as.numeric %>%

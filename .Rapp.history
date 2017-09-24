@@ -1,280 +1,3 @@
-library(lme4)
-300/241
-.244*30
-1.25*300
-1.25*240
-7*12
-7849-7527
-322/1353
-8028-7527
-501/1353
-8028-7957
-1353-501
-852/71
-7956-7878
-8176-8029
-8176-8092
-250*.75
-250*.25
-42*2 + 17*2
-118/19
-21/6.2
-59.5*.75
-59.5*.5 + 59.5
-71/12
-597/80
-597/8
-432/8
-15*8 + 9*3
-?seq_len
-7.25/3
-7.25/4
-for(i in 0:9){x=cos(2*pi/10*i);y=x+1;z=(y-2)*22;pie(c(y,8-y),col=c(0,7),init.angl=135-z,bo=F,la=NA)}
-install.packages("ProjectTemplate")
-install.packages("dplyr")
-install.packages("ggplot2")
-install.packages("data.table")
-install.packages("corrgram")
-install.packages("survival")
-install.packages("shapefiles")
-install.packages("rgdal")
-install.packages("PBSmapping")
-install.packages("sp")
-install.packages("gdistance")
-install.packages("chron")
-install.packages("unmarked")
-install.packages("lme4")
-install.packages("rgeos", repos="http://R-Forge.R-project.org", type="source")#
-require(rgeos)
-install.packages('rgdal',repos="http://www.stats.ox.ac.uk/pub/RWin")
-library(rgdal)
-install.packages("http://cran.r-project.org/src/contrib/rgdal_0.9-1.tar.gz", repos = NULL, type="source", configure.args = "--with-gdal-config=/Library/Frameworks/GDAL.framework/Versions/1.10/unix/bin/gdal-config --with-proj-include=/Library/Frameworks/PROJ.framework/unix/include --with-proj-lib=/Library/Frameworks/PROJ.framework/unix/lib")
-18/1.618
-189+114
-library(lubridate)
-library(magrittr)
-seasons <- data.frame(#
-	   SE = as.POSIXct(c("2009-3-20", "2010-3-20", "2011-3-20", "2012-3-20", #
-            "2013-3-20", "2014-3-20"), format="%Y-%m-%d"),#
-	   SS = as.POSIXct(c("2009-6-21", "2010-6-21", "2011-6-21", "2012-6-20",#
-            "2013-6-20", "2014-6-20"), format="%Y-%m-%d"),#
-	   FE = as.POSIXct(c("2009-9-22", "2010-9-23", "2011-9-23", "2012-9-22",#
-            "2013-9-22", "2014-9-22"), format="%Y-%m-%d"),#
-	   WS = as.POSIXct(c("2009-12-21", "2010-12-21", "2011-12-22", "2012-12-21", #
-            "2013-12-21", "2014-12-21"), format="%Y-%m-%d")#
-    )#
-#
-    assignSeason <- function(dat, SeasonStarts=seasons) {#
-	    dat %<>% mutate(#
-		    Season = lapply(Date,#
-				function(x) {#
-					findInterval(#
-						x, #
-						SeasonStarts[which(year(x)==year(SeasonStarts$WS)), ]#
-					)#
-				}#
-			) %>% unlist	#
-		)#
-	    dat[which(dat$Season==0 | dat$Season==4), ]$Season 	<- "Winter"#
-	    dat[which(dat$Season==1), ]$Season 					<- "Spring"#
-	    dat[which(dat$Season==2), ]$Season 					<- "Summer"#
-	    dat[which(dat$Season==3), ]$Season 					<- "Fall"#
-	    return(dat)#
-    }
-dat = data.frame(#
-	    Date = as.POSIXct(strptime(as.Date("2011-12-01", format = "%Y-%m-%d") + #
-            (0:10)*30, format="%Y-%m-%d" ))#
-    )#
-    dat %>% assignSeason
-library(dplyr)
-dat = data.frame(#
-	    Date = as.POSIXct(strptime(as.Date("2011-12-01", format = "%Y-%m-%d") + #
-            (0:10)*30, format="%Y-%m-%d" ))#
-    )#
-    dat %>% assignSeason
-library(devtoolks)
-library(devtools)
-?install_github
-devtools::install_github("ksauby/ACSampling", auth_token="2ab30a602e52fae481f4249cc25e892c0a9ccfc7", subdir="/code/Restricted_ACS_Simulations/ACSampling", repos=NULL)
-devtools::install_github("ksauby/ACSampling", auth_token="2794c3f10db92f525181a0b1f6c19064fe3a2ef3", subdir="/code/Restricted_ACS_Simulations/ACSampling", repos=NULL)
-devtools::install("~/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
-devtools::install(pkg="~/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
-devtools::install(pkg="Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
-devtools::install(pkg="~/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
-devtools::install(pkg="/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
-devtools::install_local(path="/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
-library(devtools)
-devtools::install_local(path="/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
-devtools::install(pkg="/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
-install.packages("~/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
-??limit
-37-13
-24/37
-37-13
-26/37
-25/37
-23/37
-29/37
-30/37
-22/37
-30/37
-29/37
-28/37
-27/37
-35/37
-30/37
-29/37
-26/37
-26/37 - .6757
-28/37
-30/37
-29/37
-37-12
-25/37
-219*.8
-219*.8 - 17
-26/3
-17/900
-42/900
-49/900
-29/40
-1/25
-8/25
-10/25
-(7.5 + 3.75)/15
-12*0.75
-11 * 0.75
-11/15
-11*0.25
-11/15 * 6
-32/41 +0.03.5
-32/41 + 0.035
-(32/41 + 0.035)*100
-100/41
-23/40 * 100
-(23/40 * 100)+5
-(164 + 13.5 + 6)
-(164 + 13.5 + 6)/365
-(164 + 13.5 + 6 + (50))/365
-(164 + 13.5 + 6 + (60))/365
-(164 + 13.5 + 6 + (70))/365
-(164 + 13.5 + 6 + (75))/365
-102/40
-102/41
-?table
-9.49/2
-12.75+8.25
-(10.5 + 6.5)/(12.75+8.25)
-.25^2 * 2
-(.25^2 * 2)^0.5
-(.25^2 * 2)^0.5 * 2
-3/8
-5/8
-6/8
-30*1.5
-40*15
-40*1.5
-13.25 - 4.5
-(276.29+8.75)/365
-16*3
-16*4
-84/12
-9/12
-9/12*14
-22+60+78+80+88+98
-22+38+18+2+8+10
-239/785
-(239+53)/785
-.492+.139
-.412+.166+.002
-.412/.58
-.166/.58
-.412*.58
-.71*.58
-98-54
-22+49+43+33+36+44
-60-11
-78-26
-80-35
-88-47
-98-52
-22+49+52+45+41+46
-library(RMark)
-?test_ddl
-data(dipper)    dipper.processed=process.data(dipper,groups=("sex"))    release.gof(dipper.processed)
-4+19+7+12
-4+17.83+7+12
-40.83/42
-40.83/42*14
-14
-(11.25+5)/(25.5 + 10.25 - 14)
-365*0.6666
-365*0.6666 - 75.89
-5/6 * 2
-5/6 * 2 + 75.89
-365*0.6666 -77.55667
-365*0.6666 -77.55667 - 6 - 13 - 1
-145.7523/2
-15*3
-11*5
-8/12*14
-4+15.33+5.5+12
-(4+15.33+5.5+12)
-(4+15.33+5.5+12)/(4+19+7+12)
-(4+19+7+12)
-(4+15.33+5.5+12)/(4+19+7+12)*14
-2.5+17.5+12
-32/42
-32/42 * 14
-4+12+6.5+12
-(4+12+6.5+12)/42 * 14
-5/6*2
-5/6*2 + 0.25
-5/6*2 + 0.5
-2577.77/12
-15/20
-15/20*6
-300 - 4*50
-300 - 4*40
-4.5/12*14
-9+9+7+9
-33.5/34 * 14
-32/34 * 14
-32/34*14
-7+8.5+7+7
-(7+8.5+7+7)/34 * 14
-(7+5.5+5.5+8.5)/34 * 14
-(7+5.5+5.5+8.5)/(9+7+9+9) * 14
-9+7+9+9
-(14.25+7.25)/(24.75+10.25-9)
-(16.5+7.75)/(24.75+10.25)
-(16.5+7.75)/(24.75+10.25)*6
-(5.25+5.5)/(22.5+10.5)
-(5.25+5.5)/(22.5+10.5)*6
-(9.75+5.5)/(24.7+10.25-5)*6
-(9.75+5.5)/(24.7+10.25-5)
-3.98/6
-(9.75+5.5)/(24.7+10.25-10)
-(9.75+5.5)/(24.7+10.25-10)*6
-5/6*2
-1.83-5/6*2
-1.83-4/6*2
-5/6*2 + 0.5
-4/6*2 + 0.5
-4/6*2
-4/6 + 0.5
-4/6*2 + 0.5
-33/34 * 14
-17.5*4
-24*4 + 1.75*4
-library(dplyr)
-library(plyr)
-600*.22
-library(Mage)
-??prepDataTransitionMatrix
-??projection.matrix
-1/0.167
-0.167*3
 library(purrr)
 ?map
 setwd('/Users/KSauby/Documents/Projects/Dissertation')
@@ -295,13 +18,97 @@ load.project()#
 #
 setwd('/Users/KSauby/Documents/Projects/marsico-time-series')#
 load.project()
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files')
-source("processing/values_same_across_all_models.R")#
-source("processing/prep_ldf_cldf.R")#
-# ---------------------------------------------------------------------------- ##
-TransitionYear 	= 2013#
-source("processing/mutate_ldf_cldf.R")#
-source("2013_2014/01_transition_matrix_analysis_2013_4_size_stages.R")
+str(Plant.Surveys.by.Year)
+str(Plant.Surveys.by.Plant)
+Plant.Surveys.by.Plant %>% filter(RangeofDates > 0) %>% head
+Plant.Surveys.by.Plant %>% filter(RangeofDates > 0) %>% dim()
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography')
+plants.spanning.multiple.plots <- Plant.Surveys.by.Plant %>% #
+	filter(RangeofDates >= 0)
+dim(plants.spanning.multiple.plots)
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography')
+Plant.Surveys.by.Plant %>% #
+	filter(!(is.na(RangeofDates))
+)
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography')
+plants.spanning.multiple.plots <- Plant.Surveys.by.Plant %>% #
+	filter(!(is.na(RangeofDates)))
+dim(plants.spanning.multiple.plots)
+head(plants.spanning.multiple.plots)
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography')
+av.days.to.complete.survey <- mean(plants.spanning.multiple.plots$RangeofDates)
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography')
+plants.spanning.multiple.plots <- Plant.Surveys.by.Plant %>% #
+	filter(!(is.na(RangeofDates)))
+head(plants.spanning.multiple.plots)
+str(plants.spanning.multiple.plots)
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography')
+plants.spanning.multiple.plots <- Plant.Surveys.by.Plant %>% #
+	filter(!(is.na(SizeofDateRange)))
+dim(plants.spanning.multiple.plots)
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography')
+mean(plants.spanning.multiple.plots$SizeofDateRange)
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography')
+min.days.to.complete.survey <- min(plants.spanning.multiple.plots$SizeofDateRange)#
+max.days.to.complete.survey <- max(plants.spanning.multiple.plots$SizeofDateRange)
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography')
+max.days.to.complete.survey
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography')
+min.days.to.complete.survey
+length(unique(plants.spanning.multiple.plots$PlantID))
+str(Plant.Info.Analysis)
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
+Plant.Info.stricta <- Plant.Info.Analysis %>% filter(Species=="Opuntia stricta")
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
+setwd("/Users/KSauby/Documents/Projects/GTMNERR_analysis")#
+cache("Plant.Info.stricta")
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography')
+length(unique(plants.spanning.multiple.plots$PlantID))/length(unique(Plant.Info.stricta$PlantID))
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography')
+length(unique(plants.spanning.multiple.plots$PlantID))/length(unique(Plant.Info.stricta$PlantID)) %>% round(2)
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography')
+length(unique(plants.spanning.multiple.plots$PlantID))/length(unique(Plant.Info.stricta$PlantID)) %$% round(2)
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography')
+round(#
+	length(unique(plants.spanning.multiple.plots$PlantID)) / #
+		length(unique(Plant.Info.stricta$PlantID)),#
+	2#
+)
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography')
+round(#
+	length(unique(plants.spanning.multiple.plots$PlantID)) / #
+		length(unique(Plant.Info.stricta$PlantID)),#
+	2#
+) * 100
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography')
+round(#
+	mean(plants.spanning.multiple.plots$SizeofDateRange),#
+	2#
+)
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography')
+plants.spanning.multiple.plots <- Plant.Surveys.by.Plant %>% #
+	filter(!(is.na(SizeofDateRange)))#
+av.days.to.complete.survey <- round(#
+	mean(plants.spanning.multiple.plots$SizeofDateRange),#
+	2#
+) #
+#
+min.days.to.complete.survey <- min(plants.spanning.multiple.plots$SizeofDateRange)#
+max.days.to.complete.survey <- max(plants.spanning.multiple.plots$SizeofDateRange)#
+n.plants.spanning.multiple.plots <- length(unique(plants.spanning.multiple.plots$PlantID))#
+perc.plants.spanning.multiple.plots <- round(#
+	length(unique(plants.spanning.multiple.plots$PlantID)) / #
+		length(unique(Plant.Info.stricta$PlantID)),#
+	2#
+) * 100
+setwd('/Users/KSauby/Documents/Projects/Dissertation')
+bookdown::render_book('index.Rmd')
+setwd('/Users/KSauby/Documents/Projects/Dissertation')
+bookdown::render_book('index.Rmd')
+setwd('/Users/KSauby/Documents/Projects/Dissertation')
+bookdown::render_book('index.Rmd')
+setwd('/Users/KSauby/Documents/Projects/Dissertation')
+bookdown::render_book('index.Rmd')
 setwd('/Users/KSauby/Documents/Projects')
 setwd("./GTMNERRproc")#
 #setwd("./dataproc")#
@@ -311,4 +118,2347 @@ setwd("./GTMNERRproc")#
 #devtools::test()#
 devtools::document()#
 devtools::install()
-1800*12
+setwd('/Users/KSauby/Documents/Projects/Dissertation')
+bookdown::render_book('index.Rmd')
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/Appendix')
+parent.methods <- c(#
+	"largest",#
+	"random",#
+	"random (probability of selection weighted by size)"#
+)#
+data.list.2013 <- c(#
+	"mod.4.stages.2013.mat.data",#
+	"mod.5.stages.2013.mat.data",#
+	"mod.5.stages.b.2013.mat.data",#
+	"mod.6.stages.2013.mat.data",#
+	"mod.7.stages.2013.mat.data"#
+)#
+printPopulationMatrices(#
+	data.list=data.list.2013, #
+	parent.method, #
+	years="2013-2014", #
+	first.year="2013"#
+)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+#' Successively print population matrices for inclusion in an appendix#
+#'#
+#' @param data.list#
+#' @param parent.method#
+#' @param  years#
+#' @param first.year#
+#'#
+#' @export#
+#
+printPopulationMatrices <- function(data.list, parent.method, years, first.year) {#
+	for (i in 1:length(data.list)) {#
+		dat <- eval(parse(text=data.list[i]))#
+		cat("###", dat$N.Stages.wo.break, "\n")#
+		for (j in 1:length(parent.methods)){#
+			cat('\n')  #
+			print(#
+				xtable(#
+					dat[[1]][[j]]$clone_transition_counts, #
+					digits=0,#
+					caption=paste(#
+						"Clone production counts (",#
+						years,#
+						" data) using the \`\`", #
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			print(#
+				xtable(#
+					dat[[1]][[j]]$transition.counts, #
+					digits=0,#
+					caption=paste(#
+						"Growth, stasis, retrogression, and survival counts (",#
+						years,#
+						" data) using the \`\`",#
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			print(#
+				xtable(#
+					dat[[1]][[j]]$n_per_stage %>% filter(stage!="Seed"), #
+					digits=0,#
+					caption=paste(#
+						"Number of individuals per stage in ",#
+						first.year,#
+						" using the \`\`",#
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			cat("\\clearpage ")#
+		}#
+	}#
+}#
+#' Successively print LTRE population matrices for inclusion in an appendix#
+#'#
+#' @param data.list#
+#' @param parent.method#
+#' @param  years#
+#' @param first.year#
+#' @param LTRE_variable#
+#'#
+#' @export#
+printLTREPopulationMatrices <- function(data.list, parent.method, years, first.year, LTRE_variable) {#
+	for (i in 1:length(data.list)) {#
+		dat <- eval(parse(text=data.list[i]))#
+		cat("####", dat$N.Stages.wo.break, "\n")#
+		for (j in 1:length(parent.methods)){#
+			cat('\n')  #
+			print(#
+				xtable(#
+					dat[[4]][[j]]$clone_transition_counts, #
+					digits=0, #
+					caption=paste(#
+						"Clone production counts (",#
+						years,#
+						" data for plants ",#
+						LTRE_variable,#
+						") using the \`\`", #
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			print(#
+				xtable(#
+					dat[[4]][[j]]$transition.counts, #
+					digits=0,#
+					caption=paste(#
+						"Growth, stasis, retrogression, and survival counts (",#
+						years,#
+						" data for plants ",#
+						LTRE_variable,#
+						") using the \`\`", #
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			print(#
+				xtable(#
+					dat[[4]][[j]]$n_per_stage %>% filter(stage!="Seed"), #
+					digits=0,#
+					caption=paste(#
+						"Number of individuals per stage in ",#
+						first.year,#
+						" for plants ",#
+						LTRE_variable,#
+						", using the \`\`", #
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			cat("\\clearpage")#
+		}#
+	}#
+}
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/Appendix')
+parent.methods <- c(#
+	"largest",#
+	"random",#
+	"random (probability of selection weighted by size)"#
+)#
+data.list.2013 <- c(#
+	"mod.4.stages.2013.mat.data",#
+	"mod.5.stages.2013.mat.data",#
+	"mod.5.stages.b.2013.mat.data",#
+	"mod.6.stages.2013.mat.data",#
+	"mod.7.stages.2013.mat.data"#
+)#
+printPopulationMatrices(#
+	data.list=data.list.2013, #
+	parent.method, #
+	years="2013-2014", #
+	first.year="2013"#
+)
+setwd('/Users/KSauby/Documents/Projects/Dissertation')
+bookdown::render_book('index.Rmd')
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+#' Successively print population matrices for inclusion in an appendix#
+#'#
+#' @param data.list#
+#' @param parent.method#
+#' @param  years#
+#' @param first.year#
+#'#
+#' @export#
+#
+printPopulationMatrices <- function(data.list, parent.method, years, first.year) {#
+	for (i in 1:length(data.list)) {#
+		dat <- eval(parse(text=data.list[i]))#
+		cat("###", dat$N.Stages.wo.break, "\n")#
+		for (j in 1:length(parent.methods)){#
+			cat('\n')  #
+			print(#
+				xtable(#
+					dat[[1]][[j]]$clone_transition_counts, #
+					digits=0,#
+					caption=paste(#
+						"Clone production counts (",#
+						years,#
+						" data) using the \`\`", #
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			print(#
+				xtable(#
+					dat[[1]][[j]]$transition.counts, #
+					digits=0,#
+					caption=paste(#
+						"Growth, stasis, retrogression, and survival counts (",#
+						years,#
+						" data) using the \`\`",#
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			print(#
+				xtable(#
+					dat[[1]][[j]]$n_per_stage %>% filter(stage!="Seed"), #
+					digits=0,#
+					caption=paste(#
+						"Number of individuals per stage in ",#
+						first.year,#
+						" using the \`\`",#
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			cat("\\clearpage \n")#
+		}#
+	}#
+}#
+#' Successively print LTRE population matrices for inclusion in an appendix#
+#'#
+#' @param data.list#
+#' @param parent.method#
+#' @param  years#
+#' @param first.year#
+#' @param LTRE_variable#
+#'#
+#' @export#
+printLTREPopulationMatrices <- function(data.list, parent.method, years, first.year, LTRE_variable) {#
+	for (i in 1:length(data.list)) {#
+		dat <- eval(parse(text=data.list[i]))#
+		cat("####", dat$N.Stages.wo.break, "\n")#
+		for (j in 1:length(parent.methods)){#
+			cat('\n')  #
+			print(#
+				xtable(#
+					dat[[4]][[j]]$clone_transition_counts, #
+					digits=0, #
+					caption=paste(#
+						"Clone production counts (",#
+						years,#
+						" data for plants ",#
+						LTRE_variable,#
+						") using the \`\`", #
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			print(#
+				xtable(#
+					dat[[4]][[j]]$transition.counts, #
+					digits=0,#
+					caption=paste(#
+						"Growth, stasis, retrogression, and survival counts (",#
+						years,#
+						" data for plants ",#
+						LTRE_variable,#
+						") using the \`\`", #
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			print(#
+				xtable(#
+					dat[[4]][[j]]$n_per_stage %>% filter(stage!="Seed"), #
+					digits=0,#
+					caption=paste(#
+						"Number of individuals per stage in ",#
+						first.year,#
+						" for plants ",#
+						LTRE_variable,#
+						", using the \`\`", #
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			cat("\\clearpage")#
+		}#
+	}#
+}
+setwd('/Users/KSauby/Documents/Projects/Dissertation')
+bookdown::render_book('index.Rmd')
+setwd('/Users/KSauby/Documents/Projects')
+setwd("./GTMNERRproc")#
+#setwd("./dataproc")#
+#setwd("./modresproc")#
+#setwd("./unmarked")#
+#setwd("./RPresence")#
+#devtools::test()#
+devtools::document()#
+devtools::install()
+setwd('/Users/KSauby/Documents/Projects/Dissertation')
+bookdown::render_book('index.Rmd')
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+#' Successively print population matrices for inclusion in an appendix#
+#'#
+#' @param data.list#
+#' @param parent.method#
+#' @param  years#
+#' @param first.year#
+#'#
+#' @export#
+#
+printPopulationMatrices <- function(data.list, parent.method, years, first.year) {#
+	for (i in 1:length(data.list)) {#
+		dat <- eval(parse(text=data.list[i]))#
+		cat("\\subsection{", dat$N.Stages.wo.break, "}")#
+		for (j in 1:length(parent.methods)){#
+			cat('\n')  #
+			print(#
+				xtable(#
+					dat[[1]][[j]]$clone_transition_counts, #
+					digits=0,#
+					caption=paste(#
+						"Clone production counts (",#
+						years,#
+						" data) using the \`\`", #
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			print(#
+				xtable(#
+					dat[[1]][[j]]$transition.counts, #
+					digits=0,#
+					caption=paste(#
+						"Growth, stasis, retrogression, and survival counts (",#
+						years,#
+						" data) using the \`\`",#
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			print(#
+				xtable(#
+					dat[[1]][[j]]$n_per_stage %>% filter(stage!="Seed"), #
+					digits=0,#
+					caption=paste(#
+						"Number of individuals per stage in ",#
+						first.year,#
+						" using the \`\`",#
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			cat("\\clearpage \n")#
+		}#
+	}#
+}#
+#' Successively print LTRE population matrices for inclusion in an appendix#
+#'#
+#' @param data.list#
+#' @param parent.method#
+#' @param  years#
+#' @param first.year#
+#' @param LTRE_variable#
+#'#
+#' @export#
+printLTREPopulationMatrices <- function(data.list, parent.method, years, first.year, LTRE_variable) {#
+	for (i in 1:length(data.list)) {#
+		dat <- eval(parse(text=data.list[i]))#
+		cat("####", dat$N.Stages.wo.break, "\n")#
+		for (j in 1:length(parent.methods)){#
+			cat('\n')  #
+			print(#
+				xtable(#
+					dat[[4]][[j]]$clone_transition_counts, #
+					digits=0, #
+					caption=paste(#
+						"Clone production counts (",#
+						years,#
+						" data for plants ",#
+						LTRE_variable,#
+						") using the \`\`", #
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			print(#
+				xtable(#
+					dat[[4]][[j]]$transition.counts, #
+					digits=0,#
+					caption=paste(#
+						"Growth, stasis, retrogression, and survival counts (",#
+						years,#
+						" data for plants ",#
+						LTRE_variable,#
+						") using the \`\`", #
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			print(#
+				xtable(#
+					dat[[4]][[j]]$n_per_stage %>% filter(stage!="Seed"), #
+					digits=0,#
+					caption=paste(#
+						"Number of individuals per stage in ",#
+						first.year,#
+						" for plants ",#
+						LTRE_variable,#
+						", using the \`\`", #
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			cat("\\clearpage")#
+		}#
+	}#
+}
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/Appendix')
+parent.methods <- c(#
+	"largest",#
+	"random",#
+	"random (probability of selection weighted by size)"#
+)#
+data.list.2013 <- c(#
+	"mod.4.stages.2013.mat.data",#
+	"mod.5.stages.2013.mat.data",#
+	"mod.5.stages.b.2013.mat.data",#
+	"mod.6.stages.2013.mat.data",#
+	"mod.7.stages.2013.mat.data"#
+)#
+printPopulationMatrices(#
+	data.list=data.list.2013, #
+	parent.method, #
+	years="2013-2014", #
+	first.year="2013"#
+)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+cat("\\subsection{", dat$N.Stages.wo.break, "}", sep="")
+?cat
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+#' Successively print population matrices for inclusion in an appendix#
+#'#
+#' @param data.list#
+#' @param parent.method#
+#' @param  years#
+#' @param first.year#
+#'#
+#' @export#
+#
+printPopulationMatrices <- function(data.list, parent.method, years, first.year) {#
+	for (i in 1:length(data.list)) {#
+		dat <- eval(parse(text=data.list[i]))#
+		cat("\\subsection{", dat$N.Stages.wo.break, "}", sep="")#
+		for (j in 1:length(parent.methods)){#
+			cat('\n')  #
+			print(#
+				xtable(#
+					dat[[1]][[j]]$clone_transition_counts, #
+					digits=0,#
+					caption=paste(#
+						"Clone production counts (",#
+						years,#
+						" data) using the \`\`", #
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			print(#
+				xtable(#
+					dat[[1]][[j]]$transition.counts, #
+					digits=0,#
+					caption=paste(#
+						"Growth, stasis, retrogression, and survival counts (",#
+						years,#
+						" data) using the \`\`",#
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			print(#
+				xtable(#
+					dat[[1]][[j]]$n_per_stage %>% filter(stage!="Seed"), #
+					digits=0,#
+					caption=paste(#
+						"Number of individuals per stage in ",#
+						first.year,#
+						" using the \`\`",#
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			cat("\\clearpage \n")#
+		}#
+	}#
+}#
+#' Successively print LTRE population matrices for inclusion in an appendix#
+#'#
+#' @param data.list#
+#' @param parent.method#
+#' @param  years#
+#' @param first.year#
+#' @param LTRE_variable#
+#'#
+#' @export#
+printLTREPopulationMatrices <- function(data.list, parent.method, years, first.year, LTRE_variable) {#
+	for (i in 1:length(data.list)) {#
+		dat <- eval(parse(text=data.list[i]))#
+		cat("####", dat$N.Stages.wo.break, "\n")#
+		for (j in 1:length(parent.methods)){#
+			cat('\n')  #
+			print(#
+				xtable(#
+					dat[[4]][[j]]$clone_transition_counts, #
+					digits=0, #
+					caption=paste(#
+						"Clone production counts (",#
+						years,#
+						" data for plants ",#
+						LTRE_variable,#
+						") using the \`\`", #
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			print(#
+				xtable(#
+					dat[[4]][[j]]$transition.counts, #
+					digits=0,#
+					caption=paste(#
+						"Growth, stasis, retrogression, and survival counts (",#
+						years,#
+						" data for plants ",#
+						LTRE_variable,#
+						") using the \`\`", #
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			print(#
+				xtable(#
+					dat[[4]][[j]]$n_per_stage %>% filter(stage!="Seed"), #
+					digits=0,#
+					caption=paste(#
+						"Number of individuals per stage in ",#
+						first.year,#
+						" for plants ",#
+						LTRE_variable,#
+						", using the \`\`", #
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			cat("\\clearpage")#
+		}#
+	}#
+}
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/Appendix')
+parent.methods <- c(#
+	"largest",#
+	"random",#
+	"random (probability of selection weighted by size)"#
+)#
+data.list.2013 <- c(#
+	"mod.4.stages.2013.mat.data",#
+	"mod.5.stages.2013.mat.data",#
+	"mod.5.stages.b.2013.mat.data",#
+	"mod.6.stages.2013.mat.data",#
+	"mod.7.stages.2013.mat.data"#
+)#
+printPopulationMatrices(#
+	data.list=data.list.2013, #
+	parent.method, #
+	years="2013-2014", #
+	first.year="2013"#
+)
+setwd('/Users/KSauby/Documents/Projects/Dissertation')
+bookdown::render_book('index.Rmd')
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+#' Successively print population matrices for inclusion in an appendix#
+#'#
+#' @param data.list#
+#' @param parent.method#
+#' @param  years#
+#' @param first.year#
+#'#
+#' @export#
+#
+printPopulationMatrices <- function(data.list, parent.method, years, first.year) {#
+	for (i in 1:length(data.list)) {#
+		dat <- eval(parse(text=data.list[i]))#
+		cat("\\subsection{", dat$N.Stages.wo.break, "}", sep="")#
+		for (j in 1:length(parent.methods)){#
+			cat('\n')  #
+			print(#
+				xtable(#
+					dat[[1]][[j]]$clone_transition_counts, #
+					digits=0,#
+					caption=paste(#
+						"Clone production counts (",#
+						years,#
+						" data) using the \`\`", #
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			print(#
+				xtable(#
+					dat[[1]][[j]]$transition.counts, #
+					digits=0,#
+					caption=paste(#
+						"Growth, stasis, retrogression, and survival counts (",#
+						years,#
+						" data) using the \`\`",#
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			print(#
+				xtable(#
+					dat[[1]][[j]]$n_per_stage %>% filter(stage!="Seed"), #
+					digits=0,#
+					caption=paste(#
+						"Number of individuals per stage in ",#
+						first.year,#
+						" using the \`\`",#
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			cat("\\clearpage")#
+		}#
+	}#
+}#
+#' Successively print LTRE population matrices for inclusion in an appendix#
+#'#
+#' @param data.list#
+#' @param parent.method#
+#' @param  years#
+#' @param first.year#
+#' @param LTRE_variable#
+#'#
+#' @export#
+printLTREPopulationMatrices <- function(data.list, parent.method, years, first.year, LTRE_variable) {#
+	for (i in 1:length(data.list)) {#
+		dat <- eval(parse(text=data.list[i]))#
+		cat("\\subsection{", dat$N.Stages.wo.break, "}", sep="")#
+		for (j in 1:length(parent.methods)){#
+			cat('\n')  #
+			print(#
+				xtable(#
+					dat[[4]][[j]]$clone_transition_counts, #
+					digits=0, #
+					caption=paste(#
+						"Clone production counts (",#
+						years,#
+						" data for plants ",#
+						LTRE_variable,#
+						") using the \`\`", #
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			print(#
+				xtable(#
+					dat[[4]][[j]]$transition.counts, #
+					digits=0,#
+					caption=paste(#
+						"Growth, stasis, retrogression, and survival counts (",#
+						years,#
+						" data for plants ",#
+						LTRE_variable,#
+						") using the \`\`", #
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			print(#
+				xtable(#
+					dat[[4]][[j]]$n_per_stage %>% filter(stage!="Seed"), #
+					digits=0,#
+					caption=paste(#
+						"Number of individuals per stage in ",#
+						first.year,#
+						" for plants ",#
+						LTRE_variable,#
+						", using the \`\`", #
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			cat("\\clearpage")#
+		}#
+	}#
+}
+setwd('/Users/KSauby/Documents/Projects')
+setwd("./GTMNERRproc")#
+#setwd("./dataproc")#
+#setwd("./modresproc")#
+#setwd("./unmarked")#
+#setwd("./RPresence")#
+#devtools::test()#
+devtools::document()#
+devtools::install()
+setwd('/Users/KSauby/Documents/Projects/Dissertation')
+bookdown::render_book('index.Rmd')
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+#' Successively print population matrices for inclusion in an appendix#
+#'#
+#' @param data.list#
+#' @param parent.method#
+#' @param  years#
+#' @param first.year#
+#'#
+#' @export#
+#
+printPopulationMatrices <- function(data.list, parent.method, years, first.year) {#
+	for (i in 1:length(data.list)) {#
+		dat <- eval(parse(text=data.list[i]))#
+		cat("\\subsection{", dat$N.Stages.wo.break, "}", sep="")#
+		for (j in 1:length(parent.methods)){#
+			cat("\\subsubsection{", parent.methods[j], "parent assignment method}", sep="")#
+			cat('\n')  #
+			print(#
+				xtable(#
+					dat[[1]][[j]]$clone_transition_counts, #
+					digits=0,#
+					caption=paste(#
+						"Clone production counts (",#
+						years,#
+						" data) using the \`\`", #
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			print(#
+				xtable(#
+					dat[[1]][[j]]$transition.counts, #
+					digits=0,#
+					caption=paste(#
+						"Growth, stasis, retrogression, and survival counts (",#
+						years,#
+						" data) using the \`\`",#
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			print(#
+				xtable(#
+					dat[[1]][[j]]$n_per_stage %>% filter(stage!="Seed"), #
+					digits=0,#
+					caption=paste(#
+						"Number of individuals per stage in ",#
+						first.year,#
+						" using the \`\`",#
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			cat("\\clearpage")#
+		}#
+	}#
+}#
+#' Successively print LTRE population matrices for inclusion in an appendix#
+#'#
+#' @param data.list#
+#' @param parent.method#
+#' @param  years#
+#' @param first.year#
+#' @param LTRE_variable#
+#'#
+#' @export#
+printLTREPopulationMatrices <- function(data.list, parent.method, years, first.year, LTRE_variable) {#
+	for (i in 1:length(data.list)) {#
+		dat <- eval(parse(text=data.list[i]))#
+		cat("\\subsection{", dat$N.Stages.wo.break, "}", sep="")#
+		for (j in 1:length(parent.methods)){#
+			cat('\n')  #
+			print(#
+				xtable(#
+					dat[[4]][[j]]$clone_transition_counts, #
+					digits=0, #
+					caption=paste(#
+						"Clone production counts (",#
+						years,#
+						" data for plants ",#
+						LTRE_variable,#
+						") using the \`\`", #
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			print(#
+				xtable(#
+					dat[[4]][[j]]$transition.counts, #
+					digits=0,#
+					caption=paste(#
+						"Growth, stasis, retrogression, and survival counts (",#
+						years,#
+						" data for plants ",#
+						LTRE_variable,#
+						") using the \`\`", #
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			print(#
+				xtable(#
+					dat[[4]][[j]]$n_per_stage %>% filter(stage!="Seed"), #
+					digits=0,#
+					caption=paste(#
+						"Number of individuals per stage in ",#
+						first.year,#
+						" for plants ",#
+						LTRE_variable,#
+						", using the \`\`", #
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			cat("\\clearpage")#
+		}#
+	}#
+}
+setwd('/Users/KSauby/Documents/Projects/Dissertation')
+bookdown::render_book('index.Rmd')
+setwd('/Users/KSauby/Documents/Projects/Dissertation')
+bookdown::render_book('index.Rmd')
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+#' Successively print population matrices for inclusion in an appendix#
+#'#
+#' @param data.list#
+#' @param parent.method#
+#' @param  years#
+#' @param first.year#
+#'#
+#' @export#
+#
+printPopulationMatrices <- function(data.list, parent.method, years, first.year) {#
+	for (i in 1:length(data.list)) {#
+		dat <- eval(parse(text=data.list[i]))#
+		cat("\\subsection{", dat$N.Stages.wo.break, "}", sep="")#
+		for (j in 1:length(parent.methods)){#
+			cat("\\subsubsection{ ``", parent.methods[j], "'' parent assignment method}", sep="")#
+			cat('\n')  #
+			print(#
+				xtable(#
+					dat[[1]][[j]]$clone_transition_counts, #
+					digits=0,#
+					caption=paste(#
+						"Clone production counts (",#
+						years,#
+						" data) using the \`\`", #
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			print(#
+				xtable(#
+					dat[[1]][[j]]$transition.counts, #
+					digits=0,#
+					caption=paste(#
+						"Growth, stasis, retrogression, and survival counts (",#
+						years,#
+						" data) using the \`\`",#
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			print(#
+				xtable(#
+					dat[[1]][[j]]$n_per_stage %>% filter(stage!="Seed"), #
+					digits=0,#
+					caption=paste(#
+						"Number of individuals per stage in ",#
+						first.year,#
+						" using the \`\`",#
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			cat("\\clearpage")#
+		}#
+	}#
+}#
+#' Successively print LTRE population matrices for inclusion in an appendix#
+#'#
+#' @param data.list#
+#' @param parent.method#
+#' @param  years#
+#' @param first.year#
+#' @param LTRE_variable#
+#'#
+#' @export#
+printLTREPopulationMatrices <- function(data.list, parent.method, years, first.year, LTRE_variable) {#
+	for (i in 1:length(data.list)) {#
+		dat <- eval(parse(text=data.list[i]))#
+		cat("\\subsection{", dat$N.Stages.wo.break, "}", sep="")#
+		for (j in 1:length(parent.methods)){#
+			cat('\n')  #
+			print(#
+				xtable(#
+					dat[[4]][[j]]$clone_transition_counts, #
+					digits=0, #
+					caption=paste(#
+						"Clone production counts (",#
+						years,#
+						" data for plants ",#
+						LTRE_variable,#
+						") using the \`\`", #
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			print(#
+				xtable(#
+					dat[[4]][[j]]$transition.counts, #
+					digits=0,#
+					caption=paste(#
+						"Growth, stasis, retrogression, and survival counts (",#
+						years,#
+						" data for plants ",#
+						LTRE_variable,#
+						") using the \`\`", #
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			print(#
+				xtable(#
+					dat[[4]][[j]]$n_per_stage %>% filter(stage!="Seed"), #
+					digits=0,#
+					caption=paste(#
+						"Number of individuals per stage in ",#
+						first.year,#
+						" for plants ",#
+						LTRE_variable,#
+						", using the \`\`", #
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			cat("\\clearpage")#
+		}#
+	}#
+}
+setwd('/Users/KSauby/Documents/Projects/Dissertation')
+bookdown::render_book('index.Rmd')
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+#' Successively print population matrices for inclusion in an appendix#
+#'#
+#' @param data.list#
+#' @param parent.method#
+#' @param  years#
+#' @param first.year#
+#'#
+#' @export#
+#
+printPopulationMatrices <- function(data.list, parent.method, years, first.year) {#
+	for (i in 1:length(data.list)) {#
+		dat <- eval(parse(text=data.list[i]))#
+		cat("\\subsubsection{", dat$N.Stages.wo.break, "}", sep="")#
+		for (j in 1:length(parent.methods)){#
+			cat("\\subsubsubsection{ ``", parent.methods[j], "'' parent assignment method}", sep="")#
+			cat('\n')  #
+			print(#
+				xtable(#
+					dat[[1]][[j]]$clone_transition_counts, #
+					digits=0,#
+					caption=paste(#
+						"Clone production counts (",#
+						years,#
+						" data) using the \`\`", #
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			print(#
+				xtable(#
+					dat[[1]][[j]]$transition.counts, #
+					digits=0,#
+					caption=paste(#
+						"Growth, stasis, retrogression, and survival counts (",#
+						years,#
+						" data) using the \`\`",#
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			print(#
+				xtable(#
+					dat[[1]][[j]]$n_per_stage %>% filter(stage!="Seed"), #
+					digits=0,#
+					caption=paste(#
+						"Number of individuals per stage in ",#
+						first.year,#
+						" using the \`\`",#
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			cat("\\clearpage")#
+		}#
+	}#
+}#
+#' Successively print LTRE population matrices for inclusion in an appendix#
+#'#
+#' @param data.list#
+#' @param parent.method#
+#' @param  years#
+#' @param first.year#
+#' @param LTRE_variable#
+#'#
+#' @export#
+printLTREPopulationMatrices <- function(data.list, parent.method, years, first.year, LTRE_variable) {#
+	for (i in 1:length(data.list)) {#
+		dat <- eval(parse(text=data.list[i]))#
+		cat("\\subsection{", dat$N.Stages.wo.break, "}", sep="")#
+		for (j in 1:length(parent.methods)){#
+			cat("\\subsubsection{ ``", parent.methods[j], "'' parent assignment method}", sep="")#
+			cat('\n')  #
+			print(#
+				xtable(#
+					dat[[4]][[j]]$clone_transition_counts, #
+					digits=0, #
+					caption=paste(#
+						"Clone production counts (",#
+						years,#
+						" data for plants ",#
+						LTRE_variable,#
+						") using the \`\`", #
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			print(#
+				xtable(#
+					dat[[4]][[j]]$transition.counts, #
+					digits=0,#
+					caption=paste(#
+						"Growth, stasis, retrogression, and survival counts (",#
+						years,#
+						" data for plants ",#
+						LTRE_variable,#
+						") using the \`\`", #
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			print(#
+				xtable(#
+					dat[[4]][[j]]$n_per_stage %>% filter(stage!="Seed"), #
+					digits=0,#
+					caption=paste(#
+						"Number of individuals per stage in ",#
+						first.year,#
+						" for plants ",#
+						LTRE_variable,#
+						", using the \`\`", #
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			cat("\\clearpage")#
+		}#
+	}#
+}
+setwd('/Users/KSauby/Documents/Projects')
+setwd("./GTMNERRproc")#
+#setwd("./dataproc")#
+#setwd("./modresproc")#
+#setwd("./unmarked")#
+#setwd("./RPresence")#
+#devtools::test()#
+devtools::document()#
+devtools::install()
+setwd('/Users/KSauby/Documents/Projects/Dissertation')
+bookdown::render_book('index.Rmd')
+setwd('/Users/KSauby/Documents/Projects/Dissertation')
+bookdown::render_book('index.Rmd')
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+#' Successively print population matrices for inclusion in an appendix#
+#'#
+#' @param data.list#
+#' @param parent.method#
+#' @param  years#
+#' @param first.year#
+#'#
+#' @export#
+#
+printPopulationMatrices <- function(data.list, parent.method, years, first.year) {#
+	for (i in 1:length(data.list)) {#
+		dat <- eval(parse(text=data.list[i]))#
+		cat("\\subsubsection{", dat$N.Stages.wo.break, "}", sep="")#
+		for (j in 1:length(parent.methods)){#
+			cat('\n')  #
+			print(#
+				xtable(#
+					dat[[1]][[j]]$clone_transition_counts, #
+					digits=0,#
+					caption=paste(#
+						"Clone production counts (",#
+						years,#
+						" data) using the \`\`", #
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			print(#
+				xtable(#
+					dat[[1]][[j]]$transition.counts, #
+					digits=0,#
+					caption=paste(#
+						"Growth, stasis, retrogression, and survival counts (",#
+						years,#
+						" data) using the \`\`",#
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			print(#
+				xtable(#
+					dat[[1]][[j]]$n_per_stage %>% filter(stage!="Seed"), #
+					digits=0,#
+					caption=paste(#
+						"Number of individuals per stage in ",#
+						first.year,#
+						" using the \`\`",#
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			cat("\\clearpage")#
+		}#
+	}#
+}#
+#' Successively print LTRE population matrices for inclusion in an appendix#
+#'#
+#' @param data.list#
+#' @param parent.method#
+#' @param  years#
+#' @param first.year#
+#' @param LTRE_variable#
+#'#
+#' @export#
+printLTREPopulationMatrices <- function(data.list, parent.method, years, first.year, LTRE_variable) {#
+	for (i in 1:length(data.list)) {#
+		dat <- eval(parse(text=data.list[i]))#
+		cat("\\subsection{", dat$N.Stages.wo.break, "}", sep="")#
+		for (j in 1:length(parent.methods)){#
+			cat("\\subsubsection{ ``", parent.methods[j], "'' parent assignment method}", sep="")#
+			cat('\n')  #
+			print(#
+				xtable(#
+					dat[[4]][[j]]$clone_transition_counts, #
+					digits=0, #
+					caption=paste(#
+						"Clone production counts (",#
+						years,#
+						" data for plants ",#
+						LTRE_variable,#
+						") using the \`\`", #
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			print(#
+				xtable(#
+					dat[[4]][[j]]$transition.counts, #
+					digits=0,#
+					caption=paste(#
+						"Growth, stasis, retrogression, and survival counts (",#
+						years,#
+						" data for plants ",#
+						LTRE_variable,#
+						") using the \`\`", #
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			print(#
+				xtable(#
+					dat[[4]][[j]]$n_per_stage %>% filter(stage!="Seed"), #
+					digits=0,#
+					caption=paste(#
+						"Number of individuals per stage in ",#
+						first.year,#
+						" for plants ",#
+						LTRE_variable,#
+						", using the \`\`", #
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			cat("\\clearpage")#
+		}#
+	}#
+}
+setwd('/Users/KSauby/Documents/Projects/Dissertation')
+bookdown::render_book('index.Rmd')
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+#' Successively print population matrices for inclusion in an appendix#
+#'#
+#' @param data.list#
+#' @param parent.method#
+#' @param  years#
+#' @param first.year#
+#'#
+#' @export#
+#
+printPopulationMatrices <- function(data.list, parent.method, years, first.year) {#
+	for (i in 1:length(data.list)) {#
+		dat <- eval(parse(text=data.list[i]))#
+		cat("\\subsection{", dat$N.Stages.wo.break, "}", sep="")#
+		for (j in 1:length(parent.methods)){#
+			cat("\\subsubsection{ ``", parent.methods[j], "'' parent assignment method}", sep="")#
+			cat('\n')  #
+			print(#
+				xtable(#
+					dat[[1]][[j]]$clone_transition_counts, #
+					digits=0,#
+					caption=paste(#
+						"Clone production counts (",#
+						years,#
+						" data) using the \`\`", #
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			print(#
+				xtable(#
+					dat[[1]][[j]]$transition.counts, #
+					digits=0,#
+					caption=paste(#
+						"Growth, stasis, retrogression, and survival counts (",#
+						years,#
+						" data) using the \`\`",#
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			print(#
+				xtable(#
+					dat[[1]][[j]]$n_per_stage %>% filter(stage!="Seed"), #
+					digits=0,#
+					caption=paste(#
+						"Number of individuals per stage in ",#
+						first.year,#
+						" using the \`\`",#
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			cat("\\clearpage")#
+		}#
+	}#
+}#
+#' Successively print LTRE population matrices for inclusion in an appendix#
+#'#
+#' @param data.list#
+#' @param parent.method#
+#' @param  years#
+#' @param first.year#
+#' @param LTRE_variable#
+#'#
+#' @export#
+printLTREPopulationMatrices <- function(data.list, parent.method, years, first.year, LTRE_variable) {#
+	for (i in 1:length(data.list)) {#
+		dat <- eval(parse(text=data.list[i]))#
+		cat("\\subsubsection{", dat$N.Stages.wo.break, "}", sep="")#
+		for (j in 1:length(parent.methods)){#
+			cat('\n')  #
+			print(#
+				xtable(#
+					dat[[4]][[j]]$clone_transition_counts, #
+					digits=0, #
+					caption=paste(#
+						"Clone production counts (",#
+						years,#
+						" data for plants ",#
+						LTRE_variable,#
+						") using the \`\`", #
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			print(#
+				xtable(#
+					dat[[4]][[j]]$transition.counts, #
+					digits=0,#
+					caption=paste(#
+						"Growth, stasis, retrogression, and survival counts (",#
+						years,#
+						" data for plants ",#
+						LTRE_variable,#
+						") using the \`\`", #
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			print(#
+				xtable(#
+					dat[[4]][[j]]$n_per_stage %>% filter(stage!="Seed"), #
+					digits=0,#
+					caption=paste(#
+						"Number of individuals per stage in ",#
+						first.year,#
+						" for plants ",#
+						LTRE_variable,#
+						", using the \`\`", #
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			cat("\\clearpage")#
+		}#
+	}#
+}
+setwd('/Users/KSauby/Documents/Projects/Dissertation')
+bookdown::render_book('index.Rmd')
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+#' Successively print population matrices for inclusion in an appendix#
+#'#
+#' @param data.list#
+#' @param parent.method#
+#' @param  years#
+#' @param first.year#
+#'#
+#' @export#
+#
+printPopulationMatrices <- function(data.list, parent.method, years, first.year) {#
+	for (i in 1:length(data.list)) {#
+		dat <- eval(parse(text=data.list[i]))#
+		cat("\\subsection{", dat$N.Stages.wo.break, "}", sep="")#
+		for (j in 1:length(parent.methods)){#
+			cat("\\subsubsection{ ``", parent.methods[j], "'' parent assignment method}", sep="")#
+			cat('\n')  #
+			print(#
+				xtable(#
+					dat[[1]][[j]]$clone_transition_counts, #
+					digits=0,#
+					caption=paste(#
+						"Clone production counts (",#
+						years,#
+						" data) using the \`\`", #
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			print(#
+				xtable(#
+					dat[[1]][[j]]$transition.counts, #
+					digits=0,#
+					caption=paste(#
+						"Growth, stasis, retrogression, and survival counts (",#
+						years,#
+						" data) using the \`\`",#
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			print(#
+				xtable(#
+					dat[[1]][[j]]$n_per_stage %>% filter(stage!="Seed"), #
+					digits=0,#
+					caption=paste(#
+						"Number of individuals per stage in ",#
+						first.year,#
+						" using the \`\`",#
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			cat("\\clearpage")#
+		}#
+	}#
+}#
+#' Successively print LTRE population matrices for inclusion in an appendix#
+#'#
+#' @param data.list#
+#' @param parent.method#
+#' @param  years#
+#' @param first.year#
+#' @param LTRE_variable#
+#'#
+#' @export#
+printLTREPopulationMatrices <- function(data.list, parent.method, years, first.year, LTRE_variable) {#
+	for (i in 1:length(data.list)) {#
+		dat <- eval(parse(text=data.list[i]))#
+		cat("\\subsubsection{", LTRE_variable, "}", sep="")#
+		for (j in 1:length(parent.methods)){#
+			cat('\n')  #
+			print(#
+				xtable(#
+					dat[[4]][[j]]$clone_transition_counts, #
+					digits=0, #
+					caption=paste(#
+						"Clone production counts (",#
+						years,#
+						" data for plants ",#
+						LTRE_variable,#
+						") using the \`\`", #
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			print(#
+				xtable(#
+					dat[[4]][[j]]$transition.counts, #
+					digits=0,#
+					caption=paste(#
+						"Growth, stasis, retrogression, and survival counts (",#
+						years,#
+						" data for plants ",#
+						LTRE_variable,#
+						") using the \`\`", #
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			print(#
+				xtable(#
+					dat[[4]][[j]]$n_per_stage %>% filter(stage!="Seed"), #
+					digits=0,#
+					caption=paste(#
+						"Number of individuals per stage in ",#
+						first.year,#
+						" for plants ",#
+						LTRE_variable,#
+						", using the \`\`", #
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			cat("\\clearpage")#
+		}#
+	}#
+}
+setwd('/Users/KSauby/Documents/Projects/Dissertation')
+bookdown::render_book('index.Rmd')
+setwd('/Users/KSauby/Documents/Projects/Dissertation')
+bookdown::render_book('index.Rmd')
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+#' Successively print population matrices for inclusion in an appendix#
+#'#
+#' @param data.list#
+#' @param parent.method#
+#' @param  years#
+#' @param first.year#
+#'#
+#' @export#
+#
+printPopulationMatrices <- function(data.list, parent.method, years, first.year) {#
+	for (i in 1:length(data.list)) {#
+		dat <- eval(parse(text=data.list[i]))#
+		cat("\\subsection{", dat$N.Stages.wo.break, "}", sep="")#
+		for (j in 1:length(parent.methods)){#
+			cat("\\subsubsection{ ``", parent.methods[j], "'' parent assignment method}", sep="")#
+			cat('\n')  #
+			print(#
+				xtable(#
+					dat[[1]][[j]]$clone_transition_counts, #
+					digits=0,#
+					caption=paste(#
+						"Clone production counts (",#
+						years,#
+						" data) using the \`\`", #
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			print(#
+				xtable(#
+					dat[[1]][[j]]$transition.counts, #
+					digits=0,#
+					caption=paste(#
+						"Growth, stasis, retrogression, and survival counts (",#
+						years,#
+						" data) using the \`\`",#
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			print(#
+				xtable(#
+					dat[[1]][[j]]$n_per_stage %>% filter(stage!="Seed"), #
+					digits=0,#
+					caption=paste(#
+						"Number of individuals per stage in ",#
+						first.year,#
+						" using the \`\`",#
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			cat("\\clearpage")#
+		}#
+	}#
+}#
+#' Successively print LTRE population matrices for inclusion in an appendix#
+#'#
+#' @param data.list#
+#' @param parent.method#
+#' @param  years#
+#' @param first.year#
+#' @param LTRE_variable#
+#'#
+#' @export#
+printLTREPopulationMatrices <- function(data.list, parent.method, years, first.year, LTRE_variable) {#
+	for (i in 1:length(data.list)) {#
+		dat <- eval(parse(text=data.list[i]))#
+		cat("\\subsubsection{", LTRE_variable, "}", sep="")#
+		for (j in 1:length(parent.methods)){#
+			cat('\n')  #
+			print(#
+				xtable(#
+					dat[[4]][[j]]$clone_transition_counts, #
+					digits=0, #
+					caption=paste(#
+						"Clone production counts using the \`\`", #
+						parent.methods[j],#
+						"\'\' parent assignment method for the",#
+						years,#
+						" data for plants ",#
+						LTRE_variable,#
+						".",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			print(#
+				xtable(#
+					dat[[4]][[j]]$transition.counts, #
+					digits=0,#
+					caption=paste(#
+						"Growth, stasis, retrogression, and survival counts (",#
+						years,#
+						" data for plants ",#
+						LTRE_variable,#
+						") using the \`\`", #
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			print(#
+				xtable(#
+					dat[[4]][[j]]$n_per_stage %>% filter(stage!="Seed"), #
+					digits=0,#
+					caption=paste(#
+						"Number of individuals per stage in ",#
+						first.year,#
+						" for plants ",#
+						LTRE_variable,#
+						", using the \`\`", #
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			cat("\\clearpage")#
+		}#
+	}#
+}
+setwd('/Users/KSauby/Documents/Projects/Dissertation')
+bookdown::render_book('index.Rmd')
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+#' Successively print population matrices for inclusion in an appendix#
+#'#
+#' @param data.list#
+#' @param parent.method#
+#' @param  years#
+#' @param first.year#
+#'#
+#' @export#
+#
+printPopulationMatrices <- function(data.list, parent.method, years, first.year) {#
+	for (i in 1:length(data.list)) {#
+		dat <- eval(parse(text=data.list[i]))#
+		cat("\\subsection{", dat$N.Stages.wo.break, "}", sep="")#
+		for (j in 1:length(parent.methods)){#
+			cat("\\subsubsection{ ``", parent.methods[j], "'' parent assignment method}", sep="")#
+			cat('\n')  #
+			print(#
+				xtable(#
+					dat[[1]][[j]]$clone_transition_counts, #
+					digits=0,#
+					caption=paste(#
+						"Clone production counts (",#
+						years,#
+						" data) using the \`\`", #
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			print(#
+				xtable(#
+					dat[[1]][[j]]$transition.counts, #
+					digits=0,#
+					caption=paste(#
+						"Growth, stasis, retrogression, and survival counts (",#
+						years,#
+						" data) using the \`\`",#
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			print(#
+				xtable(#
+					dat[[1]][[j]]$n_per_stage %>% filter(stage!="Seed"), #
+					digits=0,#
+					caption=paste(#
+						"Number of individuals per stage in ",#
+						first.year,#
+						" using the \`\`",#
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			cat("\\clearpage")#
+		}#
+	}#
+}#
+#' Successively print LTRE population matrices for inclusion in an appendix#
+#'#
+#' @param data.list#
+#' @param parent.method#
+#' @param  years#
+#' @param first.year#
+#' @param LTRE_variable#
+#'#
+#' @export#
+printLTREPopulationMatrices <- function(data.list, parent.method, years, first.year, LTRE_variable) {#
+	for (i in 1:length(data.list)) {#
+		dat <- eval(parse(text=data.list[i]))#
+		cat("\\subsubsection{", LTRE_variable, "}", sep="")#
+		for (j in 1:length(parent.methods)){#
+			cat('\n')  #
+			print(#
+				xtable(#
+					dat[[4]][[j]]$clone_transition_counts, #
+					digits=0, #
+					caption=paste(#
+						"Clone production counts using the \`\`", #
+						parent.methods[j],#
+						"\'\' parent assignment method for the ",#
+						years,#
+						" data for plants ",#
+						LTRE_variable,#
+						".",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			print(#
+				xtable(#
+					dat[[4]][[j]]$transition.counts, #
+					digits=0,#
+					caption=paste(#
+						"Growth, stasis, retrogression, and survival counts using the \`\`", #
+						parent.methods[j],#
+						"\'\' parent assignment method for the ",#
+						years,#
+						" data for plants ",#
+						LTRE_variable,#
+						".",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			print(#
+				xtable(#
+					dat[[4]][[j]]$n_per_stage %>% filter(stage!="Seed"), #
+					digits=0,#
+					caption=paste(#
+						"Number of individuals per stage in ",#
+						first.year,#
+						" for plants ",#
+						LTRE_variable,#
+						", using the \`\`", #
+						parent.methods[j],#
+						"\'\' parent assignment method.",#
+						sep=""#
+					)#
+				),#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			cat("\\clearpage")#
+		}#
+	}#
+}
+setwd('/Users/KSauby/Documents/Projects/Dissertation')
+bookdown::render_book('index.Rmd')
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files')
+source("processing/values_same_across_all_models.R")#
+source("processing/prep_ldf_cldf.R")#
+# ---------------------------------------------------------------------------- ##
+TransitionYear 	= 2013#
+source("processing/mutate_ldf_cldf.R")
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+SizeClass <- SizeClass#
+	A <- list()#
+	for (i in 1:length(ldf)) {#
+		A[[i]] <- prepDataTransitionMatrix(#
+			ldf[[i]], #
+			cldf[[i]], #
+			SizeClass, #
+			TransitionYear#
+		)#
+	}
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files/2013_2014')
+SizeClass <- SizeClass.4
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+SizeClass <- SizeClass#
+	A <- list()#
+	for (i in 1:length(ldf)) {#
+		A[[i]] <- prepDataTransitionMatrix(#
+			ldf[[i]], #
+			cldf[[i]], #
+			SizeClass, #
+			TransitionYear#
+		)#
+	}
+A
+Dat <- ldf[[i]]
+clonal_repro_dataset <- cldf[[i]]
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+Dat_census <- Dat %>% #
+	rowwise() %>%#
+	mutate(#
+		stage=replace(#
+			stage, #
+			which(stage=="Adult"),#
+			cut(SizewClones_t, SizeClass, include.lowest=T, labels=FALSE)#
+		)#
+	)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+Dat_census %<>%#
+		dplyr::select(#
+			FecundityYear, #
+			PlantID, #
+			stage, #
+			Fruit_Flowers_t#
+		)#
+	colnames(Dat_census)[which(names(Dat_census) == "FecundityYear")] <- "Year"#
+	# merge year with year - 1#
+	trans <- subset(#
+		merge(#
+			Dat_census, #
+			Dat_census, #
+			by = "PlantID", #
+			sort = FALSE#
+		), #
+		Year.x == Year.y - 1#
+	)#
+	# rename rows and columns#
+	rownames(trans) <- 1:nrow(trans)#
+	colnames(trans)[which(names(trans) == "Year.x")] 			<- "Year"#
+	colnames(trans)[which(names(trans) == "stage.x")] 			<- "stage"#
+	colnames(trans)[which(names(trans) == "Fruit_Flowers_t.x")] <- "Repro"#
+	colnames(trans)[which(names(trans) == "Year.y")] 			<- "Year2"#
+	colnames(trans)[which(names(trans) == "stage.y")] 			<- "fate"#
+	colnames(trans)[which(names(trans) == "Fruit_Flowers_t.y")] <- "Repro2"
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+trans01 <- trans %>%#
+		filter(Year == TransitionYear) %>%#
+		dplyr::select(PlantID, stage, Repro, fate, Repro2)#
+	seedlings <- nrow(subset(#
+		Dat_census, #
+		Year == TransitionYear & stage =="Seedling"#
+	))
+head(trans01)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+trans01 %<>% mutate(Seedling = Repro/sum(Repro, na.rm=T) * seedlings)
+head(trans01)
+tail(trans01)
+trans01 %>% filter(Seedling > 0) %>% head
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+seedlings
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+Seedlings <- nrow(subset(trans, Year == TransitionYear & stage=="Seedling"))
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+Seedlings
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+c(unique(c(trans01$stage, trans01$fate))) %>% #
+		as.numeric %>%#
+		na.omit %>% #
+		as.vector %>%#
+		sort
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+stages <- c(unique(c(trans01$stage, trans01$fate))) %>% #
+		as.numeric %>%#
+		na.omit %>% #
+		as.vector %>%#
+		sort#
+	stages <- c("Seed", "Seedling", stages, "dead")#
+	trans01$stage %<>% factor(., levels=stages[-length(stages)], ordered=T)#
+	trans01$fate %<>% factor(., levels=stages, ordered=T)
+head(trans01)
+tail(trans01)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+stages %<>% .[-length(.)]#
+	proj_matrix <- projection.matrix(#
+		trans01, #
+		sort = stages#
+	)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+proj_matrix
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+Dat_census <- Dat %>% #
+	rowwise() %>%#
+	mutate(#
+		stage=replace(#
+			stage, #
+			which(stage=="Adult"),#
+			cut(SizewClones_t, SizeClass, include.lowest=T, labels=FALSE)#
+		)#
+	)#
+	Dat_census %<>%#
+		dplyr::select(#
+			FecundityYear, #
+			PlantID, #
+			stage, #
+			Fruit_Flowers_t#
+		)#
+	colnames(Dat_census)[which(names(Dat_census) == "FecundityYear")] <- "Year"#
+	# merge year with year - 1#
+	trans <- subset(#
+		merge(#
+			Dat_census, #
+			Dat_census, #
+			by = "PlantID", #
+			sort = FALSE#
+		), #
+		Year.x == Year.y - 1#
+	)#
+	# rename rows and columns#
+	rownames(trans) <- 1:nrow(trans)#
+	colnames(trans)[which(names(trans) == "Year.x")] 			<- "Year"#
+	colnames(trans)[which(names(trans) == "stage.x")] 			<- "stage"#
+	colnames(trans)[which(names(trans) == "Fruit_Flowers_t.x")] <- "Repro"#
+	colnames(trans)[which(names(trans) == "Year.y")] 			<- "Year2"#
+	colnames(trans)[which(names(trans) == "stage.y")] 			<- "fate"#
+	colnames(trans)[which(names(trans) == "Fruit_Flowers_t.y")] <- "Repro2"#
+#
+	# year-specific transition matrix#
+	trans01 <- trans %>%#
+		filter(Year == TransitionYear) %>%#
+		dplyr::select(PlantID, stage, Repro, fate, Repro2)#
+	seedlings <- nrow(subset(#
+		Dat_census, #
+		Year == TransitionYear & stage =="Seedling"#
+	))#
+	# number of seedlings estimated to have been produced by each stage class#
+	trans01 %<>% mutate(Seedling = Repro/sum(Repro, na.rm=T) * seedlings)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+stages <- c(unique(c(trans01$stage, trans01$fate))) %>% #
+		as.numeric %>%#
+		na.omit %>% #
+		as.vector %>%#
+		sort#
+	stages <- c("Seed", "Seedling", stages, "dead")#
+	trans01$stage %<>% factor(., levels=stages[-length(stages)], ordered=T)#
+	trans01$fate %<>% factor(., levels=stages, ordered=T)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+stages %<>% .[-length(.)]
+stages
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+matrix
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+projection.matrix
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+projection.matrix(#
+		trans01, #
+		sort = stages#
+	)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+stages
+length(trans01)
+dim(trans01)
+0.197131576 * 963
+0.197131576 * 963 + 0.001653127*963 + 0.002399123*963
+sum(trans01$Repro)
+sum(trans01$Repro,na.r=T)
+sum(trans01$Repro,na.rm=T)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+SizeClass <- SizeClass#
+	A <- list()#
+	for (i in 1:length(ldf)) {#
+		A[[i]] <- prepDataTransitionMatrix(#
+			ldf[[i]], #
+			cldf[[i]], #
+			SizeClass, #
+			TransitionYear#
+		)#
+	}
+A
+i=1
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+trans_data = A[[i]]
+i=1
+j=1
+k=1
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+createProjectionMatrix(#
+					trans_data$trans01,#
+					SeedBankSize[i],#
+					SeedsPerFruit[j],#
+					SeedSurvival[k]#
+				)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+Seedlings 			<- trans_data %>% filter(stage =="Seedling") %>% nrow
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+projection.matrix(#
+		trans01, #
+		sort = stages#
+	)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+#' Prepare Data For Transition Matrix Function#
+#'#
+#' @param Dat Dataset#
+#' @param SizeClass Classes into which to divide individuals based on size#
+#' @param TransitionYear Year#
+#
+#' @description Prepare Data For Transition Matrix Function#
+#'#
+#' @export#
+#
+prepDataTransitionMatrix <- function(#
+	Dat,#
+	clonal_repro_dataset,#
+	SizeClass,#
+	TransitionYear#
+) {#
+	# Dat$stage <- Dat$Stage#
+	Dat_census <- Dat %>% #
+	rowwise() %>%#
+	mutate(#
+		stage=replace(#
+			stage, #
+			which(stage=="Adult"),#
+			cut(SizewClones_t, SizeClass, include.lowest=T, labels=FALSE)#
+		)#
+	)#
+	Dat_census %<>%#
+		dplyr::select(#
+			FecundityYear, #
+			PlantID, #
+			stage, #
+			Fruit_Flowers_t#
+		)#
+	colnames(Dat_census)[which(names(Dat_census) == "FecundityYear")] <- "Year"#
+	# merge year with year - 1#
+	trans <- subset(#
+		merge(#
+			Dat_census, #
+			Dat_census, #
+			by = "PlantID", #
+			sort = FALSE#
+		), #
+		Year.x == Year.y - 1#
+	)#
+	# rename rows and columns#
+	rownames(trans) <- 1:nrow(trans)#
+	colnames(trans)[which(names(trans) == "Year.x")] 			<- "Year"#
+	colnames(trans)[which(names(trans) == "stage.x")] 			<- "stage"#
+	colnames(trans)[which(names(trans) == "Fruit_Flowers_t.x")] <- "Repro"#
+	colnames(trans)[which(names(trans) == "Year.y")] 			<- "Year2"#
+	colnames(trans)[which(names(trans) == "stage.y")] 			<- "fate"#
+	colnames(trans)[which(names(trans) == "Fruit_Flowers_t.y")] <- "Repro2"#
+#
+	# year-specific transition matrix#
+	trans01 <- trans %>%#
+		filter(Year == TransitionYear) %>%#
+		dplyr::select(PlantID, stage, Repro, fate, Repro2)#
+	# seedlings <- nrow(subset(#
+	#	Dat_census, #
+	#	Year == TransitionYear & stage =="Seedling"#
+	#))#
+	# number of seedlings estimated to have been produced by each individual#
+	# trans01 %<>% mutate(Seedling = Repro/sum(Repro, na.rm=T) * seedlings)#
+	# create full set of stages#
+	stages <- c(unique(c(trans01$stage, trans01$fate))) %>% #
+		as.numeric %>%#
+		na.omit %>% #
+		as.vector %>%#
+		sort#
+	stages <- c("Seed", "Seedling", stages, "dead")#
+	trans01$stage %<>% factor(., levels=stages[-length(stages)], ordered=T)#
+	trans01$fate %<>% factor(., levels=stages, ordered=T)#
+	# remove last stage#
+	stages %<>% .[-length(.)]#
+	proj_matrix <- projection.matrix(#
+		trans01, #
+		sort = stages#
+	)#
+	# create matrix of transition counts#
+	transition.counts <- table(trans01$fate, trans01$stage)#
+	# create clonal matrices#
+	clonal.matrices <- createClonalReproTransitionMatrix(#
+		clonal_repro_dataset, #
+		trans01,#
+		stages#
+	)#
+	return(list(#
+		clone_transition_counts = clonal.matrices[[1]],#
+		clone_transition_rates = clonal.matrices[[2]], #
+		transition.counts = transition.counts, #
+		proj_matrix = proj_matrix, #
+		trans01 = trans01, #
+		stages = stages,#
+		n_per_stage = clonal.matrices[[3]]#
+	))#
+}
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files/2013_2014')
+SizeClass <- SizeClass.4
+i
+Dat <- ldf[[i]]
+clonal_repro_dataset <- cldf[[i]]
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+Dat_census <- Dat %>% #
+	rowwise() %>%#
+	mutate(#
+		stage=replace(#
+			stage, #
+			which(stage=="Adult"),#
+			cut(SizewClones_t, SizeClass, include.lowest=T, labels=FALSE)#
+		)#
+	)#
+	Dat_census %<>%#
+		dplyr::select(#
+			FecundityYear, #
+			PlantID, #
+			stage, #
+			Fruit_Flowers_t#
+		)#
+	colnames(Dat_census)[which(names(Dat_census) == "FecundityYear")] <- "Year"#
+	# merge year with year - 1#
+	trans <- subset(#
+		merge(#
+			Dat_census, #
+			Dat_census, #
+			by = "PlantID", #
+			sort = FALSE#
+		), #
+		Year.x == Year.y - 1#
+	)#
+	# rename rows and columns#
+	rownames(trans) <- 1:nrow(trans)#
+	colnames(trans)[which(names(trans) == "Year.x")] 			<- "Year"#
+	colnames(trans)[which(names(trans) == "stage.x")] 			<- "stage"#
+	colnames(trans)[which(names(trans) == "Fruit_Flowers_t.x")] <- "Repro"#
+	colnames(trans)[which(names(trans) == "Year.y")] 			<- "Year2"#
+	colnames(trans)[which(names(trans) == "stage.y")] 			<- "fate"#
+	colnames(trans)[which(names(trans) == "Fruit_Flowers_t.y")] <- "Repro2"#
+#
+	# year-specific transition matrix#
+	trans01 <- trans %>%#
+		filter(Year == TransitionYear) %>%#
+		dplyr::select(PlantID, stage, Repro, fate, Repro2)#
+	# seedlings <- nrow(subset(#
+	#	Dat_census, #
+	#	Year == TransitionYear & stage =="Seedling"#
+	#))#
+	# number of seedlings estimated to have been produced by each individual#
+	# trans01 %<>% mutate(Seedling = Repro/sum(Repro, na.rm=T) * seedlings)#
+	# create full set of stages#
+	stages <- c(unique(c(trans01$stage, trans01$fate))) %>% #
+		as.numeric %>%#
+		na.omit %>% #
+		as.vector %>%#
+		sort#
+	stages <- c("Seed", "Seedling", stages, "dead")#
+	trans01$stage %<>% factor(., levels=stages[-length(stages)], ordered=T)#
+	trans01$fate %<>% factor(., levels=stages, ordered=T)#
+	# remove last stage#
+	stages %<>% .[-length(.)]#
+	proj_matrix <- projection.matrix(#
+		trans01, #
+		sort = stages#
+	)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+projection.matrix(#
+		trans01, #
+		sort = stages#
+	)
+trans_data <- trans01
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+SeedBankSize
+reateProjectionMatrix(#
+					trans01,#
+					SeedBankSize[i],#
+					SeedsPerFruit[j],#
+					SeedSurvival[k]#
+				)
+createProjectionMatrix(#
+					trans01,#
+					SeedBankSize[i],#
+					SeedsPerFruit[j],#
+					SeedSurvival[k]#
+				)
+projection.matrix(#
+		trans01, #
+		sort = stages#
+	)
+createProjectionMatrix(#
+					trans01,#
+					SeedBankSize[i],#
+					SeedsPerFruit[j],#
+					SeedSurvival[k]#
+				)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+Seedlings 			<- trans_data %>% filter(stage =="Seedling") %>% nrow#
+	seeds.from.plants 	<- sum(trans_data$Repro, na.rm=T) * SeedsPerFruit
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+Seedlings
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+seeds.from.plants
+dim(trans01)
+trans01 %>% filter(Repro > 0) dim
+trans01 %>% filter(Repro > 0) %>% dim
+trans01 %>% filter(Repro > 0) %$% sum(Repro)
+trans01 %$% sum(Repro,na.rm=T)
+trans01 %>% filter(Repro > 0)
+setwd('/Users/KSauby/Documents/Projects')
+setwd("./GTMNERRproc")#
+#setwd("./dataproc")#
+#setwd("./modresproc")#
+#setwd("./unmarked")#
+#setwd("./RPresence")#
+#devtools::test()#
+devtools::document()#
+devtools::install()

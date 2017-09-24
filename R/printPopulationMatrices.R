@@ -14,6 +14,18 @@ printPopulationMatrices <- function(data.list, parent.method, years, first.year)
 		for (j in 1:length(parent.methods)){
 			cat("\\subsubsection{ ``", parent.methods[j], "'' parent assignment method}", sep="")
 			cat('\n')  
+			# PLANTS WITH FRUIT
+			temp <- xtable(
+				dat[[1]][[j]]$trans01 %>% filter(Repro > 0), 
+				digits=0,
+				caption="Plants that produced fruit in fecundity-year z."
+			)
+			names(temp) <- c("PlantID", "Stage, z", "Reproduction, z", "Stage, z+1", "Reproduction, z+1")
+			print(
+				temp,
+				include.rownames=F, caption.placement = "top"
+			)
+			# CLONE TRANSITION COUNTS	
 			print(
 				xtable(
 					dat[[1]][[j]]$clone_transition_counts, 
@@ -29,6 +41,7 @@ printPopulationMatrices <- function(data.list, parent.method, years, first.year)
 				),
 				include.rownames=F, caption.placement = "top"
 			)
+			# GROWTH, STATIS, RETROGRESSION, SURVIVAL
 			print(
 				xtable(
 					dat[[1]][[j]]$transition.counts, 
@@ -44,6 +57,7 @@ printPopulationMatrices <- function(data.list, parent.method, years, first.year)
 				),
 				include.rownames=F, caption.placement = "top"
 			)
+			# NUMBER OF INDIVIDUALS PER STAGE
 			print(
 				xtable(
 					dat[[1]][[j]]$n_per_stage %>% filter(stage!="Seed"), 
