@@ -59,10 +59,8 @@ prepDataTransitionMatrix <- function(
 		Dat_census, 
 		Year == TransitionYear & stage =="Seedling"
 	))
-	# number of seedlings estimated to have been produced by each stage class
+	# number of seedlings estimated to have been produced by each individual
 	trans01 %<>% mutate(Seedling = Repro/sum(Repro, na.rm=T) * seedlings)
-	# estimate seed to seedling transition
-	Seedlings <- nrow(subset(trans, Year == TransitionYear & stage=="Seedling"))
 	# create full set of stages
 	stages <- c(unique(c(trans01$stage, trans01$fate))) %>% 
 		as.numeric %>%
