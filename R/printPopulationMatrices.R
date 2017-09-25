@@ -87,6 +87,7 @@ printPopulationMatrices <- function(data.list, parent.method, years, first.year)
 #' @param first.year
 #' @param LTRE_variable
 #'
+#' @importFrom tools toTitleCase
 #' @export
 
 

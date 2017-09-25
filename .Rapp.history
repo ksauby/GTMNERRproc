@@ -1,5 +1,3 @@
-library(purrr)
-?map
 setwd('/Users/KSauby/Documents/Projects/Dissertation')
 library(ProjectTemplate)#
 load.project()#
@@ -18,588 +16,12 @@ load.project()#
 #
 setwd('/Users/KSauby/Documents/Projects/marsico-time-series')#
 load.project()
-str(Plant.Surveys.by.Year)
-str(Plant.Surveys.by.Plant)
-Plant.Surveys.by.Plant %>% filter(RangeofDates > 0) %>% head
-Plant.Surveys.by.Plant %>% filter(RangeofDates > 0) %>% dim()
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography')
-plants.spanning.multiple.plots <- Plant.Surveys.by.Plant %>% #
-	filter(RangeofDates >= 0)
-dim(plants.spanning.multiple.plots)
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography')
-Plant.Surveys.by.Plant %>% #
-	filter(!(is.na(RangeofDates))
-)
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography')
-plants.spanning.multiple.plots <- Plant.Surveys.by.Plant %>% #
-	filter(!(is.na(RangeofDates)))
-dim(plants.spanning.multiple.plots)
-head(plants.spanning.multiple.plots)
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography')
-av.days.to.complete.survey <- mean(plants.spanning.multiple.plots$RangeofDates)
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography')
-plants.spanning.multiple.plots <- Plant.Surveys.by.Plant %>% #
-	filter(!(is.na(RangeofDates)))
-head(plants.spanning.multiple.plots)
-str(plants.spanning.multiple.plots)
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography')
-plants.spanning.multiple.plots <- Plant.Surveys.by.Plant %>% #
-	filter(!(is.na(SizeofDateRange)))
-dim(plants.spanning.multiple.plots)
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography')
-mean(plants.spanning.multiple.plots$SizeofDateRange)
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography')
-min.days.to.complete.survey <- min(plants.spanning.multiple.plots$SizeofDateRange)#
-max.days.to.complete.survey <- max(plants.spanning.multiple.plots$SizeofDateRange)
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography')
-max.days.to.complete.survey
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography')
-min.days.to.complete.survey
-length(unique(plants.spanning.multiple.plots$PlantID))
-str(Plant.Info.Analysis)
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
-Plant.Info.stricta <- Plant.Info.Analysis %>% filter(Species=="Opuntia stricta")
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
-setwd("/Users/KSauby/Documents/Projects/GTMNERR_analysis")#
-cache("Plant.Info.stricta")
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography')
-length(unique(plants.spanning.multiple.plots$PlantID))/length(unique(Plant.Info.stricta$PlantID))
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography')
-length(unique(plants.spanning.multiple.plots$PlantID))/length(unique(Plant.Info.stricta$PlantID)) %>% round(2)
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography')
-length(unique(plants.spanning.multiple.plots$PlantID))/length(unique(Plant.Info.stricta$PlantID)) %$% round(2)
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography')
-round(#
-	length(unique(plants.spanning.multiple.plots$PlantID)) / #
-		length(unique(Plant.Info.stricta$PlantID)),#
-	2#
-)
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography')
-round(#
-	length(unique(plants.spanning.multiple.plots$PlantID)) / #
-		length(unique(Plant.Info.stricta$PlantID)),#
-	2#
-) * 100
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography')
-round(#
-	mean(plants.spanning.multiple.plots$SizeofDateRange),#
-	2#
-)
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography')
-plants.spanning.multiple.plots <- Plant.Surveys.by.Plant %>% #
-	filter(!(is.na(SizeofDateRange)))#
-av.days.to.complete.survey <- round(#
-	mean(plants.spanning.multiple.plots$SizeofDateRange),#
-	2#
-) #
-#
-min.days.to.complete.survey <- min(plants.spanning.multiple.plots$SizeofDateRange)#
-max.days.to.complete.survey <- max(plants.spanning.multiple.plots$SizeofDateRange)#
-n.plants.spanning.multiple.plots <- length(unique(plants.spanning.multiple.plots$PlantID))#
-perc.plants.spanning.multiple.plots <- round(#
-	length(unique(plants.spanning.multiple.plots$PlantID)) / #
-		length(unique(Plant.Info.stricta$PlantID)),#
-	2#
-) * 100
 setwd('/Users/KSauby/Documents/Projects/Dissertation')
 bookdown::render_book('index.Rmd')
 setwd('/Users/KSauby/Documents/Projects/Dissertation')
 bookdown::render_book('index.Rmd')
-setwd('/Users/KSauby/Documents/Projects/Dissertation')
-bookdown::render_book('index.Rmd')
-setwd('/Users/KSauby/Documents/Projects/Dissertation')
-bookdown::render_book('index.Rmd')
-setwd('/Users/KSauby/Documents/Projects')
-setwd("./GTMNERRproc")#
-#setwd("./dataproc")#
-#setwd("./modresproc")#
-#setwd("./unmarked")#
-#setwd("./RPresence")#
-#devtools::test()#
-devtools::document()#
-devtools::install()
-setwd('/Users/KSauby/Documents/Projects/Dissertation')
-bookdown::render_book('index.Rmd')
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/Appendix')
-parent.methods <- c(#
-	"largest",#
-	"random",#
-	"random (probability of selection weighted by size)"#
-)#
-data.list.2013 <- c(#
-	"mod.4.stages.2013.mat.data",#
-	"mod.5.stages.2013.mat.data",#
-	"mod.5.stages.b.2013.mat.data",#
-	"mod.6.stages.2013.mat.data",#
-	"mod.7.stages.2013.mat.data"#
-)#
-printPopulationMatrices(#
-	data.list=data.list.2013, #
-	parent.method, #
-	years="2013-2014", #
-	first.year="2013"#
-)
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-#' Successively print population matrices for inclusion in an appendix#
-#'#
-#' @param data.list#
-#' @param parent.method#
-#' @param  years#
-#' @param first.year#
-#'#
-#' @export#
-#
-printPopulationMatrices <- function(data.list, parent.method, years, first.year) {#
-	for (i in 1:length(data.list)) {#
-		dat <- eval(parse(text=data.list[i]))#
-		cat("###", dat$N.Stages.wo.break, "\n")#
-		for (j in 1:length(parent.methods)){#
-			cat('\n')  #
-			print(#
-				xtable(#
-					dat[[1]][[j]]$clone_transition_counts, #
-					digits=0,#
-					caption=paste(#
-						"Clone production counts (",#
-						years,#
-						" data) using the \`\`", #
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			print(#
-				xtable(#
-					dat[[1]][[j]]$transition.counts, #
-					digits=0,#
-					caption=paste(#
-						"Growth, stasis, retrogression, and survival counts (",#
-						years,#
-						" data) using the \`\`",#
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			print(#
-				xtable(#
-					dat[[1]][[j]]$n_per_stage %>% filter(stage!="Seed"), #
-					digits=0,#
-					caption=paste(#
-						"Number of individuals per stage in ",#
-						first.year,#
-						" using the \`\`",#
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			cat("\\clearpage ")#
-		}#
-	}#
-}#
-#' Successively print LTRE population matrices for inclusion in an appendix#
-#'#
-#' @param data.list#
-#' @param parent.method#
-#' @param  years#
-#' @param first.year#
-#' @param LTRE_variable#
-#'#
-#' @export#
-printLTREPopulationMatrices <- function(data.list, parent.method, years, first.year, LTRE_variable) {#
-	for (i in 1:length(data.list)) {#
-		dat <- eval(parse(text=data.list[i]))#
-		cat("####", dat$N.Stages.wo.break, "\n")#
-		for (j in 1:length(parent.methods)){#
-			cat('\n')  #
-			print(#
-				xtable(#
-					dat[[4]][[j]]$clone_transition_counts, #
-					digits=0, #
-					caption=paste(#
-						"Clone production counts (",#
-						years,#
-						" data for plants ",#
-						LTRE_variable,#
-						") using the \`\`", #
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			print(#
-				xtable(#
-					dat[[4]][[j]]$transition.counts, #
-					digits=0,#
-					caption=paste(#
-						"Growth, stasis, retrogression, and survival counts (",#
-						years,#
-						" data for plants ",#
-						LTRE_variable,#
-						") using the \`\`", #
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			print(#
-				xtable(#
-					dat[[4]][[j]]$n_per_stage %>% filter(stage!="Seed"), #
-					digits=0,#
-					caption=paste(#
-						"Number of individuals per stage in ",#
-						first.year,#
-						" for plants ",#
-						LTRE_variable,#
-						", using the \`\`", #
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			cat("\\clearpage")#
-		}#
-	}#
-}
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/Appendix')
-parent.methods <- c(#
-	"largest",#
-	"random",#
-	"random (probability of selection weighted by size)"#
-)#
-data.list.2013 <- c(#
-	"mod.4.stages.2013.mat.data",#
-	"mod.5.stages.2013.mat.data",#
-	"mod.5.stages.b.2013.mat.data",#
-	"mod.6.stages.2013.mat.data",#
-	"mod.7.stages.2013.mat.data"#
-)#
-printPopulationMatrices(#
-	data.list=data.list.2013, #
-	parent.method, #
-	years="2013-2014", #
-	first.year="2013"#
-)
-setwd('/Users/KSauby/Documents/Projects/Dissertation')
-bookdown::render_book('index.Rmd')
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-#' Successively print population matrices for inclusion in an appendix#
-#'#
-#' @param data.list#
-#' @param parent.method#
-#' @param  years#
-#' @param first.year#
-#'#
-#' @export#
-#
-printPopulationMatrices <- function(data.list, parent.method, years, first.year) {#
-	for (i in 1:length(data.list)) {#
-		dat <- eval(parse(text=data.list[i]))#
-		cat("###", dat$N.Stages.wo.break, "\n")#
-		for (j in 1:length(parent.methods)){#
-			cat('\n')  #
-			print(#
-				xtable(#
-					dat[[1]][[j]]$clone_transition_counts, #
-					digits=0,#
-					caption=paste(#
-						"Clone production counts (",#
-						years,#
-						" data) using the \`\`", #
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			print(#
-				xtable(#
-					dat[[1]][[j]]$transition.counts, #
-					digits=0,#
-					caption=paste(#
-						"Growth, stasis, retrogression, and survival counts (",#
-						years,#
-						" data) using the \`\`",#
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			print(#
-				xtable(#
-					dat[[1]][[j]]$n_per_stage %>% filter(stage!="Seed"), #
-					digits=0,#
-					caption=paste(#
-						"Number of individuals per stage in ",#
-						first.year,#
-						" using the \`\`",#
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			cat("\\clearpage \n")#
-		}#
-	}#
-}#
-#' Successively print LTRE population matrices for inclusion in an appendix#
-#'#
-#' @param data.list#
-#' @param parent.method#
-#' @param  years#
-#' @param first.year#
-#' @param LTRE_variable#
-#'#
-#' @export#
-printLTREPopulationMatrices <- function(data.list, parent.method, years, first.year, LTRE_variable) {#
-	for (i in 1:length(data.list)) {#
-		dat <- eval(parse(text=data.list[i]))#
-		cat("####", dat$N.Stages.wo.break, "\n")#
-		for (j in 1:length(parent.methods)){#
-			cat('\n')  #
-			print(#
-				xtable(#
-					dat[[4]][[j]]$clone_transition_counts, #
-					digits=0, #
-					caption=paste(#
-						"Clone production counts (",#
-						years,#
-						" data for plants ",#
-						LTRE_variable,#
-						") using the \`\`", #
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			print(#
-				xtable(#
-					dat[[4]][[j]]$transition.counts, #
-					digits=0,#
-					caption=paste(#
-						"Growth, stasis, retrogression, and survival counts (",#
-						years,#
-						" data for plants ",#
-						LTRE_variable,#
-						") using the \`\`", #
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			print(#
-				xtable(#
-					dat[[4]][[j]]$n_per_stage %>% filter(stage!="Seed"), #
-					digits=0,#
-					caption=paste(#
-						"Number of individuals per stage in ",#
-						first.year,#
-						" for plants ",#
-						LTRE_variable,#
-						", using the \`\`", #
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			cat("\\clearpage")#
-		}#
-	}#
-}
-setwd('/Users/KSauby/Documents/Projects/Dissertation')
-bookdown::render_book('index.Rmd')
-setwd('/Users/KSauby/Documents/Projects')
-setwd("./GTMNERRproc")#
-#setwd("./dataproc")#
-#setwd("./modresproc")#
-#setwd("./unmarked")#
-#setwd("./RPresence")#
-#devtools::test()#
-devtools::document()#
-devtools::install()
-setwd('/Users/KSauby/Documents/Projects/Dissertation')
-bookdown::render_book('index.Rmd')
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-#' Successively print population matrices for inclusion in an appendix#
-#'#
-#' @param data.list#
-#' @param parent.method#
-#' @param  years#
-#' @param first.year#
-#'#
-#' @export#
-#
-printPopulationMatrices <- function(data.list, parent.method, years, first.year) {#
-	for (i in 1:length(data.list)) {#
-		dat <- eval(parse(text=data.list[i]))#
-		cat("\\subsection{", dat$N.Stages.wo.break, "}")#
-		for (j in 1:length(parent.methods)){#
-			cat('\n')  #
-			print(#
-				xtable(#
-					dat[[1]][[j]]$clone_transition_counts, #
-					digits=0,#
-					caption=paste(#
-						"Clone production counts (",#
-						years,#
-						" data) using the \`\`", #
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			print(#
-				xtable(#
-					dat[[1]][[j]]$transition.counts, #
-					digits=0,#
-					caption=paste(#
-						"Growth, stasis, retrogression, and survival counts (",#
-						years,#
-						" data) using the \`\`",#
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			print(#
-				xtable(#
-					dat[[1]][[j]]$n_per_stage %>% filter(stage!="Seed"), #
-					digits=0,#
-					caption=paste(#
-						"Number of individuals per stage in ",#
-						first.year,#
-						" using the \`\`",#
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			cat("\\clearpage \n")#
-		}#
-	}#
-}#
-#' Successively print LTRE population matrices for inclusion in an appendix#
-#'#
-#' @param data.list#
-#' @param parent.method#
-#' @param  years#
-#' @param first.year#
-#' @param LTRE_variable#
-#'#
-#' @export#
-printLTREPopulationMatrices <- function(data.list, parent.method, years, first.year, LTRE_variable) {#
-	for (i in 1:length(data.list)) {#
-		dat <- eval(parse(text=data.list[i]))#
-		cat("####", dat$N.Stages.wo.break, "\n")#
-		for (j in 1:length(parent.methods)){#
-			cat('\n')  #
-			print(#
-				xtable(#
-					dat[[4]][[j]]$clone_transition_counts, #
-					digits=0, #
-					caption=paste(#
-						"Clone production counts (",#
-						years,#
-						" data for plants ",#
-						LTRE_variable,#
-						") using the \`\`", #
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			print(#
-				xtable(#
-					dat[[4]][[j]]$transition.counts, #
-					digits=0,#
-					caption=paste(#
-						"Growth, stasis, retrogression, and survival counts (",#
-						years,#
-						" data for plants ",#
-						LTRE_variable,#
-						") using the \`\`", #
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			print(#
-				xtable(#
-					dat[[4]][[j]]$n_per_stage %>% filter(stage!="Seed"), #
-					digits=0,#
-					caption=paste(#
-						"Number of individuals per stage in ",#
-						first.year,#
-						" for plants ",#
-						LTRE_variable,#
-						", using the \`\`", #
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			cat("\\clearpage")#
-		}#
-	}#
-}
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/Appendix')
-parent.methods <- c(#
-	"largest",#
-	"random",#
-	"random (probability of selection weighted by size)"#
-)#
-data.list.2013 <- c(#
-	"mod.4.stages.2013.mat.data",#
-	"mod.5.stages.2013.mat.data",#
-	"mod.5.stages.b.2013.mat.data",#
-	"mod.6.stages.2013.mat.data",#
-	"mod.7.stages.2013.mat.data"#
-)#
-printPopulationMatrices(#
-	data.list=data.list.2013, #
-	parent.method, #
-	years="2013-2014", #
-	first.year="2013"#
-)
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-cat("\\subsection{", dat$N.Stages.wo.break, "}", sep="")
-?cat
+library(tools)
+toTitleCase("random")
 setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
 #' Successively print population matrices for inclusion in an appendix#
 #'#
@@ -615,7 +37,20 @@ printPopulationMatrices <- function(data.list, parent.method, years, first.year)
 		dat <- eval(parse(text=data.list[i]))#
 		cat("\\subsection{", dat$N.Stages.wo.break, "}", sep="")#
 		for (j in 1:length(parent.methods)){#
+			cat("\\subsubsection{ ``", toTitleCase(parent.methods[j]), "'' parent assignment method}", sep="")#
 			cat('\n')  #
+			# PLANTS WITH FRUIT#
+			temp <- xtable(#
+				dat[[1]][[j]]$trans01 %>% filter(Repro > 0), #
+				digits=0,#
+				caption="Plants that produced fruit in fecundity-year z."#
+			)#
+			names(temp) <- c("PlantID", "Stage, z", "Reproduction, z", "Stage, z+1", "Reproduction, z+1")#
+			print(#
+				temp,#
+				include.rownames=F, caption.placement = "top"#
+			)#
+			# CLONE TRANSITION COUNTS	#
 			print(#
 				xtable(#
 					dat[[1]][[j]]$clone_transition_counts, #
@@ -631,6 +66,7 @@ printPopulationMatrices <- function(data.list, parent.method, years, first.year)
 				),#
 				include.rownames=F, caption.placement = "top"#
 			)#
+			# GROWTH, STATIS, RETROGRESSION, SURVIVAL#
 			print(#
 				xtable(#
 					dat[[1]][[j]]$transition.counts, #
@@ -646,162 +82,7 @@ printPopulationMatrices <- function(data.list, parent.method, years, first.year)
 				),#
 				include.rownames=F, caption.placement = "top"#
 			)#
-			print(#
-				xtable(#
-					dat[[1]][[j]]$n_per_stage %>% filter(stage!="Seed"), #
-					digits=0,#
-					caption=paste(#
-						"Number of individuals per stage in ",#
-						first.year,#
-						" using the \`\`",#
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			cat("\\clearpage \n")#
-		}#
-	}#
-}#
-#' Successively print LTRE population matrices for inclusion in an appendix#
-#'#
-#' @param data.list#
-#' @param parent.method#
-#' @param  years#
-#' @param first.year#
-#' @param LTRE_variable#
-#'#
-#' @export#
-printLTREPopulationMatrices <- function(data.list, parent.method, years, first.year, LTRE_variable) {#
-	for (i in 1:length(data.list)) {#
-		dat <- eval(parse(text=data.list[i]))#
-		cat("####", dat$N.Stages.wo.break, "\n")#
-		for (j in 1:length(parent.methods)){#
-			cat('\n')  #
-			print(#
-				xtable(#
-					dat[[4]][[j]]$clone_transition_counts, #
-					digits=0, #
-					caption=paste(#
-						"Clone production counts (",#
-						years,#
-						" data for plants ",#
-						LTRE_variable,#
-						") using the \`\`", #
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			print(#
-				xtable(#
-					dat[[4]][[j]]$transition.counts, #
-					digits=0,#
-					caption=paste(#
-						"Growth, stasis, retrogression, and survival counts (",#
-						years,#
-						" data for plants ",#
-						LTRE_variable,#
-						") using the \`\`", #
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			print(#
-				xtable(#
-					dat[[4]][[j]]$n_per_stage %>% filter(stage!="Seed"), #
-					digits=0,#
-					caption=paste(#
-						"Number of individuals per stage in ",#
-						first.year,#
-						" for plants ",#
-						LTRE_variable,#
-						", using the \`\`", #
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			cat("\\clearpage")#
-		}#
-	}#
-}
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/Appendix')
-parent.methods <- c(#
-	"largest",#
-	"random",#
-	"random (probability of selection weighted by size)"#
-)#
-data.list.2013 <- c(#
-	"mod.4.stages.2013.mat.data",#
-	"mod.5.stages.2013.mat.data",#
-	"mod.5.stages.b.2013.mat.data",#
-	"mod.6.stages.2013.mat.data",#
-	"mod.7.stages.2013.mat.data"#
-)#
-printPopulationMatrices(#
-	data.list=data.list.2013, #
-	parent.method, #
-	years="2013-2014", #
-	first.year="2013"#
-)
-setwd('/Users/KSauby/Documents/Projects/Dissertation')
-bookdown::render_book('index.Rmd')
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-#' Successively print population matrices for inclusion in an appendix#
-#'#
-#' @param data.list#
-#' @param parent.method#
-#' @param  years#
-#' @param first.year#
-#'#
-#' @export#
-#
-printPopulationMatrices <- function(data.list, parent.method, years, first.year) {#
-	for (i in 1:length(data.list)) {#
-		dat <- eval(parse(text=data.list[i]))#
-		cat("\\subsection{", dat$N.Stages.wo.break, "}", sep="")#
-		for (j in 1:length(parent.methods)){#
-			cat('\n')  #
-			print(#
-				xtable(#
-					dat[[1]][[j]]$clone_transition_counts, #
-					digits=0,#
-					caption=paste(#
-						"Clone production counts (",#
-						years,#
-						" data) using the \`\`", #
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			print(#
-				xtable(#
-					dat[[1]][[j]]$transition.counts, #
-					digits=0,#
-					caption=paste(#
-						"Growth, stasis, retrogression, and survival counts (",#
-						years,#
-						" data) using the \`\`",#
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
+			# NUMBER OF INDIVIDUALS PER STAGE#
 			print(#
 				xtable(#
 					dat[[1]][[j]]$n_per_stage %>% filter(stage!="Seed"), #
@@ -833,1136 +114,7 @@ printPopulationMatrices <- function(data.list, parent.method, years, first.year)
 printLTREPopulationMatrices <- function(data.list, parent.method, years, first.year, LTRE_variable) {#
 	for (i in 1:length(data.list)) {#
 		dat <- eval(parse(text=data.list[i]))#
-		cat("\\subsection{", dat$N.Stages.wo.break, "}", sep="")#
-		for (j in 1:length(parent.methods)){#
-			cat('\n')  #
-			print(#
-				xtable(#
-					dat[[4]][[j]]$clone_transition_counts, #
-					digits=0, #
-					caption=paste(#
-						"Clone production counts (",#
-						years,#
-						" data for plants ",#
-						LTRE_variable,#
-						") using the \`\`", #
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			print(#
-				xtable(#
-					dat[[4]][[j]]$transition.counts, #
-					digits=0,#
-					caption=paste(#
-						"Growth, stasis, retrogression, and survival counts (",#
-						years,#
-						" data for plants ",#
-						LTRE_variable,#
-						") using the \`\`", #
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			print(#
-				xtable(#
-					dat[[4]][[j]]$n_per_stage %>% filter(stage!="Seed"), #
-					digits=0,#
-					caption=paste(#
-						"Number of individuals per stage in ",#
-						first.year,#
-						" for plants ",#
-						LTRE_variable,#
-						", using the \`\`", #
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			cat("\\clearpage")#
-		}#
-	}#
-}
-setwd('/Users/KSauby/Documents/Projects')
-setwd("./GTMNERRproc")#
-#setwd("./dataproc")#
-#setwd("./modresproc")#
-#setwd("./unmarked")#
-#setwd("./RPresence")#
-#devtools::test()#
-devtools::document()#
-devtools::install()
-setwd('/Users/KSauby/Documents/Projects/Dissertation')
-bookdown::render_book('index.Rmd')
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-#' Successively print population matrices for inclusion in an appendix#
-#'#
-#' @param data.list#
-#' @param parent.method#
-#' @param  years#
-#' @param first.year#
-#'#
-#' @export#
-#
-printPopulationMatrices <- function(data.list, parent.method, years, first.year) {#
-	for (i in 1:length(data.list)) {#
-		dat <- eval(parse(text=data.list[i]))#
-		cat("\\subsection{", dat$N.Stages.wo.break, "}", sep="")#
-		for (j in 1:length(parent.methods)){#
-			cat("\\subsubsection{", parent.methods[j], "parent assignment method}", sep="")#
-			cat('\n')  #
-			print(#
-				xtable(#
-					dat[[1]][[j]]$clone_transition_counts, #
-					digits=0,#
-					caption=paste(#
-						"Clone production counts (",#
-						years,#
-						" data) using the \`\`", #
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			print(#
-				xtable(#
-					dat[[1]][[j]]$transition.counts, #
-					digits=0,#
-					caption=paste(#
-						"Growth, stasis, retrogression, and survival counts (",#
-						years,#
-						" data) using the \`\`",#
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			print(#
-				xtable(#
-					dat[[1]][[j]]$n_per_stage %>% filter(stage!="Seed"), #
-					digits=0,#
-					caption=paste(#
-						"Number of individuals per stage in ",#
-						first.year,#
-						" using the \`\`",#
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			cat("\\clearpage")#
-		}#
-	}#
-}#
-#' Successively print LTRE population matrices for inclusion in an appendix#
-#'#
-#' @param data.list#
-#' @param parent.method#
-#' @param  years#
-#' @param first.year#
-#' @param LTRE_variable#
-#'#
-#' @export#
-printLTREPopulationMatrices <- function(data.list, parent.method, years, first.year, LTRE_variable) {#
-	for (i in 1:length(data.list)) {#
-		dat <- eval(parse(text=data.list[i]))#
-		cat("\\subsection{", dat$N.Stages.wo.break, "}", sep="")#
-		for (j in 1:length(parent.methods)){#
-			cat('\n')  #
-			print(#
-				xtable(#
-					dat[[4]][[j]]$clone_transition_counts, #
-					digits=0, #
-					caption=paste(#
-						"Clone production counts (",#
-						years,#
-						" data for plants ",#
-						LTRE_variable,#
-						") using the \`\`", #
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			print(#
-				xtable(#
-					dat[[4]][[j]]$transition.counts, #
-					digits=0,#
-					caption=paste(#
-						"Growth, stasis, retrogression, and survival counts (",#
-						years,#
-						" data for plants ",#
-						LTRE_variable,#
-						") using the \`\`", #
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			print(#
-				xtable(#
-					dat[[4]][[j]]$n_per_stage %>% filter(stage!="Seed"), #
-					digits=0,#
-					caption=paste(#
-						"Number of individuals per stage in ",#
-						first.year,#
-						" for plants ",#
-						LTRE_variable,#
-						", using the \`\`", #
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			cat("\\clearpage")#
-		}#
-	}#
-}
-setwd('/Users/KSauby/Documents/Projects/Dissertation')
-bookdown::render_book('index.Rmd')
-setwd('/Users/KSauby/Documents/Projects/Dissertation')
-bookdown::render_book('index.Rmd')
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-#' Successively print population matrices for inclusion in an appendix#
-#'#
-#' @param data.list#
-#' @param parent.method#
-#' @param  years#
-#' @param first.year#
-#'#
-#' @export#
-#
-printPopulationMatrices <- function(data.list, parent.method, years, first.year) {#
-	for (i in 1:length(data.list)) {#
-		dat <- eval(parse(text=data.list[i]))#
-		cat("\\subsection{", dat$N.Stages.wo.break, "}", sep="")#
-		for (j in 1:length(parent.methods)){#
-			cat("\\subsubsection{ ``", parent.methods[j], "'' parent assignment method}", sep="")#
-			cat('\n')  #
-			print(#
-				xtable(#
-					dat[[1]][[j]]$clone_transition_counts, #
-					digits=0,#
-					caption=paste(#
-						"Clone production counts (",#
-						years,#
-						" data) using the \`\`", #
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			print(#
-				xtable(#
-					dat[[1]][[j]]$transition.counts, #
-					digits=0,#
-					caption=paste(#
-						"Growth, stasis, retrogression, and survival counts (",#
-						years,#
-						" data) using the \`\`",#
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			print(#
-				xtable(#
-					dat[[1]][[j]]$n_per_stage %>% filter(stage!="Seed"), #
-					digits=0,#
-					caption=paste(#
-						"Number of individuals per stage in ",#
-						first.year,#
-						" using the \`\`",#
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			cat("\\clearpage")#
-		}#
-	}#
-}#
-#' Successively print LTRE population matrices for inclusion in an appendix#
-#'#
-#' @param data.list#
-#' @param parent.method#
-#' @param  years#
-#' @param first.year#
-#' @param LTRE_variable#
-#'#
-#' @export#
-printLTREPopulationMatrices <- function(data.list, parent.method, years, first.year, LTRE_variable) {#
-	for (i in 1:length(data.list)) {#
-		dat <- eval(parse(text=data.list[i]))#
-		cat("\\subsection{", dat$N.Stages.wo.break, "}", sep="")#
-		for (j in 1:length(parent.methods)){#
-			cat('\n')  #
-			print(#
-				xtable(#
-					dat[[4]][[j]]$clone_transition_counts, #
-					digits=0, #
-					caption=paste(#
-						"Clone production counts (",#
-						years,#
-						" data for plants ",#
-						LTRE_variable,#
-						") using the \`\`", #
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			print(#
-				xtable(#
-					dat[[4]][[j]]$transition.counts, #
-					digits=0,#
-					caption=paste(#
-						"Growth, stasis, retrogression, and survival counts (",#
-						years,#
-						" data for plants ",#
-						LTRE_variable,#
-						") using the \`\`", #
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			print(#
-				xtable(#
-					dat[[4]][[j]]$n_per_stage %>% filter(stage!="Seed"), #
-					digits=0,#
-					caption=paste(#
-						"Number of individuals per stage in ",#
-						first.year,#
-						" for plants ",#
-						LTRE_variable,#
-						", using the \`\`", #
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			cat("\\clearpage")#
-		}#
-	}#
-}
-setwd('/Users/KSauby/Documents/Projects/Dissertation')
-bookdown::render_book('index.Rmd')
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-#' Successively print population matrices for inclusion in an appendix#
-#'#
-#' @param data.list#
-#' @param parent.method#
-#' @param  years#
-#' @param first.year#
-#'#
-#' @export#
-#
-printPopulationMatrices <- function(data.list, parent.method, years, first.year) {#
-	for (i in 1:length(data.list)) {#
-		dat <- eval(parse(text=data.list[i]))#
-		cat("\\subsubsection{", dat$N.Stages.wo.break, "}", sep="")#
-		for (j in 1:length(parent.methods)){#
-			cat("\\subsubsubsection{ ``", parent.methods[j], "'' parent assignment method}", sep="")#
-			cat('\n')  #
-			print(#
-				xtable(#
-					dat[[1]][[j]]$clone_transition_counts, #
-					digits=0,#
-					caption=paste(#
-						"Clone production counts (",#
-						years,#
-						" data) using the \`\`", #
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			print(#
-				xtable(#
-					dat[[1]][[j]]$transition.counts, #
-					digits=0,#
-					caption=paste(#
-						"Growth, stasis, retrogression, and survival counts (",#
-						years,#
-						" data) using the \`\`",#
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			print(#
-				xtable(#
-					dat[[1]][[j]]$n_per_stage %>% filter(stage!="Seed"), #
-					digits=0,#
-					caption=paste(#
-						"Number of individuals per stage in ",#
-						first.year,#
-						" using the \`\`",#
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			cat("\\clearpage")#
-		}#
-	}#
-}#
-#' Successively print LTRE population matrices for inclusion in an appendix#
-#'#
-#' @param data.list#
-#' @param parent.method#
-#' @param  years#
-#' @param first.year#
-#' @param LTRE_variable#
-#'#
-#' @export#
-printLTREPopulationMatrices <- function(data.list, parent.method, years, first.year, LTRE_variable) {#
-	for (i in 1:length(data.list)) {#
-		dat <- eval(parse(text=data.list[i]))#
-		cat("\\subsection{", dat$N.Stages.wo.break, "}", sep="")#
-		for (j in 1:length(parent.methods)){#
-			cat("\\subsubsection{ ``", parent.methods[j], "'' parent assignment method}", sep="")#
-			cat('\n')  #
-			print(#
-				xtable(#
-					dat[[4]][[j]]$clone_transition_counts, #
-					digits=0, #
-					caption=paste(#
-						"Clone production counts (",#
-						years,#
-						" data for plants ",#
-						LTRE_variable,#
-						") using the \`\`", #
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			print(#
-				xtable(#
-					dat[[4]][[j]]$transition.counts, #
-					digits=0,#
-					caption=paste(#
-						"Growth, stasis, retrogression, and survival counts (",#
-						years,#
-						" data for plants ",#
-						LTRE_variable,#
-						") using the \`\`", #
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			print(#
-				xtable(#
-					dat[[4]][[j]]$n_per_stage %>% filter(stage!="Seed"), #
-					digits=0,#
-					caption=paste(#
-						"Number of individuals per stage in ",#
-						first.year,#
-						" for plants ",#
-						LTRE_variable,#
-						", using the \`\`", #
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			cat("\\clearpage")#
-		}#
-	}#
-}
-setwd('/Users/KSauby/Documents/Projects')
-setwd("./GTMNERRproc")#
-#setwd("./dataproc")#
-#setwd("./modresproc")#
-#setwd("./unmarked")#
-#setwd("./RPresence")#
-#devtools::test()#
-devtools::document()#
-devtools::install()
-setwd('/Users/KSauby/Documents/Projects/Dissertation')
-bookdown::render_book('index.Rmd')
-setwd('/Users/KSauby/Documents/Projects/Dissertation')
-bookdown::render_book('index.Rmd')
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-#' Successively print population matrices for inclusion in an appendix#
-#'#
-#' @param data.list#
-#' @param parent.method#
-#' @param  years#
-#' @param first.year#
-#'#
-#' @export#
-#
-printPopulationMatrices <- function(data.list, parent.method, years, first.year) {#
-	for (i in 1:length(data.list)) {#
-		dat <- eval(parse(text=data.list[i]))#
-		cat("\\subsubsection{", dat$N.Stages.wo.break, "}", sep="")#
-		for (j in 1:length(parent.methods)){#
-			cat('\n')  #
-			print(#
-				xtable(#
-					dat[[1]][[j]]$clone_transition_counts, #
-					digits=0,#
-					caption=paste(#
-						"Clone production counts (",#
-						years,#
-						" data) using the \`\`", #
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			print(#
-				xtable(#
-					dat[[1]][[j]]$transition.counts, #
-					digits=0,#
-					caption=paste(#
-						"Growth, stasis, retrogression, and survival counts (",#
-						years,#
-						" data) using the \`\`",#
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			print(#
-				xtable(#
-					dat[[1]][[j]]$n_per_stage %>% filter(stage!="Seed"), #
-					digits=0,#
-					caption=paste(#
-						"Number of individuals per stage in ",#
-						first.year,#
-						" using the \`\`",#
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			cat("\\clearpage")#
-		}#
-	}#
-}#
-#' Successively print LTRE population matrices for inclusion in an appendix#
-#'#
-#' @param data.list#
-#' @param parent.method#
-#' @param  years#
-#' @param first.year#
-#' @param LTRE_variable#
-#'#
-#' @export#
-printLTREPopulationMatrices <- function(data.list, parent.method, years, first.year, LTRE_variable) {#
-	for (i in 1:length(data.list)) {#
-		dat <- eval(parse(text=data.list[i]))#
-		cat("\\subsection{", dat$N.Stages.wo.break, "}", sep="")#
-		for (j in 1:length(parent.methods)){#
-			cat("\\subsubsection{ ``", parent.methods[j], "'' parent assignment method}", sep="")#
-			cat('\n')  #
-			print(#
-				xtable(#
-					dat[[4]][[j]]$clone_transition_counts, #
-					digits=0, #
-					caption=paste(#
-						"Clone production counts (",#
-						years,#
-						" data for plants ",#
-						LTRE_variable,#
-						") using the \`\`", #
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			print(#
-				xtable(#
-					dat[[4]][[j]]$transition.counts, #
-					digits=0,#
-					caption=paste(#
-						"Growth, stasis, retrogression, and survival counts (",#
-						years,#
-						" data for plants ",#
-						LTRE_variable,#
-						") using the \`\`", #
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			print(#
-				xtable(#
-					dat[[4]][[j]]$n_per_stage %>% filter(stage!="Seed"), #
-					digits=0,#
-					caption=paste(#
-						"Number of individuals per stage in ",#
-						first.year,#
-						" for plants ",#
-						LTRE_variable,#
-						", using the \`\`", #
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			cat("\\clearpage")#
-		}#
-	}#
-}
-setwd('/Users/KSauby/Documents/Projects/Dissertation')
-bookdown::render_book('index.Rmd')
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-#' Successively print population matrices for inclusion in an appendix#
-#'#
-#' @param data.list#
-#' @param parent.method#
-#' @param  years#
-#' @param first.year#
-#'#
-#' @export#
-#
-printPopulationMatrices <- function(data.list, parent.method, years, first.year) {#
-	for (i in 1:length(data.list)) {#
-		dat <- eval(parse(text=data.list[i]))#
-		cat("\\subsection{", dat$N.Stages.wo.break, "}", sep="")#
-		for (j in 1:length(parent.methods)){#
-			cat("\\subsubsection{ ``", parent.methods[j], "'' parent assignment method}", sep="")#
-			cat('\n')  #
-			print(#
-				xtable(#
-					dat[[1]][[j]]$clone_transition_counts, #
-					digits=0,#
-					caption=paste(#
-						"Clone production counts (",#
-						years,#
-						" data) using the \`\`", #
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			print(#
-				xtable(#
-					dat[[1]][[j]]$transition.counts, #
-					digits=0,#
-					caption=paste(#
-						"Growth, stasis, retrogression, and survival counts (",#
-						years,#
-						" data) using the \`\`",#
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			print(#
-				xtable(#
-					dat[[1]][[j]]$n_per_stage %>% filter(stage!="Seed"), #
-					digits=0,#
-					caption=paste(#
-						"Number of individuals per stage in ",#
-						first.year,#
-						" using the \`\`",#
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			cat("\\clearpage")#
-		}#
-	}#
-}#
-#' Successively print LTRE population matrices for inclusion in an appendix#
-#'#
-#' @param data.list#
-#' @param parent.method#
-#' @param  years#
-#' @param first.year#
-#' @param LTRE_variable#
-#'#
-#' @export#
-printLTREPopulationMatrices <- function(data.list, parent.method, years, first.year, LTRE_variable) {#
-	for (i in 1:length(data.list)) {#
-		dat <- eval(parse(text=data.list[i]))#
-		cat("\\subsubsection{", dat$N.Stages.wo.break, "}", sep="")#
-		for (j in 1:length(parent.methods)){#
-			cat('\n')  #
-			print(#
-				xtable(#
-					dat[[4]][[j]]$clone_transition_counts, #
-					digits=0, #
-					caption=paste(#
-						"Clone production counts (",#
-						years,#
-						" data for plants ",#
-						LTRE_variable,#
-						") using the \`\`", #
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			print(#
-				xtable(#
-					dat[[4]][[j]]$transition.counts, #
-					digits=0,#
-					caption=paste(#
-						"Growth, stasis, retrogression, and survival counts (",#
-						years,#
-						" data for plants ",#
-						LTRE_variable,#
-						") using the \`\`", #
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			print(#
-				xtable(#
-					dat[[4]][[j]]$n_per_stage %>% filter(stage!="Seed"), #
-					digits=0,#
-					caption=paste(#
-						"Number of individuals per stage in ",#
-						first.year,#
-						" for plants ",#
-						LTRE_variable,#
-						", using the \`\`", #
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			cat("\\clearpage")#
-		}#
-	}#
-}
-setwd('/Users/KSauby/Documents/Projects/Dissertation')
-bookdown::render_book('index.Rmd')
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-#' Successively print population matrices for inclusion in an appendix#
-#'#
-#' @param data.list#
-#' @param parent.method#
-#' @param  years#
-#' @param first.year#
-#'#
-#' @export#
-#
-printPopulationMatrices <- function(data.list, parent.method, years, first.year) {#
-	for (i in 1:length(data.list)) {#
-		dat <- eval(parse(text=data.list[i]))#
-		cat("\\subsection{", dat$N.Stages.wo.break, "}", sep="")#
-		for (j in 1:length(parent.methods)){#
-			cat("\\subsubsection{ ``", parent.methods[j], "'' parent assignment method}", sep="")#
-			cat('\n')  #
-			print(#
-				xtable(#
-					dat[[1]][[j]]$clone_transition_counts, #
-					digits=0,#
-					caption=paste(#
-						"Clone production counts (",#
-						years,#
-						" data) using the \`\`", #
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			print(#
-				xtable(#
-					dat[[1]][[j]]$transition.counts, #
-					digits=0,#
-					caption=paste(#
-						"Growth, stasis, retrogression, and survival counts (",#
-						years,#
-						" data) using the \`\`",#
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			print(#
-				xtable(#
-					dat[[1]][[j]]$n_per_stage %>% filter(stage!="Seed"), #
-					digits=0,#
-					caption=paste(#
-						"Number of individuals per stage in ",#
-						first.year,#
-						" using the \`\`",#
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			cat("\\clearpage")#
-		}#
-	}#
-}#
-#' Successively print LTRE population matrices for inclusion in an appendix#
-#'#
-#' @param data.list#
-#' @param parent.method#
-#' @param  years#
-#' @param first.year#
-#' @param LTRE_variable#
-#'#
-#' @export#
-printLTREPopulationMatrices <- function(data.list, parent.method, years, first.year, LTRE_variable) {#
-	for (i in 1:length(data.list)) {#
-		dat <- eval(parse(text=data.list[i]))#
-		cat("\\subsubsection{", LTRE_variable, "}", sep="")#
-		for (j in 1:length(parent.methods)){#
-			cat('\n')  #
-			print(#
-				xtable(#
-					dat[[4]][[j]]$clone_transition_counts, #
-					digits=0, #
-					caption=paste(#
-						"Clone production counts (",#
-						years,#
-						" data for plants ",#
-						LTRE_variable,#
-						") using the \`\`", #
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			print(#
-				xtable(#
-					dat[[4]][[j]]$transition.counts, #
-					digits=0,#
-					caption=paste(#
-						"Growth, stasis, retrogression, and survival counts (",#
-						years,#
-						" data for plants ",#
-						LTRE_variable,#
-						") using the \`\`", #
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			print(#
-				xtable(#
-					dat[[4]][[j]]$n_per_stage %>% filter(stage!="Seed"), #
-					digits=0,#
-					caption=paste(#
-						"Number of individuals per stage in ",#
-						first.year,#
-						" for plants ",#
-						LTRE_variable,#
-						", using the \`\`", #
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			cat("\\clearpage")#
-		}#
-	}#
-}
-setwd('/Users/KSauby/Documents/Projects/Dissertation')
-bookdown::render_book('index.Rmd')
-setwd('/Users/KSauby/Documents/Projects/Dissertation')
-bookdown::render_book('index.Rmd')
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-#' Successively print population matrices for inclusion in an appendix#
-#'#
-#' @param data.list#
-#' @param parent.method#
-#' @param  years#
-#' @param first.year#
-#'#
-#' @export#
-#
-printPopulationMatrices <- function(data.list, parent.method, years, first.year) {#
-	for (i in 1:length(data.list)) {#
-		dat <- eval(parse(text=data.list[i]))#
-		cat("\\subsection{", dat$N.Stages.wo.break, "}", sep="")#
-		for (j in 1:length(parent.methods)){#
-			cat("\\subsubsection{ ``", parent.methods[j], "'' parent assignment method}", sep="")#
-			cat('\n')  #
-			print(#
-				xtable(#
-					dat[[1]][[j]]$clone_transition_counts, #
-					digits=0,#
-					caption=paste(#
-						"Clone production counts (",#
-						years,#
-						" data) using the \`\`", #
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			print(#
-				xtable(#
-					dat[[1]][[j]]$transition.counts, #
-					digits=0,#
-					caption=paste(#
-						"Growth, stasis, retrogression, and survival counts (",#
-						years,#
-						" data) using the \`\`",#
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			print(#
-				xtable(#
-					dat[[1]][[j]]$n_per_stage %>% filter(stage!="Seed"), #
-					digits=0,#
-					caption=paste(#
-						"Number of individuals per stage in ",#
-						first.year,#
-						" using the \`\`",#
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			cat("\\clearpage")#
-		}#
-	}#
-}#
-#' Successively print LTRE population matrices for inclusion in an appendix#
-#'#
-#' @param data.list#
-#' @param parent.method#
-#' @param  years#
-#' @param first.year#
-#' @param LTRE_variable#
-#'#
-#' @export#
-printLTREPopulationMatrices <- function(data.list, parent.method, years, first.year, LTRE_variable) {#
-	for (i in 1:length(data.list)) {#
-		dat <- eval(parse(text=data.list[i]))#
-		cat("\\subsubsection{", LTRE_variable, "}", sep="")#
-		for (j in 1:length(parent.methods)){#
-			cat('\n')  #
-			print(#
-				xtable(#
-					dat[[4]][[j]]$clone_transition_counts, #
-					digits=0, #
-					caption=paste(#
-						"Clone production counts using the \`\`", #
-						parent.methods[j],#
-						"\'\' parent assignment method for the",#
-						years,#
-						" data for plants ",#
-						LTRE_variable,#
-						".",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			print(#
-				xtable(#
-					dat[[4]][[j]]$transition.counts, #
-					digits=0,#
-					caption=paste(#
-						"Growth, stasis, retrogression, and survival counts (",#
-						years,#
-						" data for plants ",#
-						LTRE_variable,#
-						") using the \`\`", #
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			print(#
-				xtable(#
-					dat[[4]][[j]]$n_per_stage %>% filter(stage!="Seed"), #
-					digits=0,#
-					caption=paste(#
-						"Number of individuals per stage in ",#
-						first.year,#
-						" for plants ",#
-						LTRE_variable,#
-						", using the \`\`", #
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			cat("\\clearpage")#
-		}#
-	}#
-}
-setwd('/Users/KSauby/Documents/Projects/Dissertation')
-bookdown::render_book('index.Rmd')
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-#' Successively print population matrices for inclusion in an appendix#
-#'#
-#' @param data.list#
-#' @param parent.method#
-#' @param  years#
-#' @param first.year#
-#'#
-#' @export#
-#
-printPopulationMatrices <- function(data.list, parent.method, years, first.year) {#
-	for (i in 1:length(data.list)) {#
-		dat <- eval(parse(text=data.list[i]))#
-		cat("\\subsection{", dat$N.Stages.wo.break, "}", sep="")#
-		for (j in 1:length(parent.methods)){#
-			cat("\\subsubsection{ ``", parent.methods[j], "'' parent assignment method}", sep="")#
-			cat('\n')  #
-			print(#
-				xtable(#
-					dat[[1]][[j]]$clone_transition_counts, #
-					digits=0,#
-					caption=paste(#
-						"Clone production counts (",#
-						years,#
-						" data) using the \`\`", #
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			print(#
-				xtable(#
-					dat[[1]][[j]]$transition.counts, #
-					digits=0,#
-					caption=paste(#
-						"Growth, stasis, retrogression, and survival counts (",#
-						years,#
-						" data) using the \`\`",#
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			print(#
-				xtable(#
-					dat[[1]][[j]]$n_per_stage %>% filter(stage!="Seed"), #
-					digits=0,#
-					caption=paste(#
-						"Number of individuals per stage in ",#
-						first.year,#
-						" using the \`\`",#
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			cat("\\clearpage")#
-		}#
-	}#
-}#
-#' Successively print LTRE population matrices for inclusion in an appendix#
-#'#
-#' @param data.list#
-#' @param parent.method#
-#' @param  years#
-#' @param first.year#
-#' @param LTRE_variable#
-#'#
-#' @export#
-printLTREPopulationMatrices <- function(data.list, parent.method, years, first.year, LTRE_variable) {#
-	for (i in 1:length(data.list)) {#
-		dat <- eval(parse(text=data.list[i]))#
-		cat("\\subsubsection{", LTRE_variable, "}", sep="")#
+		cat("\\subsubsection{", toTitleCase(LTRE_variable), "}", sep="")#
 		for (j in 1:length(parent.methods)){#
 			cat('\n')  #
 			print(#
@@ -2022,437 +174,2551 @@ printLTREPopulationMatrices <- function(data.list, parent.method, years, first.y
 }
 setwd('/Users/KSauby/Documents/Projects/Dissertation')
 bookdown::render_book('index.Rmd')
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files')
-source("processing/values_same_across_all_models.R")#
-source("processing/prep_ldf_cldf.R")#
-# ---------------------------------------------------------------------------- ##
-TransitionYear 	= 2013#
-source("processing/mutate_ldf_cldf.R")
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/Appendix')
+mod.4.stages.2013.mat.data
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files/2013_2014/LTRE')
+mod.4.w.moth.2013.largest.parent.res
+mod.4.w.moth.2013.largest.parent.res %>% names
+str(MPMresults.2014.E.S)
+MPMresults <- mod.4.w.moth.2013.largest.parent.res
 setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-SizeClass <- SizeClass#
-	A <- list()#
-	for (i in 1:length(ldf)) {#
-		A[[i]] <- prepDataTransitionMatrix(#
-			ldf[[i]], #
-			cldf[[i]], #
-			SizeClass, #
-			TransitionYear#
-		)#
-	}
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files/2013_2014')
-SizeClass <- SizeClass.4
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-SizeClass <- SizeClass#
-	A <- list()#
-	for (i in 1:length(ldf)) {#
-		A[[i]] <- prepDataTransitionMatrix(#
-			ldf[[i]], #
-			cldf[[i]], #
-			SizeClass, #
-			TransitionYear#
-		)#
-	}
-A
-Dat <- ldf[[i]]
-clonal_repro_dataset <- cldf[[i]]
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-Dat_census <- Dat %>% #
-	rowwise() %>%#
-	mutate(#
-		stage=replace(#
-			stage, #
-			which(stage=="Adult"),#
-			cut(SizewClones_t, SizeClass, include.lowest=T, labels=FALSE)#
-		)#
-	)
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-Dat_census %<>%#
-		dplyr::select(#
-			FecundityYear, #
-			PlantID, #
-			stage, #
-			Fruit_Flowers_t#
-		)#
-	colnames(Dat_census)[which(names(Dat_census) == "FecundityYear")] <- "Year"#
-	# merge year with year - 1#
-	trans <- subset(#
-		merge(#
-			Dat_census, #
-			Dat_census, #
-			by = "PlantID", #
-			sort = FALSE#
-		), #
-		Year.x == Year.y - 1#
+reshape.variables <- c(#
+		"SeedBankSize",#
+		"SeedsPerFruit",#
+		"SeedSurvival",#
+		"Parent Assignment",	#
+		"N.Stages",#
+		LTRE_variable#
 	)#
-	# rename rows and columns#
-	rownames(trans) <- 1:nrow(trans)#
-	colnames(trans)[which(names(trans) == "Year.x")] 			<- "Year"#
-	colnames(trans)[which(names(trans) == "stage.x")] 			<- "stage"#
-	colnames(trans)[which(names(trans) == "Fruit_Flowers_t.x")] <- "Repro"#
-	colnames(trans)[which(names(trans) == "Year.y")] 			<- "Year2"#
-	colnames(trans)[which(names(trans) == "stage.y")] 			<- "fate"#
-	colnames(trans)[which(names(trans) == "Fruit_Flowers_t.y")] <- "Repro2"
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-trans01 <- trans %>%#
-		filter(Year == TransitionYear) %>%#
-		dplyr::select(PlantID, stage, Repro, fate, Repro2)#
-	seedlings <- nrow(subset(#
-		Dat_census, #
-		Year == TransitionYear & stage =="Seedling"#
-	))
-head(trans01)
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-trans01 %<>% mutate(Seedling = Repro/sum(Repro, na.rm=T) * seedlings)
-head(trans01)
-tail(trans01)
-trans01 %>% filter(Seedling > 0) %>% head
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-seedlings
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-Seedlings <- nrow(subset(trans, Year == TransitionYear & stage=="Seedling"))
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-Seedlings
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-c(unique(c(trans01$stage, trans01$fate))) %>% #
-		as.numeric %>%#
-		na.omit %>% #
-		as.vector %>%#
-		sort
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-stages <- c(unique(c(trans01$stage, trans01$fate))) %>% #
-		as.numeric %>%#
-		na.omit %>% #
-		as.vector %>%#
-		sort#
-	stages <- c("Seed", "Seedling", stages, "dead")#
-	trans01$stage %<>% factor(., levels=stages[-length(stages)], ordered=T)#
-	trans01$fate %<>% factor(., levels=stages, ordered=T)
-head(trans01)
-tail(trans01)
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-stages %<>% .[-length(.)]#
-	proj_matrix <- projection.matrix(#
-		trans01, #
-		sort = stages#
+	s.variables <- c(#
+		reshape.variables,#
+		"repro.value"#
 	)
 setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-proj_matrix
+LTRE_variable = NULL
 setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-Dat_census <- Dat %>% #
-	rowwise() %>%#
-	mutate(#
-		stage=replace(#
-			stage, #
-			which(stage=="Adult"),#
-			cut(SizewClones_t, SizeClass, include.lowest=T, labels=FALSE)#
-		)#
+reshape.variables <- c(#
+		"SeedBankSize",#
+		"SeedsPerFruit",#
+		"SeedSurvival",#
+		"Parent Assignment",	#
+		"N.Stages",#
+		LTRE_variable#
 	)#
-	Dat_census %<>%#
-		dplyr::select(#
-			FecundityYear, #
-			PlantID, #
-			stage, #
-			Fruit_Flowers_t#
-		)#
-	colnames(Dat_census)[which(names(Dat_census) == "FecundityYear")] <- "Year"#
-	# merge year with year - 1#
-	trans <- subset(#
-		merge(#
-			Dat_census, #
-			Dat_census, #
-			by = "PlantID", #
-			sort = FALSE#
-		), #
-		Year.x == Year.y - 1#
+	s.variables <- c(#
+		reshape.variables,#
+		"repro.value"#
+	)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+sensitivity.results <- MPMresults %>% #
+		dplyr::select(matches(paste(s.variables, collapse="|"))) %>% #
+		reshape2::melt(id.vars=c(reshape.variables))
+head(sensitivity.results)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+sensitivity.results <- MPMresults %>% #
+		dplyr::select(matches(paste(s.variables, collapse="|"))) %>% #
+		reshape2::melt(id.vars=c(reshape.variables)) %>%#
+		rowwise() %>%#
+		mutate(#
+			variable = gsub(pattern="repro.value.?","",variable),#
+			variable = gsub(pattern="[.]","->",variable)#
+		)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+sensitivity.results <- MPMresults %>% #
+		dplyr::select(matches(paste(s.variables, collapse="|"))) %>% #
+		reshape2::melt(id.vars=c(reshape.variables)) %>%#
+		rowwise() %>%#
+		mutate(#
+			variable = gsub(pattern="repro.value.?","",variable),#
+			variable = gsub(pattern="[.]","->",variable)#
+		) %>%#
+		as.data.frame %>%#
+		setnames("variable", "transition")
+head(sensitivity.results)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+reshape.variables <- c(#
+		"SeedBankSize",#
+		"SeedsPerFruit",#
+		"SeedSurvival",#
+		"Parent Assignment",	#
+		"N.Stages",#
+		LTRE_variable#
 	)#
-	# rename rows and columns#
-	rownames(trans) <- 1:nrow(trans)#
-	colnames(trans)[which(names(trans) == "Year.x")] 			<- "Year"#
-	colnames(trans)[which(names(trans) == "stage.x")] 			<- "stage"#
-	colnames(trans)[which(names(trans) == "Fruit_Flowers_t.x")] <- "Repro"#
-	colnames(trans)[which(names(trans) == "Year.y")] 			<- "Year2"#
-	colnames(trans)[which(names(trans) == "stage.y")] 			<- "fate"#
-	colnames(trans)[which(names(trans) == "Fruit_Flowers_t.y")] <- "Repro2"#
-#
-	# year-specific transition matrix#
-	trans01 <- trans %>%#
-		filter(Year == TransitionYear) %>%#
-		dplyr::select(PlantID, stage, Repro, fate, Repro2)#
-	seedlings <- nrow(subset(#
-		Dat_census, #
-		Year == TransitionYear & stage =="Seedling"#
-	))#
-	# number of seedlings estimated to have been produced by each stage class#
-	trans01 %<>% mutate(Seedling = Repro/sum(Repro, na.rm=T) * seedlings)
+	s.variables <- c(#
+		reshape.variables,#
+		"repro.value"#
+	)#
+	sensitivity.results <- MPMresults %>% #
+		dplyr::select(matches(paste(s.variables, collapse="|"))) %>% #
+		reshape2::melt(id.vars=c(reshape.variables))
+head(sensitivity.results)
 setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-stages <- c(unique(c(trans01$stage, trans01$fate))) %>% #
-		as.numeric %>%#
-		na.omit %>% #
-		as.vector %>%#
-		sort#
-	stages <- c("Seed", "Seedling", stages, "dead")#
-	trans01$stage %<>% factor(., levels=stages[-length(stages)], ordered=T)#
-	trans01$fate %<>% factor(., levels=stages, ordered=T)
+reshape.variables <- c(#
+		"SeedBankSize",#
+		"SeedsPerFruit",#
+		"SeedSurvival",#
+		"Parent Assignment",	#
+		"N.Stages",#
+		LTRE_variable#
+	)#
+	s.variables <- c(#
+		reshape.variables,#
+		"repro.value"#
+	)#
+	sensitivity.results <- MPMresults %>% #
+		dplyr::select(matches(paste(s.variables, collapse="|"))) %>% #
+		reshape2::melt(id.vars=c(reshape.variables)) %>%#
+		rowwise() %>%#
+		mutate(#
+			variable = gsub(pattern="repro.value.?","",variable),#
+			variable = gsub(pattern="[.]","->",variable)#
+		) %>%#
+		as.data.frame %>%#
+		setnames("variable", "transition") %>%#
+		setnames("value", "Reproductive Value")
+head(sensitivity.results)
 setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-stages %<>% .[-length(.)]
-stages
+reshape.variables <- c(#
+		"SeedBankSize",#
+		"SeedsPerFruit",#
+		"SeedSurvival",#
+		"Parent Assignment",	#
+		"N.Stages",#
+		LTRE_variable#
+	)#
+	ss.variables <- c(#
+		reshape.variables,#
+		"repro.value"#
+	)#
+	stable.stage.results <- MPMresults %>% #
+		dplyr::select(matches(paste(ss.variables, collapse="|"))) %>% #
+		reshape2::melt(id.vars=c(reshape.variables)) %>%#
+		rowwise() %>%#
+		mutate(#
+			variable = gsub(pattern="stable.stage.?","",variable),#
+			variable = gsub(pattern="[.]","->",variable)#
+		) %>%#
+		as.data.frame %>%#
+		setnames("variable", "transition") %>%#
+		setnames("value", "Stable Stage Value")
+head(stable.stage.results)
+tail(stable.stage.results)
 setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-matrix
+reshape.variables <- c(#
+		"SeedBankSize",#
+		"SeedsPerFruit",#
+		"SeedSurvival",#
+		"Parent Assignment",	#
+		"N.Stages",#
+		LTRE_variable#
+	)#
+	ss.variables <- c(#
+		reshape.variables,#
+		"repro.value"#
+	)#
+	stable.stage.results <- MPMresults %>% #
+		dplyr::select(matches(paste(ss.variables, collapse="|"))) %>% #
+		reshape2::melt(id.vars=c(reshape.variables)) %>%#
+		rowwise() %>%#
+		mutate(#
+			variable = gsub(pattern="stable.stage.?","",variable),#
+			variable = gsub(pattern="[.]","->",variable)#
+		) %>%#
+		as.data.frame %>%#
+		setnames("variable", "transition") %>%#
+		setnames("value", "Stable Stage Value")
+tail(stable.stage.results)
 setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-projection.matrix
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-projection.matrix(#
-		trans01, #
-		sort = stages#
-	)
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-stages
-length(trans01)
-dim(trans01)
-0.197131576 * 963
-0.197131576 * 963 + 0.001653127*963 + 0.002399123*963
-sum(trans01$Repro)
-sum(trans01$Repro,na.r=T)
-sum(trans01$Repro,na.rm=T)
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-SizeClass <- SizeClass#
-	A <- list()#
-	for (i in 1:length(ldf)) {#
-		A[[i]] <- prepDataTransitionMatrix(#
-			ldf[[i]], #
-			cldf[[i]], #
-			SizeClass, #
-			TransitionYear#
-		)#
-	}
-A
-i=1
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-trans_data = A[[i]]
-i=1
-j=1
-k=1
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-createProjectionMatrix(#
-					trans_data$trans01,#
-					SeedBankSize[i],#
-					SeedsPerFruit[j],#
-					SeedSurvival[k]#
-				)
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-Seedlings 			<- trans_data %>% filter(stage =="Seedling") %>% nrow
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-projection.matrix(#
-		trans01, #
-		sort = stages#
-	)
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-#' Prepare Data For Transition Matrix Function#
+#' Process Population Model Results#
 #'#
-#' @param Dat Dataset#
-#' @param SizeClass Classes into which to divide individuals based on size#
-#' @param TransitionYear Year#
-#
-#' @description Prepare Data For Transition Matrix Function#
+#' @description Prepare population modeling results for plotting.#
+#'#
+#' @param MPMresults#
+#' @param LTRE_variable Life table response variable, Default value is NULL.#
 #'#
 #' @export#
 #
-prepDataTransitionMatrix <- function(#
-	Dat,#
-	clonal_repro_dataset,#
-	SizeClass,#
-	TransitionYear#
+processPopulationModelingResults <- function(#
+	MPMresults,#
+	LTRE_variable = NULL#
 ) {#
-	# Dat$stage <- Dat$Stage#
-	Dat_census <- Dat %>% #
-	rowwise() %>%#
-	mutate(#
-		stage=replace(#
-			stage, #
-			which(stage=="Adult"),#
-			cut(SizewClones_t, SizeClass, include.lowest=T, labels=FALSE)#
-		)#
+	reshape.variables <- c(#
+		"SeedBankSize",#
+		"SeedsPerFruit",#
+		"SeedSurvival",#
+		"Parent Assignment",	#
+		"N.Stages",#
+		LTRE_variable#
 	)#
-	Dat_census %<>%#
-		dplyr::select(#
-			FecundityYear, #
-			PlantID, #
-			stage, #
-			Fruit_Flowers_t#
-		)#
-	colnames(Dat_census)[which(names(Dat_census) == "FecundityYear")] <- "Year"#
-	# merge year with year - 1#
-	trans <- subset(#
-		merge(#
-			Dat_census, #
-			Dat_census, #
-			by = "PlantID", #
-			sort = FALSE#
-		), #
-		Year.x == Year.y - 1#
+	ss.variables <- c(#
+		reshape.variables,#
+		"repro.value"#
 	)#
-	# rename rows and columns#
-	rownames(trans) <- 1:nrow(trans)#
-	colnames(trans)[which(names(trans) == "Year.x")] 			<- "Year"#
-	colnames(trans)[which(names(trans) == "stage.x")] 			<- "stage"#
-	colnames(trans)[which(names(trans) == "Fruit_Flowers_t.x")] <- "Repro"#
-	colnames(trans)[which(names(trans) == "Year.y")] 			<- "Year2"#
-	colnames(trans)[which(names(trans) == "stage.y")] 			<- "fate"#
-	colnames(trans)[which(names(trans) == "Fruit_Flowers_t.y")] <- "Repro2"#
-#
-	# year-specific transition matrix#
-	trans01 <- trans %>%#
-		filter(Year == TransitionYear) %>%#
-		dplyr::select(PlantID, stage, Repro, fate, Repro2)#
-	# seedlings <- nrow(subset(#
-	#	Dat_census, #
-	#	Year == TransitionYear & stage =="Seedling"#
-	#))#
-	# number of seedlings estimated to have been produced by each individual#
-	# trans01 %<>% mutate(Seedling = Repro/sum(Repro, na.rm=T) * seedlings)#
-	# create full set of stages#
-	stages <- c(unique(c(trans01$stage, trans01$fate))) %>% #
-		as.numeric %>%#
-		na.omit %>% #
-		as.vector %>%#
-		sort#
-	stages <- c("Seed", "Seedling", stages, "dead")#
-	trans01$stage %<>% factor(., levels=stages[-length(stages)], ordered=T)#
-	trans01$fate %<>% factor(., levels=stages, ordered=T)#
-	# remove last stage#
-	stages %<>% .[-length(.)]#
-	proj_matrix <- projection.matrix(#
-		trans01, #
-		sort = stages#
+	stable.stage.results <- MPMresults %>% #
+		dplyr::select(matches(paste(ss.variables, collapse="|"))) %>% #
+		reshape2::melt(id.vars=c(reshape.variables)) %>%#
+		rowwise() %>%#
+		mutate(#
+			variable = gsub(pattern="stable.stage.?","",variable),#
+			variable = gsub(pattern="[.]","->",variable)#
+		) %>%#
+		as.data.frame %>%#
+		setnames("variable", "transition") %>%#
+		setnames("value", "Stable Stage Value")#
+	r.variables <- c(#
+		reshape.variables,#
+		"repro.value"#
 	)#
-	# create matrix of transition counts#
-	transition.counts <- table(trans01$fate, trans01$stage)#
-	# create clonal matrices#
-	clonal.matrices <- createClonalReproTransitionMatrix(#
-		clonal_repro_dataset, #
-		trans01,#
-		stages#
+	repro.value.results <- MPMresults %>% #
+		dplyr::select(matches(paste(r.variables, collapse="|"))) %>% #
+		reshape2::melt(id.vars=c(reshape.variables)) %>%#
+		rowwise() %>%#
+		mutate(#
+			variable = gsub(pattern="repro.value.?","",variable),#
+			variable = gsub(pattern="[.]","->",variable)#
+		) %>%#
+		as.data.frame %>%#
+		setnames("variable", "transition") %>%#
+		setnames("value", "Reproductive Value")#
+	s.variables <- c(#
+		reshape.variables,#
+		"sensitivities"#
 	)#
+	sensitivity.results <- MPMresults %>% #
+		dplyr::select(matches(paste(s.variables, collapse="|"))) %>% #
+		reshape2::melt(id.vars=c(reshape.variables)) %>%#
+		rowwise() %>%#
+		mutate(#
+			variable = gsub(pattern="sensitivities.?","",variable),#
+			variable = gsub(pattern="[.]","->",variable)#
+		) %>%#
+		as.data.frame %>%#
+		setnames("variable", "transition") %>%#
+		setnames("value", "sensitivity")#
+	e.variables <- c(#
+		reshape.variables,#
+		"elasticities"#
+	)#
+	elasticity.results <- MPMresults %>% #
+		dplyr::select(matches(paste(e.variables, collapse="|"))) %>% #
+		reshape2::melt(id.vars=c(reshape.variables)) %>%#
+		rowwise() %>%#
+		mutate(#
+			variable = gsub(pattern="elasticities.?","",variable),#
+			variable = gsub(pattern="[.]","->",variable)#
+		) %>%#
+		as.data.frame %>%#
+		setnames("variable", "transition") %>%#
+		setnames("value", "elasticity")#
 	return(list(#
-		clone_transition_counts = clonal.matrices[[1]],#
-		clone_transition_rates = clonal.matrices[[2]], #
-		transition.counts = transition.counts, #
-		proj_matrix = proj_matrix, #
-		trans01 = trans01, #
-		stages = stages,#
-		n_per_stage = clonal.matrices[[3]]#
+		sensitivity.results = sensitivity.results,#
+		elasticity.results = elasticity.results,#
+		repro.value.results = repro.value.results,#
+		stable.stage.results = stable.stage.results#
 	))#
 }
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files/2013_2014')
-SizeClass <- SizeClass.4
-i
-Dat <- ldf[[i]]
-clonal_repro_dataset <- cldf[[i]]
 setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-Dat_census <- Dat %>% #
-	rowwise() %>%#
-	mutate(#
-		stage=replace(#
-			stage, #
-			which(stage=="Adult"),#
-			cut(SizewClones_t, SizeClass, include.lowest=T, labels=FALSE)#
-		)#
+reshape.variables <- c(#
+		"SeedBankSize",#
+		"SeedsPerFruit",#
+		"SeedSurvival",#
+		"Parent Assignment",	#
+		"N.Stages",#
+		LTRE_variable#
 	)#
-	Dat_census %<>%#
-		dplyr::select(#
-			FecundityYear, #
-			PlantID, #
-			stage, #
-			Fruit_Flowers_t#
-		)#
-	colnames(Dat_census)[which(names(Dat_census) == "FecundityYear")] <- "Year"#
-	# merge year with year - 1#
-	trans <- subset(#
-		merge(#
-			Dat_census, #
-			Dat_census, #
-			by = "PlantID", #
-			sort = FALSE#
-		), #
-		Year.x == Year.y - 1#
+	ss.variables <- c(#
+		reshape.variables,#
+		"stable.stage"#
 	)#
-	# rename rows and columns#
-	rownames(trans) <- 1:nrow(trans)#
-	colnames(trans)[which(names(trans) == "Year.x")] 			<- "Year"#
-	colnames(trans)[which(names(trans) == "stage.x")] 			<- "stage"#
-	colnames(trans)[which(names(trans) == "Fruit_Flowers_t.x")] <- "Repro"#
-	colnames(trans)[which(names(trans) == "Year.y")] 			<- "Year2"#
-	colnames(trans)[which(names(trans) == "stage.y")] 			<- "fate"#
-	colnames(trans)[which(names(trans) == "Fruit_Flowers_t.y")] <- "Repro2"#
+	stable.stage.results <- MPMresults %>% #
+		dplyr::select(matches(paste(ss.variables, collapse="|"))) %>% #
+		reshape2::melt(id.vars=c(reshape.variables)) %>%#
+		rowwise() %>%#
+		mutate(#
+			variable = gsub(pattern="stable.stage.?","",variable),#
+			variable = gsub(pattern="[.]","->",variable)#
+		) %>%#
+		as.data.frame %>%#
+		setnames("variable", "transition") %>%#
+		setnames("value", "Stable Stage Value")
+head(stable.stage.results)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+#' Process Population Model Results#
+#'#
+#' @description Prepare population modeling results for plotting.#
+#'#
+#' @param MPMresults#
+#' @param LTRE_variable Life table response variable, Default value is NULL.#
+#'#
+#' @export#
 #
-	# year-specific transition matrix#
-	trans01 <- trans %>%#
-		filter(Year == TransitionYear) %>%#
-		dplyr::select(PlantID, stage, Repro, fate, Repro2)#
-	# seedlings <- nrow(subset(#
-	#	Dat_census, #
-	#	Year == TransitionYear & stage =="Seedling"#
-	#))#
-	# number of seedlings estimated to have been produced by each individual#
-	# trans01 %<>% mutate(Seedling = Repro/sum(Repro, na.rm=T) * seedlings)#
-	# create full set of stages#
-	stages <- c(unique(c(trans01$stage, trans01$fate))) %>% #
-		as.numeric %>%#
-		na.omit %>% #
-		as.vector %>%#
-		sort#
-	stages <- c("Seed", "Seedling", stages, "dead")#
-	trans01$stage %<>% factor(., levels=stages[-length(stages)], ordered=T)#
-	trans01$fate %<>% factor(., levels=stages, ordered=T)#
-	# remove last stage#
-	stages %<>% .[-length(.)]#
-	proj_matrix <- projection.matrix(#
-		trans01, #
-		sort = stages#
-	)
+processPopulationModelingResults <- function(#
+	MPMresults,#
+	LTRE_variable = NULL#
+) {#
+	reshape.variables <- c(#
+		"SeedBankSize",#
+		"SeedsPerFruit",#
+		"SeedSurvival",#
+		"Parent Assignment",	#
+		"N.Stages",#
+		LTRE_variable#
+	)#
+	ss.variables <- c(#
+		reshape.variables,#
+		"stable.stage"#
+	)#
+	stable.stage.results <- MPMresults %>% #
+		dplyr::select(matches(paste(ss.variables, collapse="|"))) %>% #
+		reshape2::melt(id.vars=c(reshape.variables)) %>%#
+		rowwise() %>%#
+		mutate(#
+			variable = gsub(pattern="stable.stage.?","",variable),#
+			variable = gsub(pattern="[.]","->",variable)#
+		) %>%#
+		as.data.frame %>%#
+		setnames("variable", "transition") %>%#
+		setnames("value", "Stable Stage Value")#
+	r.variables <- c(#
+		reshape.variables,#
+		"repro.value"#
+	)#
+	repro.value.results <- MPMresults %>% #
+		dplyr::select(matches(paste(r.variables, collapse="|"))) %>% #
+		reshape2::melt(id.vars=c(reshape.variables)) %>%#
+		rowwise() %>%#
+		mutate(#
+			variable = gsub(pattern="repro.value.?","",variable),#
+			variable = gsub(pattern="[.]","->",variable)#
+		) %>%#
+		as.data.frame %>%#
+		setnames("variable", "transition") %>%#
+		setnames("value", "Reproductive Value")#
+	s.variables <- c(#
+		reshape.variables,#
+		"sensitivities"#
+	)#
+	sensitivity.results <- MPMresults %>% #
+		dplyr::select(matches(paste(s.variables, collapse="|"))) %>% #
+		reshape2::melt(id.vars=c(reshape.variables)) %>%#
+		rowwise() %>%#
+		mutate(#
+			variable = gsub(pattern="sensitivities.?","",variable),#
+			variable = gsub(pattern="[.]","->",variable)#
+		) %>%#
+		as.data.frame %>%#
+		setnames("variable", "transition") %>%#
+		setnames("value", "sensitivity")#
+	e.variables <- c(#
+		reshape.variables,#
+		"elasticities"#
+	)#
+	elasticity.results <- MPMresults %>% #
+		dplyr::select(matches(paste(e.variables, collapse="|"))) %>% #
+		reshape2::melt(id.vars=c(reshape.variables)) %>%#
+		rowwise() %>%#
+		mutate(#
+			variable = gsub(pattern="elasticities.?","",variable),#
+			variable = gsub(pattern="[.]","->",variable)#
+		) %>%#
+		as.data.frame %>%#
+		setnames("variable", "transition") %>%#
+		setnames("value", "elasticity")#
+	return(list(#
+		sensitivity.results = sensitivity.results,#
+		elasticity.results = elasticity.results,#
+		repro.value.results = repro.value.results,#
+		stable.stage.results = stable.stage.results#
+	))#
+}
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files')
+MPMresults.2013 <- rbind.fill(#
+	mod.4.stages.2013.largest.parent.res,#
+	mod.4.stages.2013.random.parent.res,#
+	mod.4.stages.2013.rand.large.parent.res,#
+	mod.5.stages.2013.largest.parent.res,#
+	mod.5.stages.2013.random.parent.res,#
+	mod.5.stages.2013.rand.large.parent.res,#
+	mod.5.stages.b.2013.largest.parent.res,#
+	mod.5.stages.b.2013.random.parent.res,#
+	mod.5.stages.b.2013.rand.large.parent.res,#
+	mod.6.stages.2013.largest.parent.res,#
+	mod.6.stages.2013.random.parent.res,#
+	mod.6.stages.2013.rand.large.parent.res,#
+	mod.7.stages.2013.largest.parent.res,#
+	mod.7.stages.2013.random.parent.res,#
+	mod.7.stages.2013.rand.large.parent.res#
+) %>%#
+	mutate(Year = "2013-2014")#
+#
+MPMresults.2013.E.S <- processPopulationModelingResults(#
+	MPMresults = MPMresults.2013,#
+	LTRE_variable = NULL#
+)#
+##### elasticities#
+#
+MPMresults.2013.E.S$elasticity.results$transition %<>% factor(levels=c(#
+	"Seed->Seed", "Seed->Seedling", "Seed->1", "Seed->2", "Seed->3", "Seed->4", "Seed->5", "Seed->6", "Seed->7", #
+	 "Seedling->Seed", "Seedling->Seedling", "Seedling->1", "Seedling->2", "Seedling->3", "Seedling->4", "Seedling->5", "Seedling->6", "Seedling->7", #
+	 "1->Seed", "1->Seedling", "1->1", "1->2", "1->3", "1->4", "1->5", "1->6", "1->7",#
+	 "2->Seed", "2->Seedling", "2->1", "2->2", "2->3", "2->4", "2->5", "2->6", "2->7",#
+	 "3->Seed", "3->Seedling", "3->1", "3->2", "3->3", "3->4", "3->5", "3->6", "3->7",#
+	 "4->Seed", "4->Seedling", "4->1", "4->2", "4->3", "4->4", "4->5", "4->6", "4->7",#
+	 "5->Seed", "5->Seedling", "5->1", "5->2", "5->3", "5->4", "5->5", "5->6", "5->7",#
+	  "6->Seed", "6->Seedling", "6->1", "6->2", "6->3", "6->4", "6->5", "6->6", "6->7",#
+	  "7->Seed", "7->Seedling", "7->1", "7->2", "7->3", "7->4", "7->5", "7->6", "7->7"#
+))#
+# --------------------------------------------------------------------------- ##
+#
+MPMresults.2014 <- rbind.fill(#
+	mod.4.stages.2014.largest.parent.res,#
+	mod.4.stages.2014.random.parent.res,#
+	mod.4.stages.2014.rand.large.parent.res,#
+	mod.5.stages.2014.largest.parent.res,#
+	mod.5.stages.2014.random.parent.res,#
+	mod.5.stages.2014.rand.large.parent.res,#
+	mod.5.stages.b.2014.largest.parent.res,#
+	mod.5.stages.b.2014.random.parent.res,#
+	mod.5.stages.b.2014.rand.large.parent.res,#
+	mod.6.stages.2014.largest.parent.res,#
+	mod.6.stages.2014.random.parent.res,#
+	mod.6.stages.2014.rand.large.parent.res,#
+	mod.7.stages.2014.largest.parent.res,#
+	mod.7.stages.2014.random.parent.res,#
+	mod.7.stages.2014.rand.large.parent.res#
+) %>%#
+	mutate(Year = "2014-2015")#
+#
+MPMresults.2014.E.S <- processPopulationModelingResults(#
+	MPMresults = MPMresults.2014,#
+	LTRE_variable = NULL#
+)#
+##### elasticities#
+#
+MPMresults.2014.E.S$elasticity.results$transition %<>%  factor(levels=c(#
+	"Seed->Seed", "Seed->Seedling", "Seed->1", "Seed->2", "Seed->3", "Seed->4", "Seed->5", "Seed->6", "Seed->7", #
+	 "Seedling->Seed", "Seedling->Seedling", "Seedling->1", "Seedling->2", "Seedling->3", "Seedling->4", "Seedling->5", "Seedling->6", "Seedling->7", #
+	 "1->Seed", "1->Seedling", "1->1", "1->2", "1->3", "1->4", "1->5", "1->6", "1->7",#
+	 "2->Seed", "2->Seedling", "2->1", "2->2", "2->3", "2->4", "2->5", "2->6", "2->7",#
+	 "3->Seed", "3->Seedling", "3->1", "3->2", "3->3", "3->4", "3->5", "3->6", "3->7",#
+	 "4->Seed", "4->Seedling", "4->1", "4->2", "4->3", "4->4", "4->5", "4->6", "4->7",#
+	 "5->Seed", "5->Seedling", "5->1", "5->2", "5->3", "5->4", "5->5", "5->6", "5->7",#
+	  "6->Seed", "6->Seedling", "6->1", "6->2", "6->3", "6->4", "6->5", "6->6", "6->7",#
+	  "7->Seed", "7->Seedling", "7->1", "7->2", "7->3", "7->4", "7->5", "7->6", "7->7"#
+))#
+# --------------------------------------------------------------------------- ##
+setwd("/Users/KSauby/Documents/Projects/GTMNERR_analysis")#
+cache("MPMresults.2013")#
+cache("MPMresults.2013.E.S")#
+cache("MPMresults.2014")#
+cache("MPMresults.2014.E.S")
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files')
+MPMresults.moth.2013 <- rbind.fill(#
+	mod.4.w.moth.2013.largest.parent.res,#
+	mod.4.w.moth.2013.random.parent.res,#
+	mod.4.w.moth.2013.rand.large.parent.res,#
+	mod.4.wo.moth.2013.largest.parent.res,#
+	mod.4.wo.moth.2013.random.parent.res,#
+	mod.4.wo.moth.2013.rand.large.parent.res#
+) %>%#
+	mutate(Year = "2013-2014")#
+#
+MPMresults.moth.2013.E.S <- processPopulationModelingResults(#
+	MPMresults = MPMresults.moth.2013,#
+	LTRE_variable = "Moth Evidence"#
+)#
+# order transition levels#
+MPMresults.moth.2013.E.S$elasticity.results$transition %<>% factor(levels=c(#
+	"Seed->Seed", "Seed->Seedling", "Seed->1", "Seed->2", "Seed->3", "Seed->4",#
+	"Seedling->Seed", "Seedling->Seedling", "Seedling->1", "Seedling->2", "Seedling->3", "Seedling->4",#
+	"1->Seed", "1->Seedling", "1->1", "1->2", "1->3", "1->4",#
+	"2->Seed", "2->Seedling", "2->1", "2->2", "2->3", "2->4",#
+	 "3->Seed", "3->Seedling", "3->1", "3->2", "3->3", "3->4",              #
+	 "4->Seed", "4->Seedling", "4->1", "4->2", "4->3", "4->4"   #
+))#
+# ---------------------------------------------------------------- ##
+MPMresults.moth.2014 <- rbind.fill(#
+	mod.4.w.moth.2014.largest.parent.res,#
+	mod.4.w.moth.2014.random.parent.res,#
+	mod.4.w.moth.2014.rand.large.parent.res,#
+	mod.4.wo.moth.2014.largest.parent.res,#
+	mod.4.wo.moth.2014.random.parent.res,#
+	mod.4.wo.moth.2014.rand.large.parent.res#
+) %>%#
+	mutate(Year = "2014-2015")#
+#
+MPMresults.moth.2014.E.S <- processPopulationModelingResults(#
+	MPMresults = MPMresults.moth.2014,#
+	LTRE_variable = "Moth Evidence"#
+)#
+#
+# order transition levels#
+MPMresults.moth.2014.E.S$elasticity.results$transition %<>% factor(levels=c(#
+	"Seed->Seed", "Seed->Seedling", "Seed->1", "Seed->2", "Seed->3", "Seed->4",#
+	"Seedling->Seed", "Seedling->Seedling", "Seedling->1", "Seedling->2", "Seedling->3", "Seedling->4",#
+	"1->Seed", "1->Seedling", "1->1", "1->2", "1->3", "1->4",#
+	"2->Seed", "2->Seedling", "2->1", "2->2", "2->3", "2->4",#
+	 "3->Seed", "3->Seedling", "3->1", "3->2", "3->3", "3->4",              #
+	 "4->Seed", "4->Seedling", "4->1", "4->2", "4->3", "4->4"   #
+))#
+# --------------------------------------------------------------------------- ##
+setwd("/Users/KSauby/Documents/Projects/GTMNERR_analysis")#
+cache("MPMresults.moth.2013")#
+cache("MPMresults.moth.2013.E.S")#
+cache("MPMresults.moth.2014")#
+cache("MPMresults.moth.2014.E.S")
+str(MPMresults.moth.2013)
+str(MPMresults.moth.2013.E.S)
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files')
+# ---------------------------------------------------------------- ##
+# Elasticities#
+# ---------------------------------------------------------------- ##
+p <- plotElasticitySensitivity(#
+	dat = MPMresults.moth.2013.E.S$stable.stage.results %>% filter(SeedBankSize==1000), #
+	x_variable = "SeedSurvival", #
+	y_variable = "Stable Stage Value", #
+	grouping_variable = "transition", #
+	facet_grid_var = "`Moth Evidence`~`Parent Assignment`", #
+	xlab_label = "Seed Survival Rate", #
+	ylab_label = "Elasticity Value", #
+	n_transitions_per_stage = 6,#
+	axis.text.x.size = 20,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 30, #
+	legend.text.size = 20,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20#
+)
+p
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files')
+plotElasticitySensitivity(#
+	dat = MPMresults.moth.2013.E.S$stable.stage.results %>% filter(SeedBankSize==1000), #
+	x_variable = "SeedSurvival", #
+	y_variable = "`Stable Stage Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "`Moth Evidence`~`Parent Assignment`", #
+	xlab_label = "Seed Survival Rate", #
+	ylab_label = "Elasticity Value", #
+	n_transitions_per_stage = 6,#
+	axis.text.x.size = 20,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 30, #
+	legend.text.size = 20,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20#
+)
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files/processing')
+black.red 				<- colorRampPalette(c("grey", "violetred", "darkred"))#
+black.yellow			<- colorRampPalette(c("grey", "lightblue", "blue4"))#
+black.blue.orange		<- colorRampPalette(c("grey", "darkorchid1", "darkorchid4"))#
+#
+black.red.yellow 		<- colorRampPalette(c("grey","darkorange2", "darkred"))#
+black.purple.yellow		<- colorRampPalette(c("grey","aquamarine","darkgreen"))#
+black.darkblue.yellow	<- colorRampPalette(c("grey","burlywood1","burlywood4"))#
+#
+black.brown.yellow		<- colorRampPalette(c("grey","black"))#
+black.brown.grey		<- colorRampPalette(c("grey", "chartreuse", "darkolivegreen"))#
+black.blue.brown 		<- colorRampPalette(c("grey","darkgoldenrod1", "darkorange4"))#
+#
+black.green.yellow		<- colorRampPalette(c("black","green", "yellow"))#
+black.green.blue		<- colorRampPalette(c("black", "green", "blue"))
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files')
+plotElasticitySensitivity(#
+	dat = MPMresults.moth.2013.E.S$stable.stage.results %>% filter(SeedBankSize==1000), #
+	x_variable = "SeedSurvival", #
+	y_variable = "`Stable Stage Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "`Moth Evidence`~`Parent Assignment`", #
+	xlab_label = "Seed Survival Rate", #
+	ylab_label = "Elasticity Value", #
+	n_transitions_per_stage = 6,#
+	axis.text.x.size = 20,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 30, #
+	legend.text.size = 20,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20#
+)
+str(MPMresults.moth.2013.E.S$stable.stage.results)
+unique(MPMresults.moth.2013.E.S$stable.stage.results$transition)
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files')
+# ---------------------------------------------------------------- ##
+MPMresults.moth.2013.E.S$stable.stage.results$transition #
+MPMresults.moth.2013.E.S$stable.stage.results$transition %<>% #
+	factor(#
+		., 	levels=unique(MPMresults.moth.2013.E.S$stable.stage.results$transition), 	ordered=T#
+)
+levels(MPMresults.moth.2013.E.S$stable.stage.results$transition)
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files')
+plotElasticitySensitivity(#
+	dat = MPMresults.moth.2013.E.S$stable.stage.results %>% filter(SeedBankSize==1000), #
+	x_variable = "SeedSurvival", #
+	y_variable = "`Stable Stage Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "`Moth Evidence`~`Parent Assignment`", #
+	xlab_label = "Seed Survival Rate", #
+	ylab_label = "Elasticity Value", #
+	n_transitions_per_stage = 6,#
+	axis.text.x.size = 20,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 30, #
+	legend.text.size = 20,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20#
+)
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files')
+MPMresults.moth.2014.E.S$stable.stage.results$transition %<>% #
+	factor(#
+		., 	levels=unique(MPMresults.moth.2014.E.S$stable.stage.results$transition), 	ordered=T#
+)#
+#
+p <- plotElasticitySensitivity(#
+	dat = MPMresults.moth.2014.E.S$stable.stage.results %>% filter(SeedBankSize==1000), #
+	x_variable = "SeedSurvival", #
+	y_variable = "`Stable Stage Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "`Moth Evidence`~`Parent Assignment`", #
+	xlab_label = "Seed Survival Rate", #
+	ylab_label = "Stable Stage Fraction", #
+	n_transitions_per_stage = 6,#
+	axis.text.x.size = 20,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 30, #
+	legend.text.size = 20,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20#
+)#
+pdf("figures/LTRE_moth_stable_stage_2014.pdf", width=16, height=20)#
+p#
+dev.off()
 setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-projection.matrix(#
-		trans01, #
-		sort = stages#
-	)
-trans_data <- trans01
+#' Plot Elasticity and Sensitivity Data#
+#'#
+#' @param dat Dataset#
+#' @param x_variable#
+#' @param y_variable#
+#' @param grouping_variable#
+#' @param facet_grid_var#
+#' @param xlab_label#
+#' @param ylab_label#
+#' @param n_transitions_per_stage#
+#'#
+#' @export#
+plotElasticitySensitivity <- function(dat, x_variable, y_variable, grouping_variable, facet_grid_var, xlab_label, ylab_label, n_transitions_per_stage, strip.text.x.size, strip.text.y.size, legend.text.size, axis.text.x.size, axis.title.x.size, axis.title.y.size, axis.text.y.size, strip.text.y.angle=270, color_values = black.red(n_transitions_per_stage),#
+				black.yellow(n_transitions_per_stage),#
+				black.blue.orange(n_transitions_per_stage),#
+				black.red.yellow(n_transitions_per_stage),#
+				black.purple.yellow(n_transitions_per_stage),#
+				black.darkblue.yellow(n_transitions_per_stage),#
+				black.brown.yellow(n_transitions_per_stage),#
+				black.brown.grey(n_transitions_per_stage),#
+				black.blue.brown(n_transitions_per_stage)) {#
+	ggplot(#
+		dat,#
+		aes(#
+			factor(eval(parse(text=x_variable))),#
+			eval(parse(text=y_variable)),#
+			fill=factor(eval(parse(text=grouping_variable)))#
+		)#
+	) +#
+		geom_bar(stat="identity") +#
+		KEStheme() +#
+		facet_grid(eval(parse(text=facet_grid_var))) +#
+		xlab(xlab_label) +#
+		ylab(ylab_label) +#
+		scale_fill_manual(values=c(color_values)) +#
+		theme(#
+			legend.position="bottom",#
+			legend.text = element_text(size = legend.text.size),#
+			axis.text.x = element_text(angle=45, hjust=1, size = axis.text.x.size),#
+			axis.text.y = element_text(size = axis.text.y.size),#
+			strip.text.y=element_text(size=strip.text.y.size, angle=strip.text.y.angle),#
+			strip.text.x=element_text(size=strip.text.x.size),#
+			axis.title.x=element_text(size=axis.title.x.size),#
+			axis.title.y=element_text(size=axis.title.y.size)#
+		) +#
+		guides(#
+			fill=guide_legend(#
+				title="Transitions", #
+				ncol=n_transitions_per_stage#
+			)#
+		)#
+}
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files')
+MPMresults.moth.2014.E.S$stable.stage.results$transition %<>% #
+	factor(#
+		., 	levels=unique(MPMresults.moth.2014.E.S$stable.stage.results$transition), 	ordered=T#
+)#
+#
+p <- plotElasticitySensitivity(#
+	dat = MPMresults.moth.2014.E.S$stable.stage.results %>% filter(SeedBankSize==1000), #
+	x_variable = "SeedSurvival", #
+	y_variable = "`Stable Stage Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "`Moth Evidence`~`Parent Assignment`", #
+	xlab_label = "Seed Survival Rate", #
+	ylab_label = "Stable Stage Fraction", #
+	n_transitions_per_stage = 6,#
+	axis.text.x.size = 20,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 30, #
+	legend.text.size = 20,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20#
+)#
+pdf("figures/LTRE_moth_stable_stage_2014.pdf", width=16, height=20)#
+p#
+dev.off()
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files')
+plotElasticitySensitivity(#
+	dat = MPMresults.moth.2014.E.S$stable.stage.results %>% filter(SeedBankSize==1000), #
+	x_variable = "SeedSurvival", #
+	y_variable = "`Stable Stage Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "`Moth Evidence`~`Parent Assignment`", #
+	xlab_label = "Seed Survival Rate", #
+	ylab_label = "Stable Stage Fraction", #
+	n_transitions_per_stage = 6,#
+	axis.text.x.size = 20,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 30, #
+	legend.text.size = 20,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20,#
+	color_values = colorRampPalette(c("grey","darkorange2", "darkred")#
+)#
+)
 setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-SeedBankSize
-reateProjectionMatrix(#
-					trans01,#
-					SeedBankSize[i],#
-					SeedsPerFruit[j],#
-					SeedSurvival[k]#
-				)
-createProjectionMatrix(#
-					trans01,#
-					SeedBankSize[i],#
-					SeedsPerFruit[j],#
-					SeedSurvival[k]#
-				)
-projection.matrix(#
-		trans01, #
-		sort = stages#
-	)
-createProjectionMatrix(#
-					trans01,#
-					SeedBankSize[i],#
-					SeedsPerFruit[j],#
-					SeedSurvival[k]#
-				)
+#' Plot Elasticity and Sensitivity Data#
+#'#
+#' @param dat Dataset#
+#' @param x_variable#
+#' @param y_variable#
+#' @param grouping_variable#
+#' @param facet_grid_var#
+#' @param xlab_label#
+#' @param ylab_label#
+#' @param n_transitions_per_stage#
+#'#
+#' @export#
+plotElasticitySensitivity <- function(dat, x_variable, y_variable, grouping_variable, facet_grid_var, xlab_label, ylab_label, n_transitions_per_stage, strip.text.x.size, strip.text.y.size, legend.text.size, axis.text.x.size, axis.title.x.size, axis.title.y.size, axis.text.y.size, strip.text.y.angle=270, color_values = black.red(n_transitions_per_stage),#
+				black.yellow(n_transitions_per_stage),#
+				black.blue.orange(n_transitions_per_stage),#
+				black.red.yellow(n_transitions_per_stage),#
+				black.purple.yellow(n_transitions_per_stage),#
+				black.darkblue.yellow(n_transitions_per_stage),#
+				black.brown.yellow(n_transitions_per_stage),#
+				black.brown.grey(n_transitions_per_stage),#
+				black.blue.brown(n_transitions_per_stage)) {#
+	ggplot(#
+		dat,#
+		aes(#
+			factor(eval(parse(text=x_variable))),#
+			eval(parse(text=y_variable)),#
+			fill=factor(eval(parse(text=grouping_variable)))#
+		)#
+	) +#
+		geom_bar(stat="identity") +#
+		KEStheme() +#
+		facet_grid(eval(parse(text=facet_grid_var))) +#
+		xlab(xlab_label) +#
+		ylab(ylab_label) +#
+		scale_fill_manual(values=c(color_values)) +#
+		theme(#
+			legend.position="bottom",#
+			legend.text = element_text(size = legend.text.size),#
+			axis.text.x = element_text(angle=45, hjust=1, size = axis.text.x.size),#
+			axis.text.y = element_text(size = axis.text.y.size),#
+			strip.text.y=element_text(size=strip.text.y.size, angle=strip.text.y.angle),#
+			strip.text.x=element_text(size=strip.text.x.size),#
+			axis.title.x=element_text(size=axis.title.x.size),#
+			axis.title.y=element_text(size=axis.title.y.size)#
+		) +#
+		guides(#
+			fill=guide_legend(#
+				title="Transitions", #
+				ncol=n_transitions_per_stage#
+			)#
+		)#
+}
 setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-Seedlings 			<- trans_data %>% filter(stage =="Seedling") %>% nrow#
-	seeds.from.plants 	<- sum(trans_data$Repro, na.rm=T) * SeedsPerFruit
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-Seedlings
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-seeds.from.plants
-dim(trans01)
-trans01 %>% filter(Repro > 0) dim
-trans01 %>% filter(Repro > 0) %>% dim
-trans01 %>% filter(Repro > 0) %$% sum(Repro)
-trans01 %$% sum(Repro,na.rm=T)
-trans01 %>% filter(Repro > 0)
+#' Plot Elasticity and Sensitivity Data#
+#'#
+#' @param dat Dataset#
+#' @param x_variable#
+#' @param y_variable#
+#' @param grouping_variable#
+#' @param facet_grid_var#
+#' @param xlab_label#
+#' @param ylab_label#
+#' @param n_transitions_per_stage#
+#'#
+#' @export#
+plotElasticitySensitivity <- function(dat, x_variable, y_variable, grouping_variable, facet_grid_var, xlab_label, ylab_label, n_transitions_per_stage, strip.text.x.size, strip.text.y.size, legend.text.size, axis.text.x.size, axis.title.x.size, axis.title.y.size, axis.text.y.size, strip.text.y.angle=270, color_values =c(#
+	black.red(n_transitions_per_stage),#
+	black.yellow(n_transitions_per_stage),#
+	black.blue.orange(n_transitions_per_stage),#
+	black.red.yellow(n_transitions_per_stage),#
+	black.purple.yellow(n_transitions_per_stage),#
+	black.darkblue.yellow(n_transitions_per_stage),#
+	black.brown.yellow(n_transitions_per_stage),#
+	black.brown.grey(n_transitions_per_stage),#
+	black.blue.brown(n_transitions_per_stage))#
+)  {#
+	ggplot(#
+		dat,#
+		aes(#
+			factor(eval(parse(text=x_variable))),#
+			eval(parse(text=y_variable)),#
+			fill=factor(eval(parse(text=grouping_variable)))#
+		)#
+	) +#
+		geom_bar(stat="identity") +#
+		KEStheme() +#
+		facet_grid(eval(parse(text=facet_grid_var))) +#
+		xlab(xlab_label) +#
+		ylab(ylab_label) +#
+		scale_fill_manual(values=c(color_values)) +#
+		theme(#
+			legend.position="bottom",#
+			legend.text = element_text(size = legend.text.size),#
+			axis.text.x = element_text(angle=45, hjust=1, size = axis.text.x.size),#
+			axis.text.y = element_text(size = axis.text.y.size),#
+			strip.text.y=element_text(size=strip.text.y.size, angle=strip.text.y.angle),#
+			strip.text.x=element_text(size=strip.text.x.size),#
+			axis.title.x=element_text(size=axis.title.x.size),#
+			axis.title.y=element_text(size=axis.title.y.size)#
+		) +#
+		guides(#
+			fill=guide_legend(#
+				title="Transitions", #
+				ncol=n_transitions_per_stage#
+			)#
+		)#
+}
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files')
+plotElasticitySensitivity(#
+	dat = MPMresults.moth.2014.E.S$stable.stage.results %>% filter(SeedBankSize==1000), #
+	x_variable = "SeedSurvival", #
+	y_variable = "`Stable Stage Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "`Moth Evidence`~`Parent Assignment`", #
+	xlab_label = "Seed Survival Rate", #
+	ylab_label = "Stable Stage Fraction", #
+	n_transitions_per_stage = 6,#
+	axis.text.x.size = 20,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 30, #
+	legend.text.size = 20,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20,#
+	color_values = colorRampPalette(c("grey","darkorange2", "darkred"))#
+)
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files')
+colorRampPalette(c("grey","darkorange2", "darkred"))
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files')
+stable.stage.colors <- colorRampPalette(c("grey","darkorange2", "darkred")
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files')
+stable.stage.colors <- colorRampPalette(c("grey","darkorange2", "darkred")#
+# ---------------------------------------------------------------- ##
+# Elasticities#
+# ---------------------------------------------------------------- ##
+MPMresults.moth.2013.E.S$stable.stage.results$transition %<>% #
+	factor(#
+		., 	levels=unique(MPMresults.moth.2013.E.S$stable.stage.results$transition), 	ordered=T#
+)
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files')
+stable.stage.colors <- colorRampPalette(c("grey","darkorange2", "darkred"))#
+# ---------------------------------------------------------------- ##
+# Elasticities#
+# ---------------------------------------------------------------- ##
+MPMresults.moth.2013.E.S$stable.stage.results$transition %<>% #
+	factor(#
+		., 	levels=unique(MPMresults.moth.2013.E.S$stable.stage.results$transition), 	ordered=T#
+)
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files')
+plotElasticitySensitivity(#
+	dat = MPMresults.moth.2013.E.S$stable.stage.results %>% filter(SeedBankSize==1000), #
+	x_variable = "SeedSurvival", #
+	y_variable = "`Stable Stage Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "`Moth Evidence`~`Parent Assignment`", #
+	xlab_label = "Seed Survival Rate", #
+	ylab_label = "Stable Stage Fraction", #
+	n_transitions_per_stage = 6,#
+	axis.text.x.size = 20,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 30, #
+	legend.text.size = 20,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20,#
+	stable.stage.colors = stable.stage.colors(6)#
+)
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files')
+plotElasticitySensitivity(#
+	dat = MPMresults.moth.2013.E.S$stable.stage.results %>% filter(SeedBankSize==1000), #
+	x_variable = "SeedSurvival", #
+	y_variable = "`Stable Stage Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "`Moth Evidence`~`Parent Assignment`", #
+	xlab_label = "Seed Survival Rate", #
+	ylab_label = "Stable Stage Fraction", #
+	n_transitions_per_stage = 6,#
+	axis.text.x.size = 20,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 30, #
+	legend.text.size = 20,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20,#
+	color_values = stable.stage.colors(6)#
+)
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files')
+stable.stage.colors <- colorRampPalette(c("grey","darkorange2", "darkred","blue"))
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files')
+plotElasticitySensitivity(#
+	dat = MPMresults.moth.2013.E.S$stable.stage.results %>% filter(SeedBankSize==1000), #
+	x_variable = "SeedSurvival", #
+	y_variable = "`Stable Stage Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "`Moth Evidence`~`Parent Assignment`", #
+	xlab_label = "Seed Survival Rate", #
+	ylab_label = "Stable Stage Fraction", #
+	n_transitions_per_stage = 6,#
+	axis.text.x.size = 20,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 30, #
+	legend.text.size = 20,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20,#
+	color_values = stable.stage.colors(6)#
+)
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files')
+stable.stage.colors <- colorRampPalette(c("grey","darkorange2", "darkred","blue"))#
+# ---------------------------------------------------------------- ##
+# Elasticities#
+# ---------------------------------------------------------------- ##
+MPMresults.moth.2013.E.S$stable.stage.results$transition %<>% #
+	factor(#
+		., 	levels=unique(MPMresults.moth.2013.E.S$stable.stage.results$transition), 	ordered=T#
+)#
+#
+p <- plotElasticitySensitivity(#
+	dat = MPMresults.moth.2013.E.S$stable.stage.results %>% filter(SeedBankSize==1000), #
+	x_variable = "SeedSurvival", #
+	y_variable = "`Stable Stage Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "`Moth Evidence`~`Parent Assignment`", #
+	xlab_label = "Seed Survival Rate", #
+	ylab_label = "Stable Stage Fraction", #
+	n_transitions_per_stage = 6,#
+	axis.text.x.size = 20,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 30, #
+	legend.text.size = 20,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20,#
+	color_values = stable.stage.colors(6)#
+)#
+pdf("figures/LTRE_moth_stable_stage_2013.pdf", width=16, height=20)#
+p#
+dev.off()#
+# ---------------------------------------------------------------- ##
+MPMresults.moth.2014.E.S$stable.stage.results$transition %<>% #
+	factor(#
+		., 	levels=unique(MPMresults.moth.2014.E.S$stable.stage.results$transition), 	ordered=T#
+)#
+#
+p <- plotElasticitySensitivity(#
+	dat = MPMresults.moth.2014.E.S$stable.stage.results %>% filter(SeedBankSize==1000), #
+	x_variable = "SeedSurvival", #
+	y_variable = "`Stable Stage Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "`Moth Evidence`~`Parent Assignment`", #
+	xlab_label = "Seed Survival Rate", #
+	ylab_label = "Stable Stage Fraction", #
+	n_transitions_per_stage = 6,#
+	axis.text.x.size = 20,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 30, #
+	legend.text.size = 20,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20,#
+	color_values = stable.stage.colors(6)#
+)#
+pdf("figures/LTRE_moth_stable_stage_2014.pdf", width=16, height=20)#
+p#
+dev.off()
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files')
+MPMresults.2013.E.S$stable.stage.results$transition %<>% #
+	factor(#
+		., 	levels=unique(MPMresults.2013.E.S$stable.stage.results$transition), 	ordered=T#
+)#
+#
+p <- plotElasticitySensitivity(#
+	dat = MPMresults.2013.E.S$stable.stage.results %>% filter(SeedBankSize==1000), #
+	x_variable = "SeedSurvival", #
+	y_variable = "`Stable Stage Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "N.Stages~`Parent Assignment`", #
+	xlab_label = "Seed Survival Rate", #
+	ylab_label = "Stable Stage Fraction", #
+	n_transitions_per_stage = 9,#
+	axis.text.x.size = 12,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 20, #
+	legend.text.size = 12,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20,#
+	strip.text.y.angle = 0,#
+	color_values = stable.stage.colors(9)#
+)#
+pdf("figures/stable_stage_2013.pdf", width=18, height=20)#
+p#
+dev.off()
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files')
+stable.stage.colors <- colorRampPalette(c("grey","green","darkorange2", "darkred","blue"))
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files')
+plotElasticitySensitivity(#
+	dat = MPMresults.2013.E.S$stable.stage.results %>% filter(SeedBankSize==1000), #
+	x_variable = "SeedSurvival", #
+	y_variable = "`Stable Stage Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "N.Stages~`Parent Assignment`", #
+	xlab_label = "Seed Survival Rate", #
+	ylab_label = "Stable Stage Fraction", #
+	n_transitions_per_stage = 9,#
+	axis.text.x.size = 12,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 20, #
+	legend.text.size = 12,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20,#
+	strip.text.y.angle = 0,#
+	color_values = stable.stage.colors(9)#
+)
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files')
+stable.stage.colors <- colorRampPalette(c("grey","brown","darkorange2", "darkred","blue"))
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files')
+plotElasticitySensitivity(#
+	dat = MPMresults.2013.E.S$stable.stage.results %>% filter(SeedBankSize==1000), #
+	x_variable = "SeedSurvival", #
+	y_variable = "`Stable Stage Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "N.Stages~`Parent Assignment`", #
+	xlab_label = "Seed Survival Rate", #
+	ylab_label = "Stable Stage Fraction", #
+	n_transitions_per_stage = 9,#
+	axis.text.x.size = 12,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 20, #
+	legend.text.size = 12,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20,#
+	strip.text.y.angle = 0,#
+	color_values = stable.stage.colors(9)#
+)
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files')
+stable.stage.colors <- colorRampPalette(c("grey","darkorange2", "darkred","blue","lightblue"))
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files')
+plotElasticitySensitivity(#
+	dat = MPMresults.2013.E.S$stable.stage.results %>% filter(SeedBankSize==1000), #
+	x_variable = "SeedSurvival", #
+	y_variable = "`Stable Stage Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "N.Stages~`Parent Assignment`", #
+	xlab_label = "Seed Survival Rate", #
+	ylab_label = "Stable Stage Fraction", #
+	n_transitions_per_stage = 9,#
+	axis.text.x.size = 12,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 20, #
+	legend.text.size = 12,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20,#
+	strip.text.y.angle = 0,#
+	color_values = stable.stage.colors(9)#
+)
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files')
+stable.stage.colors <- colorRampPalette(c("grey","darkorange2", "darkred","blue"))#
+#
+stable.stage.colors <- colorRampPalette(c("grey","darkorange2", "darkred","blue","lightblue"))#
+# ---------------------------------------------------------------- ##
+# ---------------------------------------------------------------- ##
+MPMresults.moth.2013.E.S$stable.stage.results$transition %<>% #
+	factor(#
+		., 	levels=unique(MPMresults.moth.2013.E.S$stable.stage.results$transition), 	ordered=T#
+)#
+#
+p <- plotElasticitySensitivity(#
+	dat = MPMresults.moth.2013.E.S$stable.stage.results %>% filter(SeedBankSize==1000), #
+	x_variable = "SeedSurvival", #
+	y_variable = "`Stable Stage Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "`Moth Evidence`~`Parent Assignment`", #
+	xlab_label = "Seed Survival Rate", #
+	ylab_label = "Stable Stage Fraction", #
+	n_transitions_per_stage = 6,#
+	axis.text.x.size = 20,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 30, #
+	legend.text.size = 20,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20,#
+	color_values = stable.stage.colors(6)#
+)#
+pdf("figures/LTRE_moth_stable_stage_2013_seed_bank_1000.pdf", width=16, height=20)#
+p#
+dev.off()#
+# ---------------------------------------------------------------- ##
+MPMresults.moth.2014.E.S$stable.stage.results$transition %<>% #
+	factor(#
+		., 	levels=unique(MPMresults.moth.2014.E.S$stable.stage.results$transition), 	ordered=T#
+)#
+#
+p <- plotElasticitySensitivity(#
+	dat = MPMresults.moth.2014.E.S$stable.stage.results %>% filter(SeedBankSize==1000), #
+	x_variable = "SeedSurvival", #
+	y_variable = "`Stable Stage Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "`Moth Evidence`~`Parent Assignment`", #
+	xlab_label = "Seed Survival Rate", #
+	ylab_label = "Stable Stage Fraction", #
+	n_transitions_per_stage = 6,#
+	axis.text.x.size = 20,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 30, #
+	legend.text.size = 20,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20,#
+	color_values = stable.stage.colors(6)#
+)#
+pdf("figures/LTRE_moth_stable_stage_2014_seed_bank_1000.pdf", width=16, height=20)#
+p#
+dev.off()#
+# ---------------------------------------------------------------- ##
+MPMresults.2013.E.S$stable.stage.results$transition %<>% #
+	factor(#
+		., 	levels=unique(MPMresults.2013.E.S$stable.stage.results$transition), 	ordered=T#
+)#
+#
+p <- plotElasticitySensitivity(#
+	dat = MPMresults.2013.E.S$stable.stage.results %>% filter(SeedBankSize==1000), #
+	x_variable = "SeedSurvival", #
+	y_variable = "`Stable Stage Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "N.Stages~`Parent Assignment`", #
+	xlab_label = "Seed Survival Rate", #
+	ylab_label = "Stable Stage Fraction", #
+	n_transitions_per_stage = 9,#
+	axis.text.x.size = 12,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 20, #
+	legend.text.size = 12,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20,#
+	strip.text.y.angle = 0,#
+	color_values = stable.stage.colors(9)#
+)#
+pdf("figures/stable_stage_2013_seed_bank_1000.pdf", width=18, height=20)#
+p#
+dev.off()#
+# ---------------------------------------------------------------- ##
+MPMresults.2014.E.S$stable.stage.results$transition %<>% #
+	factor(#
+		., 	levels=unique(MPMresults.2014.E.S$stable.stage.results$transition), 	ordered=T#
+)#
+#
+p <- plotElasticitySensitivity(#
+	dat = MPMresults.2014.E.S$stable.stage.results %>% filter(SeedBankSize==1000), #
+	x_variable = "SeedSurvival", #
+	y_variable = "`Stable Stage Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "N.Stages~`Parent Assignment`", #
+	xlab_label = "Seed Survival Rate", #
+	ylab_label = "Stable Stage Fraction", #
+	n_transitions_per_stage = 9,#
+	axis.text.x.size = 12,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 20, #
+	legend.text.size = 12,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20,#
+	strip.text.y.angle = 0,#
+	color_values = stable.stage.colors(9)#
+)#
+pdf("figures/stable_stage_2014_seed_bank_1000.pdf", width=18, height=20)#
+p#
+dev.off()
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files')
+stable.stage.colors <- colorRampPalette(c("grey","darkorange2", "darkred","blue"))#
+#
+stable.stage.colors <- colorRampPalette(c("grey","darkorange2", "darkred","blue","lightblue"))#
+# ---------------------------------------------------------------- ##
+# ---------------------------------------------------------------- ##
+MPMresults.moth.2013.E.S$stable.stage.results$transition %<>% #
+	factor(#
+		., 	levels=unique(MPMresults.moth.2013.E.S$stable.stage.results$transition), 	ordered=T#
+)
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files')
+plotElasticitySensitivity(#
+	dat = MPMresults.moth.2013.E.S$stable.stage.results %>% filter(SeedSurvival==0.5), #
+	x_variable = "SeedBankSize", #
+	y_variable = "`Stable Stage Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "`Moth Evidence`~`Parent Assignment`", #
+	xlab_label = "Seed Survival Rate", #
+	ylab_label = "Stable Stage Fraction", #
+	n_transitions_per_stage = 6,#
+	axis.text.x.size = 20,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 30, #
+	legend.text.size = 20,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20,#
+	color_values = stable.stage.colors(6)#
+)
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files')
+plotElasticitySensitivity(#
+	dat = MPMresults.2014.E.S$stable.stage.results %>% filter(SeedSurvival==0.5), #
+	x_variable = "SeedBankSize", #
+	y_variable = "`Stable Stage Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "N.Stages~`Parent Assignment`", #
+	xlab_label = "Seed Survival Rate", #
+	ylab_label = "Stable Stage Fraction", #
+	n_transitions_per_stage = 9,#
+	axis.text.x.size = 12,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 20, #
+	legend.text.size = 12,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20,#
+	strip.text.y.angle = 0,#
+	color_values = stable.stage.colors(9)#
+)
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files')
+stable.stage.colors <- colorRampPalette(c("grey","darkorange2", "darkred","blue"))#
+#
+stable.stage.colors <- colorRampPalette(c("grey","darkorange2", "darkred","blue","lightblue"))#
+# ---------------------------------------------------------------- ##
+# ---------------------------------------------------------------- ##
+MPMresults.moth.2013.E.S$stable.stage.results$transition %<>% #
+	factor(#
+		., 	levels=unique(MPMresults.moth.2013.E.S$stable.stage.results$transition), 	ordered=T#
+)#
+#
+p <- plotElasticitySensitivity(#
+	dat = MPMresults.moth.2013.E.S$stable.stage.results %>% filter(SeedSurvival==0.5), #
+	x_variable = "SeedBankSize", #
+	y_variable = "`Stable Stage Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "`Moth Evidence`~`Parent Assignment`", #
+	xlab_label = "Seed Bank Size", #
+	ylab_label = "Stable Stage Fraction", #
+	n_transitions_per_stage = 6,#
+	axis.text.x.size = 20,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 30, #
+	legend.text.size = 20,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20,#
+	color_values = stable.stage.colors(6)#
+)#
+pdf("figures/LTRE_moth_stable_stage_2013_SeedSurvival_05.pdf", width=16, height=20)#
+p#
+dev.off()#
+# ---------------------------------------------------------------- ##
+MPMresults.moth.2014.E.S$stable.stage.results$transition %<>% #
+	factor(#
+		., 	levels=unique(MPMresults.moth.2014.E.S$stable.stage.results$transition), 	ordered=T#
+)#
+#
+p <- plotElasticitySensitivity(#
+	dat = MPMresults.moth.2014.E.S$stable.stage.results %>% filter(SeedSurvival==0.5), #
+	x_variable = "SeedBankSize", #
+	y_variable = "`Stable Stage Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "`Moth Evidence`~`Parent Assignment`", #
+	xlab_label = "Seed Survival Rate", #
+	ylab_label = "Stable Stage Fraction", #
+	n_transitions_per_stage = 6,#
+	axis.text.x.size = 20,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 30, #
+	legend.text.size = 20,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20,#
+	color_values = stable.stage.colors(6)#
+)#
+pdf("figures/LTRE_moth_stable_stage_2014_SeedSurvival_05.pdf", width=16, height=20)#
+p#
+dev.off()#
+# ---------------------------------------------------------------- ##
+MPMresults.2013.E.S$stable.stage.results$transition %<>% #
+	factor(#
+		., 	levels=unique(MPMresults.2013.E.S$stable.stage.results$transition), 	ordered=T#
+)#
+#
+p <- plotElasticitySensitivity(#
+	dat = MPMresults.2013.E.S$stable.stage.results %>% filter(SeedSurvival==0.5), #
+	x_variable = "SeedBankSize", #
+	y_variable = "`Stable Stage Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "N.Stages~`Parent Assignment`", #
+	xlab_label = "Seed Survival Rate", #
+	ylab_label = "Stable Stage Fraction", #
+	n_transitions_per_stage = 9,#
+	axis.text.x.size = 12,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 20, #
+	legend.text.size = 12,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20,#
+	strip.text.y.angle = 0,#
+	color_values = stable.stage.colors(9)#
+)#
+pdf("figures/stable_stage_2013_SeedSurvival_05.pdf", width=18, height=20)#
+p#
+dev.off()#
+# ---------------------------------------------------------------- ##
+MPMresults.2014.E.S$stable.stage.results$transition %<>% #
+	factor(#
+		., 	levels=unique(MPMresults.2014.E.S$stable.stage.results$transition), 	ordered=T#
+)#
+#
+p <- plotElasticitySensitivity(#
+	dat = MPMresults.2014.E.S$stable.stage.results %>% filter(SeedSurvival==0.5), #
+	x_variable = "SeedBankSize", #
+	y_variable = "`Stable Stage Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "N.Stages~`Parent Assignment`", #
+	xlab_label = "Seed Survival Rate", #
+	ylab_label = "Stable Stage Fraction", #
+	n_transitions_per_stage = 9,#
+	axis.text.x.size = 12,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 20, #
+	legend.text.size = 12,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20,#
+	strip.text.y.angle = 0,#
+	color_values = stable.stage.colors(9)#
+)#
+pdf("figures/stable_stage_2014_SeedSurvival_05.pdf", width=18, height=20)#
+p#
+dev.off()
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files')
+stable.stage.colors <- colorRampPalette(c("grey","darkorange2", "darkred","blue"))#
+#
+stable.stage.colors <- colorRampPalette(c("grey","darkorange2", "darkred","blue","lightblue"))#
+# ---------------------------------------------------------------- ##
+# ---------------------------------------------------------------- ##
+MPMresults.moth.2013.E.S$stable.stage.results$transition %<>% #
+	factor(#
+		., 	levels=unique(MPMresults.moth.2013.E.S$stable.stage.results$transition), 	ordered=T#
+)#
+#
+p <- plotElasticitySensitivity(#
+	dat = MPMresults.moth.2013.E.S$stable.stage.results %>% filter(SeedSurvival==0.9), #
+	x_variable = "SeedBankSize", #
+	y_variable = "`Stable Stage Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "`Moth Evidence`~`Parent Assignment`", #
+	xlab_label = "Seed Bank Size", #
+	ylab_label = "Stable Stage Fraction", #
+	n_transitions_per_stage = 6,#
+	axis.text.x.size = 20,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 30, #
+	legend.text.size = 20,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20,#
+	color_values = stable.stage.colors(6)#
+)#
+pdf("figures/LTRE_moth_stable_stage_2013_SeedSurvival_09.pdf", width=16, height=20)#
+p#
+dev.off()#
+# ---------------------------------------------------------------- ##
+MPMresults.moth.2014.E.S$stable.stage.results$transition %<>% #
+	factor(#
+		., 	levels=unique(MPMresults.moth.2014.E.S$stable.stage.results$transition), 	ordered=T#
+)#
+#
+p <- plotElasticitySensitivity(#
+	dat = MPMresults.moth.2014.E.S$stable.stage.results %>% filter(SeedSurvival==0.9), #
+	x_variable = "SeedBankSize", #
+	y_variable = "`Stable Stage Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "`Moth Evidence`~`Parent Assignment`", #
+	xlab_label = "Seed Survival Rate", #
+	ylab_label = "Stable Stage Fraction", #
+	n_transitions_per_stage = 6,#
+	axis.text.x.size = 20,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 30, #
+	legend.text.size = 20,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20,#
+	color_values = stable.stage.colors(6)#
+)#
+pdf("figures/LTRE_moth_stable_stage_2014_SeedSurvival_09.pdf", width=16, height=20)#
+p#
+dev.off()#
+# ---------------------------------------------------------------- ##
+MPMresults.2013.E.S$stable.stage.results$transition %<>% #
+	factor(#
+		., 	levels=unique(MPMresults.2013.E.S$stable.stage.results$transition), 	ordered=T#
+)#
+#
+p <- plotElasticitySensitivity(#
+	dat = MPMresults.2013.E.S$stable.stage.results %>% filter(SeedSurvival==0.9), #
+	x_variable = "SeedBankSize", #
+	y_variable = "`Stable Stage Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "N.Stages~`Parent Assignment`", #
+	xlab_label = "Seed Survival Rate", #
+	ylab_label = "Stable Stage Fraction", #
+	n_transitions_per_stage = 9,#
+	axis.text.x.size = 12,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 20, #
+	legend.text.size = 12,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20,#
+	strip.text.y.angle = 0,#
+	color_values = stable.stage.colors(9)#
+)#
+pdf("figures/stable_stage_2013_SeedSurvival_09.pdf", width=18, height=20)#
+p#
+dev.off()#
+# ---------------------------------------------------------------- ##
+MPMresults.2014.E.S$stable.stage.results$transition %<>% #
+	factor(#
+		., 	levels=unique(MPMresults.2014.E.S$stable.stage.results$transition), 	ordered=T#
+)#
+#
+p <- plotElasticitySensitivity(#
+	dat = MPMresults.2014.E.S$stable.stage.results %>% filter(SeedSurvival==0.9), #
+	x_variable = "SeedBankSize", #
+	y_variable = "`Stable Stage Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "N.Stages~`Parent Assignment`", #
+	xlab_label = "Seed Survival Rate", #
+	ylab_label = "Stable Stage Fraction", #
+	n_transitions_per_stage = 9,#
+	axis.text.x.size = 12,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 20, #
+	legend.text.size = 12,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20,#
+	strip.text.y.angle = 0,#
+	color_values = stable.stage.colors(9)#
+)#
+pdf("figures/stable_stage_2014_SeedSurvival_09.pdf", width=18, height=20)#
+p#
+dev.off()
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files')
+stable.stage.colors <- colorRampPalette(c("grey","darkorange2", "darkred","blue"))#
+#
+stable.stage.colors <- colorRampPalette(c("grey","darkorange2", "darkred","blue","lightblue"))#
+# ---------------------------------------------------------------- ##
+# ---------------------------------------------------------------- ##
+MPMresults.moth.2013.E.S$stable.stage.results$transition %<>% #
+	factor(#
+		., 	levels=unique(MPMresults.moth.2013.E.S$stable.stage.results$transition), 	ordered=T#
+)#
+#
+p <- plotElasticitySensitivity(#
+	dat = MPMresults.moth.2013.E.S$stable.stage.results %>% filter(SeedSurvival==0.1), #
+	x_variable = "SeedBankSize", #
+	y_variable = "`Stable Stage Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "`Moth Evidence`~`Parent Assignment`", #
+	xlab_label = "Seed Bank Size", #
+	ylab_label = "Stable Stage Fraction", #
+	n_transitions_per_stage = 6,#
+	axis.text.x.size = 20,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 30, #
+	legend.text.size = 20,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20,#
+	color_values = stable.stage.colors(6)#
+)#
+pdf("figures/LTRE_moth_stable_stage_2013_SeedSurvival_01.pdf", width=16, height=20)#
+p#
+dev.off()#
+# ---------------------------------------------------------------- ##
+MPMresults.moth.2014.E.S$stable.stage.results$transition %<>% #
+	factor(#
+		., 	levels=unique(MPMresults.moth.2014.E.S$stable.stage.results$transition), 	ordered=T#
+)#
+#
+p <- plotElasticitySensitivity(#
+	dat = MPMresults.moth.2014.E.S$stable.stage.results %>% filter(SeedSurvival==0.1), #
+	x_variable = "SeedBankSize", #
+	y_variable = "`Stable Stage Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "`Moth Evidence`~`Parent Assignment`", #
+	xlab_label = "Seed Survival Rate", #
+	ylab_label = "Stable Stage Fraction", #
+	n_transitions_per_stage = 6,#
+	axis.text.x.size = 20,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 30, #
+	legend.text.size = 20,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20,#
+	color_values = stable.stage.colors(6)#
+)#
+pdf("figures/LTRE_moth_stable_stage_2014_SeedSurvival_01.pdf", width=16, height=20)#
+p#
+dev.off()#
+# ---------------------------------------------------------------- ##
+MPMresults.2013.E.S$stable.stage.results$transition %<>% #
+	factor(#
+		., 	levels=unique(MPMresults.2013.E.S$stable.stage.results$transition), 	ordered=T#
+)#
+#
+p <- plotElasticitySensitivity(#
+	dat = MPMresults.2013.E.S$stable.stage.results %>% filter(SeedSurvival==0.1), #
+	x_variable = "SeedBankSize", #
+	y_variable = "`Stable Stage Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "N.Stages~`Parent Assignment`", #
+	xlab_label = "Seed Survival Rate", #
+	ylab_label = "Stable Stage Fraction", #
+	n_transitions_per_stage = 9,#
+	axis.text.x.size = 12,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 20, #
+	legend.text.size = 12,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20,#
+	strip.text.y.angle = 0,#
+	color_values = stable.stage.colors(9)#
+)#
+pdf("figures/stable_stage_2013_SeedSurvival_01.pdf", width=18, height=20)#
+p#
+dev.off()#
+# ---------------------------------------------------------------- ##
+MPMresults.2014.E.S$stable.stage.results$transition %<>% #
+	factor(#
+		., 	levels=unique(MPMresults.2014.E.S$stable.stage.results$transition), 	ordered=T#
+)#
+#
+p <- plotElasticitySensitivity(#
+	dat = MPMresults.2014.E.S$stable.stage.results %>% filter(SeedSurvival==0.1), #
+	x_variable = "SeedBankSize", #
+	y_variable = "`Stable Stage Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "N.Stages~`Parent Assignment`", #
+	xlab_label = "Seed Survival Rate", #
+	ylab_label = "Stable Stage Fraction", #
+	n_transitions_per_stage = 9,#
+	axis.text.x.size = 12,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 20, #
+	legend.text.size = 12,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20,#
+	strip.text.y.angle = 0,#
+	color_values = stable.stage.colors(9)#
+)#
+pdf("figures/stable_stage_2014_SeedSurvival_01.pdf", width=18, height=20)#
+p#
+dev.off()
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files')
+stable.stage.colors <- colorRampPalette(c("grey","darkorange2", "darkred","blue"))#
+#
+stable.stage.colors <- colorRampPalette(c("grey","darkorange2", "darkred","blue","lightblue"))#
+# ---------------------------------------------------------------- ##
+# ---------------------------------------------------------------- ##
+MPMresults.moth.2013.E.S$stable.stage.results$transition %<>% #
+	factor(#
+		., 	levels=unique(MPMresults.moth.2013.E.S$stable.stage.results$transition), 	ordered=T#
+)#
+#
+p <- plotElasticitySensitivity(#
+	dat = MPMresults.moth.2013.E.S$stable.stage.results %>% filter(SeedSurvival==0.9), #
+	x_variable = "SeedBankSize", #
+	y_variable = "`Stable Stage Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "`Moth Evidence`~`Parent Assignment`", #
+	xlab_label = "Seed Bank Size", #
+	ylab_label = "Stable Stage Fraction", #
+	n_transitions_per_stage = 6,#
+	axis.text.x.size = 20,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 30, #
+	legend.text.size = 20,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20,#
+	color_values = stable.stage.colors(6)#
+)#
+pdf("figures/LTRE_moth_stable_stage_2013_SeedSurvival_09.pdf", width=16, height=20)#
+p#
+dev.off()#
+# ---------------------------------------------------------------- ##
+MPMresults.moth.2014.E.S$stable.stage.results$transition %<>% #
+	factor(#
+		., 	levels=unique(MPMresults.moth.2014.E.S$stable.stage.results$transition), 	ordered=T#
+)#
+#
+p <- plotElasticitySensitivity(#
+	dat = MPMresults.moth.2014.E.S$stable.stage.results %>% filter(SeedSurvival==0.9), #
+	x_variable = "SeedBankSize", #
+	y_variable = "`Stable Stage Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "`Moth Evidence`~`Parent Assignment`", #
+	xlab_label = "Seed Bank Size", #
+	ylab_label = "Stable Stage Fraction", #
+	n_transitions_per_stage = 6,#
+	axis.text.x.size = 20,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 30, #
+	legend.text.size = 20,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20,#
+	color_values = stable.stage.colors(6)#
+)#
+pdf("figures/LTRE_moth_stable_stage_2014_SeedSurvival_09.pdf", width=16, height=20)#
+p#
+dev.off()#
+# ---------------------------------------------------------------- ##
+MPMresults.2013.E.S$stable.stage.results$transition %<>% #
+	factor(#
+		., 	levels=unique(MPMresults.2013.E.S$stable.stage.results$transition), 	ordered=T#
+)#
+#
+p <- plotElasticitySensitivity(#
+	dat = MPMresults.2013.E.S$stable.stage.results %>% filter(SeedSurvival==0.9), #
+	x_variable = "SeedBankSize", #
+	y_variable = "`Stable Stage Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "N.Stages~`Parent Assignment`", #
+	xlab_label = "Seed Bank Size", #
+	ylab_label = "Stable Stage Fraction", #
+	n_transitions_per_stage = 9,#
+	axis.text.x.size = 12,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 20, #
+	legend.text.size = 12,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20,#
+	strip.text.y.angle = 0,#
+	color_values = stable.stage.colors(9)#
+)#
+pdf("figures/stable_stage_2013_SeedSurvival_09.pdf", width=18, height=20)#
+p#
+dev.off()#
+# ---------------------------------------------------------------- ##
+MPMresults.2014.E.S$stable.stage.results$transition %<>% #
+	factor(#
+		., 	levels=unique(MPMresults.2014.E.S$stable.stage.results$transition), 	ordered=T#
+)#
+#
+p <- plotElasticitySensitivity(#
+	dat = MPMresults.2014.E.S$stable.stage.results %>% filter(SeedSurvival==0.9), #
+	x_variable = "SeedBankSize", #
+	y_variable = "`Stable Stage Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "N.Stages~`Parent Assignment`", #
+	xlab_label = "Seed Bank Size", #
+	ylab_label = "Stable Stage Fraction", #
+	n_transitions_per_stage = 9,#
+	axis.text.x.size = 12,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 20, #
+	legend.text.size = 12,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20,#
+	strip.text.y.angle = 0,#
+	color_values = stable.stage.colors(9)#
+)#
+pdf("figures/stable_stage_2014_SeedSurvival_09.pdf", width=18, height=20)#
+p#
+dev.off()
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files')
+stable.stage.colors <- colorRampPalette(c("grey","darkorange2", "darkred","blue"))#
+#
+stable.stage.colors <- colorRampPalette(c("grey","darkorange2", "darkred","blue","lightblue"))#
+# ---------------------------------------------------------------- ##
+# ---------------------------------------------------------------- ##
+MPMresults.moth.2013.E.S$stable.stage.results$transition %<>% #
+	factor(#
+		., 	levels=unique(MPMresults.moth.2013.E.S$stable.stage.results$transition), 	ordered=T#
+)#
+#
+p <- plotElasticitySensitivity(#
+	dat = MPMresults.moth.2013.E.S$stable.stage.results %>% filter(SeedSurvival==0.5), #
+	x_variable = "SeedBankSize", #
+	y_variable = "`Stable Stage Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "`Moth Evidence`~`Parent Assignment`", #
+	xlab_label = "Seed Bank Size", #
+	ylab_label = "Stable Stage Fraction", #
+	n_transitions_per_stage = 6,#
+	axis.text.x.size = 20,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 30, #
+	legend.text.size = 20,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20,#
+	color_values = stable.stage.colors(6)#
+)#
+pdf("figures/LTRE_moth_stable_stage_2013_SeedSurvival_05.pdf", width=16, height=20)#
+p#
+dev.off()#
+# ---------------------------------------------------------------- ##
+MPMresults.moth.2014.E.S$stable.stage.results$transition %<>% #
+	factor(#
+		., 	levels=unique(MPMresults.moth.2014.E.S$stable.stage.results$transition), 	ordered=T#
+)#
+#
+p <- plotElasticitySensitivity(#
+	dat = MPMresults.moth.2014.E.S$stable.stage.results %>% filter(SeedSurvival==0.5), #
+	x_variable = "SeedBankSize", #
+	y_variable = "`Stable Stage Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "`Moth Evidence`~`Parent Assignment`", #
+	xlab_label = "Seed Bank Size", #
+	ylab_label = "Stable Stage Fraction", #
+	n_transitions_per_stage = 6,#
+	axis.text.x.size = 20,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 30, #
+	legend.text.size = 20,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20,#
+	color_values = stable.stage.colors(6)#
+)#
+pdf("figures/LTRE_moth_stable_stage_2014_SeedSurvival_05.pdf", width=16, height=20)#
+p#
+dev.off()#
+# ---------------------------------------------------------------- ##
+MPMresults.2013.E.S$stable.stage.results$transition %<>% #
+	factor(#
+		., 	levels=unique(MPMresults.2013.E.S$stable.stage.results$transition), 	ordered=T#
+)#
+#
+p <- plotElasticitySensitivity(#
+	dat = MPMresults.2013.E.S$stable.stage.results %>% filter(SeedSurvival==0.5), #
+	x_variable = "SeedBankSize", #
+	y_variable = "`Stable Stage Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "N.Stages~`Parent Assignment`", #
+	xlab_label = "Seed Bank Size", #
+	ylab_label = "Stable Stage Fraction", #
+	n_transitions_per_stage = 9,#
+	axis.text.x.size = 12,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 20, #
+	legend.text.size = 12,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20,#
+	strip.text.y.angle = 0,#
+	color_values = stable.stage.colors(9)#
+)#
+pdf("figures/stable_stage_2013_SeedSurvival_05.pdf", width=18, height=20)#
+p#
+dev.off()#
+# ---------------------------------------------------------------- ##
+MPMresults.2014.E.S$stable.stage.results$transition %<>% #
+	factor(#
+		., 	levels=unique(MPMresults.2014.E.S$stable.stage.results$transition), 	ordered=T#
+)#
+#
+p <- plotElasticitySensitivity(#
+	dat = MPMresults.2014.E.S$stable.stage.results %>% filter(SeedSurvival==0.5), #
+	x_variable = "SeedBankSize", #
+	y_variable = "`Stable Stage Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "N.Stages~`Parent Assignment`", #
+	xlab_label = "Seed Bank Size", #
+	ylab_label = "Stable Stage Fraction", #
+	n_transitions_per_stage = 9,#
+	axis.text.x.size = 12,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 20, #
+	legend.text.size = 12,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20,#
+	strip.text.y.angle = 0,#
+	color_values = stable.stage.colors(9)#
+)#
+pdf("figures/stable_stage_2014_SeedSurvival_05.pdf", width=18, height=20)#
+p#
+dev.off()
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files')
+stable.stage.colors <- colorRampPalette(c("grey","darkorange2", "darkred","blue"))#
+#
+stable.stage.colors <- colorRampPalette(c("grey","darkorange2", "darkred","blue","lightblue"))#
+# ---------------------------------------------------------------- ##
+# ---------------------------------------------------------------- ##
+MPMresults.moth.2013.E.S$stable.stage.results$transition %<>% #
+	factor(#
+		., 	levels=unique(MPMresults.moth.2013.E.S$stable.stage.results$transition), 	ordered=T#
+)#
+#
+p <- plotElasticitySensitivity(#
+	dat = MPMresults.moth.2013.E.S$stable.stage.results %>% filter(SeedSurvival==0.1), #
+	x_variable = "SeedBankSize", #
+	y_variable = "`Stable Stage Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "`Moth Evidence`~`Parent Assignment`", #
+	xlab_label = "Seed Bank Size", #
+	ylab_label = "Stable Stage Fraction", #
+	n_transitions_per_stage = 6,#
+	axis.text.x.size = 20,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 30, #
+	legend.text.size = 20,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20,#
+	color_values = stable.stage.colors(6)#
+)#
+pdf("figures/LTRE_moth_stable_stage_2013_SeedSurvival_01.pdf", width=16, height=20)#
+p#
+dev.off()#
+# ---------------------------------------------------------------- ##
+MPMresults.moth.2014.E.S$stable.stage.results$transition %<>% #
+	factor(#
+		., 	levels=unique(MPMresults.moth.2014.E.S$stable.stage.results$transition), 	ordered=T#
+)#
+#
+p <- plotElasticitySensitivity(#
+	dat = MPMresults.moth.2014.E.S$stable.stage.results %>% filter(SeedSurvival==0.1), #
+	x_variable = "SeedBankSize", #
+	y_variable = "`Stable Stage Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "`Moth Evidence`~`Parent Assignment`", #
+	xlab_label = "Seed Bank Size", #
+	ylab_label = "Stable Stage Fraction", #
+	n_transitions_per_stage = 6,#
+	axis.text.x.size = 20,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 30, #
+	legend.text.size = 20,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20,#
+	color_values = stable.stage.colors(6)#
+)#
+pdf("figures/LTRE_moth_stable_stage_2014_SeedSurvival_01.pdf", width=16, height=20)#
+p#
+dev.off()#
+# ---------------------------------------------------------------- ##
+MPMresults.2013.E.S$stable.stage.results$transition %<>% #
+	factor(#
+		., 	levels=unique(MPMresults.2013.E.S$stable.stage.results$transition), 	ordered=T#
+)#
+#
+p <- plotElasticitySensitivity(#
+	dat = MPMresults.2013.E.S$stable.stage.results %>% filter(SeedSurvival==0.1), #
+	x_variable = "SeedBankSize", #
+	y_variable = "`Stable Stage Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "N.Stages~`Parent Assignment`", #
+	xlab_label = "Seed Bank Size", #
+	ylab_label = "Stable Stage Fraction", #
+	n_transitions_per_stage = 9,#
+	axis.text.x.size = 12,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 20, #
+	legend.text.size = 12,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20,#
+	strip.text.y.angle = 0,#
+	color_values = stable.stage.colors(9)#
+)#
+pdf("figures/stable_stage_2013_SeedSurvival_01.pdf", width=18, height=20)#
+p#
+dev.off()#
+# ---------------------------------------------------------------- ##
+MPMresults.2014.E.S$stable.stage.results$transition %<>% #
+	factor(#
+		., 	levels=unique(MPMresults.2014.E.S$stable.stage.results$transition), 	ordered=T#
+)#
+#
+p <- plotElasticitySensitivity(#
+	dat = MPMresults.2014.E.S$stable.stage.results %>% filter(SeedSurvival==0.1), #
+	x_variable = "SeedBankSize", #
+	y_variable = "`Stable Stage Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "N.Stages~`Parent Assignment`", #
+	xlab_label = "Seed Bank Size", #
+	ylab_label = "Stable Stage Fraction", #
+	n_transitions_per_stage = 9,#
+	axis.text.x.size = 12,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 20, #
+	legend.text.size = 12,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20,#
+	strip.text.y.angle = 0,#
+	color_values = stable.stage.colors(9)#
+)#
+pdf("figures/stable_stage_2014_SeedSurvival_01.pdf", width=18, height=20)#
+p#
+dev.off()
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files')
+stable.stage.colors <- colorRampPalette(c("grey","darkorange2", "darkred","blue"))#
+#
+stable.stage.colors <- colorRampPalette(c("grey","darkorange2", "darkred","blue","lightblue"))#
+# ---------------------------------------------------------------- ##
+# ---------------------------------------------------------------- ##
+MPMresults.moth.2013.E.S$stable.stage.results$transition %<>% #
+	factor(#
+		., 	levels=unique(MPMresults.moth.2013.E.S$stable.stage.results$transition), 	ordered=T#
+)#
+#
+p <- plotElasticitySensitivity(#
+	dat = MPMresults.moth.2013.E.S$stable.stage.results %>% filter(SeedSurvival==0.1), #
+	x_variable = "SeedBankSize", #
+	y_variable = "`Stable Stage Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "`Moth Evidence`~`Parent Assignment`", #
+	xlab_label = "Seed Bank Size", #
+	ylab_label = "Stable Stage Distribution", #
+	n_transitions_per_stage = 6,#
+	axis.text.x.size = 20,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 30, #
+	legend.text.size = 20,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20,#
+	color_values = stable.stage.colors(6)#
+)#
+pdf("figures/LTRE_moth_stable_stage_2013_SeedSurvival_01.pdf", width=16, height=20)#
+p#
+dev.off()#
+# ---------------------------------------------------------------- ##
+MPMresults.moth.2014.E.S$stable.stage.results$transition %<>% #
+	factor(#
+		., 	levels=unique(MPMresults.moth.2014.E.S$stable.stage.results$transition), 	ordered=T#
+)#
+#
+p <- plotElasticitySensitivity(#
+	dat = MPMresults.moth.2014.E.S$stable.stage.results %>% filter(SeedSurvival==0.1), #
+	x_variable = "SeedBankSize", #
+	y_variable = "`Stable Stage Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "`Moth Evidence`~`Parent Assignment`", #
+	xlab_label = "Seed Bank Size", #
+	ylab_label = "Stable Stage Distribution", #
+	n_transitions_per_stage = 6,#
+	axis.text.x.size = 20,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 30, #
+	legend.text.size = 20,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20,#
+	color_values = stable.stage.colors(6)#
+)#
+pdf("figures/LTRE_moth_stable_stage_2014_SeedSurvival_01.pdf", width=16, height=20)#
+p#
+dev.off()#
+# ---------------------------------------------------------------- ##
+MPMresults.2013.E.S$stable.stage.results$transition %<>% #
+	factor(#
+		., 	levels=unique(MPMresults.2013.E.S$stable.stage.results$transition), 	ordered=T#
+)#
+#
+p <- plotElasticitySensitivity(#
+	dat = MPMresults.2013.E.S$stable.stage.results %>% filter(SeedSurvival==0.1), #
+	x_variable = "SeedBankSize", #
+	y_variable = "`Stable Stage Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "N.Stages~`Parent Assignment`", #
+	xlab_label = "Seed Bank Size", #
+	ylab_label = "Stable Stage Distribution", #
+	n_transitions_per_stage = 9,#
+	axis.text.x.size = 12,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 20, #
+	legend.text.size = 12,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20,#
+	strip.text.y.angle = 0,#
+	color_values = stable.stage.colors(9)#
+)#
+pdf("figures/stable_stage_2013_SeedSurvival_01.pdf", width=18, height=20)#
+p#
+dev.off()#
+# ---------------------------------------------------------------- ##
+MPMresults.2014.E.S$stable.stage.results$transition %<>% #
+	factor(#
+		., 	levels=unique(MPMresults.2014.E.S$stable.stage.results$transition), 	ordered=T#
+)#
+#
+p <- plotElasticitySensitivity(#
+	dat = MPMresults.2014.E.S$stable.stage.results %>% filter(SeedSurvival==0.1), #
+	x_variable = "SeedBankSize", #
+	y_variable = "`Stable Stage Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "N.Stages~`Parent Assignment`", #
+	xlab_label = "Seed Bank Size", #
+	ylab_label = "Stable Stage Distribution", #
+	n_transitions_per_stage = 9,#
+	axis.text.x.size = 12,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 20, #
+	legend.text.size = 12,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20,#
+	strip.text.y.angle = 0,#
+	color_values = stable.stage.colors(9)#
+)#
+pdf("figures/stable_stage_2014_SeedSurvival_01.pdf", width=18, height=20)#
+p#
+dev.off()
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files')
+stable.stage.colors <- colorRampPalette(c("grey","darkorange2", "darkred","blue"))#
+#
+stable.stage.colors <- colorRampPalette(c("grey","darkorange2", "darkred","blue","lightblue"))#
+# ---------------------------------------------------------------- ##
+# ---------------------------------------------------------------- ##
+MPMresults.moth.2013.E.S$stable.stage.results$transition %<>% #
+	factor(#
+		., 	levels=unique(MPMresults.moth.2013.E.S$stable.stage.results$transition), 	ordered=T#
+)#
+#
+p <- plotElasticitySensitivity(#
+	dat = MPMresults.moth.2013.E.S$stable.stage.results %>% filter(SeedSurvival==0.5), #
+	x_variable = "SeedBankSize", #
+	y_variable = "`Stable Stage Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "`Moth Evidence`~`Parent Assignment`", #
+	xlab_label = "Seed Bank Size", #
+	ylab_label = "Stable Stage Distribution", #
+	n_transitions_per_stage = 6,#
+	axis.text.x.size = 20,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 30, #
+	legend.text.size = 20,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20,#
+	color_values = stable.stage.colors(6)#
+)#
+pdf("figures/LTRE_moth_stable_stage_2013_SeedSurvival_05.pdf", width=16, height=20)#
+p#
+dev.off()#
+# ---------------------------------------------------------------- ##
+MPMresults.moth.2014.E.S$stable.stage.results$transition %<>% #
+	factor(#
+		., 	levels=unique(MPMresults.moth.2014.E.S$stable.stage.results$transition), 	ordered=T#
+)#
+#
+p <- plotElasticitySensitivity(#
+	dat = MPMresults.moth.2014.E.S$stable.stage.results %>% filter(SeedSurvival==0.5), #
+	x_variable = "SeedBankSize", #
+	y_variable = "`Stable Stage Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "`Moth Evidence`~`Parent Assignment`", #
+	xlab_label = "Seed Bank Size", #
+	ylab_label = "Stable Stage Distribution", #
+	n_transitions_per_stage = 6,#
+	axis.text.x.size = 20,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 30, #
+	legend.text.size = 20,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20,#
+	color_values = stable.stage.colors(6)#
+)#
+pdf("figures/LTRE_moth_stable_stage_2014_SeedSurvival_05.pdf", width=16, height=20)#
+p#
+dev.off()#
+# ---------------------------------------------------------------- ##
+MPMresults.2013.E.S$stable.stage.results$transition %<>% #
+	factor(#
+		., 	levels=unique(MPMresults.2013.E.S$stable.stage.results$transition), 	ordered=T#
+)#
+#
+p <- plotElasticitySensitivity(#
+	dat = MPMresults.2013.E.S$stable.stage.results %>% filter(SeedSurvival==0.5), #
+	x_variable = "SeedBankSize", #
+	y_variable = "`Stable Stage Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "N.Stages~`Parent Assignment`", #
+	xlab_label = "Seed Bank Size", #
+	ylab_label = "Stable Stage Distribution", #
+	n_transitions_per_stage = 9,#
+	axis.text.x.size = 12,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 20, #
+	legend.text.size = 12,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20,#
+	strip.text.y.angle = 0,#
+	color_values = stable.stage.colors(9)#
+)#
+pdf("figures/stable_stage_2013_SeedSurvival_05.pdf", width=18, height=20)#
+p#
+dev.off()#
+# ---------------------------------------------------------------- ##
+MPMresults.2014.E.S$stable.stage.results$transition %<>% #
+	factor(#
+		., 	levels=unique(MPMresults.2014.E.S$stable.stage.results$transition), 	ordered=T#
+)#
+#
+p <- plotElasticitySensitivity(#
+	dat = MPMresults.2014.E.S$stable.stage.results %>% filter(SeedSurvival==0.5), #
+	x_variable = "SeedBankSize", #
+	y_variable = "`Stable Stage Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "N.Stages~`Parent Assignment`", #
+	xlab_label = "Seed Bank Size", #
+	ylab_label = "Stable Stage Distribution", #
+	n_transitions_per_stage = 9,#
+	axis.text.x.size = 12,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 20, #
+	legend.text.size = 12,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20,#
+	strip.text.y.angle = 0,#
+	color_values = stable.stage.colors(9)#
+)#
+pdf("figures/stable_stage_2014_SeedSurvival_05.pdf", width=18, height=20)#
+p#
+dev.off()
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files')
+stable.stage.colors <- colorRampPalette(c("grey","darkorange2", "darkred","blue"))#
+#
+stable.stage.colors <- colorRampPalette(c("grey","darkorange2", "darkred","blue","lightblue"))#
+# ---------------------------------------------------------------- ##
+# ---------------------------------------------------------------- ##
+MPMresults.moth.2013.E.S$stable.stage.results$transition %<>% #
+	factor(#
+		., 	levels=unique(MPMresults.moth.2013.E.S$stable.stage.results$transition), 	ordered=T#
+)#
+#
+p <- plotElasticitySensitivity(#
+	dat = MPMresults.moth.2013.E.S$stable.stage.results %>% filter(SeedSurvival==0.9), #
+	x_variable = "SeedBankSize", #
+	y_variable = "`Stable Stage Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "`Moth Evidence`~`Parent Assignment`", #
+	xlab_label = "Seed Bank Size", #
+	ylab_label = "Stable Stage Distribution", #
+	n_transitions_per_stage = 6,#
+	axis.text.x.size = 20,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 30, #
+	legend.text.size = 20,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20,#
+	color_values = stable.stage.colors(6)#
+)#
+pdf("figures/LTRE_moth_stable_stage_2013_SeedSurvival_09.pdf", width=16, height=20)#
+p#
+dev.off()#
+# ---------------------------------------------------------------- ##
+MPMresults.moth.2014.E.S$stable.stage.results$transition %<>% #
+	factor(#
+		., 	levels=unique(MPMresults.moth.2014.E.S$stable.stage.results$transition), 	ordered=T#
+)#
+#
+p <- plotElasticitySensitivity(#
+	dat = MPMresults.moth.2014.E.S$stable.stage.results %>% filter(SeedSurvival==0.9), #
+	x_variable = "SeedBankSize", #
+	y_variable = "`Stable Stage Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "`Moth Evidence`~`Parent Assignment`", #
+	xlab_label = "Seed Bank Size", #
+	ylab_label = "Stable Stage Distribution", #
+	n_transitions_per_stage = 6,#
+	axis.text.x.size = 20,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 30, #
+	legend.text.size = 20,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20,#
+	color_values = stable.stage.colors(6)#
+)#
+pdf("figures/LTRE_moth_stable_stage_2014_SeedSurvival_09.pdf", width=16, height=20)#
+p#
+dev.off()#
+# ---------------------------------------------------------------- ##
+MPMresults.2013.E.S$stable.stage.results$transition %<>% #
+	factor(#
+		., 	levels=unique(MPMresults.2013.E.S$stable.stage.results$transition), 	ordered=T#
+)#
+#
+p <- plotElasticitySensitivity(#
+	dat = MPMresults.2013.E.S$stable.stage.results %>% filter(SeedSurvival==0.9), #
+	x_variable = "SeedBankSize", #
+	y_variable = "`Stable Stage Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "N.Stages~`Parent Assignment`", #
+	xlab_label = "Seed Bank Size", #
+	ylab_label = "Stable Stage Distribution", #
+	n_transitions_per_stage = 9,#
+	axis.text.x.size = 12,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 20, #
+	legend.text.size = 12,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20,#
+	strip.text.y.angle = 0,#
+	color_values = stable.stage.colors(9)#
+)#
+pdf("figures/stable_stage_2013_SeedSurvival_09.pdf", width=18, height=20)#
+p#
+dev.off()#
+# ---------------------------------------------------------------- ##
+MPMresults.2014.E.S$stable.stage.results$transition %<>% #
+	factor(#
+		., 	levels=unique(MPMresults.2014.E.S$stable.stage.results$transition), 	ordered=T#
+)#
+#
+p <- plotElasticitySensitivity(#
+	dat = MPMresults.2014.E.S$stable.stage.results %>% filter(SeedSurvival==0.9), #
+	x_variable = "SeedBankSize", #
+	y_variable = "`Stable Stage Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "N.Stages~`Parent Assignment`", #
+	xlab_label = "Seed Bank Size", #
+	ylab_label = "Stable Stage Distribution", #
+	n_transitions_per_stage = 9,#
+	axis.text.x.size = 12,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 20, #
+	legend.text.size = 12,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20,#
+	strip.text.y.angle = 0,#
+	color_values = stable.stage.colors(9)#
+)#
+pdf("figures/stable_stage_2014_SeedSurvival_09.pdf", width=18, height=20)#
+p#
+dev.off()
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files')
+stable.stage.colors <- colorRampPalette(c("grey","darkorange2", "darkred","blue"))#
+#
+stable.stage.colors <- colorRampPalette(c("grey","darkorange2", "darkred","blue","lightblue"))#
+# ---------------------------------------------------------------- ##
+# ---------------------------------------------------------------- ##
+MPMresults.moth.2013.E.S$stable.stage.results$transition %<>% #
+	factor(#
+		., 	levels=unique(MPMresults.moth.2013.E.S$stable.stage.results$transition), 	ordered=T#
+)#
+#
+p <- plotElasticitySensitivity(#
+	dat = MPMresults.moth.2013.E.S$stable.stage.results %>% filter(SeedBankSize==1000), #
+	x_variable = "SeedSurvival", #
+	y_variable = "`Stable Stage Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "`Moth Evidence`~`Parent Assignment`", #
+	xlab_label = "Seed Survival Rate", #
+	ylab_label = "Stable Stage Distribution", #
+	n_transitions_per_stage = 6,#
+	axis.text.x.size = 20,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 30, #
+	legend.text.size = 20,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20,#
+	color_values = stable.stage.colors(6)#
+)#
+pdf("figures/LTRE_moth_stable_stage_2013_seed_bank_1000.pdf", width=16, height=20)#
+p#
+dev.off()#
+# ---------------------------------------------------------------- ##
+MPMresults.moth.2014.E.S$stable.stage.results$transition %<>% #
+	factor(#
+		., 	levels=unique(MPMresults.moth.2014.E.S$stable.stage.results$transition), 	ordered=T#
+)#
+#
+p <- plotElasticitySensitivity(#
+	dat = MPMresults.moth.2014.E.S$stable.stage.results %>% filter(SeedBankSize==1000), #
+	x_variable = "SeedSurvival", #
+	y_variable = "`Stable Stage Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "`Moth Evidence`~`Parent Assignment`", #
+	xlab_label = "Seed Survival Rate", #
+	ylab_label = "Stable Stage Distribution", #
+	n_transitions_per_stage = 6,#
+	axis.text.x.size = 20,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 30, #
+	legend.text.size = 20,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20,#
+	color_values = stable.stage.colors(6)#
+)#
+pdf("figures/LTRE_moth_stable_stage_2014_seed_bank_1000.pdf", width=16, height=20)#
+p#
+dev.off()#
+# ---------------------------------------------------------------- ##
+MPMresults.2013.E.S$stable.stage.results$transition %<>% #
+	factor(#
+		., 	levels=unique(MPMresults.2013.E.S$stable.stage.results$transition), 	ordered=T#
+)#
+#
+p <- plotElasticitySensitivity(#
+	dat = MPMresults.2013.E.S$stable.stage.results %>% filter(SeedBankSize==1000), #
+	x_variable = "SeedSurvival", #
+	y_variable = "`Stable Stage Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "N.Stages~`Parent Assignment`", #
+	xlab_label = "Seed Survival Rate", #
+	ylab_label = "Stable Stage Distribution", #
+	n_transitions_per_stage = 9,#
+	axis.text.x.size = 12,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 20, #
+	legend.text.size = 12,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20,#
+	strip.text.y.angle = 0,#
+	color_values = stable.stage.colors(9)#
+)#
+pdf("figures/stable_stage_2013_seed_bank_1000.pdf", width=18, height=20)#
+p#
+dev.off()#
+# ---------------------------------------------------------------- ##
+MPMresults.2014.E.S$stable.stage.results$transition %<>% #
+	factor(#
+		., 	levels=unique(MPMresults.2014.E.S$stable.stage.results$transition), 	ordered=T#
+)#
+#
+p <- plotElasticitySensitivity(#
+	dat = MPMresults.2014.E.S$stable.stage.results %>% filter(SeedBankSize==1000), #
+	x_variable = "SeedSurvival", #
+	y_variable = "`Stable Stage Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "N.Stages~`Parent Assignment`", #
+	xlab_label = "Seed Survival Rate", #
+	ylab_label = "Stable Stage Distribution", #
+	n_transitions_per_stage = 9,#
+	axis.text.x.size = 12,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 20, #
+	legend.text.size = 12,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20,#
+	strip.text.y.angle = 0,#
+	color_values = stable.stage.colors(9)#
+)#
+pdf("figures/stable_stage_2014_seed_bank_1000.pdf", width=18, height=20)#
+p#
+dev.off()
+setwd('/Users/KSauby/Documents/Projects/Dissertation')
+bookdown::render_book('index.Rmd')
+setwd('/Users/KSauby/Documents/Projects/Dissertation')
+bookdown::render_book('index.Rmd')
+setwd('/Users/KSauby/Documents/Projects/Dissertation')
+bookdown::render_book('index.Rmd')
+str(MPMresults.moth.2013.E.S)
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files')
+MPMresults.moth.2013.E.S$repro.value.results$transition %<>% #
+	factor(#
+		., 	levels=unique(MPMresults.moth.2013.E.S$repro.value.results$transition), 	ordered=T#
+)
+levels(MPMresults.moth.2013.E.S$repro.value.results$transition)
+str(MPMresults.moth.2013.E.S$repro.value.results)
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files')
+plotElasticitySensitivity(#
+	dat = MPMresults.moth.2013.E.S$repro.value.results %>% filter(SeedBankSize==1000), #
+	x_variable = "SeedSurvival", #
+	y_variable = "`Reproductive Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "`Moth Evidence`~`Parent Assignment`", #
+	xlab_label = "Seed Survival Rate", #
+	ylab_label = "Reproductive Value", #
+	n_transitions_per_stage = 6,#
+	axis.text.x.size = 20,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 30, #
+	legend.text.size = 20,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20,#
+	color_values = stable.stage.colors(6)#
+)
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files')
+stable.stage.colors <- colorRampPalette(c("grey","darkorange2", "darkred","blue"))#
+#
+stable.stage.colors <- colorRampPalette(c("grey","darkorange2", "darkred","blue","lightblue"))#
+# ---------------------------------------------------------------- ##
+# ---------------------------------------------------------------- ##
+MPMresults.moth.2013.E.S$repro.value.results$transition %<>% #
+	factor(#
+		., 	levels=unique(MPMresults.moth.2013.E.S$repro.value.results$transition), 	ordered=T#
+)#
+#
+p <- plotElasticitySensitivity(#
+	dat = MPMresults.moth.2013.E.S$repro.value.results %>% filter(SeedBankSize==1000), #
+	x_variable = "SeedSurvival", #
+	y_variable = "`Reproductive Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "`Moth Evidence`~`Parent Assignment`", #
+	xlab_label = "Seed Survival Rate", #
+	ylab_label = "Reproductive Value", #
+	n_transitions_per_stage = 6,#
+	axis.text.x.size = 20,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 30, #
+	legend.text.size = 20,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20,#
+	color_values = stable.stage.colors(6)#
+)#
+pdf("figures/LTRE_moth_repro_value_2013_seed_bank_1000.pdf", width=16, height=20)#
+p#
+dev.off()#
+# ---------------------------------------------------------------- ##
+MPMresults.moth.2014.E.S$repro.value.results$transition %<>% #
+	factor(#
+		., 	levels=unique(MPMresults.moth.2014.E.S$repro.value.results$transition), 	ordered=T#
+)#
+#
+p <- plotElasticitySensitivity(#
+	dat = MPMresults.moth.2014.E.S$repro.value.results %>% filter(SeedBankSize==1000), #
+	x_variable = "SeedSurvival", #
+	y_variable = "`Reproductive Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "`Moth Evidence`~`Parent Assignment`", #
+	xlab_label = "Seed Survival Rate", #
+	ylab_label = "Reproductive Value", #
+	n_transitions_per_stage = 6,#
+	axis.text.x.size = 20,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 30, #
+	legend.text.size = 20,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20,#
+	color_values = stable.stage.colors(6)#
+)#
+pdf("figures/LTRE_moth_repro_value_2014_seed_bank_1000.pdf", width=16, height=20)#
+p#
+dev.off()#
+# ---------------------------------------------------------------- ##
+MPMresults.2013.E.S$repro.value.results$transition %<>% #
+	factor(#
+		., 	levels=unique(MPMresults.2013.E.S$repro.value.results$transition), 	ordered=T#
+)#
+#
+p <- plotElasticitySensitivity(#
+	dat = MPMresults.2013.E.S$repro.value.results %>% filter(SeedBankSize==1000), #
+	x_variable = "SeedSurvival", #
+	y_variable = "`Reproductive Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "N.Stages~`Parent Assignment`", #
+	xlab_label = "Seed Survival Rate", #
+	ylab_label = "Reproductive Value", #
+	n_transitions_per_stage = 9,#
+	axis.text.x.size = 12,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 20, #
+	legend.text.size = 12,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20,#
+	strip.text.y.angle = 0,#
+	color_values = stable.stage.colors(9)#
+)#
+pdf("figures/repro_value_2013_seed_bank_1000.pdf", width=18, height=20)#
+p#
+dev.off()#
+# ---------------------------------------------------------------- ##
+MPMresults.2014.E.S$repro.value.results$transition %<>% #
+	factor(#
+		., 	levels=unique(MPMresults.2014.E.S$repro.value.results$transition), 	ordered=T#
+)#
+#
+p <- plotElasticitySensitivity(#
+	dat = MPMresults.2014.E.S$repro.value.results %>% filter(SeedBankSize==1000), #
+	x_variable = "SeedSurvival", #
+	y_variable = "`Reproductive Value`", #
+	grouping_variable = "transition", #
+	facet_grid_var = "N.Stages~`Parent Assignment`", #
+	xlab_label = "Seed Survival Rate", #
+	ylab_label = "Reproductive Value", #
+	n_transitions_per_stage = 9,#
+	axis.text.x.size = 12,#
+	strip.text.x.size = 25,#
+	strip.text.y.size = 20, #
+	legend.text.size = 12,#
+	axis.title.x.size = 25, #
+	axis.title.y.size = 25, #
+	axis.text.y.size = 20,#
+	strip.text.y.angle = 0,#
+	color_values = stable.stage.colors(9)#
+)#
+pdf("figures/repro_value_2014_seed_bank_1000.pdf", width=18, height=20)#
+p#
+dev.off()
+setwd('/Users/KSauby/Documents/Projects/Dissertation')
+bookdown::render_book('index.Rmd')
 setwd('/Users/KSauby/Documents/Projects')
 setwd("./GTMNERRproc")#
 #setwd("./dataproc")#
