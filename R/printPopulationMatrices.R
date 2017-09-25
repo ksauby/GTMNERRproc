@@ -12,7 +12,7 @@ printPopulationMatrices <- function(data.list, parent.method, years, first.year)
 		dat <- eval(parse(text=data.list[i]))
 		cat("\\subsection{", dat$N.Stages.wo.break, "}", sep="")
 		for (j in 1:length(parent.methods)){
-			cat("\\subsubsection{ ``", parent.methods[j], "'' parent assignment method}", sep="")
+			cat("\\subsubsection{ ``", toTitleCase(parent.methods[j]), "'' parent assignment method}", sep="")
 			cat('\n')  
 			# PLANTS WITH FRUIT
 			temp <- xtable(
@@ -93,7 +93,7 @@ printPopulationMatrices <- function(data.list, parent.method, years, first.year)
 printLTREPopulationMatrices <- function(data.list, parent.method, years, first.year, LTRE_variable) {
 	for (i in 1:length(data.list)) {
 		dat <- eval(parse(text=data.list[i]))
-		cat("\\subsubsection{", LTRE_variable, "}", sep="")
+		cat("\\subsubsection{", toTitleCase(LTRE_variable), "}", sep="")
 		for (j in 1:length(parent.methods)){
 			cat('\n')  
 			print(

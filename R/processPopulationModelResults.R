@@ -19,6 +19,39 @@ processPopulationModelingResults <- function(
 		"N.Stages",
 		LTRE_variable
 	)
+	ss.variables <- c(
+		reshape.variables,
+		"stable.stage"
+	)
+	stable.stage.results <- MPMresults %>% 
+		dplyr::select(matches(paste(ss.variables, collapse="|"))) %>% 
+		reshape2::melt(id.vars=c(reshape.variables)) %>%
+		rowwise() %>%
+		mutate(
+			variable = gsub(pattern="stable.stage.?","",variable),
+			variable = gsub(pattern="[.]","->",variable)
+		) %>%
+		as.data.frame %>%
+		setnames("variable", "transition") %>%
+		setnames("value", "Stable Stage Value")
+	
+	r.variables <- c(
+		reshape.variables,
+		"repro.value"
+	)
+	repro.value.results <- MPMresults %>% 
+		dplyr::select(matches(paste(r.variables, collapse="|"))) %>% 
+		reshape2::melt(id.vars=c(reshape.variables)) %>%
+		rowwise() %>%
+		mutate(
+			variable = gsub(pattern="repro.value.?","",variable),
+			variable = gsub(pattern="[.]","->",variable)
+		) %>%
+		as.data.frame %>%
+		setnames("variable", "transition") %>%
+		setnames("value", "Reproductive Value")
+	
+	
 	s.variables <- c(
 		reshape.variables,
 		"sensitivities"
@@ -34,6 +67,11 @@ processPopulationModelingResults <- function(
 		as.data.frame %>%
 		setnames("variable", "transition") %>%
 		setnames("value", "sensitivity")
+	
+	
+	
+	
+	
 	e.variables <- c(
 		reshape.variables,
 		"elasticities"
@@ -51,6 +89,8 @@ processPopulationModelingResults <- function(
 		setnames("value", "elasticity")
 	return(list(
 		sensitivity.results = sensitivity.results,
-		elasticity.results = elasticity.results
+		elasticity.results = elasticity.results,
+		repro.value.results = repro.value.results,
+		stable.stage.results = stable.stage.results
 	))
 }

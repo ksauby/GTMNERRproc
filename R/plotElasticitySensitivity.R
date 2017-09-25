@@ -12,7 +12,17 @@
 #' @export
 
 
-plotElasticitySensitivity <- function(dat, x_variable, y_variable, grouping_variable, facet_grid_var, xlab_label, ylab_label, n_transitions_per_stage, strip.text.x.size, strip.text.y.size, legend.text.size, axis.text.x.size, axis.title.x.size, axis.title.y.size, axis.text.y.size, strip.text.y.angle=270) {
+plotElasticitySensitivity <- function(dat, x_variable, y_variable, grouping_variable, facet_grid_var, xlab_label, ylab_label, n_transitions_per_stage, strip.text.x.size, strip.text.y.size, legend.text.size, axis.text.x.size, axis.title.x.size, axis.title.y.size, axis.text.y.size, strip.text.y.angle=270, color_values =c(
+	black.red(n_transitions_per_stage),
+	black.yellow(n_transitions_per_stage),
+	black.blue.orange(n_transitions_per_stage),
+	black.red.yellow(n_transitions_per_stage),
+	black.purple.yellow(n_transitions_per_stage),
+	black.darkblue.yellow(n_transitions_per_stage),
+	black.brown.yellow(n_transitions_per_stage),
+	black.brown.grey(n_transitions_per_stage),
+	black.blue.brown(n_transitions_per_stage))
+)  {
 	ggplot(
 		dat,
 		aes(
@@ -26,21 +36,7 @@ plotElasticitySensitivity <- function(dat, x_variable, y_variable, grouping_vari
 		facet_grid(eval(parse(text=facet_grid_var))) +
 		xlab(xlab_label) +
 		ylab(ylab_label) +
-		scale_fill_manual(
-			values=c(
-				black.red(n_transitions_per_stage),
-				black.yellow(n_transitions_per_stage),
-				black.blue.orange(n_transitions_per_stage),
-	
-				black.red.yellow(n_transitions_per_stage),
-				black.purple.yellow(n_transitions_per_stage),
-				black.darkblue.yellow(n_transitions_per_stage),
-	
-				black.brown.yellow(n_transitions_per_stage),
-				black.brown.grey(n_transitions_per_stage),
-				black.blue.brown(n_transitions_per_stage)
-			)
-		) +
+		scale_fill_manual(values=c(color_values)) +
 		theme(
 			legend.position="bottom",
 			legend.text = element_text(size = legend.text.size),
