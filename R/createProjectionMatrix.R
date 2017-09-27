@@ -27,7 +27,10 @@ createProjectionMatrix <- function(
 	trans_data$Seed 	<- trans_data$Repro * SeedsPerFruit * SeedSurvival
 	# return projection matrix
 	projection.matrix(
-		trans_data, 
+		transitions = trans_data, 
+		stage=stage,
+		fate=fate, 
+		fertility=Repro,
 		add = c(
 			# transition from seed to seedling
 			2, 1, recruitment.rate

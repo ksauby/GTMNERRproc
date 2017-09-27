@@ -68,7 +68,10 @@ prepDataTransitionMatrix <- function(
 	# remove last stage
 	stages %<>% .[-length(.)]
 	proj_matrix <- projection.matrix(
-		trans01, 
+		transitions = trans01,
+		stage = stage,
+		fate = fate, 
+		fertility = Repro,
 		sort = stages
 	)
 	# create matrix of transition counts

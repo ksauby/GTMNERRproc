@@ -68,9 +68,9 @@ analyzeMatrixPopModels <- function(
 						)
 					)
 				pr <- pop.projection(
-					all_proj_matrix, 
-					n_per_stage$n, 
-					iterations=n.iter
+					A = all_proj_matrix, 
+					n = n_per_stage$n, 
+					iterations = n.iter
 				)
 				analysis.results <- eigen.analysis(all_proj_matrix)
 			
