@@ -16,7 +16,7 @@ printPopulationMatrices <- function(data.list, parent.method, years, first.year)
 			cat('\n')  
 			# PLANTS WITH FRUIT
 			temp <- xtable(
-				dat[[1]][[j]]$trans01 %>% filter(Repro2 > 0), 
+				dat[[1]][[j]]$trans01 %>% filter(Repro > 0), 
 				digits=0,
 				caption="Plants that produced fruit in fecundity-year z."
 			)
@@ -106,7 +106,7 @@ printLTREPopulationMatrices <- function(data.list, parent.method, years, first.y
 				) > 0 
 			) {
 				temp <- xtable(
-					dat[[4]][[j]]$trans01 %>% filter(Repro2 > 0), 
+					dat[[4]][[j]]$trans01 %>% filter(Repro > 0), 
 					digits=0,
 					caption="Plants that produced fruit in fecundity-year z."
 				)
