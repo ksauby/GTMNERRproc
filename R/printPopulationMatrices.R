@@ -19,8 +19,10 @@ printPopulationMatrices <- function(data.list, parent.method, years, first.year,
 				dat[[1]][[j]]$trans01 %>% filter(Repro > 0), 
 				digits=0,
 				caption=paste(
-					"Plants that produced fruit in fecundity-year",
-					first.year
+					"Plants that produced fruit in fecundity-year ",
+					first.year,
+					".",
+					sep=""
 				)
 			)
 			names(temp) <- c(
@@ -134,8 +136,10 @@ printLTREPopulationMatrices <- function(data.list, parent.method, years, first.y
 					dat[[4]][[j]]$trans01 %>% filter(Repro > 0), 
 					digits=0,
 					caption=paste(
-						"Plants that produced fruit in fecundity-year",
-						first.year
+						"Plants that produced fruit in fecundity-year ",
+						first.year,
+						".",
+						sep=""
 					)
 				)
 				names(temp) <- c(
@@ -164,7 +168,7 @@ printLTREPopulationMatrices <- function(data.list, parent.method, years, first.y
 							years,
 							" data for plants ",
 							LTRE_variable,
-							". Columns represent the stages parent plants were in during fecundity-year $z$ and the rows represent the stages of clonal offspring produced in fecundity-year $z+1$.",
+							" at some point during the study. Columns represent the stages parent plants were in during fecundity-year $z$ and the rows represent the stages of clonal offspring produced in fecundity-year $z+1$.",
 							sep=""
 						),
 						paste(
@@ -174,7 +178,7 @@ printLTREPopulationMatrices <- function(data.list, parent.method, years, first.y
 							years,
 							" data for plants ",
 							LTRE_variable,
-							".",
+							" at some point during the study.",
 							sep=""
 						)
 					)
@@ -194,7 +198,8 @@ printLTREPopulationMatrices <- function(data.list, parent.method, years, first.y
 							years,
 							" data for plants ",
 							LTRE_variable,
-							". Columns represent the stages plants were in during fecundity-year $z$ and the rows represent the stages the plants transitioned to in fecundity-year $z+1$."
+							" at some point during the study. Columns represent the stages plants were in during fecundity-year $z$ and the rows represent the stages the plants transitioned to in fecundity-year $z+1$.",
+							sep=""
 						),
 						paste(
 							"Growth, stasis, retrogression, and survival counts using the \`\`", 
@@ -203,7 +208,8 @@ printLTREPopulationMatrices <- function(data.list, parent.method, years, first.y
 							years,
 							" data for plants ",
 							LTRE_variable,
-							"."
+							" at some point during the study.",
+							sep=""
 						)
 					)
 				),
@@ -219,7 +225,7 @@ printLTREPopulationMatrices <- function(data.list, parent.method, years, first.y
 						first.year,
 						" for plants ",
 						LTRE_variable,
-						", using the \`\`", 
+						" at some point during the study, using the \`\`", 
 						parent.methods[j],
 						"\'\' parent assignment method.",
 						sep=""
