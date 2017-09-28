@@ -5,7 +5,7 @@
 \title{Successively print LTRE population matrices for inclusion in an appendix}
 \usage{
 printLTREPopulationMatrices(data.list, parent.method, years, first.year,
-  LTRE_variable, LTRE_variable_section_heading)
+  second.year, LTRE_variable, LTRE_variable_section_heading)
 }
 \arguments{
 \item{years}{}

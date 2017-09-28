@@ -4,7 +4,8 @@
 \alias{printPopulationMatrices}
 \title{Successively print population matrices for inclusion in an appendix}
 \usage{
-printPopulationMatrices(data.list, parent.method, years, first.year)
+printPopulationMatrices(data.list, parent.method, years, first.year,
+  second.year)
 }
 \arguments{
 \item{years}{}

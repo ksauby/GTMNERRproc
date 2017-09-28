@@ -7,7 +7,7 @@
 #'
 #' @export
 
-printPopulationMatrices <- function(data.list, parent.method, years, first.year) {
+printPopulationMatrices <- function(data.list, parent.method, years, first.year, second.year) {
 	for (i in 1:length(data.list)) {
 		dat <- eval(parse(text=data.list[i]))
 		cat("\\subsection{", dat$N.Stages.wo.break, "}", sep="")
@@ -18,9 +18,18 @@ printPopulationMatrices <- function(data.list, parent.method, years, first.year)
 			temp <- xtable(
 				dat[[1]][[j]]$trans01 %>% filter(Repro > 0), 
 				digits=0,
-				caption="Plants that produced fruit in fecundity-year z."
+				caption=paste(
+					"Plants that produced fruit in fecundity-year",
+					first.year
+				)
 			)
-			names(temp) <- c("PlantID", "Stage, z", "Reproduction, z", "Stage, z+1", "Reproduction, z+1")
+			names(temp) <- c(
+				"PlantID", 
+				paste("Stage,",first.year), 
+				paste("Reproduction,",first.year), 
+				paste("Stage",second.year), 
+				paste("Reproduction",second.year)
+			)
 			print(
 				temp,
 				include.rownames=F, caption.placement = "top"
@@ -30,13 +39,21 @@ printPopulationMatrices <- function(data.list, parent.method, years, first.year)
 				xtable(
 					dat[[1]][[j]]$clone_transition_counts, 
 					digits=0,
-					caption=paste(
-						"Clone production counts (",
-						years,
-						" data) using the \`\`", 
-						parent.methods[j],
-						"\'\' parent assignment method.",
-						sep=""
+					caption=c(
+						paste(
+							"Clone production counts (",
+							years,
+							" data) using the \`\`", 
+							parent.methods[j],
+							"\'\' parent assignment method. Columns represent the stages parent plants were in during fecundity-year $z$ and the rows represent the stages of clonal offspring produced in fecundity-year $z+1$."
+						),
+						paste(
+							"Clone production counts (",
+							years,
+							" data) using the \`\`", 
+							parent.methods[j],
+							"\'\' parent assignment method."
+						)
 					)
 				),
 				caption.placement = "top"
@@ -46,13 +63,21 @@ printPopulationMatrices <- function(data.list, parent.method, years, first.year)
 				xtable(
 					dat[[1]][[j]]$transition.counts, 
 					digits=0,
-					caption=paste(
-						"Growth, stasis, retrogression, and survival counts (",
-						years,
-						" data) using the \`\`",
-						parent.methods[j],
-						"\'\' parent assignment method.",
-						sep=""
+					caption=c(
+						paste(
+							"Growth, stasis, retrogression, and survival counts (",
+							years,
+							" data) using the \`\`", 
+							parent.methods[j],
+							"\'\' parent assignment method. Columns represent the stages plants were in during fecundity-year $z$ and the rows represent the stages the plants transitioned to in fecundity-year $z+1$."
+						),
+						paste(
+							"Growth, stasis, retrogression, and survival counts (",
+							years,
+							" data) using the \`\`", 
+							parent.methods[j],
+							"\'\' parent assignment method."
+						)
 					)
 				),
 				caption.placement = "top"
@@ -91,7 +116,7 @@ printPopulationMatrices <- function(data.list, parent.method, years, first.year)
 #' @export
 
 
-printLTREPopulationMatrices <- function(data.list, parent.method, years, first.year, LTRE_variable, LTRE_variable_section_heading) {
+printLTREPopulationMatrices <- function(data.list, parent.method, years, first.year, second.year, LTRE_variable, LTRE_variable_section_heading) {
 	for (i in 1:length(data.list)) {
 		dat <- eval(parse(text=data.list[i]))
 		cat("\\subsubsection{", LTRE_variable_section_heading, "}", sep="")
@@ -108,9 +133,18 @@ printLTREPopulationMatrices <- function(data.list, parent.method, years, first.y
 				temp <- xtable(
 					dat[[4]][[j]]$trans01 %>% filter(Repro > 0), 
 					digits=0,
-					caption="Plants that produced fruit in fecundity-year z."
+					caption=paste(
+						"Plants that produced fruit in fecundity-year",
+						first.year
+					)
 				)
-				names(temp) <- c("PlantID", "Stage, z", "Reproduction, z", "Stage, z+1", "Reproduction, z+1")
+				names(temp) <- c(
+					"PlantID", 
+					paste("Stage,",first.year), 
+					paste("Reproduction,",first.year), 
+					paste("Stage",second.year), 
+					paste("Reproduction",second.year)
+				)
 				print(
 					temp,
 					include.rownames=F, caption.placement = "top"
@@ -122,15 +156,27 @@ printLTREPopulationMatrices <- function(data.list, parent.method, years, first.y
 				xtable(
 					dat[[4]][[j]]$clone_transition_counts, 
 					digits=0, 
-					caption=paste(
-						"Clone production counts using the \`\`", 
-						parent.methods[j],
-						"\'\' parent assignment method for the ",
-						years,
-						" data for plants ",
-						LTRE_variable,
-						".",
-						sep=""
+					caption=c(
+						paste(
+							"Clone production counts using the \`\`", 
+							parent.methods[j],
+							"\'\' parent assignment method for the ",
+							years,
+							" data for plants ",
+							LTRE_variable,
+							". Columns represent the stages parent plants were in during fecundity-year $z$ and the rows represent the stages of clonal offspring produced in fecundity-year $z+1$.",
+							sep=""
+						),
+						paste(
+							"Clone production counts using the \`\`", 
+							parent.methods[j],
+							"\'\' parent assignment method for the ",
+							years,
+							" data for plants ",
+							LTRE_variable,
+							".",
+							sep=""
+						)
 					)
 				),
 				caption.placement = "top"
@@ -140,15 +186,25 @@ printLTREPopulationMatrices <- function(data.list, parent.method, years, first.y
 				xtable(
 					dat[[4]][[j]]$transition.counts, 
 					digits=0,
-					caption=paste(
-						"Growth, stasis, retrogression, and survival counts using the \`\`", 
-						parent.methods[j],
-						"\'\' parent assignment method for the ",
-						years,
-						" data for plants ",
-						LTRE_variable,
-						".",
-						sep=""
+					caption=c(
+						paste(
+							"Growth, stasis, retrogression, and survival counts using the \`\`", 
+							parent.methods[j],
+							"\'\' parent assignment method for the ",
+							years,
+							" data for plants ",
+							LTRE_variable,
+							". Columns represent the stages plants were in during fecundity-year $z$ and the rows represent the stages the plants transitioned to in fecundity-year $z+1$."
+						),
+						paste(
+							"Growth, stasis, retrogression, and survival counts using the \`\`", 
+							parent.methods[j],
+							"\'\' parent assignment method for the ",
+							years,
+							" data for plants ",
+							LTRE_variable,
+							"."
+						)
 					)
 				),
 				caption.placement = "top"
