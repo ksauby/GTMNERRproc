@@ -101,7 +101,7 @@ printLTREPopulationMatrices <- function(data.list, parent.method, years, first.y
 			if (
 				(
 					dat[[4]][[j]]$trans01 %>% 
-						filter(Repro2 > 0) %$% 
+						filter(Repro > 0) %$% 
 						dim(.)[1]
 				) > 0 
 			) {
