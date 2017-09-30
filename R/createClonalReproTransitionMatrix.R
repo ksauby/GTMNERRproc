@@ -55,31 +55,33 @@ createClonalReproTransitionMatrix <- function(
 	clone_table %<>% .[match(stages, .$Row.names), ] %>%
 		.[, -1] %>% 
 		as.matrix(rownames="Row.names")
-	# make sure I have all of the columns that I need	
-	fill = matrix(
-		0, 
-		length(stages), 
-		length(stages[!(stages %in% colnames(clone_table))]), 
-		dimnames=list(
-			stages, 
-			stages[!(stages %in% colnames(clone_table))]
+	# make sure I have all of the columns that I need
+	if (length(stages[!(stages %in% colnames(clone_table))]) > 0) {
+		fill = matrix(
+			0, 
+			length(stages), 
+			length(stages[!(stages %in% colnames(clone_table))]), 
+			dimnames=list(
+				stages, 
+				stages[!(stages %in% colnames(clone_table))]
+			)
 		)
-	)
-	clone_table <- merge(
-		fill, 
-		clone_table, 
-		by="row.names", 
-		all=T)
-	rownames(clone_table) <- clone_table$Row.names
-	clone_table[is.na(clone_table)] <- 0
+		clone_table <- merge(
+			fill, 
+			clone_table, 
+			by="row.names", 
+			all=T)
+		rownames(clone_table) <- clone_table$Row.names
+		clone_table[is.na(clone_table)] <- 0
+	}	
 	# reorder rows
-	clone_table %<>% .[, stages]
+	clone_table %<>% .[stages, stages]
 	# function output
-	clone_transition_rates = calculateTransitionRates(
+	clone_transition_rates <- calculateTransitionRates(
 		clone_table, 
 		as.vector(n_per_stage$n)
 	)
-	clone_transition_counts = clone_table
+	clone_transition_counts <- clone_table
 	return(list(
 		clone_transition_counts = clone_transition_counts, 
 		clone_transition_rates = clone_transition_rates,
