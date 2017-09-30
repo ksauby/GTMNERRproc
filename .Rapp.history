@@ -1,24 +1,277 @@
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
-Plant.Surveys.TM.random.parent <- Plant.Surveys.by.Year.random.parent %>% 	#
+setwd('/Users/KSauby/Documents/Dropbox/Teaching/2017/Fall_BSC2011')
+library(ProjectTemplate)#
+#
+# create.project("grades")#
+load.project()
+X412075.BURLEIGH75MU.E1
+setwd('/Users/KSauby/Documents/Dropbox/Teaching/2017/Fall_BSC2011/analysis')
+Canvas <- X25.Sep.22.05.Grades.BSC2011#
+names(Canvas)[1:5] <- c(#
+	"Student",#
+	"ID",#
+	"SIS User ID",#
+	"SIS Login ID",#
+	"Section"#
+)#
+Canvas %<>% dplyr::select(#
+	Student,#
+	ID,#
+	`SIS User ID`,#
+	`SIS Login ID`,#
+	Section#
+)#
+Canvas %<>% filter(!(is.na(ID)))#
+dim(Canvas)#
+#
+###############################################################################
+Exam1 <-
+)
+library(magrittr)
+library(dplyr)
+setwd('/Users/KSauby/Documents/Dropbox/Teaching/2017/Fall_BSC2011/analysis')
+Canvas <- X25.Sep.22.05.Grades.BSC2011#
+names(Canvas)[1:5] <- c(#
+	"Student",#
+	"ID",#
+	"SIS User ID",#
+	"SIS Login ID",#
+	"Section"#
+)#
+Canvas %<>% dplyr::select(#
+	Student,#
+	ID,#
+	`SIS User ID`,#
+	`SIS Login ID`,#
+	Section#
+)#
+Canvas %<>% filter(!(is.na(ID)))#
+dim(Canvas)#
+#
+###############################################################################
+Exam1 <-
+(#
+		X412075.BURLEIGH75MU.E1 %>%#
+		mutate(#
+			`Exam 1 (3326487)` = EXAM.1.MAKEUP,#
+			`SIS User ID` = ID#
+		)#
+	)#
+	%>%#
+dplyr::select(#
+	`SIS User ID`,#
+	`Exam 1 (3326487)`#
+)
+setwd('/Users/KSauby/Documents/Dropbox/Teaching/2017/Fall_BSC2011/analysis')
+Exam1 <-
+(#
+		X412075.BURLEIGH75MU.E1 %>%#
+		mutate(#
+			`Exam 1 (3326487)` = EXAM.1.MAKEUP,#
+			`SIS User ID` = ID#
+		)#
+	) %>%#
+dplyr::select(#
+	`SIS User ID`,#
+	`Exam 1 (3326487)`#
+)
+setwd('/Users/KSauby/Documents/Dropbox/Teaching/2017/Fall_BSC2011/analysis')
+Exam1 %<>% merge(Canvas, by="SIS User ID", all=T)#
+#
+# make sure there aren't duplicate records for students#
+Exam1 %<>% #
+	group_by(`SIS User ID`) %>% #
+	mutate(N.records = length(`Exam 1 (3326487)`)) %>%#
+	as.data.frame#
+#
+Exam1 %>% filter(N.records > 1)#
+Exam1 %>% filter(N.records < 1)#
+#
+Exam1 %<>% dplyr::select(-N.records)#
+#
+Exam1[which(is.na(Exam1$`Exam 1 (3326487)`)), ] %>% write.csv("Exam1_missing_grades.csv")#
+#
+Exam1[which(Exam1$`Exam 1 (3326487)` < 0), ]#
+#Exam1[which(Exam1$`Exam 1 (3191318)` < 40), ]
+head(Exam1)
+setwd('/Users/KSauby/Documents/Dropbox/Teaching/2017/Fall_BSC2011/analysis')
+Exam1 %<>%#
 	as.data.frame %>%#
- 	droplevels %>% #
- 	dplyr::select(#
- 		Species,#
-		PlantID,#
-		stage,#
-		FecundityYear,#
- 		Network,#
- 		Island,#
-		SizewClones_t,#
-		Fruit_Flowers_t,#
- 		CA_t,#
-		ME_t,#
-		Old_Moth_Evidence_t,#
-		DeadMissingbyEndofYear,#
-		CAPlantPres,#
-		MothPlantPres#
- 	) %>%#
-	filter(FecundityYear > 2012)
+	filter(`Exam 1 (3326487)` > 0)#
+	dplyr::select(#
+		Student,#
+		ID,#
+		`SIS User ID`,#
+		`SIS Login ID`,#
+		Section,#
+		`Exam 1 (3326487)`#
+	) %>% arrange(Student)
+setwd('/Users/KSauby/Documents/Dropbox/Teaching/2017/Fall_BSC2011/analysis')
+Exam1 %<>%#
+	as.data.frame %>%#
+	filter(`Exam 1 (3326487)` > 0) %>%#
+	dplyr::select(#
+		Student,#
+		ID,#
+		`SIS User ID`,#
+		`SIS Login ID`,#
+		Section,#
+		`Exam 1 (3326487)`#
+	) %>% arrange(Student)
+dim(Exam1)
+setwd('/Users/KSauby/Documents/Dropbox/Teaching/2017/Fall_BSC2011/analysis')
+Exam1 %>% write.csv("../data/Exam1_makeup.csv", row.names = F)
+setwd('/Users/KSauby/Documents/Dropbox/Teaching/2017/Fall_BSC2011/analysis')
+Canvas <- X25.Sep.22.05.Grades.BSC2011#
+names(Canvas)[1:5] <- c(#
+	"Student",#
+	"ID",#
+	"SIS User ID",#
+	"SIS Login ID",#
+	"Section"#
+)#
+Canvas %<>% dplyr::select(#
+	Student,#
+	ID,#
+	`SIS User ID`,#
+	`SIS Login ID`,#
+	Section#
+)#
+Canvas %<>% filter(!(is.na(ID)))#
+dim(Canvas)
+setwd('/Users/KSauby/Documents/Dropbox/Teaching/2017/Fall_BSC2011/analysis')
+Exam1 <-
+(#
+		X412075.BURLEIGH75MU.E1 %>%#
+		mutate(#
+			`Exam 1 (3326487)` = EXAM.1.MAKEUP,#
+			`SIS User ID` = ID#
+		)#
+	) %>%#
+dplyr::select(#
+	`SIS User ID`,#
+	`Exam 1 (3326487)`#
+)
+head(Exam1)
+setwd('/Users/KSauby/Documents/Dropbox/Teaching/2017/Fall_BSC2011/analysis')
+X412075.BURLEIGH75MU.E1
+setwd('/Users/KSauby/Documents/Dropbox/Teaching/2017/Fall_BSC2011/analysis')
+Exam1 <-
+(#
+		X412075.BURLEIGH75MU.E1 %>%#
+		mutate(#
+			`Exam 1 (3326487)` = EXAM.1.MAKEUP,#
+			`SIS User ID` = SIS.Login.ID#
+		)#
+	) %>%#
+dplyr::select(#
+	`SIS User ID`,#
+	`Exam 1 (3326487)`#
+)
+setwd('/Users/KSauby/Documents/Dropbox/Teaching/2017/Fall_BSC2011/analysis')
+Exam1 %<>% merge(Canvas, by="SIS User ID"
+)
+dim(Exam1)
+head(Canvas)
+setwd('/Users/KSauby/Documents/Dropbox/Teaching/2017/Fall_BSC2011/analysis')
+Exam1 <-
+(#
+		X412075.BURLEIGH75MU.E1 %>%#
+		mutate(#
+			`Exam 1 (3326487)` = EXAM.1.MAKEUP,#
+			`SIS Login ID` = SIS.Login.ID#
+		)#
+	) %>%#
+dplyr::select(#
+	`SIS User ID`,#
+	`Exam 1 (3326487)`#
+)
+Exam1 <- (#
+		X412075.BURLEIGH75MU.E1 %>%#
+		mutate(#
+			`Exam 1 (3326487)` = EXAM.1.MAKEUP,#
+			`SIS Login ID` = SIS.Login.ID#
+		)#
+	) %>%#
+dplyr::select(#
+	`SIS Login ID`,#
+	`Exam 1 (3326487)`#
+)
+Exam1
+setwd('/Users/KSauby/Documents/Dropbox/Teaching/2017/Fall_BSC2011/analysis')
+Exam1 %<>% merge(Canvas, by="SIS User ID", all=T)
+setwd('/Users/KSauby/Documents/Dropbox/Teaching/2017/Fall_BSC2011/analysis')
+Exam1 %<>% merge(Canvas, by="SIS Login ID", all=T)
+Exam1
+setwd('/Users/KSauby/Documents/Dropbox/Teaching/2017/Fall_BSC2011/analysis')
+Canvas <- X25.Sep.22.05.Grades.BSC2011#
+names(Canvas)[1:5] <- c(#
+	"Student",#
+	"ID",#
+	"SIS User ID",#
+	"SIS Login ID",#
+	"Section"#
+)#
+Canvas %<>% dplyr::select(#
+	Student,#
+	ID,#
+	`SIS User ID`,#
+	`SIS Login ID`,#
+	Section#
+)#
+Canvas %<>% filter(!(is.na(ID)))#
+dim(Canvas)
+setwd('/Users/KSauby/Documents/Dropbox/Teaching/2017/Fall_BSC2011/analysis')
+Canvas <- X25.Sep.22.05.Grades.BSC2011#
+names(Canvas)[1:5] <- c(#
+	"Student",#
+	"ID",#
+	"SIS User ID",#
+	"SIS Login ID",#
+	"Section"#
+)#
+Canvas %<>% dplyr::select(#
+	Student,#
+	ID,#
+	`SIS User ID`,#
+	`SIS Login ID`,#
+	Section#
+)#
+Canvas %<>% filter(!(is.na(ID)))#
+dim(Canvas)#
+#
+###############################################################################
+Exam1 <-
+(#
+		X412075.BURLEIGH75MU.E1 %>%#
+		mutate(#
+			`Exam 1 (3326487)` = EXAM.1.MAKEUP,#
+			`SIS Login ID` = SIS.Login.ID#
+		)#
+	) %>%#
+dplyr::select(#
+	`SIS Login ID`,#
+	`Exam 1 (3326487)`#
+)
+setwd('/Users/KSauby/Documents/Dropbox/Teaching/2017/Fall_BSC2011/analysis')
+Exam1 %<>% merge(Canvas, by="SIS Login ID")
+dim(Exam1)
+setwd('/Users/KSauby/Documents/Dropbox/Teaching/2017/Fall_BSC2011/analysis')
+Exam1 %<>%#
+	as.data.frame %>%#
+	filter(`Exam 1 (3326487)` > 0) %>%#
+	dplyr::select(#
+		Student,#
+		ID,#
+		`SIS User ID`,#
+		`SIS Login ID`,#
+		Section,#
+		`Exam 1 (3326487)`#
+	) %>% arrange(Student)#
+#
+Exam1 %>% write.csv("../data/Exam1_makeup.csv", row.names = F)
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files/2013_2014/LTRE')
+Moth.Evidence.Present
+head(clonal_reproduction_info_for_transition_matrix.largest.parent)
 setwd('/Users/KSauby/Documents/Projects/Dissertation')
 library(ProjectTemplate)#
 load.project()#
@@ -37,6 +290,60 @@ load.project()#
 #
 setwd('/Users/KSauby/Documents/Projects/marsico-time-series')#
 load.project()
+dim(clonal_reproduction_info_for_transition_matrix.largest.parent)
+head(clonal_reproduction_info_for_transition_matrix.largest.parent)
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files/processing')
+# create lists of data#
+ldf <- list(#
+	Plant.Surveys.TM.largest.parent,#
+	Plant.Surveys.TM.random.parent,#
+	Plant.Surveys.TM.random.largest.parent#
+)#
+cldf <- list(#
+	clonal_reproduction_info_for_transition_matrix.largest.parent,#
+	clonal_reproduction_info_for_transition_matrix.random.parent,#
+	clonal_reproduction_info_for_transition_matrix.random.largest.parent#
+)
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files/processing')
+# ALL PLANT DATA: add new columns#
+ldf %<>%#
+	map(#
+		~ mutate(#
+			., #
+			allYears 	= TransitionYear, #
+			Year 		= FecundityYear#
+		)#
+	)#
+# CLONE DATA: add plant info#
+cldf %<>%#
+	map(#
+		~ merge(#
+			., #
+			Plant.Info.Analysis, #
+			by.x="Parent.ID",#
+			by.y="PlantID"#
+		)#
+	)#
+if (length(ldf) != length(cldf)) {#
+	stop(paste("ldf and cldf are of different lengths"))#
+}
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files')
+TransitionYear 	= 2013
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files')
+source("processing/mutate_ldf_cldf.R")
+str(cldf)
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files')
+source("processing/values_same_across_all_models.R")#
+source("processing/prep_ldf_cldf.R")#
+# ---------------------------------------------------------------------------- ##
+TransitionYear 	= 2013#
+source("processing/mutate_ldf_cldf.R")
+str(cldf)
+i=1
+head(cldf[[i]])
+dim(cldf[[i]])
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+SizeClass
 setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files/processing')
 SeedSurvival 	= c(0.001, 0.005, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, #
 					0.9, 0.95, 0.99)#
@@ -78,7 +385,7 @@ Number.Stages.7 =#
 Number.Stages.7.wo.break =#
 	"Scheme 5: 7 Size Classes (1,2,3,4,5-7,8-10,11+ Segments)"#
 # plotting#
-#
+other.legend.text.size = 30#
 es.n_transitions_per_stage = 9#
 es.axis.text.x.size = 18#
 es.strip.text.x.size = 26#
@@ -87,139 +394,159 @@ es.legend.text.size = 12#
 es.axis.title.x.size = 28#
 es.axis.title.y.size = 28#
 es.axis.text.y.size = 20#
-es.strip.text.y.angle = 0
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files')
-source("processing/values_same_across_all_models.R")#
-source("processing/prep_ldf_cldf.R")
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files/2013_2014/LTRE')
-# ALL PLANT DATA: add new columns, filter out mothpresence = 1#
-ldf %<>%#
-	map(#
-		~ mutate(#
-			., #
-			allYears 	= TransitionYear, #
-			Year 		= FecundityYear#
+es.strip.text.y.angle = 0#
+es.color_values = stable.stage.colors(9)#
+#
+repro.strip.text.x.size = 25#
+repro.legend.text.size = 25#
+LTRE.n_transitions_per_stage = 6#
+LTRE.axis.text.x.size = 20#
+LTRE.strip.text.x.size = 25#
+LTRE.strip.text.y.size = 30#
+LTRE.legend.text.size = 20#
+LTRE.axis.title.x.size = 25#
+LTRE.axis.title.y.size = 25#
+LTRE.axis.text.y.size = 20#
+LTRE.strip.text.y.angle = 270#
+LTRE.color_values = stable.stage.colors(6)#
+#
+LTRE.facet_grid_var = "`Moth Evidence`~`Parent Assignment`"#
+facet_grid_var = "N.Stages~`Parent Assignment`"#
+#
+stable.stage.colors <- colorRampPalette(c("grey","darkorange2", "darkred","blue"))#
+stable.stage.colors <- colorRampPalette(c("grey","darkorange2", "darkred","blue","lightblue"))#
+#
+LTRE.special.facet_grid = "`Parent Assignment`~`Moth Evidence`"#
+#
+grouping_variable = "transition"#
+#
+SeedBankSize_x_variable = "SeedBankSize"#
+SeedBankSize_xlab_label = "Seed Bank Size"#
+#
+SeedSurvival_x_variable = "SeedSurvival"#
+SeedSurvival_xlab_label = "Seed Survival Rate"#
+#
+StableStage_ylab_label = "Stable Stage Distribution"#
+StableStage_y_variable = "`Stable Stage Value`"#
+elasticity_y_variable = "elasticity"#
+elasticity_ylab_label = "Elasticity Value"#
+repro_y_variable = "`Reproductive Value`"#
+repro_ylab_label = "Reproductive Value"#
+#
+sensitivity_y_variable = "sensitivity"#
+sensitivity_ylab_label = "Sensitivity Value"
+SizeClass <- SizeClass.4
+Dat <- cldf[[i]]
+Dat <- ldf[[i]]
+clonal_repro_dataset <- cldf[[i]]
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+Dat_census <- Dat %>% #
+	rowwise() %>%#
+	mutate(#
+		stage=replace(#
+			stage, #
+			which(stage=="Adult"),#
+			cut(SizewClones_t, SizeClass, include.lowest=T, labels=FALSE)#
 		)#
-	) %>%#
-	map(#
-		~ filter(#
-			.,#
-			MothPlantPres == 1#
+	)#
+	Dat_census %<>%#
+		dplyr::select(#
+			FecundityYear, #
+			PlantID, #
+			stage, #
+			Fruit_Flowers_t#
 		)#
+	colnames(Dat_census)[which(names(Dat_census) == "FecundityYear")] <- "Year"#
+	# merge year with year - 1#
+	trans <- subset(#
+		merge(#
+			Dat_census, #
+			Dat_census, #
+			by = "PlantID", #
+			sort = FALSE#
+		), #
+		Year.x == Year.y - 1#
+	)#
+	# rename rows and columns#
+	rownames(trans) <- 1:nrow(trans)#
+	colnames(trans)[which(names(trans) == "Year.x")] 			<- "Year"#
+	colnames(trans)[which(names(trans) == "stage.x")] 			<- "stage"#
+	colnames(trans)[which(names(trans) == "Fruit_Flowers_t.x")] <- "Repro"#
+	colnames(trans)[which(names(trans) == "Year.y")] 			<- "Year2"#
+	colnames(trans)[which(names(trans) == "stage.y")] 			<- "fate"#
+	colnames(trans)[which(names(trans) == "Fruit_Flowers_t.y")] <- "Repro2"#
+#
+	# year-specific transition matrix#
+	trans01 <- trans %>%#
+		filter(Year == TransitionYear) %>%#
+		dplyr::select(PlantID, stage, Repro, fate, Repro2)
+head(trans01)
+dim(trans01)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+TransitionYear
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+stages <- c(unique(c(trans01$stage, trans01$fate))) %>% #
+		as.numeric %>%#
+		na.omit %>% #
+		as.vector %>%#
+		sort#
+	stages <- c("Seed", "Seedling", stages, "dead")#
+	trans01$stage %<>% factor(., levels=stages[-length(stages)], ordered=T)#
+	trans01$fate %<>% factor(., levels=stages, ordered=T)#
+	# remove last stage#
+	stages %<>% .[-length(.)]
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+proj_matrix <- projection.matrix(#
+		transitions = trans01,#
+		stage = stage,#
+		fate = fate, #
+		fertility = Repro,#
+		sort = stages#
+	)#
+	# create matrix of transition counts#
+	transition.counts <- table(trans01$fate, trans01$stage)
+head(clonal_repro_dataset)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+createClonalReproTransitionMatrix(#
+		clonal_repro_dataset, #
+		trans01,#
+		stages#
 	)
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files')
-ldf <- cldf <- NULL#
-source("processing/prep_ldf_cldf.R")#
-source("processing/LTRE_values.R")#
-# ---------------------------------------------------------------------------- ##
-TransitionYear 	= 2013
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files/2013_2014/LTRE')
-# ALL PLANT DATA: add new columns, filter out mothpresence = 1#
-ldf %<>%#
-	map(#
-		~ mutate(#
-			., #
-			allYears 	= TransitionYear, #
-			Year 		= FecundityYear#
-		)#
-	) %>%#
-	map(#
-		~ filter(#
-			.,#
-			MothPlantPres == 1#
-		)#
-	)
-str(%>%#
-+ 	map(#
-+ 		~ filter(#
-+ 			.,#
-+ 			MothPlantPres == 1#
-+ 		)#
-+ 	)#
+dim(clonal_repro_dataset)
+head(clonal_repro_dataset)
+length(unique(clonal_repro_dataset$Offspring.ID))
+str(clonal_reproduction_info_for_transition_matrix.largest.parent)
+str(Plant.Surveys.TM.largest.parent)
+unique(Plant.Surveys.TM.largest.parent$Species)
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files/processing')
+# create lists of data#
+ldf <- list(#
+	Plant.Surveys.TM.largest.parent,#
+	Plant.Surveys.TM.random.parent,#
+	Plant.Surveys.TM.random.largest.parent#
+)#
+cldf <- list(#
+	clonal_reproduction_info_for_transition_matrix.largest.parent %>% #
+		filter(Species=="Opuntia stricta"),#
+	clonal_reproduction_info_for_transition_matrix.random.parent %>% #
+		filter(Species=="Opuntia stricta"),#
+	clonal_reproduction_info_for_transition_matrix.random.largest.parent %>% #
+		filter(Species=="Opuntia stricta")#
 )
-str(%>%#
-+ 	map(#
-+ 		~ filter(#
-+ 			.,#
-+ 			MothPlantPres == 1#
-+ 		)#
-+ 	)#
-)
-str(ldf)
-ldf %>%#
-+ 	map(#
-+ 		~ filter(#
-+ 			.,#
-+ 			Fruit_Flowers_t == 1#
-+ 		)#
-+ 	)
-ldf %>%#
-+ 	map(#
-+ 		~ filter(#
-+ 			.,#
-+ 			Fruit_Flowers_t == 1#
-+ 		)#
-+ 	)
-ldf %>%#
-+ 	map(#
-+ 		~ filter(#
-+ 			.,#
-+ 			Fruit_Flowers_t > 0#
-+ 		)#
-+ 	)
-str(ldf)
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files/2013_2014/LTRE')
-# ALL PLANT DATA: add new columns, filter out mothpresence = 1#
-ldf %<>%#
-	map(#
-		~ mutate(#
-			., #
-			allYears 	= TransitionYear, #
-			Year 		= FecundityYear#
-		)#
-	) %>%#
-	map(#
-		~ filter(#
-			.,#
-			MothPlantPres == 1#
-		)#
-	) %>%#
-	map(#
-		~ filter(#
-			.,#
-			Fruit_Flowers_t > 0#
-		)#
-	)
-str(ldf)
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files')
-ldf <- cldf <- NULL#
-source("processing/prep_ldf_cldf.R")#
-source("processing/LTRE_values.R")#
-# ---------------------------------------------------------------------------- ##
-TransitionYear 	= 2013
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files/2013_2014/LTRE')
-# ALL PLANT DATA: add new columns, filter out mothpresence = 0#
-ldf %<>%#
-	map(#
-		~ mutate(#
-			., #
-			allYears 	= TransitionYear, #
-			Year 		= FecundityYear#
-		)#
-	) %>%#
-	map(#
-		~ filter(#
-			.,#
-			MothPlantPres == 0#
-		)#
-	) %>%#
-	map(#
-		~ filter(#
-			.,#
-			Fruit_Flowers_t > 0#
-		)#
-	)
-ldf
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+clonal_repro_dat <- clonal_repro_dataset %>%#
+		filter(#
+			Year == TransitionYear,#
+			Species == "Opuntia stricta"#
+		)
+str(clonal_repro_dataset)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+clonal_repro_dat <- clonal_repro_dataset %>%#
+		filter(#
+			minFecundityYear == TransitionYear,#
+			Species == "Opuntia stricta"#
+		)
+dim(clonal_repro_dat)
 setwd('/Users/KSauby/Documents/Projects')
 setwd("./GTMNERRproc")#
 #setwd("./dataproc")#
@@ -229,281 +556,6 @@ setwd("./GTMNERRproc")#
 #devtools::test()#
 devtools::document()#
 devtools::install()
-setwd('/Users/KSauby/Documents/Projects/Dissertation')
-bookdown::render_book('index.Rmd')
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files')
-ldf <- cldf <- NULL#
-source("processing/prep_ldf_cldf.R")#
-source("processing/LTRE_values.R")#
-# ---------------------------------------------------------------------------- ##
-TransitionYear 	= 2013
-str(ldf)
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files/2013_2014/LTRE')
-ldf %<>%#
-	map(#
-		~ mutate(#
-			., #
-			allYears 	= TransitionYear, #
-			Year 		= FecundityYear#
-		)#
-	) %>%#
-	map(#
-		~ filter(#
-			.,#
-			MothPlantPres == 1#
-		)#
-	) %>%#
-	map(#
-		~ filter(#
-			.,#
-			Fruit_Flowers_t > 0#
-		)#
-	)
-ldf
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files/2013_2014/LTRE')
-# ALL PLANT DATA: add new columns, filter out mothpresence = 1#
-ldf %<>%#
-	map(#
-		~ mutate(#
-			., #
-			allYears 	= TransitionYear, #
-			Year 		= FecundityYear#
-		)#
-	) %>%#
-	map(#
-		~ filter(#
-			.,#
-			MothPlantPres == 0#
-		)#
-	) %>%#
-	map(#
-		~ filter(#
-			.,#
-			Fruit_Flowers_t > 0#
-		)#
-	)
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files')
-ldf <- cldf <- NULL#
-source("processing/prep_ldf_cldf.R")#
-source("processing/LTRE_values.R")#
-# ---------------------------------------------------------------------------- ##
-TransitionYear 	= 2013
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files/2013_2014/LTRE')
-# ALL PLANT DATA: add new columns, filter out mothpresence = 1#
-ldf %<>%#
-	map(#
-		~ mutate(#
-			., #
-			allYears 	= TransitionYear, #
-			Year 		= FecundityYear#
-		)#
-	) %>%#
-	map(#
-		~ filter(#
-			.,#
-			MothPlantPres == 0#
-		)#
-	) %>%#
-	map(#
-		~ filter(#
-			.,#
-			Fruit_Flowers_t > 0#
-		)#
-	)
-ldf
-setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-#' Successively print population matrices for inclusion in an appendix#
-#'#
-#' @param data.list#
-#' @param parent.method#
-#' @param  years#
-#' @param first.year#
-#'#
-#' @export#
-#
-printPopulationMatrices <- function(data.list, parent.method, years, first.year) {#
-	for (i in 1:length(data.list)) {#
-		dat <- eval(parse(text=data.list[i]))#
-		cat("\\subsection{", dat$N.Stages.wo.break, "}", sep="")#
-		for (j in 1:length(parent.methods)){#
-			cat("\\subsubsection{ ``", toTitleCase(parent.methods[j]), "'' parent assignment method}", sep="")#
-			cat('\n')  #
-			# PLANTS WITH FRUIT#
-			temp <- xtable(#
-				dat[[1]][[j]]$trans01 %>% filter(Repro > 0), #
-				digits=0,#
-				caption=paste(#
-					"Plants that produced fruit in fecundity-year",#
-					first.year#
-				)#
-			)#
-			names(temp) <- c(#
-				"PlantID", #
-				paste("Stage,",first.year), #
-				paste("Reproduction,",first.year), #
-				paste("Stage",first.year+1), #
-				paste("Reproduction",first.year+1), #
-			)#
-			print(#
-				temp,#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			# CLONE TRANSITION COUNTS	#
-			print(#
-				xtable(#
-					dat[[1]][[j]]$clone_transition_counts, #
-					digits=0,#
-					caption=paste(#
-						"Clone production counts (",#
-						years,#
-						" data) using the \`\`", #
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				caption.placement = "top"#
-			)#
-			# GROWTH, STATIS, RETROGRESSION, SURVIVAL#
-			print(#
-				xtable(#
-					dat[[1]][[j]]$transition.counts, #
-					digits=0,#
-					caption=paste(#
-						"Growth, stasis, retrogression, and survival counts (",#
-						years,#
-						" data) using the \`\`",#
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				caption.placement = "top"#
-			)#
-			# NUMBER OF INDIVIDUALS PER STAGE#
-			print(#
-				xtable(#
-					dat[[1]][[j]]$n_per_stage %>% filter(stage!="Seed"), #
-					digits=0,#
-					caption=paste(#
-						"Number of individuals per stage in ",#
-						first.year,#
-						" using the \`\`",#
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			cat("\\clearpage")#
-		}#
-	}#
-}#
-#' Successively print LTRE population matrices for inclusion in an appendix#
-#'#
-#' @param data.list#
-#' @param parent.method#
-#' @param  years#
-#' @param first.year#
-#' @param LTRE_variable#
-#'#
-#' @importFrom tools toTitleCase#
-#' @export#
-printLTREPopulationMatrices <- function(data.list, parent.method, years, first.year, LTRE_variable, LTRE_variable_section_heading) {#
-	for (i in 1:length(data.list)) {#
-		dat <- eval(parse(text=data.list[i]))#
-		cat("\\subsubsection{", LTRE_variable_section_heading, "}", sep="")#
-		for (j in 1:length(parent.methods)){#
-			cat('\n')  #
-			# PLANTS WITH FRUIT#
-			if (#
-				(#
-					dat[[4]][[j]]$trans01 %>% #
-						filter(Repro > 0) %$% #
-						dim(.)[1]#
-				) > 0 #
-			) {#
-				temp <- xtable(#
-					dat[[4]][[j]]$trans01 %>% filter(Repro > 0), #
-					digits=0,#
-					caption=paste(#
-						"Plants that produced fruit in fecundity-year",#
-						first.year#
-					)#
-				)#
-				names(temp) <- c(#
-					"PlantID", #
-					paste("Stage,",first.year), #
-					paste("Reproduction,",first.year), #
-					paste("Stage",first.year+1), #
-					paste("Reproduction",first.year+1), #
-				)#
-				print(#
-					temp,#
-					include.rownames=F, caption.placement = "top"#
-				)	#
-			}#
-			# CLONE TRANSITION COUNTS	#
-			print(#
-				xtable(#
-					dat[[4]][[j]]$clone_transition_counts, #
-					digits=0, #
-					caption=paste(#
-						"Clone production counts using the \`\`", #
-						parent.methods[j],#
-						"\'\' parent assignment method for the ",#
-						years,#
-						" data for plants ",#
-						LTRE_variable,#
-						". Columns represent the stage plants were in during fecundity-year $z$ and the rows represent the stage the plants transitioned to in fecundity-year $z+1.",#
-						sep=""#
-					)#
-				),#
-				caption.placement = "top"#
-			)#
-			# GROWTH, STATIS, RETROGRESSION, SURVIVAL#
-			print(#
-				xtable(#
-					dat[[4]][[j]]$transition.counts, #
-					digits=0,#
-					caption=paste(#
-						"Growth, stasis, retrogression, and survival counts using the \`\`", #
-						parent.methods[j],#
-						"\'\' parent assignment method for the ",#
-						years,#
-						" data for plants ",#
-						LTRE_variable,#
-						".",#
-						sep=""#
-					)#
-				),#
-				caption.placement = "top"#
-			)#
-			# NUMBER OF INDIVIDUALS PER STAGE#
-			print(#
-				xtable(#
-					dat[[4]][[j]]$n_per_stage %>% filter(stage!="Seed"), #
-					digits=0,#
-					caption=paste(#
-						"Number of individuals per stage in ",#
-						first.year,#
-						" for plants ",#
-						LTRE_variable,#
-						", using the \`\`", #
-						parent.methods[j],#
-						"\'\' parent assignment method.",#
-						sep=""#
-					)#
-				),#
-				include.rownames=F, caption.placement = "top"#
-			)#
-			cat("\\clearpage")#
-		}#
-	}#
-}
-setwd('/Users/KSauby/Documents/Projects/Dissertation')
-bookdown::render_book('index.Rmd')
 setwd('/Users/KSauby/Documents/Projects')
 setwd("./GTMNERRproc")#
 #setwd("./dataproc")#

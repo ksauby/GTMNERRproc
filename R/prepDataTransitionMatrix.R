@@ -77,8 +77,13 @@ prepDataTransitionMatrix <- function(
 	# create matrix of transition counts
 	transition.counts <- table(trans01$fate, trans01$stage)
 	# create clonal matrices
+	clonal_repro_dat <- clonal_repro_dataset %>%
+		filter(
+			minFecundityYear == TransitionYear,
+			Species == "Opuntia stricta"
+		)
 	clonal.matrices <- createClonalReproTransitionMatrix(
-		clonal_repro_dataset, 
+		clonal_repro_dat, 
 		trans01,
 		stages
 	)

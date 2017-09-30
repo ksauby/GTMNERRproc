@@ -10,7 +10,7 @@ calculateStageDistribution <- function(dataset) {
 			group_by(stage) %>%
 			summarise(count = n()) %>%
 			mutate(
-				Stable Stage Value = count/sum(count),s
+				`Stable Stage Value` = count/sum(count),
 				SeedBankSize = "Observed", 
 				SeedsPerFruit = "Observed", 
 				SeedSurvival = "Observed"
