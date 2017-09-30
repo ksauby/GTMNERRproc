@@ -55,6 +55,25 @@ createClonalReproTransitionMatrix <- function(
 	clone_table %<>% .[match(stages, .$Row.names), ] %>%
 		.[, -1] %>% 
 		as.matrix(rownames="Row.names")
+	# make sure I have all of the columns that I need	
+	fill = matrix(
+		0, 
+		length(stages), 
+		length(stages[!(stages %in% colnames(clone_table))]), 
+		dimnames=list(
+			stages, 
+			stages[!(stages %in% colnames(clone_table))]
+		)
+	)
+	clone_table <- merge(
+		fill, 
+		clone_table, 
+		by="row.names", 
+		all=T)
+	rownames(clone_table) <- clone_table$Row.names
+	clone_table[is.na(clone_table)] <- 0
+	# reorder rows
+	clone_table %<>% .[, stages]
 	# function output
 	clone_transition_rates = calculateTransitionRates(
 		clone_table, 
