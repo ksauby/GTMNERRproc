@@ -4,7 +4,7 @@
 \alias{calculateStageDistribution}
 \title{Calculate Observed Stage Distribution}
 \usage{
-calculateStageDistribution(dataset)
+calculateStageDistribution(dataset, n.seeds)
 }
 \arguments{
 \item{dataset}{}

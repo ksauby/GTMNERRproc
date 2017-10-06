@@ -7,7 +7,7 @@
 plotSeedBankSeedSurvival(dat, x_variable, grouping_variable, facet_grid_var,
   legend_title = "Parent Assignment\\nMethod", xlab_label, strip.text.size,
   x_breaks, x_limits, x_coord_trans, y_breaks, y_limits, strip.text.y.angle,
-  axis.text.x.size)
+  axis.text.x.size, legend.text.size, legend.title.size)
 }
 \arguments{
 \item{dat}{Dataset}
