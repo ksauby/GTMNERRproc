@@ -1,5 +1,4 @@
-
-#' Run Population Models
+#' Run Boostrapped Population Models
 #'
 #' @description Prepare transition matrices, then project matrices and analyze results.
 #'
@@ -14,7 +13,7 @@
 #'
 #' @export
 
-runPopulationModels <- function(ldf, cldf, SizeClass, TransitionYear, SeedSurvival, SeedBankSize, SeedsPerFruit, n.iter) {
+runBootstrapPopulationModels <- function(ldf, cldf, SizeClass, TransitionYear, SeedSurvival, SeedBankSize, SeedsPerFruit, n.iter, n_bootstraps) {
 	# prep data transition matrices, then analyze
 	SizeClass <- SizeClass
 	A <- list()
@@ -28,14 +27,16 @@ runPopulationModels <- function(ldf, cldf, SizeClass, TransitionYear, SeedSurviv
 	}
 	B <- list()
 	for (i in 1:length(ldf)) {
-		B[[i]] <- analyzeMatrixPopModels(
+		B[[i]] <- analyzeBootstrappedMatrixPopModels(
 			trans_data = A[[i]],
+			clonal_repro_dataset = cldf[[i]],
 			SizeClass,
 			TransitionYear,
 			SeedSurvival,
 			SeedBankSize,
 			SeedsPerFruit,
-			n.iter
+			n.iter,
+			n_bootstraps
 		)
 	}
 	return(list(
