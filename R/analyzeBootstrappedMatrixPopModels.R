@@ -34,7 +34,9 @@ analyzeBootstrappedMatrixPopModels <- function(
 ) {
 	A <- vector("list", length(SeedBankSize))	
 	for (i in 1:length(SeedBankSize)) {
+		A[[i]] <- vector("list", length(SeedsPerFruit))	
 		for (j in 1:length(SeedsPerFruit)) {
+			A[[i]][[j]] <- vector("list", length(SeedSurvival))	
 			for (k in 1:length(SeedSurvival)) {
 				for (l in 1:n_bootstraps) {
 					# -------------------------------------------------------- #
