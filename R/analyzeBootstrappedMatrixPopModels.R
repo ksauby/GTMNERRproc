@@ -156,16 +156,36 @@ analyzeBootstrappedMatrixPopModels <- function(
 							Bootstrap		= l
 						)		
 					} else {
-						repros <- paste(
+						# repro values
+						x <- paste(
 							"repro.value.", 
 							trans_data$stages, 
 							sep=""
 						)
-						x <- rep("NA", length(repros)) %>% t %>% as.data.frame
-						colnames(x) <- repros
-						
-						FINISH CREATING NULL
-						
+						repro.value.dat <- rep("NA", length(x)) %>%
+							t %>% as.data.frame
+						colnames(repro.value.dat) <- x
+						# stable stages
+						x <- paste(
+							"stable.stage.", 
+							trans_data$stages, 
+							sep=""
+						)
+						stable.stage.dat <- rep("NA", length(x)) %>%
+							t %>% as.data.frame
+						colnames(stable.stage.dat) <- x
+						# sensitivities
+						x <- expand.grid(trans_data$stages,trans_data$stages)
+						y <- paste("sensitivies.", x$Var1,"-",x$Var2,sep="")
+						sensitivities <- rep("NA", length(y)) %>%
+							t %>% as.data.frame
+						colnames(sensitivities) <- y
+						# elasticities
+						x <- expand.grid(trans_data$stages,trans_data$stages)
+						y <- paste("elasticities.", x$Var1,"-",x$Var2,sep="")
+						elasticities <- rep("NA", length(y)) %>%
+							t %>% as.data.frame
+						colnames(elasticities) <- y						
 						A[[i]][[j]][[k]][[l]] <- data.frame(
 							repro.value.dat,
 							stable.stage.dat,
@@ -177,6 +197,7 @@ analyzeBootstrappedMatrixPopModels <- function(
 							SeedsPerFruit 	= SeedsPerFruit[j],
 							SeedSurvival 	= SeedSurvival[k],
 							Bootstrap		= l
+						)
 					}
 							
 				}
