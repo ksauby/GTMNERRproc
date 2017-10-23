@@ -1,311 +1,792 @@
-setwd('/Users/KSauby/Documents/Dropbox/Teaching/2017/Fall_BSC2011')
-library(ProjectTemplate)#
-#
-# create.project("grades")#
-load.project()
-X412075.BURLEIGH75MU.E1
-setwd('/Users/KSauby/Documents/Dropbox/Teaching/2017/Fall_BSC2011/analysis')
-Canvas <- X25.Sep.22.05.Grades.BSC2011#
-names(Canvas)[1:5] <- c(#
-	"Student",#
-	"ID",#
-	"SIS User ID",#
-	"SIS Login ID",#
-	"Section"#
-)#
-Canvas %<>% dplyr::select(#
-	Student,#
-	ID,#
-	`SIS User ID`,#
-	`SIS Login ID`,#
-	Section#
-)#
-Canvas %<>% filter(!(is.na(ID)))#
-dim(Canvas)#
-#
-###############################################################################
-Exam1 <-
-)
-library(magrittr)
-library(dplyr)
-setwd('/Users/KSauby/Documents/Dropbox/Teaching/2017/Fall_BSC2011/analysis')
-Canvas <- X25.Sep.22.05.Grades.BSC2011#
-names(Canvas)[1:5] <- c(#
-	"Student",#
-	"ID",#
-	"SIS User ID",#
-	"SIS Login ID",#
-	"Section"#
-)#
-Canvas %<>% dplyr::select(#
-	Student,#
-	ID,#
-	`SIS User ID`,#
-	`SIS Login ID`,#
-	Section#
-)#
-Canvas %<>% filter(!(is.na(ID)))#
-dim(Canvas)#
-#
-###############################################################################
-Exam1 <-
-(#
-		X412075.BURLEIGH75MU.E1 %>%#
-		mutate(#
-			`Exam 1 (3326487)` = EXAM.1.MAKEUP,#
-			`SIS User ID` = ID#
-		)#
-	)#
-	%>%#
-dplyr::select(#
-	`SIS User ID`,#
-	`Exam 1 (3326487)`#
-)
-setwd('/Users/KSauby/Documents/Dropbox/Teaching/2017/Fall_BSC2011/analysis')
-Exam1 <-
-(#
-		X412075.BURLEIGH75MU.E1 %>%#
-		mutate(#
-			`Exam 1 (3326487)` = EXAM.1.MAKEUP,#
-			`SIS User ID` = ID#
-		)#
-	) %>%#
-dplyr::select(#
-	`SIS User ID`,#
-	`Exam 1 (3326487)`#
-)
-setwd('/Users/KSauby/Documents/Dropbox/Teaching/2017/Fall_BSC2011/analysis')
-Exam1 %<>% merge(Canvas, by="SIS User ID", all=T)#
-#
-# make sure there aren't duplicate records for students#
-Exam1 %<>% #
-	group_by(`SIS User ID`) %>% #
-	mutate(N.records = length(`Exam 1 (3326487)`)) %>%#
-	as.data.frame#
-#
-Exam1 %>% filter(N.records > 1)#
-Exam1 %>% filter(N.records < 1)#
-#
-Exam1 %<>% dplyr::select(-N.records)#
-#
-Exam1[which(is.na(Exam1$`Exam 1 (3326487)`)), ] %>% write.csv("Exam1_missing_grades.csv")#
-#
-Exam1[which(Exam1$`Exam 1 (3326487)` < 0), ]#
-#Exam1[which(Exam1$`Exam 1 (3191318)` < 40), ]
-head(Exam1)
-setwd('/Users/KSauby/Documents/Dropbox/Teaching/2017/Fall_BSC2011/analysis')
-Exam1 %<>%#
-	as.data.frame %>%#
-	filter(`Exam 1 (3326487)` > 0)#
-	dplyr::select(#
-		Student,#
-		ID,#
-		`SIS User ID`,#
-		`SIS Login ID`,#
-		Section,#
-		`Exam 1 (3326487)`#
-	) %>% arrange(Student)
-setwd('/Users/KSauby/Documents/Dropbox/Teaching/2017/Fall_BSC2011/analysis')
-Exam1 %<>%#
-	as.data.frame %>%#
-	filter(`Exam 1 (3326487)` > 0) %>%#
-	dplyr::select(#
-		Student,#
-		ID,#
-		`SIS User ID`,#
-		`SIS Login ID`,#
-		Section,#
-		`Exam 1 (3326487)`#
-	) %>% arrange(Student)
-dim(Exam1)
-setwd('/Users/KSauby/Documents/Dropbox/Teaching/2017/Fall_BSC2011/analysis')
-Exam1 %>% write.csv("../data/Exam1_makeup.csv", row.names = F)
-setwd('/Users/KSauby/Documents/Dropbox/Teaching/2017/Fall_BSC2011/analysis')
-Canvas <- X25.Sep.22.05.Grades.BSC2011#
-names(Canvas)[1:5] <- c(#
-	"Student",#
-	"ID",#
-	"SIS User ID",#
-	"SIS Login ID",#
-	"Section"#
-)#
-Canvas %<>% dplyr::select(#
-	Student,#
-	ID,#
-	`SIS User ID`,#
-	`SIS Login ID`,#
-	Section#
-)#
-Canvas %<>% filter(!(is.na(ID)))#
-dim(Canvas)
-setwd('/Users/KSauby/Documents/Dropbox/Teaching/2017/Fall_BSC2011/analysis')
-Exam1 <-
-(#
-		X412075.BURLEIGH75MU.E1 %>%#
-		mutate(#
-			`Exam 1 (3326487)` = EXAM.1.MAKEUP,#
-			`SIS User ID` = ID#
-		)#
-	) %>%#
-dplyr::select(#
-	`SIS User ID`,#
-	`Exam 1 (3326487)`#
-)
-head(Exam1)
-setwd('/Users/KSauby/Documents/Dropbox/Teaching/2017/Fall_BSC2011/analysis')
-X412075.BURLEIGH75MU.E1
-setwd('/Users/KSauby/Documents/Dropbox/Teaching/2017/Fall_BSC2011/analysis')
-Exam1 <-
-(#
-		X412075.BURLEIGH75MU.E1 %>%#
-		mutate(#
-			`Exam 1 (3326487)` = EXAM.1.MAKEUP,#
-			`SIS User ID` = SIS.Login.ID#
-		)#
-	) %>%#
-dplyr::select(#
-	`SIS User ID`,#
-	`Exam 1 (3326487)`#
-)
-setwd('/Users/KSauby/Documents/Dropbox/Teaching/2017/Fall_BSC2011/analysis')
-Exam1 %<>% merge(Canvas, by="SIS User ID"
-)
-dim(Exam1)
-head(Canvas)
-setwd('/Users/KSauby/Documents/Dropbox/Teaching/2017/Fall_BSC2011/analysis')
-Exam1 <-
-(#
-		X412075.BURLEIGH75MU.E1 %>%#
-		mutate(#
-			`Exam 1 (3326487)` = EXAM.1.MAKEUP,#
-			`SIS Login ID` = SIS.Login.ID#
-		)#
-	) %>%#
-dplyr::select(#
-	`SIS User ID`,#
-	`Exam 1 (3326487)`#
-)
-Exam1 <- (#
-		X412075.BURLEIGH75MU.E1 %>%#
-		mutate(#
-			`Exam 1 (3326487)` = EXAM.1.MAKEUP,#
-			`SIS Login ID` = SIS.Login.ID#
-		)#
-	) %>%#
-dplyr::select(#
-	`SIS Login ID`,#
-	`Exam 1 (3326487)`#
-)
-Exam1
-setwd('/Users/KSauby/Documents/Dropbox/Teaching/2017/Fall_BSC2011/analysis')
-Exam1 %<>% merge(Canvas, by="SIS User ID", all=T)
-setwd('/Users/KSauby/Documents/Dropbox/Teaching/2017/Fall_BSC2011/analysis')
-Exam1 %<>% merge(Canvas, by="SIS Login ID", all=T)
-Exam1
-setwd('/Users/KSauby/Documents/Dropbox/Teaching/2017/Fall_BSC2011/analysis')
-Canvas <- X25.Sep.22.05.Grades.BSC2011#
-names(Canvas)[1:5] <- c(#
-	"Student",#
-	"ID",#
-	"SIS User ID",#
-	"SIS Login ID",#
-	"Section"#
-)#
-Canvas %<>% dplyr::select(#
-	Student,#
-	ID,#
-	`SIS User ID`,#
-	`SIS Login ID`,#
-	Section#
-)#
-Canvas %<>% filter(!(is.na(ID)))#
-dim(Canvas)
-setwd('/Users/KSauby/Documents/Dropbox/Teaching/2017/Fall_BSC2011/analysis')
-Canvas <- X25.Sep.22.05.Grades.BSC2011#
-names(Canvas)[1:5] <- c(#
-	"Student",#
-	"ID",#
-	"SIS User ID",#
-	"SIS Login ID",#
-	"Section"#
-)#
-Canvas %<>% dplyr::select(#
-	Student,#
-	ID,#
-	`SIS User ID`,#
-	`SIS Login ID`,#
-	Section#
-)#
-Canvas %<>% filter(!(is.na(ID)))#
-dim(Canvas)#
-#
-###############################################################################
-Exam1 <-
-(#
-		X412075.BURLEIGH75MU.E1 %>%#
-		mutate(#
-			`Exam 1 (3326487)` = EXAM.1.MAKEUP,#
-			`SIS Login ID` = SIS.Login.ID#
-		)#
-	) %>%#
-dplyr::select(#
-	`SIS Login ID`,#
-	`Exam 1 (3326487)`#
-)
-setwd('/Users/KSauby/Documents/Dropbox/Teaching/2017/Fall_BSC2011/analysis')
-Exam1 %<>% merge(Canvas, by="SIS Login ID")
-dim(Exam1)
-setwd('/Users/KSauby/Documents/Dropbox/Teaching/2017/Fall_BSC2011/analysis')
-Exam1 %<>%#
-	as.data.frame %>%#
-	filter(`Exam 1 (3326487)` > 0) %>%#
-	dplyr::select(#
-		Student,#
-		ID,#
-		`SIS User ID`,#
-		`SIS Login ID`,#
-		Section,#
-		`Exam 1 (3326487)`#
-	) %>% arrange(Student)#
-#
-Exam1 %>% write.csv("../data/Exam1_makeup.csv", row.names = F)
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files/2013_2014/LTRE')
-Moth.Evidence.Present
-head(clonal_reproduction_info_for_transition_matrix.largest.parent)
-setwd('/Users/KSauby/Documents/Projects/Dissertation')
-library(ProjectTemplate)#
-load.project()#
-#
-# load GTMNERR#
-#
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis')#
-load.project()#
-#
-# load ACSampling#
-#
-setwd('/Users/KSauby/Documents/Projects/ACSampling_project')#
-load.project()#
-#
-# load marsico project#
-#
-setwd('/Users/KSauby/Documents/Projects/marsico-time-series')#
-load.project()
-dim(clonal_reproduction_info_for_transition_matrix.largest.parent)
-head(clonal_reproduction_info_for_transition_matrix.largest.parent)
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files/processing')
-# create lists of data#
-ldf <- list(#
-	Plant.Surveys.TM.largest.parent,#
-	Plant.Surveys.TM.random.parent,#
-	Plant.Surveys.TM.random.largest.parent#
-)#
-cldf <- list(#
-	clonal_reproduction_info_for_transition_matrix.largest.parent,#
-	clonal_reproduction_info_for_transition_matrix.random.parent,#
-	clonal_reproduction_info_for_transition_matrix.random.largest.parent#
-)
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files/processing')
-# ALL PLANT DATA: add new columns#
+ii=1
+j=1
+k=1
+l=1
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+trans_data$stages
+expand.grid(trans_data$stages,trans_data$stages)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+A <- vector("list", length(SeedBankSize))
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+A[[i]] <- vector("list", length(SeedsPerFruit))
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+A[[i]][[j]] <- vector("list", length(SeedSurvival))
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+analysis.results <- NULL#
+					# -------------------------------------------------------- ##
+					# Create growth/retrogression/survival/fecundity transition matrix#
+					# -------------------------------------------------------- ##
+					# bootstrap ldf#
+					x <- sample(nrow(trans_data$trans01), replace=TRUE)#
+					ldf_bootstrap <- trans_data$trans01[x, ]#
+					# create transition matrix#
+					proj_mat <- createProjectionMatrix(#
+						ldf_bootstrap,#
+						SeedBankSize[i],#
+						SeedsPerFruit[j],#
+						SeedSurvival[k]#
+					)#
+					# -------------------------------------------------------- ##
+					# Create clonal reproduction transition matrix#
+					# -------------------------------------------------------- ##
+					# bootstrap cldf#
+					clonal_repro_dat <- clonal_repro_dataset %>%#
+						filter(#
+							minFecundityYear == TransitionYear,#
+							Species == "Opuntia stricta"#
+						)#
+					x <- NULL#
+					x <- sample(nrow(clonal_repro_dat), replace=TRUE)#
+					cldf_bootstrap <- clonal_repro_dat[x, ]#
+					# create clonal transition matrix#
+					clonal.matrices <- createClonalReproTransitionMatrix(#
+						cldf_bootstrap, #
+						ldf_bootstrap,#
+						trans_data$stages#
+					)#
+					# ------------------------------------------------------- ##
+					# add transition matrices together#
+					# ------------------------------------------------------- ##
+					all_proj_matrix <- proj_mat + clonal.matrices[[2]]#
+					# ------------------------------------------------------- ##
+					# starting numbers#
+					# ------------------------------------------------------- ##
+					n_per_stage <- NULL#
+					n_per_stage <- calculateNumberIndivperStage(#
+						trans_data$trans01, #
+						trans_data$stages#
+					)#
+					# ------------------------------------------------------- ##
+					# dynamics#
+					# ------------------------------------------------------- ##
+					all_proj_matrix[1, 1] <- SeedSurvival[k]#
+					n_per_stage %<>% #
+						mutate(#
+							n = replace(#
+								n, #
+								which(stage=="Seed"),#
+								SeedBankSize[i]#
+							)#
+						)#
+					pr <- pop.projection(#
+						A = all_proj_matrix, #
+						n = n_per_stage$n, #
+						iterations = n.iter#
+					)#
+					analysis.results <- eigen.analysis(all_proj_matrix)
+i
+j
+k
+l
+i=1
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+analysis.results <- NULL#
+					# -------------------------------------------------------- ##
+					# Create growth/retrogression/survival/fecundity transition matrix#
+					# -------------------------------------------------------- ##
+					# bootstrap ldf#
+					x <- sample(nrow(trans_data$trans01), replace=TRUE)#
+					ldf_bootstrap <- trans_data$trans01[x, ]#
+					# create transition matrix#
+					proj_mat <- createProjectionMatrix(#
+						ldf_bootstrap,#
+						SeedBankSize[i],#
+						SeedsPerFruit[j],#
+						SeedSurvival[k]#
+					)#
+					# -------------------------------------------------------- ##
+					# Create clonal reproduction transition matrix#
+					# -------------------------------------------------------- ##
+					# bootstrap cldf#
+					clonal_repro_dat <- clonal_repro_dataset %>%#
+						filter(#
+							minFecundityYear == TransitionYear,#
+							Species == "Opuntia stricta"#
+						)#
+					x <- NULL#
+					x <- sample(nrow(clonal_repro_dat), replace=TRUE)#
+					cldf_bootstrap <- clonal_repro_dat[x, ]#
+					# create clonal transition matrix#
+					clonal.matrices <- createClonalReproTransitionMatrix(#
+						cldf_bootstrap, #
+						ldf_bootstrap,#
+						trans_data$stages#
+					)#
+					# ------------------------------------------------------- ##
+					# add transition matrices together#
+					# ------------------------------------------------------- ##
+					all_proj_matrix <- proj_mat + clonal.matrices[[2]]#
+					# ------------------------------------------------------- ##
+					# starting numbers#
+					# ------------------------------------------------------- ##
+					n_per_stage <- NULL#
+					n_per_stage <- calculateNumberIndivperStage(#
+						trans_data$trans01, #
+						trans_data$stages#
+					)#
+					# ------------------------------------------------------- ##
+					# dynamics#
+					# ------------------------------------------------------- ##
+					all_proj_matrix[1, 1] <- SeedSurvival[k]#
+					n_per_stage %<>% #
+						mutate(#
+							n = replace(#
+								n, #
+								which(stage=="Seed"),#
+								SeedBankSize[i]#
+							)#
+						)#
+					pr <- pop.projection(#
+						A = all_proj_matrix, #
+						n = n_per_stage$n, #
+						iterations = n.iter#
+					)#
+					analysis.results <- eigen.analysis(all_proj_matrix)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+analysis.results
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+!(is.null(analysis.results))
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+repro.value.dat <- analysis.results$repro.value#
+						names(repro.value.dat) <- #
+							paste("repro.value",names(repro.value.dat),sep=".")#
+						repro.value.dat %<>% t %>% as.data.frame#
+						#		stable stage distribution#
+						stable.stage.dat <- analysis.results$stable.stage#
+						names(stable.stage.dat) <- #
+							paste("stable.stage",names(stable.stage.dat),sep=".")#
+						stable.stage.dat %<>% t %>% as.data.frame#
+						#		elasticities#
+						elasticities <- analysis.results$elasticities %>% #
+							as.data.frame %>%#
+							mutate(#
+								Name = paste(#
+									"elasticities.", #
+									Var2, "-", #
+									Var1, #
+									sep=""#
+								)#
+							) %>%#
+							as.data.frame(row.names=.$Name) %>%#
+							dplyr::select(Freq) %>%#
+							t %>%#
+							as.data.frame()#
+						#		sensitivities#
+						sensitivities <- analysis.results$sensitivities %>% #
+							as.table %>% as.data.frame %>%#
+							mutate(#
+								Name = paste(#
+									"sensitivities.", #
+									Var2, "-",#
+									Var1, #
+									sep=""#
+								)#
+							) %>%#
+							as.data.frame(row.names=.$Name) %>%#
+							dplyr::select(Freq) %>%#
+							t %>%#
+							as.data.frame()#
+						A[[i]][[j]][[k]][[l]] <- data.frame(#
+							repro.value.dat,#
+							stable.stage.dat,#
+							sensitivities,#
+							elasticities,#
+							lambda1 		= analysis.results$lambda1,#
+							damping.ratio 	= analysis.results$damping.ratio,#
+							SeedBankSize 	= SeedBankSize[i],#
+							SeedsPerFruit 	= SeedsPerFruit[j],#
+							SeedSurvival 	= SeedSurvival[k],#
+							Bootstrap		= l#
+						)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+sensitivities
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+# repro values#
+						x <- paste(#
+							"repro.value.", #
+							trans_data$stages, #
+							sep=""#
+						)#
+						repro.dat <- rep("NA", length(x)) %>%#
+							t %>% as.data.frame#
+						colnames(repro.dat) <- x
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+repro.dat
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+x <- expand.grid(trans_data$stages,trans_data$stages)#
+						paste("sensitivies.", x$Var1,"-",x$Var2,sep="")
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+x <- expand.grid(trans_data$stages,trans_data$stages)#
+						y <- paste("sensitivies.", x$Var1,"-",x$Var2,sep="")#
+						sens.dat <- rep("NA", length(y)) %>%#
+							t %>% as.data.frame
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+sens.dat
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+colnames(sens.dat) <- y
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+sens.dat
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+x <- expand.grid(trans_data$stages,trans_data$stages)#
+						y <- paste("elasticities.", x$Var1,"-",x$Var2,sep="")#
+						elas.dat <- rep("NA", length(y)) %>%#
+							t %>% as.data.frame#
+						colnames(elas.dat) <- y
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+analysis.results
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+elasticities
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+sensitivities
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+stable.stage.dat
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+x <- paste(#
+							"stable.stage.", #
+							trans_data$stages, #
+							sep=""#
+						)#
+						stable.stage.dat <- rep("NA", length(x)) %>%#
+							t %>% as.data.frame#
+						colnames(stable.stage.dat) <- x
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+stable.stage.dat
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+all_proj_matrix
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+analysis.results <- eigen.analysis(all_proj_matrix)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+analysis.results
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+A <- vector("list", length(SeedBankSize))	#
+	for (i in 1:length(SeedBankSize)) {#
+		A[[i]] <- vector("list", length(SeedsPerFruit))	#
+		for (j in 1:length(SeedsPerFruit)) {#
+			A[[i]][[j]] <- vector("list", length(SeedSurvival))	#
+			for (k in 1:length(SeedSurvival)) {#
+				for (l in 1:n_bootstraps) {#
+					analysis.results <- NULL#
+					# -------------------------------------------------------- ##
+					# Create growth/retrogression/survival/fecundity transition matrix#
+					# -------------------------------------------------------- ##
+					# bootstrap ldf#
+					x <- sample(nrow(trans_data$trans01), replace=TRUE)#
+					ldf_bootstrap <- trans_data$trans01[x, ]#
+					# create transition matrix#
+					proj_mat <- createProjectionMatrix(#
+						ldf_bootstrap,#
+						SeedBankSize[i],#
+						SeedsPerFruit[j],#
+						SeedSurvival[k]#
+					)#
+					# -------------------------------------------------------- ##
+					# Create clonal reproduction transition matrix#
+					# -------------------------------------------------------- ##
+					# bootstrap cldf#
+					clonal_repro_dat <- clonal_repro_dataset %>%#
+						filter(#
+							minFecundityYear == TransitionYear,#
+							Species == "Opuntia stricta"#
+						)#
+					x <- NULL#
+					x <- sample(nrow(clonal_repro_dat), replace=TRUE)#
+					cldf_bootstrap <- clonal_repro_dat[x, ]#
+					# create clonal transition matrix#
+					clonal.matrices <- createClonalReproTransitionMatrix(#
+						cldf_bootstrap, #
+						ldf_bootstrap,#
+						trans_data$stages#
+					)#
+					# ------------------------------------------------------- ##
+					# add transition matrices together#
+					# ------------------------------------------------------- ##
+					all_proj_matrix <- proj_mat + clonal.matrices[[2]]#
+					# ------------------------------------------------------- ##
+					# starting numbers#
+					# ------------------------------------------------------- ##
+					n_per_stage <- NULL#
+					n_per_stage <- calculateNumberIndivperStage(#
+						trans_data$trans01, #
+						trans_data$stages#
+					)#
+					# ------------------------------------------------------- ##
+					# dynamics#
+					# ------------------------------------------------------- ##
+					all_proj_matrix[1, 1] <- SeedSurvival[k]#
+					n_per_stage %<>% #
+						mutate(#
+							n = replace(#
+								n, #
+								which(stage=="Seed"),#
+								SeedBankSize[i]#
+							)#
+						)#
+					pr <- pop.projection(#
+						A = all_proj_matrix, #
+						n = n_per_stage$n, #
+						iterations = n.iter#
+					)#
+					analysis.results <- eigen.analysis(all_proj_matrix)#
+					if (!(is.null(analysis.results))) {#
+						# create table of results				#
+						#		repro.values#
+						repro.value.dat <- analysis.results$repro.value#
+						names(repro.value.dat) <- #
+							paste("repro.value",names(repro.value.dat),sep=".")#
+						repro.value.dat %<>% t %>% as.data.frame#
+						#		stable stage distribution#
+						stable.stage.dat <- analysis.results$stable.stage#
+						names(stable.stage.dat) <- #
+							paste("stable.stage",names(stable.stage.dat),sep=".")#
+						stable.stage.dat %<>% t %>% as.data.frame#
+						#		elasticities#
+						elasticities <- analysis.results$elasticities %>% #
+							as.data.frame %>%#
+							mutate(#
+								Name = paste(#
+									"elasticities.", #
+									Var2, "-", #
+									Var1, #
+									sep=""#
+								)#
+							) %>%#
+							as.data.frame(row.names=.$Name) %>%#
+							dplyr::select(Freq) %>%#
+							t %>%#
+							as.data.frame()#
+						#		sensitivities#
+						sensitivities <- analysis.results$sensitivities %>% #
+							as.table %>% as.data.frame %>%#
+							mutate(#
+								Name = paste(#
+									"sensitivities.", #
+									Var2, "-",#
+									Var1, #
+									sep=""#
+								)#
+							) %>%#
+							as.data.frame(row.names=.$Name) %>%#
+							dplyr::select(Freq) %>%#
+							t %>%#
+							as.data.frame()#
+						A[[i]][[j]][[k]][[l]] <- data.frame(#
+							repro.value.dat,#
+							stable.stage.dat,#
+							sensitivities,#
+							elasticities,#
+							lambda1 		= analysis.results$lambda1,#
+							damping.ratio 	= analysis.results$damping.ratio,#
+							SeedBankSize 	= SeedBankSize[i],#
+							SeedsPerFruit 	= SeedsPerFruit[j],#
+							SeedSurvival 	= SeedSurvival[k],#
+							Bootstrap		= l#
+						)		#
+					} else {#
+						# repro values#
+						x <- paste(#
+							"repro.value.", #
+							trans_data$stages, #
+							sep=""#
+						)#
+						repro.value.dat <- rep("NA", length(x)) %>%#
+							t %>% as.data.frame#
+						colnames(repro.value.dat) <- x#
+						# stable stages#
+						x <- paste(#
+							"stable.stage.", #
+							trans_data$stages, #
+							sep=""#
+						)#
+						stable.stage.dat <- rep("NA", length(x)) %>%#
+							t %>% as.data.frame#
+						colnames(stable.stage.dat) <- x#
+						# sensitivities#
+						x <- expand.grid(trans_data$stages,trans_data$stages)#
+						y <- paste("sensitivies.", x$Var1,"-",x$Var2,sep="")#
+						sensitivities <- rep("NA", length(y)) %>%#
+							t %>% as.data.frame#
+						colnames(sensitivities) <- y#
+						# elasticities#
+						x <- expand.grid(trans_data$stages,trans_data$stages)#
+						y <- paste("elasticities.", x$Var1,"-",x$Var2,sep="")#
+						elasticities <- rep("NA", length(y)) %>%#
+							t %>% as.data.frame#
+						colnames(elasticities) <- y						#
+						A[[i]][[j]][[k]][[l]] <- data.frame(#
+							repro.value.dat,#
+							stable.stage.dat,#
+							sensitivities,#
+							elasticities,#
+							lambda1 		= NA,#
+							damping.ratio 	= NA,#
+							SeedBankSize 	= SeedBankSize[i],#
+							SeedsPerFruit 	= SeedsPerFruit[j],#
+							SeedSurvival 	= SeedSurvival[k],#
+							Bootstrap		= l#
+					}#
+				}#
+				A[[i]][[j]][[k]] <- do.call(rbind.data.frame, A[[i]][[j]][[k]])#
+			}#
+			A[[i]][[j]] <- do.call(rbind.data.frame, A[[i]][[j]])#
+		}#
+		A[[i]] <- do.call(rbind.data.frame, A[[i]])#
+	}#
+	A <- do.call(rbind.data.frame, A)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+A <- vector("list", length(SeedBankSize))	#
+	for (i in 1:length(SeedBankSize)) {#
+		A[[i]] <- vector("list", length(SeedsPerFruit))	#
+		for (j in 1:length(SeedsPerFruit)) {#
+			A[[i]][[j]] <- vector("list", length(SeedSurvival))	#
+			for (k in 1:length(SeedSurvival)) {#
+				for (l in 1:n_bootstraps) {#
+					analysis.results <- NULL#
+					# -------------------------------------------------------- ##
+					# Create growth/retrogression/survival/fecundity transition matrix#
+					# -------------------------------------------------------- ##
+					# bootstrap ldf#
+					x <- sample(nrow(trans_data$trans01), replace=TRUE)#
+					ldf_bootstrap <- trans_data$trans01[x, ]#
+					# create transition matrix#
+					proj_mat <- createProjectionMatrix(#
+						ldf_bootstrap,#
+						SeedBankSize[i],#
+						SeedsPerFruit[j],#
+						SeedSurvival[k]#
+					)#
+					# -------------------------------------------------------- ##
+					# Create clonal reproduction transition matrix#
+					# -------------------------------------------------------- ##
+					# bootstrap cldf#
+					clonal_repro_dat <- clonal_repro_dataset %>%#
+						filter(#
+							minFecundityYear == TransitionYear,#
+							Species == "Opuntia stricta"#
+						)#
+					x <- NULL#
+					x <- sample(nrow(clonal_repro_dat), replace=TRUE)#
+					cldf_bootstrap <- clonal_repro_dat[x, ]#
+					# create clonal transition matrix#
+					clonal.matrices <- createClonalReproTransitionMatrix(#
+						cldf_bootstrap, #
+						ldf_bootstrap,#
+						trans_data$stages#
+					)#
+					# ------------------------------------------------------- ##
+					# add transition matrices together#
+					# ------------------------------------------------------- ##
+					all_proj_matrix <- proj_mat + clonal.matrices[[2]]#
+					# ------------------------------------------------------- ##
+					# starting numbers#
+					# ------------------------------------------------------- ##
+					n_per_stage <- NULL#
+					n_per_stage <- calculateNumberIndivperStage(#
+						trans_data$trans01, #
+						trans_data$stages#
+					)#
+					# ------------------------------------------------------- ##
+					# dynamics#
+					# ------------------------------------------------------- ##
+					all_proj_matrix[1, 1] <- SeedSurvival[k]#
+					n_per_stage %<>% #
+						mutate(#
+							n = replace(#
+								n, #
+								which(stage=="Seed"),#
+								SeedBankSize[i]#
+							)#
+						)#
+					pr <- pop.projection(#
+						A = all_proj_matrix, #
+						n = n_per_stage$n, #
+						iterations = n.iter#
+					)#
+					analysis.results <- eigen.analysis(all_proj_matrix)#
+					if (!(is.null(analysis.results))) {#
+						# create table of results				#
+						#		repro.values#
+						repro.value.dat <- analysis.results$repro.value#
+						names(repro.value.dat) <- #
+							paste("repro.value",names(repro.value.dat),sep=".")#
+						repro.value.dat %<>% t %>% as.data.frame#
+						#		stable stage distribution#
+						stable.stage.dat <- analysis.results$stable.stage#
+						names(stable.stage.dat) <- #
+							paste("stable.stage",names(stable.stage.dat),sep=".")#
+						stable.stage.dat %<>% t %>% as.data.frame#
+						#		elasticities#
+						elasticities <- analysis.results$elasticities %>% #
+							as.data.frame %>%#
+							mutate(#
+								Name = paste(#
+									"elasticities.", #
+									Var2, "-", #
+									Var1, #
+									sep=""#
+								)#
+							) %>%#
+							as.data.frame(row.names=.$Name) %>%#
+							dplyr::select(Freq) %>%#
+							t %>%#
+							as.data.frame()#
+						#		sensitivities#
+						sensitivities <- analysis.results$sensitivities %>% #
+							as.table %>% as.data.frame %>%#
+							mutate(#
+								Name = paste(#
+									"sensitivities.", #
+									Var2, "-",#
+									Var1, #
+									sep=""#
+								)#
+							) %>%#
+							as.data.frame(row.names=.$Name) %>%#
+							dplyr::select(Freq) %>%#
+							t %>%#
+							as.data.frame()#
+						A[[i]][[j]][[k]][[l]] <- data.frame(#
+							repro.value.dat,#
+							stable.stage.dat,#
+							sensitivities,#
+							elasticities,#
+							lambda1 		= analysis.results$lambda1,#
+							damping.ratio 	= analysis.results$damping.ratio,#
+							SeedBankSize 	= SeedBankSize[i],#
+							SeedsPerFruit 	= SeedsPerFruit[j],#
+							SeedSurvival 	= SeedSurvival[k],#
+							Bootstrap		= l#
+						)		#
+					} else {#
+						# repro values#
+						x <- paste(#
+							"repro.value.", #
+							trans_data$stages, #
+							sep=""#
+						)#
+						repro.value.dat <- rep("NA", length(x)) %>%#
+							t %>% as.data.frame#
+						colnames(repro.value.dat) <- x#
+						# stable stages#
+						x <- paste(#
+							"stable.stage.", #
+							trans_data$stages, #
+							sep=""#
+						)#
+						stable.stage.dat <- rep("NA", length(x)) %>%#
+							t %>% as.data.frame#
+						colnames(stable.stage.dat) <- x#
+						# sensitivities#
+						x <- expand.grid(trans_data$stages,trans_data$stages)#
+						y <- paste("sensitivies.", x$Var1,"-",x$Var2,sep="")#
+						sensitivities <- rep("NA", length(y)) %>%#
+							t %>% as.data.frame#
+						colnames(sensitivities) <- y#
+						# elasticities#
+						x <- expand.grid(trans_data$stages,trans_data$stages)#
+						y <- paste("elasticities.", x$Var1,"-",x$Var2,sep="")#
+						elasticities <- rep("NA", length(y)) %>%#
+							t %>% as.data.frame#
+						colnames(elasticities) <- y						#
+						A[[i]][[j]][[k]][[l]] <- data.frame(#
+							repro.value.dat,#
+							stable.stage.dat,#
+							sensitivities,#
+							elasticities,#
+							lambda1 		= NA,#
+							damping.ratio 	= NA,#
+							SeedBankSize 	= SeedBankSize[i],#
+							SeedsPerFruit 	= SeedsPerFruit[j],#
+							SeedSurvival 	= SeedSurvival[k],#
+							Bootstrap		= l#
+						}#
+					}#
+				}#
+				A[[i]][[j]][[k]] <- do.call(rbind.data.frame, A[[i]][[j]][[k]])#
+			}#
+			A[[i]][[j]] <- do.call(rbind.data.frame, A[[i]][[j]])#
+		}#
+		A[[i]] <- do.call(rbind.data.frame, A[[i]])#
+	}#
+	A <- do.call(rbind.data.frame, A)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+A <- vector("list", length(SeedBankSize))	#
+	for (i in 1:length(SeedBankSize)) {#
+		A[[i]] <- vector("list", length(SeedsPerFruit))	#
+		for (j in 1:length(SeedsPerFruit)) {#
+			A[[i]][[j]] <- vector("list", length(SeedSurvival))	#
+			for (k in 1:length(SeedSurvival)) {#
+				for (l in 1:n_bootstraps) {#
+					analysis.results <- NULL#
+					# -------------------------------------------------------- ##
+					# Create growth/retrogression/survival/fecundity transition matrix#
+					# -------------------------------------------------------- ##
+					# bootstrap ldf#
+					x <- sample(nrow(trans_data$trans01), replace=TRUE)#
+					ldf_bootstrap <- trans_data$trans01[x, ]#
+					# create transition matrix#
+					proj_mat <- createProjectionMatrix(#
+						ldf_bootstrap,#
+						SeedBankSize[i],#
+						SeedsPerFruit[j],#
+						SeedSurvival[k]#
+					)#
+					# -------------------------------------------------------- ##
+					# Create clonal reproduction transition matrix#
+					# -------------------------------------------------------- ##
+					# bootstrap cldf#
+					clonal_repro_dat <- clonal_repro_dataset %>%#
+						filter(#
+							minFecundityYear == TransitionYear,#
+							Species == "Opuntia stricta"#
+						)#
+					x <- NULL#
+					x <- sample(nrow(clonal_repro_dat), replace=TRUE)#
+					cldf_bootstrap <- clonal_repro_dat[x, ]#
+					# create clonal transition matrix#
+					clonal.matrices <- createClonalReproTransitionMatrix(#
+						cldf_bootstrap, #
+						ldf_bootstrap,#
+						trans_data$stages#
+					)#
+					# ------------------------------------------------------- ##
+					# add transition matrices together#
+					# ------------------------------------------------------- ##
+					all_proj_matrix <- proj_mat + clonal.matrices[[2]]#
+					# ------------------------------------------------------- ##
+					# starting numbers#
+					# ------------------------------------------------------- ##
+					n_per_stage <- NULL#
+					n_per_stage <- calculateNumberIndivperStage(#
+						trans_data$trans01, #
+						trans_data$stages#
+					)#
+					# ------------------------------------------------------- ##
+					# dynamics#
+					# ------------------------------------------------------- ##
+					all_proj_matrix[1, 1] <- SeedSurvival[k]#
+					n_per_stage %<>% #
+						mutate(#
+							n = replace(#
+								n, #
+								which(stage=="Seed"),#
+								SeedBankSize[i]#
+							)#
+						)#
+					pr <- pop.projection(#
+						A = all_proj_matrix, #
+						n = n_per_stage$n, #
+						iterations = n.iter#
+					)#
+					analysis.results <- eigen.analysis(all_proj_matrix)#
+					if (!(is.null(analysis.results))) {#
+						# create table of results				#
+						#		repro.values#
+						repro.value.dat <- analysis.results$repro.value#
+						names(repro.value.dat) <- #
+							paste("repro.value",names(repro.value.dat),sep=".")#
+						repro.value.dat %<>% t %>% as.data.frame#
+						#		stable stage distribution#
+						stable.stage.dat <- analysis.results$stable.stage#
+						names(stable.stage.dat) <- #
+							paste("stable.stage",names(stable.stage.dat),sep=".")#
+						stable.stage.dat %<>% t %>% as.data.frame#
+						#		elasticities#
+						elasticities <- analysis.results$elasticities %>% #
+							as.data.frame %>%#
+							mutate(#
+								Name = paste(#
+									"elasticities.", #
+									Var2, "-", #
+									Var1, #
+									sep=""#
+								)#
+							) %>%#
+							as.data.frame(row.names=.$Name) %>%#
+							dplyr::select(Freq) %>%#
+							t %>%#
+							as.data.frame()#
+						#		sensitivities#
+						sensitivities <- analysis.results$sensitivities %>% #
+							as.table %>% as.data.frame %>%#
+							mutate(#
+								Name = paste(#
+									"sensitivities.", #
+									Var2, "-",#
+									Var1, #
+									sep=""#
+								)#
+							) %>%#
+							as.data.frame(row.names=.$Name) %>%#
+							dplyr::select(Freq) %>%#
+							t %>%#
+							as.data.frame()#
+						A[[i]][[j]][[k]][[l]] <- data.frame(#
+							repro.value.dat,#
+							stable.stage.dat,#
+							sensitivities,#
+							elasticities,#
+							lambda1 		= analysis.results$lambda1,#
+							damping.ratio 	= analysis.results$damping.ratio,#
+							SeedBankSize 	= SeedBankSize[i],#
+							SeedsPerFruit 	= SeedsPerFruit[j],#
+							SeedSurvival 	= SeedSurvival[k],#
+							Bootstrap		= l#
+						)		#
+					} else {#
+						# repro values#
+						x <- paste(#
+							"repro.value.", #
+							trans_data$stages, #
+							sep=""#
+						)#
+						repro.value.dat <- rep("NA", length(x)) %>%#
+							t %>% as.data.frame#
+						colnames(repro.value.dat) <- x#
+						# stable stages#
+						x <- paste(#
+							"stable.stage.", #
+							trans_data$stages, #
+							sep=""#
+						)#
+						stable.stage.dat <- rep("NA", length(x)) %>%#
+							t %>% as.data.frame#
+						colnames(stable.stage.dat) <- x#
+						# sensitivities#
+						x <- expand.grid(trans_data$stages,trans_data$stages)#
+						y <- paste("sensitivies.", x$Var1,"-",x$Var2,sep="")#
+						sensitivities <- rep("NA", length(y)) %>%#
+							t %>% as.data.frame#
+						colnames(sensitivities) <- y#
+						# elasticities#
+						x <- expand.grid(trans_data$stages,trans_data$stages)#
+						y <- paste("elasticities.", x$Var1,"-",x$Var2,sep="")#
+						elasticities <- rep("NA", length(y)) %>%#
+							t %>% as.data.frame#
+						colnames(elasticities) <- y						#
+						A[[i]][[j]][[k]][[l]] <- data.frame(#
+							repro.value.dat,#
+							stable.stage.dat,#
+							sensitivities,#
+							elasticities,#
+							lambda1 		= NA,#
+							damping.ratio 	= NA,#
+							SeedBankSize 	= SeedBankSize[i],#
+							SeedsPerFruit 	= SeedsPerFruit[j],#
+							SeedSurvival 	= SeedSurvival[k],#
+							Bootstrap		= l#
+						)#
+					}#
+				}#
+				A[[i]][[j]][[k]] <- do.call(rbind.data.frame, A[[i]][[j]][[k]])#
+			}#
+			A[[i]][[j]] <- do.call(rbind.data.frame, A[[i]][[j]])#
+		}#
+		A[[i]] <- do.call(rbind.data.frame, A[[i]])#
+	}
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files')
+source("processing/prep_ldf_cldf.R")
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files/2013_2014/LTRE/bootstrapping')
+# ALL PLANT DATA: add new columns, filter out mothpresence = 1#
 ldf %<>%#
 	map(#
 		~ mutate(#
@@ -313,8 +794,14 @@ ldf %<>%#
 			allYears 	= TransitionYear, #
 			Year 		= FecundityYear#
 		)#
+	) %>%#
+	map(#
+		~ filter(#
+			.,#
+			Island == "7"#
+		)#
 	)#
-# CLONE DATA: add plant info#
+# CLONE DATA: add plant info, filter out mothpresence = 1#
 cldf %<>%#
 	map(#
 		~ merge(#
@@ -323,239 +810,1695 @@ cldf %<>%#
 			by.x="Parent.ID",#
 			by.y="PlantID"#
 		)#
+	) %>%#
+	map(#
+		~ filter(#
+			.,#
+			Island == "7"#
+		)#
 	)#
+#
 if (length(ldf) != length(cldf)) {#
 	stop(paste("ldf and cldf are of different lengths"))#
-}
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files')
-TransitionYear 	= 2013
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files')
-source("processing/mutate_ldf_cldf.R")
-str(cldf)
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files')
-source("processing/values_same_across_all_models.R")#
-source("processing/prep_ldf_cldf.R")#
+}#
 # ---------------------------------------------------------------------------- ##
-TransitionYear 	= 2013#
-source("processing/mutate_ldf_cldf.R")
-str(cldf)
-i=1
-head(cldf[[i]])
-dim(cldf[[i]])
+SizeClass <- SizeClass.4#
+#
+SizeClass <- SizeClass.4#
+SeedBankSize = 1000#
+SeedSurvival = 0.5
 setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-SizeClass
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files/processing')
-SeedSurvival 	= c(0.001, 0.005, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, #
-					0.9, 0.95, 0.99)#
-SeedBankSize	= c(10,100,1000,10000,100000,1000000)#
-SeedsPerFruit 	= 49.44#
-n.iter			= 1000#
-#
-largest.parent <- "\"largest\" parent method"#
-random.parent <- "\"random\" parent method"#
-random.largest.parent <- "\"probability proportional to\nsize\" parent method"#
-#
-SizeClass.4 		= c(0:2,6,140)#
-Number.Stages.4 =#
-	"Scheme 1:\n4 Size Classes\n(1,2,3-6,7+\nsegments)"#
-Number.Stages.4.wo.break =#
-	"Scheme 1: 4 Size Classes (1,2,3-6,7+ Segments)"#
-#
-SizeClass.5 		= c(0:2,6,10,140)#
-Number.Stages.5 =#
-	"Scheme 2:\n5 Size Classes\n(1,2,3-6,7-10,11+\nsegments)"#
-Number.Stages.5.wo.break =#
-	"Scheme 2: 5 Size Classes (1,2,3-6,7-10,11+ Segments)"#
-#
-SizeClass.5b 		= c(0:3,6,140)#
-Number.Stages.5b =#
-	"Scheme 3:\n5 Size Classes\n(1,2,3,4-6,7+\nsegments)"#
-Number.Stages.5b.wo.break =#
-	"Scheme 3: 5 Size Classes (1,2,3,4-6,7+ Segments)"#
-#
-SizeClass.6 		= c(0:3,6,10,140)#
-Number.Stages.6 =#
-	"Scheme 4:\n6 Size Classes\n(1,2,3,4-6,7-10,11+\nsegments)"#
-Number.Stages.6.wo.break =#
-	"Scheme 4: 6 Size Classes (1,2,3,4-6,7-10,11+ Segments)"#
-#
-SizeClass.7 		= c(0:4,7,10,140)#
-Number.Stages.7 =#
-	"Scheme 5:\n7 Size Classes\n(1,2,3,4,5-7,8-10,11+\nsegments)"#
-Number.Stages.7.wo.break =#
-	"Scheme 5: 7 Size Classes (1,2,3,4,5-7,8-10,11+ Segments)"#
-# plotting#
-other.legend.text.size = 30#
-es.n_transitions_per_stage = 9#
-es.axis.text.x.size = 18#
-es.strip.text.x.size = 26#
-es.strip.text.y.size = 28#
-es.legend.text.size = 12#
-es.axis.title.x.size = 28#
-es.axis.title.y.size = 28#
-es.axis.text.y.size = 20#
-es.strip.text.y.angle = 0#
-es.color_values = stable.stage.colors(9)#
-#
-repro.strip.text.x.size = 25#
-repro.legend.text.size = 25#
-LTRE.n_transitions_per_stage = 6#
-LTRE.axis.text.x.size = 20#
-LTRE.strip.text.x.size = 25#
-LTRE.strip.text.y.size = 30#
-LTRE.legend.text.size = 20#
-LTRE.axis.title.x.size = 25#
-LTRE.axis.title.y.size = 25#
-LTRE.axis.text.y.size = 20#
-LTRE.strip.text.y.angle = 270#
-LTRE.color_values = stable.stage.colors(6)#
-#
-LTRE.facet_grid_var = "`Moth Evidence`~`Parent Assignment`"#
-facet_grid_var = "N.Stages~`Parent Assignment`"#
-#
-stable.stage.colors <- colorRampPalette(c("grey","darkorange2", "darkred","blue"))#
-stable.stage.colors <- colorRampPalette(c("grey","darkorange2", "darkred","blue","lightblue"))#
-#
-LTRE.special.facet_grid = "`Parent Assignment`~`Moth Evidence`"#
-#
-grouping_variable = "transition"#
-#
-SeedBankSize_x_variable = "SeedBankSize"#
-SeedBankSize_xlab_label = "Seed Bank Size"#
-#
-SeedSurvival_x_variable = "SeedSurvival"#
-SeedSurvival_xlab_label = "Seed Survival Rate"#
-#
-StableStage_ylab_label = "Stable Stage Distribution"#
-StableStage_y_variable = "`Stable Stage Value`"#
-elasticity_y_variable = "elasticity"#
-elasticity_ylab_label = "Elasticity Value"#
-repro_y_variable = "`Reproductive Value`"#
-repro_ylab_label = "Reproductive Value"#
-#
-sensitivity_y_variable = "sensitivity"#
-sensitivity_ylab_label = "Sensitivity Value"
-SizeClass <- SizeClass.4
-Dat <- cldf[[i]]
-Dat <- ldf[[i]]
-clonal_repro_dataset <- cldf[[i]]
+A <- vector("list", length(SeedBankSize))	#
+	for (i in 1:length(SeedBankSize)) {#
+		A[[i]] <- vector("list", length(SeedsPerFruit))	#
+		for (j in 1:length(SeedsPerFruit)) {#
+			A[[i]][[j]] <- vector("list", length(SeedSurvival))	#
+			for (k in 1:length(SeedSurvival)) {#
+				for (l in 1:n_bootstraps) {#
+					analysis.results <- NULL#
+					# -------------------------------------------------------- ##
+					# Create growth/retrogression/survival/fecundity transition matrix#
+					# -------------------------------------------------------- ##
+					# bootstrap ldf#
+					x <- sample(nrow(trans_data$trans01), replace=TRUE)#
+					ldf_bootstrap <- trans_data$trans01[x, ]#
+					# create transition matrix#
+					proj_mat <- createProjectionMatrix(#
+						ldf_bootstrap,#
+						SeedBankSize[i],#
+						SeedsPerFruit[j],#
+						SeedSurvival[k]#
+					)#
+					# -------------------------------------------------------- ##
+					# Create clonal reproduction transition matrix#
+					# -------------------------------------------------------- ##
+					# bootstrap cldf#
+					clonal_repro_dat <- clonal_repro_dataset %>%#
+						filter(#
+							minFecundityYear == TransitionYear,#
+							Species == "Opuntia stricta"#
+						)#
+					x <- NULL#
+					x <- sample(nrow(clonal_repro_dat), replace=TRUE)#
+					cldf_bootstrap <- clonal_repro_dat[x, ]#
+					# create clonal transition matrix#
+					clonal.matrices <- createClonalReproTransitionMatrix(#
+						cldf_bootstrap, #
+						ldf_bootstrap,#
+						trans_data$stages#
+					)#
+					# ------------------------------------------------------- ##
+					# add transition matrices together#
+					# ------------------------------------------------------- ##
+					all_proj_matrix <- proj_mat + clonal.matrices[[2]]#
+					# ------------------------------------------------------- ##
+					# starting numbers#
+					# ------------------------------------------------------- ##
+					n_per_stage <- NULL#
+					n_per_stage <- calculateNumberIndivperStage(#
+						trans_data$trans01, #
+						trans_data$stages#
+					)#
+					# ------------------------------------------------------- ##
+					# dynamics#
+					# ------------------------------------------------------- ##
+					all_proj_matrix[1, 1] <- SeedSurvival[k]#
+					n_per_stage %<>% #
+						mutate(#
+							n = replace(#
+								n, #
+								which(stage=="Seed"),#
+								SeedBankSize[i]#
+							)#
+						)#
+					pr <- pop.projection(#
+						A = all_proj_matrix, #
+						n = n_per_stage$n, #
+						iterations = n.iter#
+					)#
+					analysis.results <- eigen.analysis(all_proj_matrix)#
+					if (!(is.null(analysis.results))) {#
+						# create table of results				#
+						#		repro.values#
+						repro.value.dat <- analysis.results$repro.value#
+						names(repro.value.dat) <- #
+							paste("repro.value",names(repro.value.dat),sep=".")#
+						repro.value.dat %<>% t %>% as.data.frame#
+						#		stable stage distribution#
+						stable.stage.dat <- analysis.results$stable.stage#
+						names(stable.stage.dat) <- #
+							paste("stable.stage",names(stable.stage.dat),sep=".")#
+						stable.stage.dat %<>% t %>% as.data.frame#
+						#		elasticities#
+						elasticities <- analysis.results$elasticities %>% #
+							as.data.frame %>%#
+							mutate(#
+								Name = paste(#
+									"elasticities.", #
+									Var2, "-", #
+									Var1, #
+									sep=""#
+								)#
+							) %>%#
+							as.data.frame(row.names=.$Name) %>%#
+							dplyr::select(Freq) %>%#
+							t %>%#
+							as.data.frame()#
+						#		sensitivities#
+						sensitivities <- analysis.results$sensitivities %>% #
+							as.table %>% as.data.frame %>%#
+							mutate(#
+								Name = paste(#
+									"sensitivities.", #
+									Var2, "-",#
+									Var1, #
+									sep=""#
+								)#
+							) %>%#
+							as.data.frame(row.names=.$Name) %>%#
+							dplyr::select(Freq) %>%#
+							t %>%#
+							as.data.frame()#
+						A[[i]][[j]][[k]][[l]] <- data.frame(#
+							repro.value.dat,#
+							stable.stage.dat,#
+							sensitivities,#
+							elasticities,#
+							lambda1 		= analysis.results$lambda1,#
+							damping.ratio 	= analysis.results$damping.ratio,#
+							SeedBankSize 	= SeedBankSize[i],#
+							SeedsPerFruit 	= SeedsPerFruit[j],#
+							SeedSurvival 	= SeedSurvival[k],#
+							Bootstrap		= l#
+						)		#
+					} else {#
+						# repro values#
+						x <- paste(#
+							"repro.value.", #
+							trans_data$stages, #
+							sep=""#
+						)#
+						repro.value.dat <- rep("NA", length(x)) %>%#
+							t %>% as.data.frame#
+						colnames(repro.value.dat) <- x#
+						# stable stages#
+						x <- paste(#
+							"stable.stage.", #
+							trans_data$stages, #
+							sep=""#
+						)#
+						stable.stage.dat <- rep("NA", length(x)) %>%#
+							t %>% as.data.frame#
+						colnames(stable.stage.dat) <- x#
+						# sensitivities#
+						x <- expand.grid(trans_data$stages,trans_data$stages)#
+						y <- paste("sensitivies.", x$Var1,"-",x$Var2,sep="")#
+						sensitivities <- rep("NA", length(y)) %>%#
+							t %>% as.data.frame#
+						colnames(sensitivities) <- y#
+						# elasticities#
+						x <- expand.grid(trans_data$stages,trans_data$stages)#
+						y <- paste("elasticities.", x$Var1,"-",x$Var2,sep="")#
+						elasticities <- rep("NA", length(y)) %>%#
+							t %>% as.data.frame#
+						colnames(elasticities) <- y						#
+						A[[i]][[j]][[k]][[l]] <- data.frame(#
+							repro.value.dat,#
+							stable.stage.dat,#
+							sensitivities,#
+							elasticities,#
+							lambda1 		= NA,#
+							damping.ratio 	= NA,#
+							SeedBankSize 	= SeedBankSize[i],#
+							SeedsPerFruit 	= SeedsPerFruit[j],#
+							SeedSurvival 	= SeedSurvival[k],#
+							Bootstrap		= l#
+						)#
+					}#
+				}#
+				A[[i]][[j]][[k]] <- do.call(rbind.data.frame, A[[i]][[j]][[k]])#
+			}#
+			A[[i]][[j]] <- do.call(rbind.data.frame, A[[i]][[j]])#
+		}#
+		A[[i]] <- do.call(rbind.data.frame, A[[i]])#
+	}
+i
+j
+k
+l
 setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-Dat_census <- Dat %>% #
-	rowwise() %>%#
-	mutate(#
-		stage=replace(#
-			stage, #
-			which(stage=="Adult"),#
-			cut(SizewClones_t, SizeClass, include.lowest=T, labels=FALSE)#
-		)#
-	)#
-	Dat_census %<>%#
-		dplyr::select(#
-			FecundityYear, #
-			PlantID, #
-			stage, #
-			Fruit_Flowers_t#
-		)#
-	colnames(Dat_census)[which(names(Dat_census) == "FecundityYear")] <- "Year"#
-	# merge year with year - 1#
-	trans <- subset(#
-		merge(#
-			Dat_census, #
-			Dat_census, #
-			by = "PlantID", #
-			sort = FALSE#
-		), #
-		Year.x == Year.y - 1#
-	)#
-	# rename rows and columns#
-	rownames(trans) <- 1:nrow(trans)#
-	colnames(trans)[which(names(trans) == "Year.x")] 			<- "Year"#
-	colnames(trans)[which(names(trans) == "stage.x")] 			<- "stage"#
-	colnames(trans)[which(names(trans) == "Fruit_Flowers_t.x")] <- "Repro"#
-	colnames(trans)[which(names(trans) == "Year.y")] 			<- "Year2"#
-	colnames(trans)[which(names(trans) == "stage.y")] 			<- "fate"#
-	colnames(trans)[which(names(trans) == "Fruit_Flowers_t.y")] <- "Repro2"#
-#
-	# year-specific transition matrix#
-	trans01 <- trans %>%#
-		filter(Year == TransitionYear) %>%#
-		dplyr::select(PlantID, stage, Repro, fate, Repro2)
-head(trans01)
-dim(trans01)
+analysis.results
 setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-TransitionYear
+do.call(rbind.data.frame, A[[i]][[j]][[k]])
+do.call(rbind.fill, A[[i]][[j]][[k]])
+do.call(rbind.fill, A[[i]][[j]][[k]]) %>% head
 setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-stages <- c(unique(c(trans01$stage, trans01$fate))) %>% #
-		as.numeric %>%#
-		na.omit %>% #
-		as.vector %>%#
-		sort#
-	stages <- c("Seed", "Seedling", stages, "dead")#
-	trans01$stage %<>% factor(., levels=stages[-length(stages)], ordered=T)#
-	trans01$fate %<>% factor(., levels=stages, ordered=T)#
-	# remove last stage#
-	stages %<>% .[-length(.)]
+x <- paste(#
+							"repro.value.", #
+							trans_data$stages, #
+							sep=""#
+						)#
+						repro.value.dat <- rep("NA", length(x)) %>%#
+							t %>% as.data.frame#
+						colnames(repro.value.dat) <- x#
+						# stable stages#
+						x <- paste(#
+							"stable.stage.", #
+							trans_data$stages, #
+							sep=""#
+						)#
+						stable.stage.dat <- rep("NA", length(x)) %>%#
+							t %>% as.data.frame#
+						colnames(stable.stage.dat) <- x#
+						# sensitivities#
+						x <- expand.grid(trans_data$stages,trans_data$stages)#
+						y <- paste("sensitivies.", x$Var1,"-",x$Var2,sep="")#
+						sensitivities <- rep("NA", length(y)) %>%#
+							t %>% as.data.frame#
+						colnames(sensitivities) <- y#
+						# elasticities#
+						x <- expand.grid(trans_data$stages,trans_data$stages)#
+						y <- paste("elasticities.", x$Var1,"-",x$Var2,sep="")#
+						elasticities <- rep("NA", length(y)) %>%#
+							t %>% as.data.frame#
+						colnames(elasticities) <- y
 setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-proj_matrix <- projection.matrix(#
-		transitions = trans01,#
-		stage = stage,#
-		fate = fate, #
-		fertility = Repro,#
-		sort = stages#
-	)#
-	# create matrix of transition counts#
-	transition.counts <- table(trans01$fate, trans01$stage)
-head(clonal_repro_dataset)
+data.frame(#
+							repro.value.dat,#
+							stable.stage.dat,#
+							sensitivities,#
+							elasticities,#
+							lambda1 		= NA,#
+							damping.ratio 	= NA,#
+							SeedBankSize 	= SeedBankSize[i],#
+							SeedsPerFruit 	= SeedsPerFruit[j],#
+							SeedSurvival 	= SeedSurvival[k],#
+							Bootstrap		= l#
+						)
 setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-createClonalReproTransitionMatrix(#
-		clonal_repro_dataset, #
-		trans01,#
-		stages#
-	)
-dim(clonal_repro_dataset)
-head(clonal_repro_dataset)
-length(unique(clonal_repro_dataset$Offspring.ID))
-str(clonal_reproduction_info_for_transition_matrix.largest.parent)
-str(Plant.Surveys.TM.largest.parent)
-unique(Plant.Surveys.TM.largest.parent$Species)
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/Manuscript/Demography/population_modeling_files/processing')
-# create lists of data#
-ldf <- list(#
-	Plant.Surveys.TM.largest.parent,#
-	Plant.Surveys.TM.random.parent,#
-	Plant.Surveys.TM.random.largest.parent#
-)#
-cldf <- list(#
-	clonal_reproduction_info_for_transition_matrix.largest.parent %>% #
-		filter(Species=="Opuntia stricta"),#
-	clonal_reproduction_info_for_transition_matrix.random.parent %>% #
-		filter(Species=="Opuntia stricta"),#
-	clonal_reproduction_info_for_transition_matrix.random.largest.parent %>% #
-		filter(Species=="Opuntia stricta")#
-)
+!(is.null(analysis.results))
 setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-clonal_repro_dat <- clonal_repro_dataset %>%#
-		filter(#
-			Year == TransitionYear,#
-			Species == "Opuntia stricta"#
-		)
-str(clonal_repro_dataset)
+repro.value.dat <- analysis.results$repro.value#
+						names(repro.value.dat) <- #
+							paste("repro.value",names(repro.value.dat),sep=".")#
+						repro.value.dat %<>% t %>% as.data.frame#
+						#		stable stage distribution#
+						stable.stage.dat <- analysis.results$stable.stage#
+						names(stable.stage.dat) <- #
+							paste("stable.stage",names(stable.stage.dat),sep=".")#
+						stable.stage.dat %<>% t %>% as.data.frame#
+						#		elasticities#
+						elasticities <- analysis.results$elasticities %>% #
+							as.data.frame %>%#
+							mutate(#
+								Name = paste(#
+									"elasticities.", #
+									Var2, "-", #
+									Var1, #
+									sep=""#
+								)#
+							) %>%#
+							as.data.frame(row.names=.$Name) %>%#
+							dplyr::select(Freq) %>%#
+							t %>%#
+							as.data.frame()#
+						#		sensitivities#
+						sensitivities <- analysis.results$sensitivities %>% #
+							as.table %>% as.data.frame %>%#
+							mutate(#
+								Name = paste(#
+									"sensitivities.", #
+									Var2, "-",#
+									Var1, #
+									sep=""#
+								)#
+							) %>%#
+							as.data.frame(row.names=.$Name) %>%#
+							dplyr::select(Freq) %>%#
+							t %>%#
+							as.data.frame()
 setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
-clonal_repro_dat <- clonal_repro_dataset %>%#
-		filter(#
-			minFecundityYear == TransitionYear,#
-			Species == "Opuntia stricta"#
-		)
-dim(clonal_repro_dat)
-setwd('/Users/KSauby/Documents/Projects')
-setwd("./GTMNERRproc")#
-#setwd("./dataproc")#
-#setwd("./modresproc")#
-#setwd("./unmarked")#
-#setwd("./RPresence")#
-#devtools::test()#
-devtools::document()#
-devtools::install()
+data.frame(#
+							repro.value.dat,#
+							stable.stage.dat,#
+							sensitivities,#
+							elasticities,#
+							lambda1 		= analysis.results$lambda1,#
+							damping.ratio 	= analysis.results$damping.ratio,#
+							SeedBankSize 	= SeedBankSize[i],#
+							SeedsPerFruit 	= SeedsPerFruit[j],#
+							SeedSurvival 	= SeedSurvival[k],#
+							Bootstrap		= l#
+						)
+X <- do.call(rbind.fill, A[[i]][[j]][[k]])
+head(X)
+X %>% filter(lambda1 == "NA")
+X %>% filter(is.na(lambda1))
+X %>% filter(is.na(elasticities.3.3))
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+analysis.results
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+repro.value.dat <- rep("NA", length(x)) %>%#
+							t %>% as.data.frame#
+						colnames(repro.value.dat) <- x#
+						# stable stages#
+						x <- paste(#
+							"stable.stage.", #
+							trans_data$stages, #
+							sep=""#
+						)#
+						stable.stage.dat <- rep("NA", length(x)) %>%#
+							t %>% as.data.frame#
+						colnames(stable.stage.dat) <- x#
+						# sensitivities#
+						x <- expand.grid(trans_data$stages,trans_data$stages)#
+						y <- paste("sensitivies.", x$Var1,"-",x$Var2,sep="")#
+						sensitivities <- rep("NA", length(y)) %>%#
+							t %>% as.data.frame#
+						colnames(sensitivities) <- y#
+						# elasticities#
+						x <- expand.grid(trans_data$stages,trans_data$stages)#
+						y <- paste("elasticities.", x$Var1,"-",x$Var2,sep="")#
+						elasticities <- rep("NA", length(y)) %>%#
+							t %>% as.data.frame#
+						colnames(elasticities) <- y
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+data.frame(#
+							repro.value.dat,#
+							stable.stage.dat,#
+							sensitivities,#
+							elasticities,#
+							lambda1 		= NA,#
+							damping.ratio 	= NA,#
+							SeedBankSize 	= SeedBankSize[i],#
+							SeedsPerFruit 	= SeedsPerFruit[j],#
+							SeedSurvival 	= SeedSurvival[k],#
+							Bootstrap		= l#
+						)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+repro.value.dat
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+repro.value.dat
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+stable.stage.dat
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+paste(#
+							"repro.value.", #
+							trans_data$stages, #
+							sep=""#
+						)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+x <- paste(#
+							"repro.value.", #
+							trans_data$stages, #
+							sep=""#
+						)#
+						repro.value.dat <- rep("NA", length(x)) %>%#
+							t %>% as.data.frame
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+repro.value.dat
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+x
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+colnames(repro.value.dat) <- x
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+repro.value.dat
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+repro.value.dat
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+x <- paste(#
+							"repro.value.", #
+							trans_data$stages, #
+							sep=""#
+						)#
+						repro.value.dat <- rep("NA", length(x)) %>%#
+							t %>% as.data.frame#
+						colnames(repro.value.dat) <- x#
+						# stable stages#
+						x <- paste(#
+							"stable.stage.", #
+							trans_data$stages, #
+							sep=""#
+						)#
+						stable.stage.dat <- rep("NA", length(x)) %>%#
+							t %>% as.data.frame#
+						colnames(stable.stage.dat) <- x#
+						# sensitivities#
+						x <- expand.grid(trans_data$stages,trans_data$stages)#
+						y <- paste("sensitivies.", x$Var1,"-",x$Var2,sep="")#
+						sensitivities <- rep("NA", length(y)) %>%#
+							t %>% as.data.frame#
+						colnames(sensitivities) <- y#
+						# elasticities#
+						x <- expand.grid(trans_data$stages,trans_data$stages)#
+						y <- paste("elasticities.", x$Var1,"-",x$Var2,sep="")#
+						elasticities <- rep("NA", length(y)) %>%#
+							t %>% as.data.frame#
+						colnames(elasticities) <- y
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+repro.value.dat
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+stable.stage.dat
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+data.frame(#
+							repro.value.dat,#
+							stable.stage.dat,#
+							sensitivities,#
+							elasticities,#
+							lambda1 		= NA,#
+							damping.ratio 	= NA,#
+							SeedBankSize 	= SeedBankSize[i],#
+							SeedsPerFruit 	= SeedsPerFruit[j],#
+							SeedSurvival 	= SeedSurvival[k],#
+							Bootstrap		= l#
+						)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+x <- paste(#
+							"repro.value.", #
+							trans_data$stages, #
+							sep=""#
+						)#
+						repro.value.dat <- rep("NA", length(x)) %>%#
+							t %>% as.data.frame#
+						colnames(repro.value.dat) <- x#
+						# stable stages#
+						x <- paste(#
+							"stable.stage.", #
+							trans_data$stages, #
+							sep=""#
+						)#
+						stable.stage.dat <- rep("NA", length(x)) %>%#
+							t %>% as.data.frame#
+						colnames(stable.stage.dat) <- x#
+						# sensitivities#
+						x <- expand.grid(trans_data$stages,trans_data$stages)#
+						y <- paste("sensitivies.", x$Var1,"-",x$Var2,sep="")#
+						sensitivities <- rep("NA", length(y)) %>%#
+							t %>% as.data.frame#
+						colnames(sensitivities) <- y#
+						# elasticities#
+						x <- expand.grid(trans_data$stages,trans_data$stages)#
+						y <- paste("elasticities.", x$Var1,"-",x$Var2,sep="")#
+						elasticities <- rep("NA", length(y)) %>%#
+							t %>% as.data.frame#
+						colnames(elasticities) <- y
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+data.frame(#
+							repro.value.dat,#
+							stable.stage.dat,#
+							sensitivities,#
+							elasticities,#
+							lambda1 		= NA,#
+							damping.ratio 	= NA,#
+							SeedBankSize 	= SeedBankSize[i],#
+							SeedsPerFruit 	= SeedsPerFruit[j],#
+							SeedSurvival 	= SeedSurvival[k],#
+							Bootstrap		= l#
+						)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+A <- vector("list", length(SeedBankSize))	#
+	for (i in 1:length(SeedBankSize)) {#
+		A[[i]] <- vector("list", length(SeedsPerFruit))	#
+		for (j in 1:length(SeedsPerFruit)) {#
+			A[[i]][[j]] <- vector("list", length(SeedSurvival))	#
+			for (k in 1:length(SeedSurvival)) {#
+				for (l in 1:n_bootstraps) {#
+					analysis.results <- NULL#
+					# -------------------------------------------------------- ##
+					# Create growth/retrogression/survival/fecundity transition matrix#
+					# -------------------------------------------------------- ##
+					# bootstrap ldf#
+					x <- sample(nrow(trans_data$trans01), replace=TRUE)#
+					ldf_bootstrap <- trans_data$trans01[x, ]#
+					# create transition matrix#
+					proj_mat <- createProjectionMatrix(#
+						ldf_bootstrap,#
+						SeedBankSize[i],#
+						SeedsPerFruit[j],#
+						SeedSurvival[k]#
+					)#
+					# -------------------------------------------------------- ##
+					# Create clonal reproduction transition matrix#
+					# -------------------------------------------------------- ##
+					# bootstrap cldf#
+					clonal_repro_dat <- clonal_repro_dataset %>%#
+						filter(#
+							minFecundityYear == TransitionYear,#
+							Species == "Opuntia stricta"#
+						)#
+					x <- NULL#
+					x <- sample(nrow(clonal_repro_dat), replace=TRUE)#
+					cldf_bootstrap <- clonal_repro_dat[x, ]#
+					# create clonal transition matrix#
+					clonal.matrices <- createClonalReproTransitionMatrix(#
+						cldf_bootstrap, #
+						ldf_bootstrap,#
+						trans_data$stages#
+					)#
+					# ------------------------------------------------------- ##
+					# add transition matrices together#
+					# ------------------------------------------------------- ##
+					all_proj_matrix <- proj_mat + clonal.matrices[[2]]#
+					# ------------------------------------------------------- ##
+					# starting numbers#
+					# ------------------------------------------------------- ##
+					n_per_stage <- NULL#
+					n_per_stage <- calculateNumberIndivperStage(#
+						trans_data$trans01, #
+						trans_data$stages#
+					)#
+					# ------------------------------------------------------- ##
+					# dynamics#
+					# ------------------------------------------------------- ##
+					all_proj_matrix[1, 1] <- SeedSurvival[k]#
+					n_per_stage %<>% #
+						mutate(#
+							n = replace(#
+								n, #
+								which(stage=="Seed"),#
+								SeedBankSize[i]#
+							)#
+						)#
+					pr <- pop.projection(#
+						A = all_proj_matrix, #
+						n = n_per_stage$n, #
+						iterations = n.iter#
+					)#
+					analysis.results <- eigen.analysis(all_proj_matrix)#
+					if (!(is.null(analysis.results))) {#
+						# create table of results				#
+						#		repro.values#
+						repro.value.dat <- analysis.results$repro.value#
+						names(repro.value.dat) <- #
+							paste("repro.value",names(repro.value.dat),sep=".")#
+						repro.value.dat %<>% t %>% as.data.frame#
+						#		stable stage distribution#
+						stable.stage.dat <- analysis.results$stable.stage#
+						names(stable.stage.dat) <- #
+							paste("stable.stage",names(stable.stage.dat),sep=".")#
+						stable.stage.dat %<>% t %>% as.data.frame#
+						#		elasticities#
+						elasticities <- analysis.results$elasticities %>% #
+							as.data.frame %>%#
+							mutate(#
+								Name = paste(#
+									"elasticities.", #
+									Var2, "-", #
+									Var1, #
+									sep=""#
+								)#
+							) %>%#
+							as.data.frame(row.names=.$Name) %>%#
+							dplyr::select(Freq) %>%#
+							t %>%#
+							as.data.frame()#
+						#		sensitivities#
+						sensitivities <- analysis.results$sensitivities %>% #
+							as.table %>% as.data.frame %>%#
+							mutate(#
+								Name = paste(#
+									"sensitivities.", #
+									Var2, "-",#
+									Var1, #
+									sep=""#
+								)#
+							) %>%#
+							as.data.frame(row.names=.$Name) %>%#
+							dplyr::select(Freq) %>%#
+							t %>%#
+							as.data.frame()#
+						A[[i]][[j]][[k]][[l]] <- data.frame(#
+							repro.value.dat,#
+							stable.stage.dat,#
+							sensitivities,#
+							elasticities,#
+							lambda1 		= analysis.results$lambda1,#
+							damping.ratio 	= analysis.results$damping.ratio,#
+							SeedBankSize 	= SeedBankSize[i],#
+							SeedsPerFruit 	= SeedsPerFruit[j],#
+							SeedSurvival 	= SeedSurvival[k],#
+							Bootstrap		= l#
+						)		#
+					} else {#
+						# repro values#
+						x <- paste(#
+							"repro.value.", #
+							trans_data$stages, #
+							sep=""#
+						)#
+						repro.value.dat <- rep("NA", length(x)) %>%#
+							t %>% as.data.frame#
+						colnames(repro.value.dat) <- x#
+						# stable stages#
+						x <- paste(#
+							"stable.stage.", #
+							trans_data$stages, #
+							sep=""#
+						)#
+						stable.stage.dat <- rep("NA", length(x)) %>%#
+							t %>% as.data.frame#
+						colnames(stable.stage.dat) <- x#
+						# sensitivities#
+						x <- expand.grid(trans_data$stages,trans_data$stages)#
+						y <- paste("sensitivies.", x$Var1,"-",x$Var2,sep="")#
+						sensitivities <- rep("NA", length(y)) %>%#
+							t %>% as.data.frame#
+						colnames(sensitivities) <- y#
+						# elasticities#
+						x <- expand.grid(trans_data$stages,trans_data$stages)#
+						y <- paste("elasticities.", x$Var1,"-",x$Var2,sep="")#
+						elasticities <- rep("NA", length(y)) %>%#
+							t %>% as.data.frame#
+						colnames(elasticities) <- y						#
+						A[[i]][[j]][[k]][[l]] <- data.frame(#
+							repro.value.dat,#
+							stable.stage.dat,#
+							sensitivities,#
+							elasticities,#
+							lambda1 		= NA,#
+							damping.ratio 	= NA,#
+							SeedBankSize 	= SeedBankSize[i],#
+							SeedsPerFruit 	= SeedsPerFruit[j],#
+							SeedSurvival 	= SeedSurvival[k],#
+							Bootstrap		= l#
+						)#
+					}#
+				}#
+				A[[i]][[j]][[k]] <- do.call(rbind.data.frame, A[[i]][[j]][[k]])#
+			}#
+			A[[i]][[j]] <- do.call(rbind.data.frame, A[[i]][[j]])#
+		}#
+		A[[i]] <- do.call(rbind.data.frame, A[[i]])#
+	}#
+	A <- do.call(rbind.data.frame, A)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+A[[i]][[j]][[k]] <- do.call(rbind.data.frame, A[[i]][[j]][[k]])
+str(A)
+i
+j
+k
+l
+X <- do.call(rbind.data.frame, A[[i]][[j]][[k]])
+X <- do.call(rbind.fill, A[[i]][[j]][[k]])
+str(A[[i]][[j]][[k]])
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+for (l in 1:n_bootstraps) {#
+					analysis.results <- NULL#
+					# -------------------------------------------------------- ##
+					# Create growth/retrogression/survival/fecundity transition matrix#
+					# -------------------------------------------------------- ##
+					# bootstrap ldf#
+					x <- sample(nrow(trans_data$trans01), replace=TRUE)#
+					ldf_bootstrap <- trans_data$trans01[x, ]#
+					# create transition matrix#
+					proj_mat <- createProjectionMatrix(#
+						ldf_bootstrap,#
+						SeedBankSize[i],#
+						SeedsPerFruit[j],#
+						SeedSurvival[k]#
+					)#
+					# -------------------------------------------------------- ##
+					# Create clonal reproduction transition matrix#
+					# -------------------------------------------------------- ##
+					# bootstrap cldf#
+					clonal_repro_dat <- clonal_repro_dataset %>%#
+						filter(#
+							minFecundityYear == TransitionYear,#
+							Species == "Opuntia stricta"#
+						)#
+					x <- NULL#
+					x <- sample(nrow(clonal_repro_dat), replace=TRUE)#
+					cldf_bootstrap <- clonal_repro_dat[x, ]#
+					# create clonal transition matrix#
+					clonal.matrices <- createClonalReproTransitionMatrix(#
+						cldf_bootstrap, #
+						ldf_bootstrap,#
+						trans_data$stages#
+					)#
+					# ------------------------------------------------------- ##
+					# add transition matrices together#
+					# ------------------------------------------------------- ##
+					all_proj_matrix <- proj_mat + clonal.matrices[[2]]#
+					# ------------------------------------------------------- ##
+					# starting numbers#
+					# ------------------------------------------------------- ##
+					n_per_stage <- NULL#
+					n_per_stage <- calculateNumberIndivperStage(#
+						trans_data$trans01, #
+						trans_data$stages#
+					)#
+					# ------------------------------------------------------- ##
+					# dynamics#
+					# ------------------------------------------------------- ##
+					all_proj_matrix[1, 1] <- SeedSurvival[k]#
+					n_per_stage %<>% #
+						mutate(#
+							n = replace(#
+								n, #
+								which(stage=="Seed"),#
+								SeedBankSize[i]#
+							)#
+						)#
+					pr <- pop.projection(#
+						A = all_proj_matrix, #
+						n = n_per_stage$n, #
+						iterations = n.iter#
+					)#
+					analysis.results <- eigen.analysis(all_proj_matrix)#
+					if (!(is.null(analysis.results))) {#
+						# create table of results				#
+						#		repro.values#
+						repro.value.dat <- analysis.results$repro.value#
+						names(repro.value.dat) <- #
+							paste("repro.value",names(repro.value.dat),sep=".")#
+						repro.value.dat %<>% t %>% as.data.frame#
+						#		stable stage distribution#
+						stable.stage.dat <- analysis.results$stable.stage#
+						names(stable.stage.dat) <- #
+							paste("stable.stage",names(stable.stage.dat),sep=".")#
+						stable.stage.dat %<>% t %>% as.data.frame#
+						#		elasticities#
+						elasticities <- analysis.results$elasticities %>% #
+							as.data.frame %>%#
+							mutate(#
+								Name = paste(#
+									"elasticities.", #
+									Var2, "-", #
+									Var1, #
+									sep=""#
+								)#
+							) %>%#
+							as.data.frame(row.names=.$Name) %>%#
+							dplyr::select(Freq) %>%#
+							t %>%#
+							as.data.frame()#
+						#		sensitivities#
+						sensitivities <- analysis.results$sensitivities %>% #
+							as.table %>% as.data.frame %>%#
+							mutate(#
+								Name = paste(#
+									"sensitivities.", #
+									Var2, "-",#
+									Var1, #
+									sep=""#
+								)#
+							) %>%#
+							as.data.frame(row.names=.$Name) %>%#
+							dplyr::select(Freq) %>%#
+							t %>%#
+							as.data.frame()#
+						A[[i]][[j]][[k]][[l]] <- data.frame(#
+							repro.value.dat,#
+							stable.stage.dat,#
+							sensitivities,#
+							elasticities,#
+							lambda1 		= analysis.results$lambda1,#
+							damping.ratio 	= analysis.results$damping.ratio,#
+							SeedBankSize 	= SeedBankSize[i],#
+							SeedsPerFruit 	= SeedsPerFruit[j],#
+							SeedSurvival 	= SeedSurvival[k],#
+							Bootstrap		= l#
+						)		#
+					} else {#
+						# repro values#
+						x <- paste(#
+							"repro.value.", #
+							trans_data$stages, #
+							sep=""#
+						)#
+						repro.value.dat <- rep("NA", length(x)) %>%#
+							t %>% as.data.frame#
+						colnames(repro.value.dat) <- x#
+						# stable stages#
+						x <- paste(#
+							"stable.stage.", #
+							trans_data$stages, #
+							sep=""#
+						)#
+						stable.stage.dat <- rep("NA", length(x)) %>%#
+							t %>% as.data.frame#
+						colnames(stable.stage.dat) <- x#
+						# sensitivities#
+						x <- expand.grid(trans_data$stages,trans_data$stages)#
+						y <- paste("sensitivies.", x$Var1,"-",x$Var2,sep="")#
+						sensitivities <- rep("NA", length(y)) %>%#
+							t %>% as.data.frame#
+						colnames(sensitivities) <- y#
+						# elasticities#
+						x <- expand.grid(trans_data$stages,trans_data$stages)#
+						y <- paste("elasticities.", x$Var1,"-",x$Var2,sep="")#
+						elasticities <- rep("NA", length(y)) %>%#
+							t %>% as.data.frame#
+						colnames(elasticities) <- y						#
+						A[[i]][[j]][[k]][[l]] <- data.frame(#
+							repro.value.dat,#
+							stable.stage.dat,#
+							sensitivities,#
+							elasticities,#
+							lambda1 		= NA,#
+							damping.ratio 	= NA,#
+							SeedBankSize 	= SeedBankSize[i],#
+							SeedsPerFruit 	= SeedsPerFruit[j],#
+							SeedSurvival 	= SeedSurvival[k],#
+							Bootstrap		= l#
+						)#
+					}#
+				}#
+				A[[i]][[j]][[k]] <- do.call(rbind.data.frame, A[[i]][[j]][[k]])
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+A <- vector("list", length(SeedBankSize))
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+A[[i]] <- vector("list", length(SeedsPerFruit))
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+A[[i]][[j]] <- vector("list", length(SeedSurvival))
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+for (l in 1:n_bootstraps) {#
+					analysis.results <- NULL#
+					# -------------------------------------------------------- ##
+					# Create growth/retrogression/survival/fecundity transition matrix#
+					# -------------------------------------------------------- ##
+					# bootstrap ldf#
+					x <- sample(nrow(trans_data$trans01), replace=TRUE)#
+					ldf_bootstrap <- trans_data$trans01[x, ]#
+					# create transition matrix#
+					proj_mat <- createProjectionMatrix(#
+						ldf_bootstrap,#
+						SeedBankSize[i],#
+						SeedsPerFruit[j],#
+						SeedSurvival[k]#
+					)#
+					# -------------------------------------------------------- ##
+					# Create clonal reproduction transition matrix#
+					# -------------------------------------------------------- ##
+					# bootstrap cldf#
+					clonal_repro_dat <- clonal_repro_dataset %>%#
+						filter(#
+							minFecundityYear == TransitionYear,#
+							Species == "Opuntia stricta"#
+						)#
+					x <- NULL#
+					x <- sample(nrow(clonal_repro_dat), replace=TRUE)#
+					cldf_bootstrap <- clonal_repro_dat[x, ]#
+					# create clonal transition matrix#
+					clonal.matrices <- createClonalReproTransitionMatrix(#
+						cldf_bootstrap, #
+						ldf_bootstrap,#
+						trans_data$stages#
+					)#
+					# ------------------------------------------------------- ##
+					# add transition matrices together#
+					# ------------------------------------------------------- ##
+					all_proj_matrix <- proj_mat + clonal.matrices[[2]]#
+					# ------------------------------------------------------- ##
+					# starting numbers#
+					# ------------------------------------------------------- ##
+					n_per_stage <- NULL#
+					n_per_stage <- calculateNumberIndivperStage(#
+						trans_data$trans01, #
+						trans_data$stages#
+					)#
+					# ------------------------------------------------------- ##
+					# dynamics#
+					# ------------------------------------------------------- ##
+					all_proj_matrix[1, 1] <- SeedSurvival[k]#
+					n_per_stage %<>% #
+						mutate(#
+							n = replace(#
+								n, #
+								which(stage=="Seed"),#
+								SeedBankSize[i]#
+							)#
+						)#
+					pr <- pop.projection(#
+						A = all_proj_matrix, #
+						n = n_per_stage$n, #
+						iterations = n.iter#
+					)#
+					analysis.results <- eigen.analysis(all_proj_matrix)#
+					if (!(is.null(analysis.results))) {#
+						# create table of results				#
+						#		repro.values#
+						repro.value.dat <- analysis.results$repro.value#
+						names(repro.value.dat) <- #
+							paste("repro.value",names(repro.value.dat),sep=".")#
+						repro.value.dat %<>% t %>% as.data.frame#
+						#		stable stage distribution#
+						stable.stage.dat <- analysis.results$stable.stage#
+						names(stable.stage.dat) <- #
+							paste("stable.stage",names(stable.stage.dat),sep=".")#
+						stable.stage.dat %<>% t %>% as.data.frame#
+						#		elasticities#
+						elasticities <- analysis.results$elasticities %>% #
+							as.data.frame %>%#
+							mutate(#
+								Name = paste(#
+									"elasticities.", #
+									Var2, "-", #
+									Var1, #
+									sep=""#
+								)#
+							) %>%#
+							as.data.frame(row.names=.$Name) %>%#
+							dplyr::select(Freq) %>%#
+							t %>%#
+							as.data.frame()#
+						#		sensitivities#
+						sensitivities <- analysis.results$sensitivities %>% #
+							as.table %>% as.data.frame %>%#
+							mutate(#
+								Name = paste(#
+									"sensitivities.", #
+									Var2, "-",#
+									Var1, #
+									sep=""#
+								)#
+							) %>%#
+							as.data.frame(row.names=.$Name) %>%#
+							dplyr::select(Freq) %>%#
+							t %>%#
+							as.data.frame()#
+						A[[i]][[j]][[k]][[l]] <- data.frame(#
+							repro.value.dat,#
+							stable.stage.dat,#
+							sensitivities,#
+							elasticities,#
+							lambda1 		= analysis.results$lambda1,#
+							damping.ratio 	= analysis.results$damping.ratio,#
+							SeedBankSize 	= SeedBankSize[i],#
+							SeedsPerFruit 	= SeedsPerFruit[j],#
+							SeedSurvival 	= SeedSurvival[k],#
+							Bootstrap		= l#
+						)		#
+					} else {#
+						# repro values#
+						x <- paste(#
+							"repro.value.", #
+							trans_data$stages, #
+							sep=""#
+						)#
+						repro.value.dat <- rep("NA", length(x)) %>%#
+							t %>% as.data.frame#
+						colnames(repro.value.dat) <- x#
+						# stable stages#
+						x <- paste(#
+							"stable.stage.", #
+							trans_data$stages, #
+							sep=""#
+						)#
+						stable.stage.dat <- rep("NA", length(x)) %>%#
+							t %>% as.data.frame#
+						colnames(stable.stage.dat) <- x#
+						# sensitivities#
+						x <- expand.grid(trans_data$stages,trans_data$stages)#
+						y <- paste("sensitivies.", x$Var1,"-",x$Var2,sep="")#
+						sensitivities <- rep("NA", length(y)) %>%#
+							t %>% as.data.frame#
+						colnames(sensitivities) <- y#
+						# elasticities#
+						x <- expand.grid(trans_data$stages,trans_data$stages)#
+						y <- paste("elasticities.", x$Var1,"-",x$Var2,sep="")#
+						elasticities <- rep("NA", length(y)) %>%#
+							t %>% as.data.frame#
+						colnames(elasticities) <- y						#
+						A[[i]][[j]][[k]][[l]] <- data.frame(#
+							repro.value.dat,#
+							stable.stage.dat,#
+							sensitivities,#
+							elasticities,#
+							lambda1 		= NA,#
+							damping.ratio 	= NA,#
+							SeedBankSize 	= SeedBankSize[i],#
+							SeedsPerFruit 	= SeedsPerFruit[j],#
+							SeedSurvival 	= SeedSurvival[k],#
+							Bootstrap		= l#
+						)#
+					}#
+				}#
+				A[[i]][[j]][[k]] <- do.call(rbind.data.frame, A[[i]][[j]][[k]])#
+			}#
+			A[[i]][[j]] <- do.call(rbind.data.frame, A[[i]][[j]])
+i
+j
+k
+l
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+A <- vector("list", length(SeedBankSize))
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+A[[i]] <- vector("list", length(SeedsPerFruit))
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+A[[i]][[j]] <- vector("list", length(SeedSurvival))
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+for (l in 1:n_bootstraps) {#
+					analysis.results <- NULL#
+					# -------------------------------------------------------- ##
+					# Create growth/retrogression/survival/fecundity transition matrix#
+					# -------------------------------------------------------- ##
+					# bootstrap ldf#
+					x <- sample(nrow(trans_data$trans01), replace=TRUE)#
+					ldf_bootstrap <- trans_data$trans01[x, ]#
+					# create transition matrix#
+					proj_mat <- createProjectionMatrix(#
+						ldf_bootstrap,#
+						SeedBankSize[i],#
+						SeedsPerFruit[j],#
+						SeedSurvival[k]#
+					)#
+					# -------------------------------------------------------- ##
+					# Create clonal reproduction transition matrix#
+					# -------------------------------------------------------- ##
+					# bootstrap cldf#
+					clonal_repro_dat <- clonal_repro_dataset %>%#
+						filter(#
+							minFecundityYear == TransitionYear,#
+							Species == "Opuntia stricta"#
+						)#
+					x <- NULL#
+					x <- sample(nrow(clonal_repro_dat), replace=TRUE)#
+					cldf_bootstrap <- clonal_repro_dat[x, ]#
+					# create clonal transition matrix#
+					clonal.matrices <- createClonalReproTransitionMatrix(#
+						cldf_bootstrap, #
+						ldf_bootstrap,#
+						trans_data$stages#
+					)#
+					# ------------------------------------------------------- ##
+					# add transition matrices together#
+					# ------------------------------------------------------- ##
+					all_proj_matrix <- proj_mat + clonal.matrices[[2]]#
+					# ------------------------------------------------------- ##
+					# starting numbers#
+					# ------------------------------------------------------- ##
+					n_per_stage <- NULL#
+					n_per_stage <- calculateNumberIndivperStage(#
+						trans_data$trans01, #
+						trans_data$stages#
+					)#
+					# ------------------------------------------------------- ##
+					# dynamics#
+					# ------------------------------------------------------- ##
+					all_proj_matrix[1, 1] <- SeedSurvival[k]#
+					n_per_stage %<>% #
+						mutate(#
+							n = replace(#
+								n, #
+								which(stage=="Seed"),#
+								SeedBankSize[i]#
+							)#
+						)#
+					pr <- pop.projection(#
+						A = all_proj_matrix, #
+						n = n_per_stage$n, #
+						iterations = n.iter#
+					)#
+					analysis.results <- eigen.analysis(all_proj_matrix)#
+					if (!(is.null(analysis.results))) {#
+						# create table of results				#
+						#		repro.values#
+						repro.value.dat <- analysis.results$repro.value#
+						names(repro.value.dat) <- #
+							paste("repro.value",names(repro.value.dat),sep=".")#
+						repro.value.dat %<>% t %>% as.data.frame#
+						#		stable stage distribution#
+						stable.stage.dat <- analysis.results$stable.stage#
+						names(stable.stage.dat) <- #
+							paste("stable.stage",names(stable.stage.dat),sep=".")#
+						stable.stage.dat %<>% t %>% as.data.frame#
+						#		elasticities#
+						elasticities <- analysis.results$elasticities %>% #
+							as.data.frame %>%#
+							mutate(#
+								Name = paste(#
+									"elasticities.", #
+									Var2, "-", #
+									Var1, #
+									sep=""#
+								)#
+							) %>%#
+							as.data.frame(row.names=.$Name) %>%#
+							dplyr::select(Freq) %>%#
+							t %>%#
+							as.data.frame()#
+						#		sensitivities#
+						sensitivities <- analysis.results$sensitivities %>% #
+							as.table %>% as.data.frame %>%#
+							mutate(#
+								Name = paste(#
+									"sensitivities.", #
+									Var2, "-",#
+									Var1, #
+									sep=""#
+								)#
+							) %>%#
+							as.data.frame(row.names=.$Name) %>%#
+							dplyr::select(Freq) %>%#
+							t %>%#
+							as.data.frame()#
+						A[[i]][[j]][[k]][[l]] <- data.frame(#
+							repro.value.dat,#
+							stable.stage.dat,#
+							sensitivities,#
+							elasticities,#
+							lambda1 		= analysis.results$lambda1,#
+							damping.ratio 	= analysis.results$damping.ratio,#
+							SeedBankSize 	= SeedBankSize[i],#
+							SeedsPerFruit 	= SeedsPerFruit[j],#
+							SeedSurvival 	= SeedSurvival[k],#
+							Bootstrap		= l#
+						)		#
+					}#
+				}#
+				A[[i]][[j]][[k]] <- do.call(rbind.data.frame, A[[i]][[j]][[k]])
+str(A[[i]][[j]][[k]])
+X <- do.call(rbind.data.frame, A[[i]][[j]][[k]][[1:1000]])
+X <- do.call(rbind.data.frame, A[[i]][[j]][[k]][[1]])
+X
+X <- do.call(rbind.data.frame, A[[i]][[j]][[k]][[1:3]])
+X <- do.call(rbind.data.frame, A[[i]][[j]][[k]][[2]])
+X
+X <- do.call(rbind.data.frame, A[[i]][[j]][[k]][1:3])
+X
+X <- do.call(rbind.data.frame, A[[i]][[j]][[k]][1:1000])
+X <- do.call(rbind.data.frame, A[[i]][[j]][[k]][1:500])
+X <- do.call(rbind.data.frame, A[[i]][[j]][[k]][1:100])
+X <- do.call(rbind.data.frame, A[[i]][[j]][[k]][101:200])
+X <- do.call(rbind.data.frame, A[[i]][[j]][[k]][201:300])
+X <- do.call(rbind.data.frame, A[[i]][[j]][[k]][301:400])
+X <- do.call(rbind.data.frame, A[[i]][[j]][[k]][301:350])
+X <- do.call(rbind.data.frame, A[[i]][[j]][[k]][301:320])
+X <- do.call(rbind.data.frame, A[[i]][[j]][[k]][301:310])
+X <- do.call(rbind.data.frame, A[[i]][[j]][[k]][301:305])
+rbind.data.frame, A[[i]][[j]][[k]][[301]]
+A[[i]][[j]][[k]][[301]]
+A[[i]][[j]][[k]][[302]]
+A[[i]][[j]][[k]][[303]]
+A[[i]][[j]][[k]][[304]]
+X <- do.call(rbind.data.frame, A[[i]][[j]][[k]][304:305])
+A[[i]][[j]][[k]][[303]]
+A[[i]][[j]][[k]][[304]]
+A[[i]][[j]][[k]][[303]]
+A[[i]][[j]][[k]][[304]]
+?set.seed
+i
+set.seed(i)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+A <- vector("list", length(SeedBankSize))
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+A[[i]] <- vector("list", length(SeedsPerFruit))
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+A[[i]][[j]] <- vector("list", length(SeedSurvival))	#
+			for (k in 1:length(SeedSurvival)) {#
+				for (l in 1:n_bootstraps) {#
+					analysis.results <- NULL#
+					# -------------------------------------------------------- ##
+					# Create growth/retrogression/survival/fecundity transition matrix#
+					# -------------------------------------------------------- ##
+					# bootstrap ldf#
+					set.seed(l)#
+					x <- sample(nrow(trans_data$trans01), replace=TRUE)#
+					ldf_bootstrap <- trans_data$trans01[x, ]#
+					# create transition matrix#
+					proj_mat <- createProjectionMatrix(#
+						ldf_bootstrap,#
+						SeedBankSize[i],#
+						SeedsPerFruit[j],#
+						SeedSurvival[k]#
+					)#
+					# -------------------------------------------------------- ##
+					# Create clonal reproduction transition matrix#
+					# -------------------------------------------------------- ##
+					# bootstrap cldf#
+					clonal_repro_dat <- clonal_repro_dataset %>%#
+						filter(#
+							minFecundityYear == TransitionYear,#
+							Species == "Opuntia stricta"#
+						)#
+					x <- NULL#
+					set.seed(l)#
+					x <- sample(nrow(clonal_repro_dat), replace=TRUE)#
+					cldf_bootstrap <- clonal_repro_dat[x, ]#
+					# create clonal transition matrix#
+					clonal.matrices <- createClonalReproTransitionMatrix(#
+						cldf_bootstrap, #
+						ldf_bootstrap,#
+						trans_data$stages#
+					)#
+					# ------------------------------------------------------- ##
+					# add transition matrices together#
+					# ------------------------------------------------------- ##
+					all_proj_matrix <- proj_mat + clonal.matrices[[2]]#
+					# ------------------------------------------------------- ##
+					# starting numbers#
+					# ------------------------------------------------------- ##
+					n_per_stage <- NULL#
+					n_per_stage <- calculateNumberIndivperStage(#
+						trans_data$trans01, #
+						trans_data$stages#
+					)#
+					# ------------------------------------------------------- ##
+					# dynamics#
+					# ------------------------------------------------------- ##
+					all_proj_matrix[1, 1] <- SeedSurvival[k]#
+					n_per_stage %<>% #
+						mutate(#
+							n = replace(#
+								n, #
+								which(stage=="Seed"),#
+								SeedBankSize[i]#
+							)#
+						)#
+					pr <- pop.projection(#
+						A = all_proj_matrix, #
+						n = n_per_stage$n, #
+						iterations = n.iter#
+					)#
+					analysis.results <- eigen.analysis(all_proj_matrix)#
+					if (!(is.null(analysis.results))) {#
+						# create table of results				#
+						#		repro.values#
+						repro.value.dat <- analysis.results$repro.value#
+						names(repro.value.dat) <- #
+							paste("repro.value",names(repro.value.dat),sep=".")#
+						repro.value.dat %<>% t %>% as.data.frame#
+						#		stable stage distribution#
+						stable.stage.dat <- analysis.results$stable.stage#
+						names(stable.stage.dat) <- #
+							paste("stable.stage",names(stable.stage.dat),sep=".")#
+						stable.stage.dat %<>% t %>% as.data.frame#
+						#		elasticities#
+						elasticities <- analysis.results$elasticities %>% #
+							as.data.frame %>%#
+							mutate(#
+								Name = paste(#
+									"elasticities.", #
+									Var2, "-", #
+									Var1, #
+									sep=""#
+								)#
+							) %>%#
+							as.data.frame(row.names=.$Name) %>%#
+							dplyr::select(Freq) %>%#
+							t %>%#
+							as.data.frame()#
+						#		sensitivities#
+						sensitivities <- analysis.results$sensitivities %>% #
+							as.table %>% as.data.frame %>%#
+							mutate(#
+								Name = paste(#
+									"sensitivities.", #
+									Var2, "-",#
+									Var1, #
+									sep=""#
+								)#
+							) %>%#
+							as.data.frame(row.names=.$Name) %>%#
+							dplyr::select(Freq) %>%#
+							t %>%#
+							as.data.frame()#
+						A[[i]][[j]][[k]][[l]] <- data.frame(#
+							repro.value.dat,#
+							stable.stage.dat,#
+							sensitivities,#
+							elasticities,#
+							lambda1 		= analysis.results$lambda1,#
+							damping.ratio 	= analysis.results$damping.ratio,#
+							SeedBankSize 	= SeedBankSize[i],#
+							SeedsPerFruit 	= SeedsPerFruit[j],#
+							SeedSurvival 	= SeedSurvival[k],#
+							Bootstrap		= l#
+						)		#
+					}#
+				}#
+				A[[i]][[j]][[k]] <- do.call(rbind.data.frame, A[[i]][[j]][[k]])#
+			}#
+			A[[i]][[j]] <- do.call(rbind.data.frame, A[[i]][[j]])
+A[[i]][[j]][[k]]
+A[[i]][[j]]
+A[[i]][[j]] %>% head
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+A <- vector("list", length(SeedBankSize))
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+A[[i]] <- vector("list", length(SeedsPerFruit))
+i
+j
+k
+l
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+A[[i]][[j]] <- vector("list", length(SeedSurvival))
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+A <- vector("list", length(SeedBankSize))
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+A[[i]] <- vector("list", length(SeedsPerFruit))
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+A[[i]][[j]] <- vector("list", length(SeedSurvival))
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+seeds <- runif(simulations)#
+				for (l in 1:n_bootstraps) {#
+					temp_seed <- seeds[k]*100000#
+					analysis.results <- NULL#
+					# -------------------------------------------------------- ##
+					# Create growth/retrogression/survival/fecundity transition matrix#
+					# -------------------------------------------------------- ##
+					# bootstrap ldf#
+					set.seed(temp_seed)#
+					x <- sample(nrow(trans_data$trans01), replace=TRUE)#
+					ldf_bootstrap <- trans_data$trans01[x, ]#
+					# create transition matrix#
+					proj_mat <- createProjectionMatrix(#
+						ldf_bootstrap,#
+						SeedBankSize[i],#
+						SeedsPerFruit[j],#
+						SeedSurvival[k]#
+					)#
+					# -------------------------------------------------------- ##
+					# Create clonal reproduction transition matrix#
+					# -------------------------------------------------------- ##
+					# bootstrap cldf#
+					clonal_repro_dat <- clonal_repro_dataset %>%#
+						filter(#
+							minFecundityYear == TransitionYear,#
+							Species == "Opuntia stricta"#
+						)#
+					x <- NULL#
+					set.seed(temp_seed)#
+					x <- sample(nrow(clonal_repro_dat), replace=TRUE)#
+					cldf_bootstrap <- clonal_repro_dat[x, ]#
+					# create clonal transition matrix#
+					clonal.matrices <- createClonalReproTransitionMatrix(#
+						cldf_bootstrap, #
+						ldf_bootstrap,#
+						trans_data$stages#
+					)#
+					# ------------------------------------------------------- ##
+					# add transition matrices together#
+					# ------------------------------------------------------- ##
+					all_proj_matrix <- proj_mat + clonal.matrices[[2]]#
+					# ------------------------------------------------------- ##
+					# starting numbers#
+					# ------------------------------------------------------- ##
+					n_per_stage <- NULL#
+					n_per_stage <- calculateNumberIndivperStage(#
+						trans_data$trans01, #
+						trans_data$stages#
+					)#
+					# ------------------------------------------------------- ##
+					# dynamics#
+					# ------------------------------------------------------- ##
+					all_proj_matrix[1, 1] <- SeedSurvival[k]#
+					n_per_stage %<>% #
+						mutate(#
+							n = replace(#
+								n, #
+								which(stage=="Seed"),#
+								SeedBankSize[i]#
+							)#
+						)#
+					pr <- pop.projection(#
+						A = all_proj_matrix, #
+						n = n_per_stage$n, #
+						iterations = n.iter#
+					)#
+					analysis.results <- eigen.analysis(all_proj_matrix)#
+					if (!(is.null(analysis.results))) {#
+						# create table of results				#
+						#		repro.values#
+						repro.value.dat <- analysis.results$repro.value#
+						names(repro.value.dat) <- #
+							paste("repro.value",names(repro.value.dat),sep=".")#
+						repro.value.dat %<>% t %>% as.data.frame#
+						#		stable stage distribution#
+						stable.stage.dat <- analysis.results$stable.stage#
+						names(stable.stage.dat) <- #
+							paste("stable.stage",names(stable.stage.dat),sep=".")#
+						stable.stage.dat %<>% t %>% as.data.frame#
+						#		elasticities#
+						elasticities <- analysis.results$elasticities %>% #
+							as.data.frame %>%#
+							mutate(#
+								Name = paste(#
+									"elasticities.", #
+									Var2, "-", #
+									Var1, #
+									sep=""#
+								)#
+							) %>%#
+							as.data.frame(row.names=.$Name) %>%#
+							dplyr::select(Freq) %>%#
+							t %>%#
+							as.data.frame()#
+						#		sensitivities#
+						sensitivities <- analysis.results$sensitivities %>% #
+							as.table %>% as.data.frame %>%#
+							mutate(#
+								Name = paste(#
+									"sensitivities.", #
+									Var2, "-",#
+									Var1, #
+									sep=""#
+								)#
+							) %>%#
+							as.data.frame(row.names=.$Name) %>%#
+							dplyr::select(Freq) %>%#
+							t %>%#
+							as.data.frame()#
+						A[[i]][[j]][[k]][[l]] <- data.frame(#
+							repro.value.dat,#
+							stable.stage.dat,#
+							sensitivities,#
+							elasticities,#
+							lambda1 		= analysis.results$lambda1,#
+							damping.ratio 	= analysis.results$damping.ratio,#
+							SeedBankSize 	= SeedBankSize[i],#
+							SeedsPerFruit 	= SeedsPerFruit[j],#
+							SeedSurvival 	= SeedSurvival[k],#
+							Bootstrap		= l,#
+							seed			= temp_seed#
+						)		#
+					}#
+				}#
+				A[[i]][[j]][[k]] <- do.call(rbind.data.frame, A[[i]][[j]][[k]])
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+seeds <- runif(n_bootstraps)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+for (l in 1:n_bootstraps) {#
+					temp_seed <- seeds[k]*100000#
+					analysis.results <- NULL#
+					# -------------------------------------------------------- ##
+					# Create growth/retrogression/survival/fecundity transition matrix#
+					# -------------------------------------------------------- ##
+					# bootstrap ldf#
+					set.seed(temp_seed)#
+					x <- sample(nrow(trans_data$trans01), replace=TRUE)#
+					ldf_bootstrap <- trans_data$trans01[x, ]#
+					# create transition matrix#
+					proj_mat <- createProjectionMatrix(#
+						ldf_bootstrap,#
+						SeedBankSize[i],#
+						SeedsPerFruit[j],#
+						SeedSurvival[k]#
+					)#
+					# -------------------------------------------------------- ##
+					# Create clonal reproduction transition matrix#
+					# -------------------------------------------------------- ##
+					# bootstrap cldf#
+					clonal_repro_dat <- clonal_repro_dataset %>%#
+						filter(#
+							minFecundityYear == TransitionYear,#
+							Species == "Opuntia stricta"#
+						)#
+					x <- NULL#
+					set.seed(temp_seed)#
+					x <- sample(nrow(clonal_repro_dat), replace=TRUE)#
+					cldf_bootstrap <- clonal_repro_dat[x, ]#
+					# create clonal transition matrix#
+					clonal.matrices <- createClonalReproTransitionMatrix(#
+						cldf_bootstrap, #
+						ldf_bootstrap,#
+						trans_data$stages#
+					)#
+					# ------------------------------------------------------- ##
+					# add transition matrices together#
+					# ------------------------------------------------------- ##
+					all_proj_matrix <- proj_mat + clonal.matrices[[2]]#
+					# ------------------------------------------------------- ##
+					# starting numbers#
+					# ------------------------------------------------------- ##
+					n_per_stage <- NULL#
+					n_per_stage <- calculateNumberIndivperStage(#
+						trans_data$trans01, #
+						trans_data$stages#
+					)#
+					# ------------------------------------------------------- ##
+					# dynamics#
+					# ------------------------------------------------------- ##
+					all_proj_matrix[1, 1] <- SeedSurvival[k]#
+					n_per_stage %<>% #
+						mutate(#
+							n = replace(#
+								n, #
+								which(stage=="Seed"),#
+								SeedBankSize[i]#
+							)#
+						)#
+					pr <- pop.projection(#
+						A = all_proj_matrix, #
+						n = n_per_stage$n, #
+						iterations = n.iter#
+					)#
+					analysis.results <- eigen.analysis(all_proj_matrix)#
+					if (!(is.null(analysis.results))) {#
+						# create table of results				#
+						#		repro.values#
+						repro.value.dat <- analysis.results$repro.value#
+						names(repro.value.dat) <- #
+							paste("repro.value",names(repro.value.dat),sep=".")#
+						repro.value.dat %<>% t %>% as.data.frame#
+						#		stable stage distribution#
+						stable.stage.dat <- analysis.results$stable.stage#
+						names(stable.stage.dat) <- #
+							paste("stable.stage",names(stable.stage.dat),sep=".")#
+						stable.stage.dat %<>% t %>% as.data.frame#
+						#		elasticities#
+						elasticities <- analysis.results$elasticities %>% #
+							as.data.frame %>%#
+							mutate(#
+								Name = paste(#
+									"elasticities.", #
+									Var2, "-", #
+									Var1, #
+									sep=""#
+								)#
+							) %>%#
+							as.data.frame(row.names=.$Name) %>%#
+							dplyr::select(Freq) %>%#
+							t %>%#
+							as.data.frame()#
+						#		sensitivities#
+						sensitivities <- analysis.results$sensitivities %>% #
+							as.table %>% as.data.frame %>%#
+							mutate(#
+								Name = paste(#
+									"sensitivities.", #
+									Var2, "-",#
+									Var1, #
+									sep=""#
+								)#
+							) %>%#
+							as.data.frame(row.names=.$Name) %>%#
+							dplyr::select(Freq) %>%#
+							t %>%#
+							as.data.frame()#
+						A[[i]][[j]][[k]][[l]] <- data.frame(#
+							repro.value.dat,#
+							stable.stage.dat,#
+							sensitivities,#
+							elasticities,#
+							lambda1 		= analysis.results$lambda1,#
+							damping.ratio 	= analysis.results$damping.ratio,#
+							SeedBankSize 	= SeedBankSize[i],#
+							SeedsPerFruit 	= SeedsPerFruit[j],#
+							SeedSurvival 	= SeedSurvival[k],#
+							Bootstrap		= l,#
+							seed			= temp_seed#
+						)		#
+					}#
+				}#
+				A[[i]][[j]][[k]] <- do.call(rbind.data.frame, A[[i]][[j]][[k]])
+head(A[[i]][[j]][[k]] )
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+A <- vector("list", length(SeedBankSize))
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+A[[i]] <- vector("list", length(SeedsPerFruit))
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+A[[i]][[j]] <- vector("list", length(SeedSurvival))
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+seeds <- runif(n_bootstraps)#
+				for (l in 1:n_bootstraps) {#
+					temp_seed <- seeds[l]*100000#
+					analysis.results <- NULL#
+					# -------------------------------------------------------- ##
+					# Create growth/retrogression/survival/fecundity transition matrix#
+					# -------------------------------------------------------- ##
+					# bootstrap ldf#
+					set.seed(temp_seed)#
+					x <- sample(nrow(trans_data$trans01), replace=TRUE)#
+					ldf_bootstrap <- trans_data$trans01[x, ]#
+					# create transition matrix#
+					proj_mat <- createProjectionMatrix(#
+						ldf_bootstrap,#
+						SeedBankSize[i],#
+						SeedsPerFruit[j],#
+						SeedSurvival[k]#
+					)#
+					# -------------------------------------------------------- ##
+					# Create clonal reproduction transition matrix#
+					# -------------------------------------------------------- ##
+					# bootstrap cldf#
+					clonal_repro_dat <- clonal_repro_dataset %>%#
+						filter(#
+							minFecundityYear == TransitionYear,#
+							Species == "Opuntia stricta"#
+						)#
+					x <- NULL#
+					set.seed(temp_seed)#
+					x <- sample(nrow(clonal_repro_dat), replace=TRUE)#
+					cldf_bootstrap <- clonal_repro_dat[x, ]#
+					# create clonal transition matrix#
+					clonal.matrices <- createClonalReproTransitionMatrix(#
+						cldf_bootstrap, #
+						ldf_bootstrap,#
+						trans_data$stages#
+					)#
+					# ------------------------------------------------------- ##
+					# add transition matrices together#
+					# ------------------------------------------------------- ##
+					all_proj_matrix <- proj_mat + clonal.matrices[[2]]#
+					# ------------------------------------------------------- ##
+					# starting numbers#
+					# ------------------------------------------------------- ##
+					n_per_stage <- NULL#
+					n_per_stage <- calculateNumberIndivperStage(#
+						trans_data$trans01, #
+						trans_data$stages#
+					)#
+					# ------------------------------------------------------- ##
+					# dynamics#
+					# ------------------------------------------------------- ##
+					all_proj_matrix[1, 1] <- SeedSurvival[k]#
+					n_per_stage %<>% #
+						mutate(#
+							n = replace(#
+								n, #
+								which(stage=="Seed"),#
+								SeedBankSize[i]#
+							)#
+						)#
+					pr <- pop.projection(#
+						A = all_proj_matrix, #
+						n = n_per_stage$n, #
+						iterations = n.iter#
+					)#
+					analysis.results <- eigen.analysis(all_proj_matrix)#
+					if (!(is.null(analysis.results))) {#
+						# create table of results				#
+						#		repro.values#
+						repro.value.dat <- analysis.results$repro.value#
+						names(repro.value.dat) <- #
+							paste("repro.value",names(repro.value.dat),sep=".")#
+						repro.value.dat %<>% t %>% as.data.frame#
+						#		stable stage distribution#
+						stable.stage.dat <- analysis.results$stable.stage#
+						names(stable.stage.dat) <- #
+							paste("stable.stage",names(stable.stage.dat),sep=".")#
+						stable.stage.dat %<>% t %>% as.data.frame#
+						#		elasticities#
+						elasticities <- analysis.results$elasticities %>% #
+							as.data.frame %>%#
+							mutate(#
+								Name = paste(#
+									"elasticities.", #
+									Var2, "-", #
+									Var1, #
+									sep=""#
+								)#
+							) %>%#
+							as.data.frame(row.names=.$Name) %>%#
+							dplyr::select(Freq) %>%#
+							t %>%#
+							as.data.frame()#
+						#		sensitivities#
+						sensitivities <- analysis.results$sensitivities %>% #
+							as.table %>% as.data.frame %>%#
+							mutate(#
+								Name = paste(#
+									"sensitivities.", #
+									Var2, "-",#
+									Var1, #
+									sep=""#
+								)#
+							) %>%#
+							as.data.frame(row.names=.$Name) %>%#
+							dplyr::select(Freq) %>%#
+							t %>%#
+							as.data.frame()#
+						A[[i]][[j]][[k]][[l]] <- data.frame(#
+							repro.value.dat,#
+							stable.stage.dat,#
+							sensitivities,#
+							elasticities,#
+							lambda1 		= analysis.results$lambda1,#
+							damping.ratio 	= analysis.results$damping.ratio,#
+							SeedBankSize 	= SeedBankSize[i],#
+							SeedsPerFruit 	= SeedsPerFruit[j],#
+							SeedSurvival 	= SeedSurvival[k],#
+							Bootstrap		= l,#
+							seed			= temp_seed#
+						)		#
+					}#
+				}#
+				A[[i]][[j]][[k]] <- do.call(rbind.data.frame, A[[i]][[j]][[k]])
+head(	A[[i]][[j]][[k]])
+dim(A[[i]][[j]][[k]])
+A[[i]][[j]][[k]] %>% filter(is.na(seed))
 setwd('/Users/KSauby/Documents/Projects')
 setwd("./GTMNERRproc")#
 #setwd("./dataproc")#

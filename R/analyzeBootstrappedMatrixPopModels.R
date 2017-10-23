@@ -1,6 +1,6 @@
 #' Analyze Bootstrapped Matrix Population Models
 #'
-#' @description Analyze multiple matrix population models, allowing for a seed bank and clonal reproduction.
+#' @description Analyze multiple matrix population models, allowing for a seed bank and clonal reproduction. If a boostrap population cannot be analyzed, it is not added to the dataset (or is listed as NAs for all values).
 
 #' @return Returns a list including:
 #' \itemize{
@@ -59,19 +59,16 @@ analyzeBootstrappedMatrixPopModels <- function(
 					# -------------------------------------------------------- #
 					# Create clonal reproduction transition matrix
 					# -------------------------------------------------------- #
-					# bootstrap cldf
-					clonal_repro_dat <- clonal_repro_dataset %>%
-						filter(
-							minFecundityYear == TransitionYear,
-							Species == "Opuntia stricta"
-						)
-					x <- NULL
-					set.seed(temp_seed)
-					x <- sample(nrow(clonal_repro_dat), replace=TRUE)
-					cldf_bootstrap <- clonal_repro_dat[x, ]
+					# DONT RANDOMLY SAMPLE, MERGE WITH BOOTSTRAPPED LDF TO GET CLONES THAT THOSE PLANTS PRODUCED
+					
+					clonal_repro_dat <- merge(ldf_bootstrap, clonal_repro_dataset, by.x="PlantID", by.y="Parent.ID")
+					
+				
+					# AFTER I FIGURE OUT CLONES THEN I NEED TO FIGURE OUT PARENT SIZE AGAIN? AND THEN DIVIDE BY CORRECT NUMBER OF INDIVIDUALS PER STAGE?
+				
 					# create clonal transition matrix
 					clonal.matrices <- createClonalReproTransitionMatrix(
-						cldf_bootstrap, 
+						clonal_repro_dat, 
 						ldf_bootstrap,
 						trans_data$stages
 					)
