@@ -38,12 +38,15 @@ analyzeBootstrappedMatrixPopModels <- function(
 		for (j in 1:length(SeedsPerFruit)) {
 			A[[i]][[j]] <- vector("list", length(SeedSurvival))	
 			for (k in 1:length(SeedSurvival)) {
+				seeds <- runif(n_bootstraps)
 				for (l in 1:n_bootstraps) {
+					temp_seed <- seeds[l]*100000
 					analysis.results <- NULL
 					# -------------------------------------------------------- #
 					# Create growth/retrogression/survival/fecundity transition matrix
 					# -------------------------------------------------------- #
 					# bootstrap ldf
+					set.seed(temp_seed)
 					x <- sample(nrow(trans_data$trans01), replace=TRUE)
 					ldf_bootstrap <- trans_data$trans01[x, ]
 					# create transition matrix
@@ -63,6 +66,7 @@ analyzeBootstrappedMatrixPopModels <- function(
 							Species == "Opuntia stricta"
 						)
 					x <- NULL
+					set.seed(temp_seed)
 					x <- sample(nrow(clonal_repro_dat), replace=TRUE)
 					cldf_bootstrap <- clonal_repro_dat[x, ]
 					# create clonal transition matrix
@@ -153,53 +157,10 @@ analyzeBootstrappedMatrixPopModels <- function(
 							SeedBankSize 	= SeedBankSize[i],
 							SeedsPerFruit 	= SeedsPerFruit[j],
 							SeedSurvival 	= SeedSurvival[k],
-							Bootstrap		= l
+							Bootstrap		= l,
+							seed			= temp_seed
 						)		
-					} else {
-						# repro values
-						x <- paste(
-							"repro.value.", 
-							trans_data$stages, 
-							sep=""
-						)
-						repro.value.dat <- rep("NA", length(x)) %>%
-							t %>% as.data.frame
-						colnames(repro.value.dat) <- x
-						# stable stages
-						x <- paste(
-							"stable.stage.", 
-							trans_data$stages, 
-							sep=""
-						)
-						stable.stage.dat <- rep("NA", length(x)) %>%
-							t %>% as.data.frame
-						colnames(stable.stage.dat) <- x
-						# sensitivities
-						x <- expand.grid(trans_data$stages,trans_data$stages)
-						y <- paste("sensitivies.", x$Var1,"-",x$Var2,sep="")
-						sensitivities <- rep("NA", length(y)) %>%
-							t %>% as.data.frame
-						colnames(sensitivities) <- y
-						# elasticities
-						x <- expand.grid(trans_data$stages,trans_data$stages)
-						y <- paste("elasticities.", x$Var1,"-",x$Var2,sep="")
-						elasticities <- rep("NA", length(y)) %>%
-							t %>% as.data.frame
-						colnames(elasticities) <- y						
-						A[[i]][[j]][[k]][[l]] <- data.frame(
-							repro.value.dat,
-							stable.stage.dat,
-							sensitivities,
-							elasticities,
-							lambda1 		= NA,
-							damping.ratio 	= NA,
-							SeedBankSize 	= SeedBankSize[i],
-							SeedsPerFruit 	= SeedsPerFruit[j],
-							SeedSurvival 	= SeedSurvival[k],
-							Bootstrap		= l
-						)
 					}
-							
 				}
 				A[[i]][[j]][[k]] <- do.call(rbind.data.frame, A[[i]][[j]][[k]])
 			}
