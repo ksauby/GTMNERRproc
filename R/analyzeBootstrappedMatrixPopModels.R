@@ -49,6 +49,7 @@ analyzeBootstrappedMatrixPopModels <- function(
 					set.seed(temp_seed)
 					x <- sample(nrow(trans_data$trans01), replace=TRUE)
 					ldf_bootstrap <- trans_data$trans01[x, ]
+					ldf_bootstrap$bootstrap_indiv <- 1:dim(ldf_bootstrap)[1]
 					# create transition matrix
 					proj_mat <- createProjectionMatrix(
 						ldf_bootstrap,
@@ -61,8 +62,14 @@ analyzeBootstrappedMatrixPopModels <- function(
 					# -------------------------------------------------------- #
 					# DONT RANDOMLY SAMPLE, MERGE WITH BOOTSTRAPPED LDF TO GET CLONES THAT THOSE PLANTS PRODUCED
 					
-					clonal_repro_dat <- merge(ldf_bootstrap, clonal_repro_dataset, by.x="PlantID", by.y="Parent.ID")
+					clonal_repro_dat <- merge(
+						ldf_bootstrap, 
+						clonal_repro_dataset,
+						by.x="PlantID", 
+						by.y="Parent.ID"
+					)
 					
+					# STAGE AND PARENT STAGE ARE DIFFERENT FOR PARENTS WITH CLONES
 				
 					# AFTER I FIGURE OUT CLONES THEN I NEED TO FIGURE OUT PARENT SIZE AGAIN? AND THEN DIVIDE BY CORRECT NUMBER OF INDIVIDUALS PER STAGE?
 				

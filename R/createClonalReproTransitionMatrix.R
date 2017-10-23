@@ -1,7 +1,7 @@
 #' Create Clonal Reproduction Transition Matrix
 #'
 
-#' @param clonal_repro_dataset This dataset is created by the calculateClonalReproduction function. Each row represents information for a unique offspring. Each row contains the identity of the parent, the year, the size of the offspring, and the size of the parent.
+#' @param clonal_repro_dat This dataset is created by the calculateClonalReproduction function. Each row represents information for a unique offspring. Each row contains the identity of the parent, the year, the size of the offspring, and the size of the parent.
 #' @param TMdata Survey data used to create transition matrix.
 
 #' @return Returns a list in which the first element is the count of the number of individuals in each stage-stage transition and the second element contains the rates at which individuals transition among stages.
@@ -9,11 +9,11 @@
 #' @export
 
 createClonalReproTransitionMatrix <- function(
-	clonal_repro_dataset, 
+	clonal_repro_dat, 
 	TMdata, 
 	stages
 ) {
-	clonal_repro_dataset_mod <- clonal_repro_dataset %>% 
+	clonal_repro_dat_mod <- clonal_repro_dat %>% 
 		rowwise() %>%
 		mutate(
 			parent_stage=cut(
@@ -30,8 +30,8 @@ createClonalReproTransitionMatrix <- function(
 			)
 		)
 	clone_table <- table(
-		clonal_repro_dataset_mod$offspring_stage, 
-		clonal_repro_dataset_mod$parent_stage
+		clonal_repro_dat_mod$offspring_stage, 
+		clonal_repro_dat_mod$parent_stage
 	) %>% 
 		as.data.frame.matrix %>% 
 		data.matrix
