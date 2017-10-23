@@ -39,6 +39,7 @@ analyzeBootstrappedMatrixPopModels <- function(
 			A[[i]][[j]] <- vector("list", length(SeedSurvival))	
 			for (k in 1:length(SeedSurvival)) {
 				for (l in 1:n_bootstraps) {
+					analysis.results <- NULL
 					# -------------------------------------------------------- #
 					# Create growth/retrogression/survival/fecundity transition matrix
 					# -------------------------------------------------------- #
@@ -100,60 +101,84 @@ analyzeBootstrappedMatrixPopModels <- function(
 						iterations = n.iter
 					)
 					analysis.results <- eigen.analysis(all_proj_matrix)
-			
-					# create table of results				
-					#		repro.values
-					repro.value.dat <- analysis.results$repro.value
-					names(repro.value.dat) <- 
-						paste("repro.value",names(repro.value.dat),sep=".")
-					repro.value.dat %<>% t %>% as.data.frame
-					#		stable stage distribution
-					stable.stage.dat <- analysis.results$stable.stage
-					names(stable.stage.dat) <- 
-						paste("stable.stage",names(stable.stage.dat),sep=".")
-					stable.stage.dat %<>% t %>% as.data.frame
-					#		elasticities
-					elasticities <- analysis.results$elasticities %>% 
-						as.data.frame %>%
-						mutate(
-							Name = paste(
-								"elasticities.", 
-								Var2, "-", 
-								Var1, 
-								sep=""
-							)
-						) %>%
-						as.data.frame(row.names=.$Name) %>%
-						dplyr::select(Freq) %>%
-						t %>%
-						as.data.frame()
-					#		sensitivities
-					sensitivities <- analysis.results$sensitivities %>% 
-						as.table %>% as.data.frame %>%
-						mutate(
-							Name = paste(
-								"sensitivities.", 
-								Var2, "-",
-								Var1, 
-								sep=""
-							)
-						) %>%
-						as.data.frame(row.names=.$Name) %>%
-						dplyr::select(Freq) %>%
-						t %>%
-						as.data.frame()
-					A[[i]][[j]][[k]][[l]] <- data.frame(
-						repro.value.dat,
-						stable.stage.dat,
-						sensitivities,
-						elasticities,
-						lambda1 		= analysis.results$lambda1,
-						damping.ratio 	= analysis.results$damping.ratio,
-						SeedBankSize 	= SeedBankSize[i],
-						SeedsPerFruit 	= SeedsPerFruit[j],
-						SeedSurvival 	= SeedSurvival[k],
-						Bootstrap		= l
-					)				
+					if (!(is.null(analysis.results))) {
+						# create table of results				
+						#		repro.values
+						repro.value.dat <- analysis.results$repro.value
+						names(repro.value.dat) <- 
+							paste("repro.value",names(repro.value.dat),sep=".")
+						repro.value.dat %<>% t %>% as.data.frame
+						#		stable stage distribution
+						stable.stage.dat <- analysis.results$stable.stage
+						names(stable.stage.dat) <- 
+							paste("stable.stage",names(stable.stage.dat),sep=".")
+						stable.stage.dat %<>% t %>% as.data.frame
+						#		elasticities
+						elasticities <- analysis.results$elasticities %>% 
+							as.data.frame %>%
+							mutate(
+								Name = paste(
+									"elasticities.", 
+									Var2, "-", 
+									Var1, 
+									sep=""
+								)
+							) %>%
+							as.data.frame(row.names=.$Name) %>%
+							dplyr::select(Freq) %>%
+							t %>%
+							as.data.frame()
+						#		sensitivities
+						sensitivities <- analysis.results$sensitivities %>% 
+							as.table %>% as.data.frame %>%
+							mutate(
+								Name = paste(
+									"sensitivities.", 
+									Var2, "-",
+									Var1, 
+									sep=""
+								)
+							) %>%
+							as.data.frame(row.names=.$Name) %>%
+							dplyr::select(Freq) %>%
+							t %>%
+							as.data.frame()
+						A[[i]][[j]][[k]][[l]] <- data.frame(
+							repro.value.dat,
+							stable.stage.dat,
+							sensitivities,
+							elasticities,
+							lambda1 		= analysis.results$lambda1,
+							damping.ratio 	= analysis.results$damping.ratio,
+							SeedBankSize 	= SeedBankSize[i],
+							SeedsPerFruit 	= SeedsPerFruit[j],
+							SeedSurvival 	= SeedSurvival[k],
+							Bootstrap		= l
+						)		
+					} else {
+						repros <- paste(
+							"repro.value.", 
+							trans_data$stages, 
+							sep=""
+						)
+						x <- rep("NA", length(repros)) %>% t %>% as.data.frame
+						colnames(x) <- repros
+						
+						FINISH CREATING NULL
+						
+						A[[i]][[j]][[k]][[l]] <- data.frame(
+							repro.value.dat,
+							stable.stage.dat,
+							sensitivities,
+							elasticities,
+							lambda1 		= NA,
+							damping.ratio 	= NA,
+							SeedBankSize 	= SeedBankSize[i],
+							SeedsPerFruit 	= SeedsPerFruit[j],
+							SeedSurvival 	= SeedSurvival[k],
+							Bootstrap		= l
+					}
+							
 				}
 				A[[i]][[j]][[k]] <- do.call(rbind.data.frame, A[[i]][[j]][[k]])
 			}
