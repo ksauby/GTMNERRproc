@@ -1,3 +1,10 @@
+#' from https://stackoverflow.com/questions/18509527/first-letter-to-upper-case
+#' @export
+firstup <- function(x) {
+   substr(x, 1, 1) <- toupper(substr(x, 1, 1))
+x
+}
+
 #' Successively print population matrices for inclusion in an appendix
 #'
 #' @param data.list
@@ -12,7 +19,7 @@ printPopulationMatrices <- function(data.list, parent.method, years, first.year,
 		dat <- eval(parse(text=data.list[i]))
 		cat("\\subsection{", dat$N.Stages.wo.break, "}", sep="")
 		for (j in 1:length(parent.methods)){
-			cat("\\subsubsection{ ``", toTitleCase(parent.methods[j]), "'' parent assignment method}", sep="")
+			cat("\\subsubsection{Parent assignment method: ", parent.methods[j], "}", sep="")
 			cat('\n')  
 			# PLANTS WITH FRUIT
 			temp <- xtable(

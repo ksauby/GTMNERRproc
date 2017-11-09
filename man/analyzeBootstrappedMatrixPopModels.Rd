@@ -31,6 +31,6 @@ Returns a list including:
 	}
 }
 \description{
-Analyze multiple matrix population models, allowing for a seed bank and clonal reproduction.
+Analyze multiple matrix population models, allowing for a seed bank and clonal reproduction. If a boostrap population cannot be analyzed, it is not added to the dataset (or is listed as NAs for all values).
 }
 
