@@ -4,7 +4,7 @@
 #' @param x_variable
 #' @param  grouping_variable
 #' @param facet_grid_var
-#' @param legend_title Default value is "Parent Assignment\nMethod."
+#' @param legend_title Default value is "Parent Assignment Method."
 #' @param xlab_label
 #' @param strip.text.size
 #'

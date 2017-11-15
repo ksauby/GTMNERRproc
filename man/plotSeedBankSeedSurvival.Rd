@@ -14,7 +14,7 @@ plotSeedBankSeedSurvival(dat, x_variable, grouping_variable, facet_grid_var,
 
 \item{grouping_variable}{}
 
-\item{legend_title}{Default value is "Parent Assignment\nMethod."}
+\item{legend_title}{Default value is "Parent Assignment Method."}
 
 \item{strip.text.size}{}
 }

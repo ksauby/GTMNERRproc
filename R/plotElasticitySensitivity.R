@@ -47,7 +47,8 @@ plotElasticitySensitivity <- function(dat, x_variable, y_variable, grouping_vari
 			strip.text.y=element_text(size=strip.text.y.size, angle=strip.text.y.angle),
 			strip.text.x=element_text(size=strip.text.x.size),
 			axis.title.x=element_text(size=axis.title.x.size),
-			axis.title.y=element_text(size=axis.title.y.size)
+			axis.title.y=element_text(size=axis.title.y.size),
+			text=element_text(family="serif")
 		) +
 		guides(
 			fill=guide_legend(
@@ -109,7 +110,8 @@ plotLTREReproductiveValues <- function(dat, x_variable, y_variable, grouping_var
 			strip.text.y=element_text(size=strip.text.y.size, angle=strip.text.y.angle),
 			strip.text.x=element_text(size=strip.text.x.size),
 			axis.title.x=element_text(size=axis.title.x.size),
-			axis.title.y=element_text(size=axis.title.y.size)
+			axis.title.y=element_text(size=axis.title.y.size), 
+			text=element_text(family="serif")
 		) +
 		guides(
 			fill=guide_legend(
